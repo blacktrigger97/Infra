@@ -1,0 +1,34 @@
+version: 1.0.1
+services:
+  hdc_baseimage:
+    build:
+      context: hdc_baseimage
+      dockerfile: /home/vishesh/docker/hdc/hdc_baseimage/DockerFile
+      args:
+        - GIT_DIR=${GIT_DIR}
+        - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
+        - HDC_USER=${HDC_USER}
+        - HDC_PASS=${HDC_PASS}
+        - HDC_VERSION=${HDC_VERSION}
+        - DOCKER_NAMENODE_DIR=${DOCKER_NAMENODE_DIR}
+    image: hdc_baseimage
+    container_name: hdc_baseimage
+  namenode:
+    build: 
+      context: namenode
+      dockerfile: /home/vishesh/docker/hdc/namenode/DockerFile
+      args:
+        - HDC_USER=${HDC_USER}
+    image: namenode
+    container_name: namenode
+    hostname: namenode
+    ports:
+      - 9870:9870
+    volumes:
+      - type: bind
+        source: ${LOCAL_NAMENODE_DIR}
+        target: ${DOCKER_NAMENODE_DIR}
+    depends_on:
+      - hdc_baseimage
+volumes:
+  docker:

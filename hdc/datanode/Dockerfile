@@ -1,0 +1,50 @@
+FROM baseimage
+
+ARG GIT_DIR
+ARG GIT_REMOTE_ADDRESS
+ARG HDC_USER
+ARG HDC_PASS
+ARG HDC_VERSION
+ARG DOCKER_NAMENODE_DIR
+
+
+RUN useradd -m -d /home/${HDC_USER} -s /bin/bash $HDC_USER
+RUN echo $HDC_PASS | passwd $HDC_USER --stdin
+
+RUN su - $HDC_USER
+RUN < /dev/zero ssh-keygen -q -N ''
+RUN cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+RUN cat ~/.ssh/id_rsa > ~/.ssh/known_keys
+RUN chmod 600 ~/.ssh/*_keys
+
+RUN ssh -o StrictHostKeyChecking=no ${HDC_USER}@$(hostname)
+
+RUN wget https://www-us.apache.org/dist/hadoop/common/hadoop-${HDC_VERSION}/hadoop-${$HDC_VERSION}.tar.gz
+RUN tar -zxvf hadoop-${$HDC_VERSION}.tar.gz
+RUN mv hadoop-${$HDC_VERSION} hadoop
+RUN mkdir -p $DOCKER_NAMENODE_DIR
+
+RUN mkdir -p $GIT_DIR
+RUN cd $GIT_DIR
+RUN git clone $GIT_REMOTE_ADDRESS
+
+RUN mv ${DOCKER_NAMENODE_DIR}/hadoop/* /home/${HDC_USER}/${HDC_USER}/etc/hadoop/
+
+RUN echo "########JAVE Exports########" >> ~/.bashrc
+RUN echo "export JAVA_HOME=/usr/lib/jvm/jre/" >> ~/.bashrc
+RUN echo "" >> ~/.bashrc
+RUN echo "########HAdoop Exports########" >> ~/.bashrc
+RUN echo "export HADOOP_HOME=/home/hadoop/hadoop" >> ~/.bashrc
+RUN echo "export HADOOP_INSTALL=$HADOOP_HOME" >> ~/.bashrc
+RUN echo "export HADOOP_MAPRED_HOME=$HADOOP_HOME" >> ~/.bashrc
+RUN echo "export HADOOP_COMMON_HOME=$HADOOP_HOME" >> ~/.bashrc
+RUN echo "export HADOOP_HDFS_HOME=$HADOOP_HOME" >> ~/.bashrc
+RUN echo "export HADOOP_YARN_HOME=$HADOOP_HOME" >> ~/.bashrc
+RUN echo "export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native" >> ~/.bashrc
+RUN echo "export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin" >> ~/.bashrc
+
+RUN source ~/.bashrc
+
+RUN echo "export JAVA_HOME=/usr/lib/jvm/jre/" >> /home/${HDC_USER}/${HDC_USER}/etc/hadoop/hadoop-env.sh
+
+EXPOSE 9870
