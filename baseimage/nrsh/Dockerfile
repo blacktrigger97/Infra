@@ -9,13 +9,21 @@ ARG DOCKER_PASS
 ARG GIT_DIR
 ARG GIT_REMOTE_ADDRESS
 ARG HDC_VERSION
+ARG ICEBERG_VER
+ARG ICEBERG_SPARK_VER
+ARG NESSIE_VER
 ARG SPARK_VERSION
 ARG SPARK_HDC_VERSION
 
 
 # Java, Python & Other Dependencies
 RUN yum install java-${JAVA_VER}-openjdk java-${JAVA_VER}-openjdk-devel -y
-RUN yum install crontabs cronie net-tools wget gcc git rsync openssh-server openssh openssh-clients -y
+RUN yum install crontabs cronie net-tools wget gcc git rsync openssh-server openssh openssh-clients which procps -y
+
+# Pip & other Python library installation
+RUN yum install pip -y
+RUN pip3 install --upgrade pip
+RUN pip3 install pynessie
 
 # SSH configuration
 RUN echo $DOCKER_PASS | passwd $DOCKER_USR --stdin
@@ -28,15 +36,19 @@ RUN mkdir -p {hosts,s_scripts}
 
 # Downloading Hadoop
 RUN wget https://downloads.apache.org/hadoop/common/hadoop-$HDC_VERSION/hadoop-$HDC_VERSION.tar.gz
-RUN cd  && tar -zxf hadoop-$HDC_VERSION.tar.gz && rm hadoop-$HDC_VERSION.tar.gz
+RUN tar -zxf hadoop-$HDC_VERSION.tar.gz && rm hadoop-$HDC_VERSION.tar.gz
 RUN mv hadoop-$HDC_VERSION hadoop
 
 # Downloading Spark
 RUN wget https://dlcdn.apache.org/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${SPARK_HDC_VERSION}.tgz
-RUN cd  && tar -zxf spark-${SPARK_VERSION}-bin-hadoop${SPARK_HDC_VERSION}.tgz && rm spark-${SPARK_VERSION}-bin-hadoop${SPARK_HDC_VERSION}.tgz
+RUN tar -zxf spark-${SPARK_VERSION}-bin-hadoop${SPARK_HDC_VERSION}.tgz && rm spark-${SPARK_VERSION}-bin-hadoop${SPARK_HDC_VERSION}.tgz
 RUN mv spark-${SPARK_VERSION}-bin-hadoop${SPARK_HDC_VERSION} spark
+RUN wget https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime-${ICEBERG_SPARK_VER}/${ICEBERG_VER}/iceberg-spark-runtime-${ICEBERG_SPARK_VER}-${ICEBERG_VER}.jar -P spark/jars/
+RUN wget https://repo.maven.apache.org/maven2/org/projectnessie/nessie-spark-${SPARK_HDC_VERSION}-extensions/${NESSIE_VER}/nessie-spark-${SPARK_HDC_VERSION}-extensions-${NESSIE_VER}.jar -P spark/jars/
 
 # Bashrc entries
+RUN echo "alias nessie='nessie --endpoint http://nessie:19120/api/v1'" >> .bashrc
+RUN echo "" >> .bashrc
 RUN echo "########JAVA Export########" >> .bashrc
 RUN echo "export JAVA_HOME=/usr/lib/jvm/jre/" >> .bashrc
 RUN echo "" >> .bashrc
@@ -63,6 +75,8 @@ RUN echo "########SPARK Exports########" >> .bashrc
 RUN echo "export SPARK_HOME=${DOCKER_DIR}spark" >> .bashrc
 RUN echo "export PATH=\$PATH:\$SPARK_HOME/bin:\$SPARK_HOME/sbin:/usr/sbin" >> .bashrc
 RUN echo "export LD_LIBRARY_PATH=/opt/hadoop/lib/native:\$LD_LIBRARY_PATH" >> .bashrc
+
+
 
 # Updating configuration files
 RUN echo "export JAVA_HOME=/usr/lib/jvm/jre/" >> hadoop/etc/hadoop/hadoop-env.sh

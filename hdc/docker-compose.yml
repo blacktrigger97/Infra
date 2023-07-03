@@ -16,6 +16,7 @@ services:
     user: root
     image: name-res
     container_name: name-res
+    restart: always
     hostname: name-res
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
@@ -39,6 +40,7 @@ services:
     user: root
     image: secon-hist
     container_name: secon-hist
+    restart: always
     hostname: secon-hist
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
@@ -63,6 +65,7 @@ services:
     user: root
     image: data-node1
     container_name: data-node1
+    restart: always
     hostname: data-node1
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
@@ -84,6 +87,7 @@ services:
     user: root
     image: data-node2
     container_name: data-node2
+    restart: always
     hostname: data-node2
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
@@ -113,6 +117,24 @@ services:
     volumes:
       - hdc:${DOCKER_DIR}hosts 
       - ${LOCAL_DIR}${DB_DIR}:/var/lib/postgresql/data
+  nessie:
+    build:
+      context: nessie
+      dockerfile: /home/vishesh/docker/hdc/nessie/Dockerfile
+      args:
+        - DOCKER_USR=${DOCKER_USR}
+        - DOCKER_PASS=${DOCKER_PASS}
+        - NESSIE_GC_VER=${NESSIE_GC_VER}
+    image: nessie
+    container_name: nessie
+    hostname: nessie
+    restart: always
+    ports:
+      - 19120:19120
+    volumes:
+      - hdc:/home/jboss/hosts
+    depends_on:
+      - postgresql
 volumes:
   hdc:
 
@@ -141,23 +163,23 @@ volumes:
   #    - 3306:3306
   #  depends_on:
   #    - hdc_baseimage
-  # hue:
-  #  build:
-  #      context: hue
-  #      dockerfile: /home/vishesh/docker/hdc/hue/Dockerfile
-  #      args:
-  #        - OS_VER=${OS_VER}
-  #        - HUE_VER=${HUE_VER}
-  #        - GIT_DIR=${GIT_DIR}
-  #        - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
-  #        - DOCKER_DIR=${DOCKER_DIR}
-  #  image: hue
-  #  hostname: hue
-  #  container_name: hue
-  #  ports:
-  #  - 8888:8888
-  #  volumes:
-  #    - hdc:${DOCKER_DIR}/hosts
-  #    #- ./hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
-  #  depends_on:
+  #hue:
+  # build:
+  #     context: hue
+  #     dockerfile: /home/vishesh/docker/hdc/hue/Dockerfile
+  #     args:
+  #       - OS_VER=${OS_VER}
+  #       - HUE_VER=${HUE_VER}
+  #       - GIT_DIR=${GIT_DIR}
+  #       - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
+  #       - DOCKER_DIR=${DOCKER_DIR}
+  # image: hue
+  # hostname: hue
+  # container_name: hue
+  # ports:
+  # - 8888:8888
+  # volumes:
+  #   - hdc:${DOCKER_DIR}/hosts
+  #   #- ./hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
+  # depends_on 
   #    - mariadb
