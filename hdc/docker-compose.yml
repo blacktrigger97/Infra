@@ -1,34 +1,131 @@
-version: 1.0.1
+version: 2.18.1
 services:
   hdc_baseimage:
-    build:
+    build: 
       context: hdc_baseimage
-      dockerfile: /home/vishesh/docker/hdc/hdc_baseimage/DockerFile
+      dockerfile: /home/vishesh/docker/hdc/hdc_baseimage/Dockerfile
+      args:
+        - DOCKER_USR=${DOCKER_USR}
+        - DOCKER_PASS=${DOCKER_PASS}
+        - DOCKER_DIR=${DOCKER_DIR}
+        - GIT_DIR=${GIT_DIR}
+        - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
+        - HDC_VERSION=${HDC_VERSION}
+        - HIVE_VERSION=${HIVE_VERSION}
+        - MYSQL_CONN_VER=${MYSQL_CONN_VER}
+    image: hdc_baseimage
+    container_name: hdc_baseimage
+  name-res:
+    build: 
+      context: name-res
+      dockerfile: /home/vishesh/docker/hdc/name-res/Dockerfile
       args:
         - GIT_DIR=${GIT_DIR}
         - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
-        - HDC_USER=${HDC_USER}
-        - HDC_PASS=${HDC_PASS}
-        - HDC_VERSION=${HDC_VERSION}
+        - DOCKER_DIR=${DOCKER_DIR}
         - DOCKER_NAMENODE_DIR=${DOCKER_NAMENODE_DIR}
-    image: hdc_baseimage
-    container_name: hdc_baseimage
-  namenode:
-    build: 
-      context: namenode
-      dockerfile: /home/vishesh/docker/hdc/namenode/DockerFile
-      args:
-        - HDC_USER=${HDC_USER}
-    image: namenode
-    container_name: namenode
-    hostname: namenode
+    user: root
+    image: name-res
+    container_name: name-res
+    hostname: name-res
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0
     ports:
       - 9870:9870
+      - 8088:8088
     volumes:
-      - type: bind
-        source: ${LOCAL_NAMENODE_DIR}
-        target: ${DOCKER_NAMENODE_DIR}
+      - hdc:${DOCKER_DIR}hosts
+      - ${LOCAL_DIR}${LOCAL_NAMENODE_DIR}:${DOCKER_DIR}${DOCKER_NAMENODE_DIR}
+    depends_on:
+      - hdc_baseimage
+  secon-hist:
+    build: 
+      context: secon-hist
+      dockerfile: /home/vishesh/docker/hdc/secon-hist/Dockerfile
+      args:
+        - GIT_DIR=${GIT_DIR}
+        - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
+        - DOCKER_DIR=${DOCKER_DIR}
+        - DOCKER_SECONDARY_NAMENODE_DIR=${DOCKER_SECONDARY_NAMENODE_DIR}
+    user: root
+    image: secon-hist
+    container_name: secon-hist
+    hostname: secon-hist
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0
+    ports:
+      - 9868:9868
+      - 19888:19888
+    volumes:
+      - hdc:${DOCKER_DIR}hosts
+      - ${LOCAL_DIR}${LOCAL_SECONDARY_NAMENODE_DIR}:${DOCKER_DIR}${DOCKER_SECONDARY_NAMENODE_DIR}
+    depends_on:
+      - mariadb
+  data-node1:
+    build: 
+      context: data-node
+      dockerfile: /home/vishesh/docker/hdc/data-node/Dockerfile
+      args:
+        - GIT_DIR=${GIT_DIR}
+        - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
+        - DOCKER_DIR=${DOCKER_DIR}
+        - DOCKER_DATANODE_DIR=${DOCKER_DATANODE_DIR}
+    user: root
+    image: data-node1
+    container_name: data-node1
+    hostname: data-node1
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0
+    volumes:
+      - hdc:${DOCKER_DIR}hosts
+      - ${LOCAL_DIR}${LOCAL_DATANODE_DIR1}:${DOCKER_DIR}${DOCKER_DATANODE_DIR}
+    depends_on:
+      - secon-hist
+  data-node2:
+    build: 
+      context: data-node
+      dockerfile: /home/vishesh/docker/hdc/data-node/Dockerfile
+      args:
+        - GIT_DIR=${GIT_DIR}
+        - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
+        - DOCKER_DIR=${DOCKER_DIR}
+        - DOCKER_DATANODE_DIR=${DOCKER_DATANODE_DIR}
+    user: root
+    image: data-node2
+    container_name: data-node2
+    hostname: data-node2
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0
+    volumes:
+      - hdc:${DOCKER_DIR}hosts
+      - ${LOCAL_DIR}${LOCAL_DATANODE_DIR2}:${DOCKER_DIR}${DOCKER_DATANODE_DIR}
+    depends_on:
+      - secon-hist
+  mariadb:
+    build:
+      context: mariadb
+      dockerfile: /home/vishesh/docker/hdc/mariadb/Dockerfile
+      args:
+        - GIT_DIR=${GIT_DIR}
+        - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
+        - DOCKER_DIR=${DOCKER_DIR}
+        - MARIADB_VER=${MARIADB_VER}
+    user: root
+    image: mariadb
+    container_name: mariadb
+    hostname: mariadb
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0
+    environment:
+      MYSQL_ROOT_PASSWORD: $DOCKER_PASS
+      MYSQL_USER: hive
+      MYSQL_PASSWORD: hive
+    volumes:
+      - hdc:${DOCKER_DIR}hosts
+      - ${LOCAL_DIR}$MARIADB_DIR:/var/lib/mysql
+    ports:
+      - "3306:3306"
     depends_on:
       - hdc_baseimage
 volumes:
-  docker:
+  hdc:
