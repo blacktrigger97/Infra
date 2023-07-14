@@ -12,7 +12,10 @@ services:
         - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
         - HDC_VERSION=${HDC_VERSION}
         - HIVE_VERSION=${HIVE_VERSION}
+        - MYSQL_VER=${MYSQL_VER}
         - MYSQL_CONN_VER=${MYSQL_CONN_VER}
+        - SPARK_VERSION=${SPARK_VERSION}
+        - SPARK_HDC_VERSION=${SPARK_HDC_VERSION}
     image: hdc_baseimage
     container_name: hdc_baseimage
   name-res:
@@ -54,13 +57,14 @@ services:
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
     ports:
+      - 18080:18080
       - 9868:9868
       - 19888:19888
     volumes:
       - hdc:${DOCKER_DIR}hosts
       - ${LOCAL_DIR}${LOCAL_SECONDARY_NAMENODE_DIR}:${DOCKER_DIR}${DOCKER_SECONDARY_NAMENODE_DIR}
     depends_on:
-      - mariadb
+      - mysql
   data-node1:
     build: 
       context: data-node
@@ -100,32 +104,51 @@ services:
       - hdc:${DOCKER_DIR}hosts
       - ${LOCAL_DIR}${LOCAL_DATANODE_DIR2}:${DOCKER_DIR}${DOCKER_DATANODE_DIR}
     depends_on:
-      - secon-hist
-  mariadb:
+      - data-node1
+  mysql:
     build:
-      context: mariadb
-      dockerfile: /home/vishesh/docker/hdc/mariadb/Dockerfile
+      context: mysql
+      dockerfile: /home/vishesh/docker/hdc/mysql/Dockerfile
       args:
         - GIT_DIR=${GIT_DIR}
         - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
         - DOCKER_DIR=${DOCKER_DIR}
-        - MARIADB_VER=${MARIADB_VER}
+        - MYSQL_VER=${MYSQL_VER}
+        - MYSQL_DIR=${MYSQL_DIR}
     user: root
-    image: mariadb
-    container_name: mariadb
-    hostname: mariadb
+    image: mysql
+    container_name: mysql
+    hostname: mysql
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
     environment:
       MYSQL_ROOT_PASSWORD: $DOCKER_PASS
-      MYSQL_USER: hive
-      MYSQL_PASSWORD: hive
     volumes:
       - hdc:${DOCKER_DIR}hosts
-      - ${LOCAL_DIR}$MARIADB_DIR:/var/lib/mysql
+      - ${LOCAL_DIR}$MYSQL_DIR:/var/lib/mysql
     ports:
-      - "3306:3306"
+      - 3306:3306
     depends_on:
       - hdc_baseimage
+  # hue:
+  #  build:
+  #      context: hue
+  #      dockerfile: /home/vishesh/docker/hdc/hue/Dockerfile
+  #      args:
+  #        - OS_VER=${OS_VER}
+  #        - HUE_VER=${HUE_VER}
+  #        - GIT_DIR=${GIT_DIR}
+  #        - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
+  #        - DOCKER_DIR=${DOCKER_DIR}
+  #  image: hue
+  #  hostname: hue
+  #  container_name: hue
+  #  ports:
+  #  - 8888:8888
+  #  volumes:
+  #    - hdc:${DOCKER_DIR}/hosts
+  #    #- ./hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
+  #  depends_on:
+  #    - mariadb
 volumes:
   hdc:
