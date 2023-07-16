@@ -1,29 +1,53 @@
 version: 2.18.1
 services:
-  baseimage:
+  nrsh:
     build:
-      context: baseimage 
-      dockerfile: /home/vishesh/docker/baseimage/Dockerfile
+      context: baseimage/nrsh
+      dockerfile: /home/vishesh/docker/baseimage/nrsh/Dockerfile
+      args:
+        - JAVA_VER=${JAVA_VER}
+        - OS_VER=${OS_VER}
+        - DOCKER_USR=${DOCKER_USR}
+        - DOCKER_PASS=${DOCKER_PASS}
+        - DOCKER_DIR=${DOCKER_DIR}
+        - GIT_DIR=${GIT_DIR}
+        - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
+        - HDC_VERSION=${HDC_VERSION}
+        - SPARK_VERSION=${SPARK_VERSION}
+        - SPARK_HDC_VERSION=${SPARK_HDC_VERSION}
+    image: nrsh
+  dn:
+    build:
+      context: baseimage/dn
+      dockerfile: /home/vishesh/docker/baseimage/dn/Dockerfile
       args:
         - JAVA_VER=${JAVA_VER}
         - OS_VER=${OS_VER}
         - PY_VER=${PY_VER}
-    image: baseimage
-  jupyter:
-    build: 
-      context: jupyter
-      dockerfile: /home/vishesh/docker/jupyter/Dockerfile
-    user: root
-    image: jupyter
-    container_name: jupyter
-    hostname: jupyter
-    ports:
-      - 8091:8091
-    volumes:
-      - type: bind
-        source: /home/vishesh/notebooks
-        target: /notebooks
-    depends_on:
-      - baseimage
+        - DOCKER_USR=${DOCKER_USR}
+        - DOCKER_PASS=${DOCKER_PASS}
+        - DOCKER_DIR=${DOCKER_DIR}
+        - GIT_DIR=${GIT_DIR}
+        - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
+        - HDC_VERSION=${HDC_VERSION}
+        - SPARK_VERSION=${SPARK_VERSION}
+        - SPARK_HDC_VERSION=${SPARK_HDC_VERSION}
+    image: dn
+  #jupyter:
+  #  build: 
+  #    context: jupyter
+  #    dockerfile: /home/vishesh/docker/jupyter/Dockerfile
+  #  user: root
+  #  image: jupyter
+  #  container_name: jupyter
+  #  hostname: jupyter
+  #  ports:
+  #    - 8091:8091
+  #  volumes:
+  #    - type: bind
+  #      source: /home/vishesh/notebooks
+  #      target: /notebooks
+  #  depends_on:
+  #    - baseimage
 volumes:
   docker:

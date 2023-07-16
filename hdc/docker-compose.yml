@@ -1,23 +1,9 @@
 version: 2.18.1
 services:
-  hdc_baseimage:
-    build: 
-      context: hdc_baseimage
-      dockerfile: /home/vishesh/docker/hdc/hdc_baseimage/Dockerfile
-      args:
-        - DOCKER_USR=${DOCKER_USR}
-        - DOCKER_PASS=${DOCKER_PASS}
-        - DOCKER_DIR=${DOCKER_DIR}
-        - GIT_DIR=${GIT_DIR}
-        - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
-        - HDC_VERSION=${HDC_VERSION}
-        - HIVE_VERSION=${HIVE_VERSION}
-        - MYSQL_VER=${MYSQL_VER}
-        - MYSQL_CONN_VER=${MYSQL_CONN_VER}
-        - SPARK_VERSION=${SPARK_VERSION}
-        - SPARK_HDC_VERSION=${SPARK_HDC_VERSION}
-    image: hdc_baseimage
-    container_name: hdc_baseimage
+  nrsh:
+    image: nrsh
+  dn:
+    image: dn
   name-res:
     build: 
       context: name-res
@@ -40,7 +26,7 @@ services:
       - hdc:${DOCKER_DIR}hosts
       - ${LOCAL_DIR}${LOCAL_NAMENODE_DIR}:${DOCKER_DIR}${DOCKER_NAMENODE_DIR}
     depends_on:
-      - hdc_baseimage
+      - nrsh
   secon-hist:
     build: 
       context: secon-hist
@@ -64,7 +50,7 @@ services:
       - hdc:${DOCKER_DIR}hosts
       - ${LOCAL_DIR}${LOCAL_SECONDARY_NAMENODE_DIR}:${DOCKER_DIR}${DOCKER_SECONDARY_NAMENODE_DIR}
     depends_on:
-      - mysql
+      - name-res
   data-node1:
     build: 
       context: data-node
@@ -85,6 +71,7 @@ services:
       - ${LOCAL_DIR}${LOCAL_DATANODE_DIR1}:${DOCKER_DIR}${DOCKER_DATANODE_DIR}
     depends_on:
       - secon-hist
+      - dn
   data-node2:
     build: 
       context: data-node
@@ -105,31 +92,55 @@ services:
       - ${LOCAL_DIR}${LOCAL_DATANODE_DIR2}:${DOCKER_DIR}${DOCKER_DATANODE_DIR}
     depends_on:
       - data-node1
-  mysql:
+  postgresql:
     build:
-      context: mysql
-      dockerfile: /home/vishesh/docker/hdc/mysql/Dockerfile
+      context: postgresql
+      dockerfile: /home/vishesh/docker/hdc/postgresql/Dockerfile
       args:
         - GIT_DIR=${GIT_DIR}
         - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
         - DOCKER_DIR=${DOCKER_DIR}
-        - MYSQL_VER=${MYSQL_VER}
-        - MYSQL_DIR=${MYSQL_DIR}
-    user: root
-    image: mysql
-    container_name: mysql
-    hostname: mysql
-    sysctls:
-      - net.ipv6.conf.all.disable_ipv6=0
+        - DB_VER=${DB_VER}
+    image: postgresql
+    container_name: postgresql
+    hostname: postgresql
+    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: $DOCKER_PASS
-    volumes:
-      - hdc:${DOCKER_DIR}hosts
-      - ${LOCAL_DIR}$MYSQL_DIR:/var/lib/mysql
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=${DOCKER_PASS}
     ports:
-      - 3306:3306
-    depends_on:
-      - hdc_baseimage
+      - 5432:5432
+    volumes:
+      - hdc:${DOCKER_DIR}hosts 
+      - ${LOCAL_DIR}${DB_DIR}:/var/lib/postgresql/data
+volumes:
+  hdc:
+
+  #mysql:
+  #  build:
+  #    context: mysql
+  #    dockerfile: /home/vishesh/docker/hdc/mysql/Dockerfile
+  #    args:
+  #      - GIT_DIR=${GIT_DIR}
+  #      - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
+  #      - DOCKER_DIR=${DOCKER_DIR}
+  #      - MYSQL_VER=${MYSQL_VER}
+  #      - MYSQL_DIR=${MYSQL_DIR}
+  #  user: root
+  #  image: mysql
+  #  container_name: mysql
+  #  hostname: mysql
+  #  sysctls:
+  #    - net.ipv6.conf.all.disable_ipv6=0
+  #  environment:
+  #    MYSQL_ROOT_PASSWORD: $DOCKER_PASS
+  #  volumes:
+  #    - hdc:${DOCKER_DIR}hosts
+  #    - ${LOCAL_DIR}$MYSQL_DIR:/var/lib/mysql
+  #  ports:
+  #    - 3306:3306
+  #  depends_on:
+  #    - hdc_baseimage
   # hue:
   #  build:
   #      context: hue
@@ -150,5 +161,3 @@ services:
   #    #- ./hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
   #  depends_on:
   #    - mariadb
-volumes:
-  hdc:
