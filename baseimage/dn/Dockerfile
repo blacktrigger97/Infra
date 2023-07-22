@@ -84,6 +84,11 @@ RUN echo "########SPARK Exports########" >> .bashrc
 RUN echo "export SPARK_HOME=${DOCKER_DIR}spark" >> .bashrc
 RUN echo "export PATH=\$PATH:\$SPARK_HOME/bin:\$SPARK_HOME/sbin:/usr/sbin/" >> .bashrc
 RUN echo "export LD_LIBRARY_PATH=/opt/hadoop/lib/native:\$LD_LIBRARY_PATH" >> .bashrc
+RUN echo -e "ssql () {\nspark-sql --packages org.apache.iceberg:iceberg-spark-runtime-3.2_2.12:1.3.0,org.projectnessie:nessie-spark-3.2-extensions:0.45.0 \\ \n\
+--conf spark.sql.extensions='org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSpark32SessionExtensions' \\ \n\
+--conf spark.sql.catalog.nessie.uri='http://nessie:19120/api/v1' --conf spark.sql.catalog.nessie.ref=main  --conf spark.sql.catalog.nessie.authentication.type=NONE \\ \n\
+--conf spark.sql.catalog.nessie.catalog-impl=org.apache.iceberg.nessie.NessieCatalog --conf spark.sql.catalog.nessie=org.apache.iceberg.spark.SparkCatalog \\ \n\
+--conf spark.sql.catalog.nessie.warehouse=hdfs://name-res:9000/root/nessie/warehouse \$@ \n}" >> .bashrc
 
 # Updating configuration files
 RUN echo "export JAVA_HOME=/usr/lib/jvm/jre/" >> hadoop/etc/hadoop/hadoop-env.sh

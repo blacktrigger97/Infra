@@ -73,7 +73,7 @@ services:
       - hdc:${DOCKER_DIR}hosts
       - ${LOCAL_DIR}${LOCAL_DATANODE_DIR1}:${DOCKER_DIR}${DOCKER_DATANODE_DIR}
     depends_on:
-      - secon-hist
+      - name-res
       - dn
   data-node2:
     build: 
