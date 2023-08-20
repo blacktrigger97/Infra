@@ -39,21 +39,5 @@ services:
         - SPARK_VERSION=${SPARK_VERSION}
         - SPARK_HDC_VERSION=${SPARK_HDC_VERSION}
     image: dn
-  #jupyter:
-  #  build: 
-  #    context: jupyter
-  #    dockerfile: /home/vishesh/docker/jupyter/Dockerfile
-  #  user: root
-  #  image: jupyter
-  #  container_name: jupyter
-  #  hostname: jupyter
-  #  ports:
-  #    - 8091:8091
-  #  volumes:
-  #    - type: bind
-  #      source: /home/vishesh/notebooks
-  #      target: /notebooks
-  #  depends_on:
-  #    - baseimage
 volumes:
   docker:

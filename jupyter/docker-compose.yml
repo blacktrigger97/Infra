@@ -1,0 +1,17 @@
+version: 2.18.1
+services:
+  jupyter:
+    build: 
+      dockerfile: /home/vishesh/docker/jupyter/Dockerfile
+    user: root
+    image: jupyter
+    container_name: jupyter
+    hostname: jupyter
+    ports:
+      - 8091:8091
+    volumes:
+      - type: bind
+        source: /home/vishesh/notebooks
+        target: /notebooks
+volumes:
+  jupyter:

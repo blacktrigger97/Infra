@@ -32,7 +32,8 @@ RUN cd /usr/src \
 # Pip & other Python library installation
 RUN yum install pip -y
 RUN pip3 install --upgrade pip
-RUN pip3 install numpy pandas matplotlib seaborn statsmodels pynessie
+RUN pip3 install numpy pandas matplotlib seaborn statsmodels scikit-learn 
+RUN pip3 install -U pip setuptools
 
 # SSH configuration
 RUN echo $DOCKER_PASS | passwd $DOCKER_USR --stdin
