@@ -1,7 +1,6 @@
 version: 2.18.1
 services:
   nrsh:
-    env_file: ${HOST_DIR}/.env
     build:
       context: baseimage/nrsh
       dockerfile: ${HOST_DIR}/baseimage/nrsh/Dockerfile
@@ -22,7 +21,6 @@ services:
         - NESSIE_SPARK_EXT_VER=${NESSIE_SPARK_EXT_VER}
     image: nrsh
   dn:
-    env_file: ${HOST_DIR}/.env
     build:
       context: baseimage/dn
       dockerfile: ${HOST_DIR}/baseimage/dn/Dockerfile

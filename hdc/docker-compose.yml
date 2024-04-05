@@ -5,7 +5,6 @@ services:
   dn:
     image: dn
   name-res:
-    env_file: ${HOST_DIR}/.env
     build: 
       context: name-res
       dockerfile: ${HOST_DIR}/hdc/name-res/Dockerfile
@@ -31,7 +30,6 @@ services:
     depends_on:
       - nrsh
   secon-hist:
-    env_file: ${HOST_DIR}/.env
     build: 
       context: secon-hist
       dockerfile: ${HOST_DIR}/hdc/secon-hist/Dockerfile
@@ -58,7 +56,6 @@ services:
     depends_on:
       - name-res
   data-node1:
-    env_file: ${HOST_DIR}/.env
     build: 
       context: data-node
       dockerfile: ${HOST_DIR}/hdc/data-node/Dockerfile
@@ -81,7 +78,6 @@ services:
       - name-res
       - dn
   data-node2:
-    env_file: ${HOST_DIR}/.env
     build: 
       context: data-node
       dockerfile: ${HOST_DIR}/hdc/data-node/Dockerfile
@@ -103,7 +99,6 @@ services:
     depends_on:
       - data-node1
   postgresql:
-    env_file: ${HOST_DIR}/.env
     build:
       context: postgresql
       dockerfile: ${HOST_DIR}/hdc/postgresql/Dockerfile
@@ -125,7 +120,6 @@ services:
     volumes: 
       - ${LOCAL_DIR}${DB_DIR}:/var/lib/postgresql/data
   nessie:
-    env_file: ${HOST_DIR}/.env
     build:
       context: nessie
       dockerfile: ${HOST_DIR}/hdc/nessie/Dockerfile
