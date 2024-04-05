@@ -7,8 +7,9 @@ ARG DOCKER_NAMENODE_DIR
 
 WORKDIR $DOCKER_DIR
 
-RUN git clone $GIT_REMOTE_ADDRESS
+RUN echo "export DOCKER_DIR=$DOCKER_DIR" >> .bashrc
 
+RUN git clone $GIT_REMOTE_ADDRESS
 RUN rsync -avru $GIT_DIR/s_scripts/ s_scripts
 RUN rsync -avru $GIT_DIR/hadoop/ hadoop
 RUN rsync -avru $GIT_DIR/spark/ spark
