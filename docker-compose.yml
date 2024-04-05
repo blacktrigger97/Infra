@@ -4,6 +4,7 @@ services:
     build:
       context: baseimage/nrsh
       dockerfile: ${HOST_DIR}/baseimage/nrsh/Dockerfile
+      env_file: ${HOST_DIR}/Infra/.env
       args:
         - JAVA_VER=${JAVA_VER}
         - OS_VER=${OS_VER}
@@ -24,6 +25,7 @@ services:
     build:
       context: baseimage/dn
       dockerfile: ${HOST_DIR}/baseimage/dn/Dockerfile
+      env_file: ${HOST_DIR}/Infra/.env
       args:
         - JAVA_VER=${JAVA_VER}
         - OS_VER=${OS_VER}

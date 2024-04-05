@@ -8,6 +8,7 @@ services:
     build: 
       context: name-res
       dockerfile: ${HOST_DIR}/hdc/name-res/Dockerfile
+      env_file: ${HOST_DIR}/Infra/.env
       args:
         - GIT_DIR=${GIT_DIR}
         - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
@@ -33,6 +34,7 @@ services:
     build: 
       context: secon-hist
       dockerfile: ${HOST_DIR}/hdc/secon-hist/Dockerfile
+      env_file: ${HOST_DIR}/Infra/.env
       args:
         - GIT_DIR=${GIT_DIR}
         - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
@@ -59,6 +61,7 @@ services:
     build: 
       context: data-node
       dockerfile: ${HOST_DIR}/hdc/data-node/Dockerfile
+      env_file: ${HOST_DIR}/Infra/.env
       args:
         - GIT_DIR=${GIT_DIR}
         - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
@@ -81,6 +84,7 @@ services:
     build: 
       context: data-node
       dockerfile: ${HOST_DIR}/hdc/data-node/Dockerfile
+      env_file: ${HOST_DIR}/Infra/.env
       args:
         - GIT_DIR=${GIT_DIR}
         - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
@@ -102,6 +106,7 @@ services:
     build:
       context: postgresql
       dockerfile: ${HOST_DIR}/hdc/postgresql/Dockerfile
+      env_file: ${HOST_DIR}/Infra/.env
       args:
         - GIT_DIR=${GIT_DIR}
         - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
@@ -124,6 +129,7 @@ services:
     build:
       context: nessie
       dockerfile: ${HOST_DIR}/hdc/nessie/Dockerfile
+      env_file: ${HOST_DIR}/Infra/.env
       args:
         - DOCKER_USR=${DOCKER_USR}
         - DOCKER_PASS=${DOCKER_PASS}
