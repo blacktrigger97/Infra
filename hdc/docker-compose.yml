@@ -122,8 +122,7 @@ services:
       - POSTGRES_PASSWORD=${DOCKER_PASS}
     ports:
       - 5432:5432
-    volumes:
-      - hdc:${DOCKER_DIR}hosts 
+    volumes: 
       - ${LOCAL_DIR}${DB_DIR}:/var/lib/postgresql/data
   nessie:
     env_file: ${HOST_DIR}/.env
@@ -140,8 +139,6 @@ services:
     restart: always
     ports:
       - 19120:19120
-    volumes:
-      - hdc:/home/jboss/hosts
     depends_on:
       - postgresql
 volumes:
