@@ -96,7 +96,7 @@ services:
       - hdc:${DOCKER_DIR}hosts
       - ${LOCAL_DIR}${LOCAL_DATANODE_DIR2}:${DOCKER_DIR}${DOCKER_DATANODE_DIR}
     depends_on:
-      - data-node1
+      - dn
   postgresql:
     build:
       context: postgresql
