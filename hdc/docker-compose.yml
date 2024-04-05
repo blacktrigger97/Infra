@@ -7,7 +7,7 @@ services:
   name-res:
     build: 
       context: name-res
-      dockerfile: /home/vishesh/docker/hdc/name-res/Dockerfile
+      dockerfile: ${HOST_DIR}/hdc/name-res/Dockerfile
       args:
         - GIT_DIR=${GIT_DIR}
         - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
@@ -31,7 +31,7 @@ services:
   secon-hist:
     build: 
       context: secon-hist
-      dockerfile: /home/vishesh/docker/hdc/secon-hist/Dockerfile
+      dockerfile: ${HOST_DIR}/hdc/secon-hist/Dockerfile
       args:
         - GIT_DIR=${GIT_DIR}
         - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
@@ -56,7 +56,7 @@ services:
   data-node1:
     build: 
       context: data-node
-      dockerfile: /home/vishesh/docker/hdc/data-node/Dockerfile
+      dockerfile: ${HOST_DIR}/hdc/data-node/Dockerfile
       args:
         - GIT_DIR=${GIT_DIR}
         - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
@@ -78,7 +78,7 @@ services:
   data-node2:
     build: 
       context: data-node
-      dockerfile: /home/vishesh/docker/hdc/data-node/Dockerfile
+      dockerfile: ${HOST_DIR}/hdc/data-node/Dockerfile
       args:
         - GIT_DIR=${GIT_DIR}
         - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
@@ -99,7 +99,7 @@ services:
   postgresql:
     build:
       context: postgresql
-      dockerfile: /home/vishesh/docker/hdc/postgresql/Dockerfile
+      dockerfile: ${HOST_DIR}/hdc/postgresql/Dockerfile
       args:
         - GIT_DIR=${GIT_DIR}
         - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
@@ -120,7 +120,7 @@ services:
   nessie:
     build:
       context: nessie
-      dockerfile: /home/vishesh/docker/hdc/nessie/Dockerfile
+      dockerfile: ${HOST_DIR}/hdc/nessie/Dockerfile
       args:
         - DOCKER_USR=${DOCKER_USR}
         - DOCKER_PASS=${DOCKER_PASS}
