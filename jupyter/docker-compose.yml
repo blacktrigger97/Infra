@@ -2,7 +2,7 @@ version: 2.18.1
 services:
   jupyter:
     build: 
-      dockerfile: /home/vishesh/docker/jupyter/Dockerfile
+      dockerfile: ${HOST_DIR}/jupyter/Dockerfile
     user: root
     image: jupyter
     container_name: jupyter
