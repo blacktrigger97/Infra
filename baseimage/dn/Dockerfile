@@ -15,6 +15,7 @@ ARG ICEBERG_SPARK_VER
 ARG NESSIE_VER
 ARG SPARK_VERSION
 ARG SPARK_HDC_VERSION
+ARG NESSIE_SPARK_EXT_VER
 
 
 # Java, Python & Other Dependencie
@@ -54,7 +55,7 @@ RUN wget https://dlcdn.apache.org/spark/spark-${SPARK_VERSION}/spark-${SPARK_VER
 RUN tar -zxf spark-${SPARK_VERSION}-bin-hadoop${SPARK_HDC_VERSION}.tgz && rm spark-${SPARK_VERSION}-bin-hadoop${SPARK_HDC_VERSION}.tgz
 RUN mv spark-${SPARK_VERSION}-bin-hadoop${SPARK_HDC_VERSION} spark
 RUN wget https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime-${ICEBERG_SPARK_VER}/${ICEBERG_VER}/iceberg-spark-runtime-${ICEBERG_SPARK_VER}-${ICEBERG_VER}.jar -P spark/jars/
-RUN wget https://repo.maven.apache.org/maven2/org/projectnessie/nessie-spark-${SPARK_HDC_VERSION}-extensions/${NESSIE_VER}/nessie-spark-${SPARK_HDC_VERSION}-extensions-${NESSIE_VER}.jar -P spark/jars/
+RUN wget https://repo.maven.apache.org/maven2/org/projectnessie/nessie-spark-extensions-${NESSIE_SPARK_EXT_VER}/${NESSIE_VER}/nessie-spark-extensions-${NESSIE_SPARK_EXT_VER}-${NESSIE_VER}.jar -P spark/jars/
 
 # Bashrc entries
 RUN echo "alias nessie='nessie --endpoint http://nessie:19120/api/v1'" >> .bashrc

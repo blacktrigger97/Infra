@@ -18,6 +18,7 @@ services:
         - NESSIE_VER=${NESSIE_VER}
         - SPARK_VERSION=${SPARK_VERSION}
         - SPARK_HDC_VERSION=${SPARK_HDC_VERSION}
+        - NESSIE_SPARK_EXT_VER=${NESSIE_SPARK_EXT_VER}
     image: nrsh
   dn:
     build:
