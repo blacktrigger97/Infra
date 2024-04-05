@@ -1,11 +1,10 @@
 version: 2.18.1
 services:
   nrsh:
+    env_file: ${HOST_DIR}/.env
     build:
       context: baseimage/nrsh
       dockerfile: ${HOST_DIR}/baseimage/nrsh/Dockerfile
-      env_file: 
-        - ${HOST_DIR}/.env
       args:
         - JAVA_VER=${JAVA_VER}
         - OS_VER=${OS_VER}
@@ -23,10 +22,10 @@ services:
         - NESSIE_SPARK_EXT_VER=${NESSIE_SPARK_EXT_VER}
     image: nrsh
   dn:
+    env_file: ${HOST_DIR}/.env
     build:
       context: baseimage/dn
       dockerfile: ${HOST_DIR}/baseimage/dn/Dockerfile
-      env_file: ${HOST_DIR}/.env
       args:
         - JAVA_VER=${JAVA_VER}
         - OS_VER=${OS_VER}

@@ -5,10 +5,10 @@ services:
   dn:
     image: dn
   name-res:
+    env_file: ${HOST_DIR}/.env
     build: 
       context: name-res
       dockerfile: ${HOST_DIR}/hdc/name-res/Dockerfile
-      env_file: ${HOST_DIR}/.env
       args:
         - GIT_DIR=${GIT_DIR}
         - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
@@ -31,10 +31,10 @@ services:
     depends_on:
       - nrsh
   secon-hist:
+    env_file: ${HOST_DIR}/.env
     build: 
       context: secon-hist
       dockerfile: ${HOST_DIR}/hdc/secon-hist/Dockerfile
-      env_file: ${HOST_DIR}/.env
       args:
         - GIT_DIR=${GIT_DIR}
         - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
@@ -58,10 +58,10 @@ services:
     depends_on:
       - name-res
   data-node1:
+    env_file: ${HOST_DIR}/.env
     build: 
       context: data-node
       dockerfile: ${HOST_DIR}/hdc/data-node/Dockerfile
-      env_file: ${HOST_DIR}/.env
       args:
         - GIT_DIR=${GIT_DIR}
         - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
@@ -81,10 +81,10 @@ services:
       - name-res
       - dn
   data-node2:
+    env_file: ${HOST_DIR}/.env
     build: 
       context: data-node
       dockerfile: ${HOST_DIR}/hdc/data-node/Dockerfile
-      env_file: ${HOST_DIR}/.env
       args:
         - GIT_DIR=${GIT_DIR}
         - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
@@ -103,10 +103,10 @@ services:
     depends_on:
       - data-node1
   postgresql:
+    env_file: ${HOST_DIR}/.env
     build:
       context: postgresql
       dockerfile: ${HOST_DIR}/hdc/postgresql/Dockerfile
-      env_file: ${HOST_DIR}/.env
       args:
         - GIT_DIR=${GIT_DIR}
         - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
@@ -126,10 +126,10 @@ services:
       - hdc:${DOCKER_DIR}hosts 
       - ${LOCAL_DIR}${DB_DIR}:/var/lib/postgresql/data
   nessie:
+    env_file: ${HOST_DIR}/.env
     build:
       context: nessie
       dockerfile: ${HOST_DIR}/hdc/nessie/Dockerfile
-      env_file: ${HOST_DIR}/.env
       args:
         - DOCKER_USR=${DOCKER_USR}
         - DOCKER_PASS=${DOCKER_PASS}
