@@ -4,7 +4,7 @@ networks:
   bdCluster:
     driver: ipvlan
     driver_opts:
-      parent: enp0s31f6
+      parent: e${ETHERNET_NAME}
     ipam:
       driver: default
       config:
