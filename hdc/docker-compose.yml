@@ -4,12 +4,12 @@ networks:
   bdCluster:
     driver: ipvlan
     driver_opts:
-      parent: e${ETHERNET_NAME}
+      parent: ${ETHERNET_NAME}
     ipam:
       driver: default
       config:
         - subnet: 192.168.1.0/24
-        - gateway: 192.168.1.1
+          gateway: 192.168.1.1
           
 
 services:
