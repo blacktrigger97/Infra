@@ -32,8 +32,8 @@ RUN < /dev/zero ssh-keygen -q -N '' && cat ${DOCKER_DIR}.ssh/id_rsa.pub >> ${DOC
 
 WORKDIR ${DOCKER_DIR}
 
-# Host & Start Scripts config
-RUN mkdir -p {hosts,s_scripts}
+# Start Scripts config
+RUN mkdir s_scripts
 
 # Downloading Hadoop
 RUN wget https://downloads.apache.org/hadoop/common/hadoop-$HDC_VERSION/hadoop-$HDC_VERSION.tar.gz
