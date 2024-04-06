@@ -89,6 +89,9 @@ services:
     container_name: data-node1
     restart: always
     hostname: data-node1
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.51
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
     volumes:
@@ -110,6 +113,9 @@ services:
     container_name: data-node2
     restart: always
     hostname: data-node2
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.52
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
     volumes:
