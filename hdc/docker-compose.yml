@@ -42,7 +42,6 @@ services:
       - 9870:9870
       - 8088:8088
     volumes:
-      - hdc:${DOCKER_DIR}hosts
       - ${LOCAL_DIR}${LOCAL_NAMENODE_DIR}:${DOCKER_DIR}${DOCKER_NAMENODE_DIR}
     depends_on:
       - nrsh
@@ -71,7 +70,6 @@ services:
       - 9868:9868
       - 19888:19888
     volumes:
-      - hdc:${DOCKER_DIR}hosts
       - ${LOCAL_DIR}${LOCAL_SECONDARY_NAMENODE_DIR}:${DOCKER_DIR}${DOCKER_SECONDARY_NAMENODE_DIR}
     depends_on:
       - name-res
@@ -95,7 +93,6 @@ services:
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
     volumes:
-      - hdc:${DOCKER_DIR}hosts
       - ${LOCAL_DIR}${LOCAL_DATANODE_DIR1}:${DOCKER_DIR}${DOCKER_DATANODE_DIR}
     depends_on:
       - dn
@@ -119,7 +116,6 @@ services:
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
     volumes:
-      - hdc:${DOCKER_DIR}hosts
       - ${LOCAL_DIR}${LOCAL_DATANODE_DIR2}:${DOCKER_DIR}${DOCKER_DATANODE_DIR}
     depends_on:
       - dn
