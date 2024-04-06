@@ -20,7 +20,7 @@ ARG NESSIE_SPARK_EXT_VER
 
 # Java, Python & Other Dependencie
 RUN yum install java-${JAVA_VER}-openjdk java-${JAVA_VER}-openjdk-devel -y
-RUN yum install wget gcc git rsync openssh-server openssh openssh-clients which procps -y
+RUN yum install net-tools wget gcc git rsync openssh-server openssh openssh-clients which procps -y
 RUN yum install openssl-devel bzip2-devel libffi-devel zlib-devel sqlite-devel  -y
 
 RUN cd /usr/src \
