@@ -31,7 +31,7 @@ services:
     image: name-res
     container_name: name-res
     restart: unless-stopped
-    hostname: name-res
+    hostname: name-res.bdc.home
     cpus: 1
     networks:
       bdCluster:
