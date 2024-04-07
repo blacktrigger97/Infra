@@ -1,16 +1,16 @@
-$TTL 2d
+$TTL 20
 
 $ORIGIN bd.cluster.home.
 
-@           IN      SOA     ns.bd.cluster.home.  info@cluster.home. (
-                            20240406
-                            12h
-                            15m
-                            3w
-                            2h
-                            )
+@           IN      SOA     bd.cluster.home.  root.bd.cluster.home. (
+                            2
+                            20
+                            20
+                            20
+                            20
+                            );
 
-            IN      NS      ns.bd.cluster.home.
+@           IN      NS      bd.cluster.home.
 ns          IN      A       192.168.1.50
 
 ; -- add dns records below

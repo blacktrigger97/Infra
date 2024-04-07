@@ -1,0 +1,25 @@
+$TTL 20
+
+$ORIGIN bd.cluster.home.
+
+@           IN      SOA     bd.cluster.home.  root.bd.cluster.home. (
+                            1
+                            20
+                            20
+                            20
+                            20
+                            );
+
+@          IN      NS      bd.cluster.home.
+50         IN      PTR       bd.cluster.home.
+
+; -- add dns records below
+
+41  IN  PTR     name-res
+42  IN  PTR     secon-hist
+43  IN  PTR     postgresql
+44  IN  PTR     nessie
+51  IN  PTR     data-node1
+52  IN  PTR     data-node2
+
+; -- demo servers
