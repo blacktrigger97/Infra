@@ -2,6 +2,7 @@ version: '3'
 
 networks:
   bdCluster:
+    name: bdCluster
     driver: ipvlan
     driver_opts:
       parent: ${ETHERNET_NAME}
