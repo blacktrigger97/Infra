@@ -1,0 +1,23 @@
+$TTL 2d
+
+$ORIGIN bdcluster.home.
+
+@           IN      SOA     ns.bdcluster.home.  info@dbcluster.home. (
+                            20240406
+                            12h
+                            15m
+                            3w
+                            2h
+                            )
+
+            IN      NS      ns.bdcluster.home.
+ns          IN      A       192.168.1.50
+
+; -- add dns records below
+
+name-res    IN      A       192.168.1.41
+secon-hist  IN      A       192.168.1.42
+postgresql  IN      A       192.168.1.43
+nessie      IN      A       192.168.1.44
+data-node1  IN      A       192.168.1.51
+data-node2  IN      A       192.168.1.52
