@@ -1,5 +1,16 @@
 version: '3'
 
+networks:
+  bdCluster:
+    driver: ipvlan
+    driver_opts:
+      parent: ${ETHERNET_NAME}
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.1.0/24
+          gateway: 192.168.1.1
+
 services:
   bind9:
     container_name: ldns
@@ -11,6 +22,9 @@ services:
       - ./config:/etc/bind
       - ./cache:/var/cache/bind
       - ./records:/var/lib/bind
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.50
     ports:
       - "53:53/tcp"
       - "53:53/udp"
