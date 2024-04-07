@@ -2,7 +2,7 @@ $TTL 20
 
 
 
-1.168.192.in-addr.arpa.      IN      SOA     ns.bd.cluster.home.  root.bd.cluster.home. (
+1.168.192.in-addr.arpa.      IN      SOA     ns.bdc.home.  root.bdc.home. (
                             1
                             20
                             20
@@ -10,9 +10,9 @@ $TTL 20
                             20
                             );
 
-           IN      NS       ns.bd.cluster.home.
+           IN      NS       ns.bdc.home.
 $ORIGIN 1.168.192.in-addr.arpa.
-50          IN      PTR      ns.bd.cluster.home.
+50          IN      PTR      ns.bdc.home.
 
 ;
 
