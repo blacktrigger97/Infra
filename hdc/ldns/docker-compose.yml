@@ -7,6 +7,10 @@ services:
     environment:
       - BIND9_USER=root
       - TZ=Asia/Kolkata
+    volumes:
+      - ./config:/etc/bind
+      - ./cache:/var/cache/bind
+      - ./records:/var/lib/bind
     ports:
       - "53:53/tcp"
       - "53:53/udp"
