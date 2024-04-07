@@ -14,3 +14,13 @@ $TTL 20
 $ORIGIN 1.168.192.in-addr.arpa.
 50          IN      PTR      ns.bd.cluster.home.
 
+;
+
+41  IN  PTR     name-res
+42  IN  PTR     secon-hist
+43  IN  PTR     postgresql
+44  IN  PTR     nessie
+51  IN  PTR     data-node1
+52  IN  PTR     data-node2
+
+;
