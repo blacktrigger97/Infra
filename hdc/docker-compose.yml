@@ -162,7 +162,7 @@ services:
       - 19120:19120
     depends_on:
       - postgresql
-  bind9:
+  ldns:
     container_name: ldns
     image: ubuntu/bind9:latest
     environment:
