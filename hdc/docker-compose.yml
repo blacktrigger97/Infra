@@ -58,7 +58,7 @@ services:
     image: secon-hist
     container_name: secon-hist
     restart: unless-stopped
-    hostname: secon-hist
+    hostname: secon-hist.bdc.home
     cpus: 1
     networks:
       bdCluster:
@@ -86,7 +86,7 @@ services:
     image: data-node1
     container_name: data-node1
     restart: unless-stopped
-    hostname: data-node1
+    hostname: data-node1.bdc.home
     networks:
       bdCluster:
         ipv4_address: 192.168.1.51
@@ -109,7 +109,7 @@ services:
     image: data-node2
     container_name: data-node2
     restart: unless-stopped
-    hostname: data-node2
+    hostname: data-node2.bdc.home
     networks:
       bdCluster:
         ipv4_address: 192.168.1.52
@@ -130,7 +130,7 @@ services:
         - DB_VER=${DB_VER}
     image: postgresql
     container_name: postgresql
-    hostname: postgresql
+    hostname: postgresql.bdc.home
     cpus: 1
     restart: unless-stopped
     networks:
@@ -153,7 +153,7 @@ services:
         - NESSIE_GC_VER=${NESSIE_GC_VER}
     image: nessie
     container_name: nessie
-    hostname: nessie
+    hostname: nessie.bdc.home
     restart: unless-stopped
     networks:
       bdCluster:
