@@ -1,4 +1,4 @@
-version: 2.18.1
+version: '3'
 services:
   nrsh:
     build:
