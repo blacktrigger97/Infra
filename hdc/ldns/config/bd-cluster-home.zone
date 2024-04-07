@@ -2,7 +2,7 @@ $TTL 20
 
 $ORIGIN bd.cluster.home.
 
-@           IN      SOA     ns.bd.cluster.home.  root.bd.cluster.home. (
+@           IN      SOA     bd.cluster.home.  root.bd.cluster.home. (
                             2
                             20
                             20
@@ -10,7 +10,7 @@ $ORIGIN bd.cluster.home.
                             20
                             );
 
-@           IN      NS      ns.bd.cluster.home.
+@           IN      NS      bd.cluster.home.
 ns          IN      A       192.168.1.50
 
 ; -- add dns records below
