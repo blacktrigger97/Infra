@@ -11,7 +11,7 @@ $ORIGIN bd.cluster.home.
                             );
 
 @          IN      NS       ns.bd.cluster.home.
-50         IN      PTR      ns.bd.cluster.home.
+50         IN      PTR      ns
 
 ; -- add dns records below
 
