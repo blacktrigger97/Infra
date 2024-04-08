@@ -7,7 +7,7 @@ ARG NESSIE_GC_VER
 ENV JAVA_OPTS_APPEND="-Dnessie.server.authentication.enabled=false -Dnessie.version.store.type=JDBC -Dquarkus.datasource.db-kind=postgresql \
 -Dquarkus.datasource.jdbc.max-size=16 -Dquarkus.datasource.username=${DOCKER_USR} -Dquarkus.datasource.password=${DOCKER_PASS} \
 -Dquarkus.debug.print-startup-times=true -Dquarkus.profile=dev -Dquarkus.datasource.driver='org.postgresql.Driver' \
--Dquarkus.http.port=19120 -Dquarkus.datasource.jdbc.url=jdbc:postgresql://postgresql.bdc.home:5432/nessie_gc"
+-Dquarkus.http.port=8080 -Dquarkus.http.hostname=nessie.bdc.home -Dquarkus.datasource.jdbc.url=jdbc:postgresql://postgresql.bdc.home:5432/nessie_gc"
 
 WORKDIR /home/jboss
 
