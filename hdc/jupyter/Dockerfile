@@ -6,7 +6,6 @@ ARG HDC_PASS
 RUN mkdir /notebooks
 
 RUN pip3 install jupyter
-RUN pip3 install --upgrade kiteconnect
 RUN jupyter notebook --generate-config
 
 RUN echo "c.NotebookApp.allow_root=True" >> /root/.jupyter/jupyter_notebook_config.py \

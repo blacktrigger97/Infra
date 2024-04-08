@@ -19,6 +19,7 @@ name-res    IN      A       192.168.1.41
 secon-hist  IN      A       192.168.1.42
 postgresql  IN      A       192.168.1.43
 nessie      IN      A       192.168.1.44
+jupyter     IN      A       192.168.1.45
 data-node1  IN      A       192.168.1.51
 data-node2  IN      A       192.168.1.52
 

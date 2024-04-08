@@ -20,6 +20,7 @@ $ORIGIN 1.168.192.in-addr.arpa.
 42  IN  PTR     secon-hist
 43  IN  PTR     postgresql
 44  IN  PTR     nessie
+45  IN  PTR     jupyter
 51  IN  PTR     data-node1
 52  IN  PTR     data-node2
 

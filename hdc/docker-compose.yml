@@ -155,6 +155,23 @@ services:
       - 19120:19120
     depends_on:
       - postgresql
+  jupyter:
+    build: 
+      dockerfile: ${HOST_DIR}/jupyter/Dockerfile
+    user: root
+    image: jupyter
+    container_name: jupyter
+    hostname: jupyter.bdc.home
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.45
+    ports:
+      - 8091:8091
+    volumes:
+      - /home/vishesh/notebooks:/notebooks
+    depends_on:
+      - dn
+    
 
 
   #mysql:
