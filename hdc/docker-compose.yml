@@ -157,7 +157,7 @@ services:
       - postgresql
   jupyter:
     build: 
-      dockerfile: ${HOST_DIR}/jupyter/Dockerfile
+      dockerfile: ${HOST_DIR}/hdc/jupyter/Dockerfile
     user: root
     image: jupyter
     container_name: jupyter
