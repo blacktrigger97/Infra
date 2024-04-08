@@ -1,0 +1,31 @@
+version: '3.8'
+
+networks:
+  bdCluster:
+    name: bdCluster
+    driver: ipvlan
+    driver_opts:
+      parent: wlo1
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24
+          gateway: 192.168.1.1
+
+services:
+  ldns:
+    container_name: ldns
+    image: ubuntu/bind9:latest
+    environment:
+      - BIND9_USER=root
+      - TZ=Asia/Kolkata
+    volumes:
+      - ./config:/etc/bind
+      - ./cache:/var/cache/bind
+      - ./records:/var/lib/bind
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.50
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+    restart: always
