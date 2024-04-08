@@ -48,7 +48,7 @@ RUN wget https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime
 RUN wget https://repo.maven.apache.org/maven2/org/projectnessie/nessie-spark-extensions-${NESSIE_SPARK_VER}/${NESSIE_VER}/nessie-spark-extensions-${NESSIE_SPARK_VER}-${NESSIE_VER}.jar -P spark/jars/
 
 # Bashrc entries
-RUN echo "alias nessie='nessie --endpoint http://nessie:19120/api/v1'" >> .bashrc
+RUN echo "alias nessie='nessie --endpoint http://nessie.bdc.home:19120/api/v1'" >> .bashrc
 RUN echo "" >> .bashrc
 RUN echo "########JAVA Export########" >> .bashrc
 RUN echo "export JAVA_HOME=/usr/lib/jvm/jre/" >> .bashrc

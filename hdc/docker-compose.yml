@@ -120,15 +120,7 @@ services:
     depends_on:
       - dn
   postgresql:
-    build:
-      context: postgresql
-      dockerfile: ${HOST_DIR}/hdc/postgresql/Dockerfile
-      args:
-        - GIT_DIR=${GIT_DIR}
-        - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
-        - DOCKER_DIR=${DOCKER_DIR}
-        - DB_VER=${DB_VER}
-    image: postgresql
+    image: postgres:${DB_VER}
     container_name: postgresql
     hostname: postgresql.bdc.home
     cpus: 1
@@ -142,6 +134,7 @@ services:
     ports:
       - 5432:5432
     volumes: 
+      - ./postgresql/init.sql:/docker-entrypoint-initdb.d/
       - ${LOCAL_DIR}${DB_DIR}:/var/lib/postgresql/data
   nessie:
     build:
