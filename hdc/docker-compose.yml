@@ -153,8 +153,6 @@ services:
         ipv4_address: 192.168.1.44
     ports:
       - 19120:19120
-      - "4343:4317"   # OTLP gRPC receiver
-      - "4318:4318"   # OTLP http receiver
     depends_on:
       - postgresql
 
