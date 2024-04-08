@@ -25,6 +25,7 @@ RUN yum install crontabs cronie net-tools iputils nmap wget gcc git rsync openss
 RUN yum install pip -y
 RUN pip3 install --upgrade pip
 RUN pip3 install pynessie
+RUN nessie remote add http://nessie.bdc.home:19120/api/v1
 
 # SSH configuration
 RUN echo $DOCKER_PASS | passwd $DOCKER_USR --stdin
@@ -48,7 +49,6 @@ RUN wget https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime
 RUN wget https://repo.maven.apache.org/maven2/org/projectnessie/nessie-spark-extensions-${NESSIE_SPARK_VER}/${NESSIE_VER}/nessie-spark-extensions-${NESSIE_SPARK_VER}-${NESSIE_VER}.jar -P spark/jars/
 
 # Bashrc entries
-RUN echo "alias nessie='nessie --endpoint http://nessie.bdc.home:19120/api/v1'" >> .bashrc
 RUN echo "" >> .bashrc
 RUN echo "########JAVA Export########" >> .bashrc
 RUN echo "export JAVA_HOME=/usr/lib/jvm/jre/" >> .bashrc
