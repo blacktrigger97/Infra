@@ -134,7 +134,7 @@ services:
     ports:
       - 5432:5432
     volumes: 
-      - ./postgresql/init.sql:/docker-entrypoint-initdb.d/
+      - ./postgresql/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ${LOCAL_DIR}${DB_DIR}:/var/lib/postgresql/data
   nessie:
     build:
