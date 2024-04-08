@@ -15,12 +15,12 @@ WORKDIR /home/jboss
 RUN curl -LJ -o nessie-gc https://github.com/projectnessie/nessie/releases/download/nessie-${NESSIE_GC_VER}/nessie-gc-${NESSIE_GC_VER}
 
 # Host & Start Scripts config
-RUN mkdir -p hosts
-RUN chown -R jboss /home/jboss/hosts
+#RUN mkdir -p hosts
+#RUN chown -R jboss /home/jboss/hosts
 
 # Updating run script
 RUN sed -i "2i java -jar nessie-gc create-sql-schema --jdbc-url jdbc:postgresql://\${postgresql}:5432/nessie_gc --jdbc-user ${DOCKER_USR} --jdbc-password ${DOCKER_PASS}" /opt/jboss/container/java/run/run-java.sh
-RUN sed -i "2i export postgresql=\`cat /home/jboss/hosts/hosts | grep postgresql | awk '{print \$1;}'\`" /opt/jboss/container/java/run/run-java.sh
+#RUN sed -i "2i export postgresql=\`cat /home/jboss/hosts/hosts | grep postgresql | awk '{print \$1;}'\`" /opt/jboss/container/java/run/run-java.sh
 RUN sed -i "2i sleep 60" /opt/jboss/container/java/run/run-java.sh
 #RUN sed -i "2i if [ \$? -eq 1 ]; then cat /etc/hosts | grep nessie >> /home/jboss/hosts/hosts; fi" /opt/jboss/container/java/run/run-java.sh
 #RUN sed -i "2i cat /home/jboss/hosts/hosts | grep nessie" /opt/jboss/container/java/run/run-java.sh
