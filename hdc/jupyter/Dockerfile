@@ -12,7 +12,7 @@ RUN echo "export PYTHONPATH=\$SPARK_HOME/python:\$PYTHONPATH" >> .bashrc
 RUN echo "export PYSPARK_DRIVER_PYTHON='jupyter'" >> .bashrc
 RUN echo "export PYSPARK_DRIVER_PYTHON_OPTS='notebook'" >> .bashrc
 RUN echo "export PYSPARK_PYTHON=python3" >> .bashrc
-RUN echo "exportPYSPARK_HADOOP_VERSION=3" >> .bashrc
+RUN echo "export PYSPARK_HADOOP_VERSION=3" >> .bashrc
 RUN source .bashrc
 
 RUN mkdir notebooks
