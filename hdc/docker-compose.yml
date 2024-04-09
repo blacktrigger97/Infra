@@ -72,7 +72,7 @@ services:
     volumes:
       - ${LOCAL_DIR}${LOCAL_SECONDARY_NAMENODE_DIR}:${DOCKER_DIR}${DOCKER_SECONDARY_NAMENODE_DIR}
     depends_on:
-      - data-node1
+      - name-res
   data-node1:
     build: 
       context: data-node
