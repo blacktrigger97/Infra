@@ -6,6 +6,7 @@ ARG HDC_PASS
 RUN mkdir /root/notebooks
 
 RUN pip3 install jupyter
+RUN pip3 install findspark
 RUN jupyter notebook --generate-config
 
 RUN echo "c.NotebookApp.allow_root=True" >> /root/.jupyter/jupyter_notebook_config.py \
