@@ -158,6 +158,8 @@ services:
   jupyter:
     build: 
       dockerfile: ${HOST_DIR}/hdc/jupyter/Dockerfile
+      args:
+        - DOCKER_DIR=${DOCKER_DIR}
     user: root
     image: jupyter
     container_name: jupyter
