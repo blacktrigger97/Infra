@@ -69,6 +69,7 @@ RUN echo "export HDFS_DATANODE_USER='root'" >> .bashrc
 RUN echo "export HDFS_SECONDARYNAMENODE_USER='root'" >> .bashrc
 RUN echo "export YARN_RESOURCEMANAGER_USER='root'" >> .bashrc
 RUN echo "export YARN_NODEMANAGER_USER='root'" >> .bashrc
+RUN echo "export YARN_CONF_DIR=\$HADOOP_HOME/etc/hadoop" >> .bashrc
 RUN echo "export DOCKER_DIR=${DOCKER_DIR}" >> .bashrc
 RUN echo "" >> .bashrc
 RUN echo "" >> .bashrc
@@ -85,6 +86,9 @@ RUN echo -e "ssql () {\nspark-sql --packages org.apache.iceberg:iceberg-spark-ru
 # Updating configuration files
 RUN echo "export JAVA_HOME=/usr/lib/jvm/jre/" >> hadoop/etc/hadoop/hadoop-env.sh
 RUN mv spark/conf/spark-defaults.conf.template spark/conf/spark-defaults.conf
+RUN mv spark/conf/spark-env.sh.template spark/conf/spark-env.sh
+RUN echo "export HADOOP_CONF_DIR=\$HADOOP_HOME/etc/hadoop" >> spark/conf/spark-env.sh
+RUN echo "export YARN_CONF_DIR=\$HADOOP_HOME/etc/hadoop" >> spark/conf/spark-env.sh
 RUN git clone $GIT_REMOTE_ADDRESS
 RUN rsync -avru $GIT_DIR/hadoop/ hadoop
 RUN rsync -avru $GIT_DIR/spark/ spark
