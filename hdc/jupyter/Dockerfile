@@ -7,10 +7,18 @@ ARG SPARK_VERSION
 
 WORKDIR $DOCKER_DIR
 
+# Bash Entries
+RUN echo "export PYTHONPATH=\$SPARK_HOME/python:\$PYTHONPATH" >> .bashrc
+RUN echo "export PYSPARK_DRIVER_PYTHON='jupyter'" >> .bashrc
+RUN echo "export PYSPARK_DRIVER_PYTHON_OPTS='notebook'" >> .bashrc
+RUN echo "export PYSPARK_PYTHON=python3" >> .bashrc
+RUN echo "exportPYSPARK_HADOOP_VERSION=3" >> .bashrc
+RUN source .bashrc
+
 RUN mkdir notebooks
 
 RUN pip3 install jupyter
-RUN pip3 install pyspark-${SPARK_VERSION}
+RUN pip3 install pyspark==${SPARK_VERSION}
 RUN jupyter notebook --generate-config
 
 # Jupiter config entries
@@ -21,12 +29,6 @@ RUN echo "c.NotebookApp.allow_root=True" >> /root/.jupyter/jupyter_notebook_conf
    && echo "c.NotebookApp.open_browser = True" >> /root/.jupyter/jupyter_notebook_config.py \
    && echo "c.NotebookApp.ip = 'jupyter.bdc.home'" >> /root/.jupyter/jupyter_notebook_config.py \
    && echo "c.NotebookApp.notebook_dir = '${DOCKER_DIR}notebooks/'" >> /root/.jupyter/jupyter_notebook_config.py 
-
-# Bash Entries
-RUN echo "export PYTHONPATH=\$SPARK_HOME/python:\$PYTHONPATH" >> .bashrc
-RUN echo "export PYSPARK_DRIVER_PYTHON='jupyter'" >> .bashrc
-RUN echo "export PYSPARK_DRIVER_PYTHON_OPTS='notebook'" >> .bashrc
-RUN echo "export PYSPARK_PYTHON=python3" >> .bashrc
 
 EXPOSE 8091
 
