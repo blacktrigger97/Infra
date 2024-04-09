@@ -28,4 +28,4 @@ RUN echo "export PYSPARK_PYTHON=python3" >> .bashrc
 
 EXPOSE 8091
 
-CMD ["pyspark"]
+CMD ["jupyter", "notebook"]
