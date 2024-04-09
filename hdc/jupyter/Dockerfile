@@ -3,13 +3,14 @@ FROM dn
 ARG HDC_USER
 ARG HDC_PASS
 ARG DOCKER_DIR
+ARG SPARK_VERSION
 
 WORKDIR $DOCKER_DIR
 
 RUN mkdir notebooks
 
 RUN pip3 install jupyter
-RUN pip3 install pyspark
+RUN pip3 install pyspark-${SPARK_VERSION}
 RUN jupyter notebook --generate-config
 
 # Jupiter config entries

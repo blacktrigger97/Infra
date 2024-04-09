@@ -160,6 +160,7 @@ services:
       dockerfile: ${HOST_DIR}/hdc/jupyter/Dockerfile
       args:
         - DOCKER_DIR=${DOCKER_DIR}
+        - SPARK_VERSION=${SPARK_VERSION}
     user: root
     image: jupyter
     container_name: jupyter
