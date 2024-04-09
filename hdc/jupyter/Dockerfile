@@ -9,7 +9,6 @@ WORKDIR $DOCKER_DIR
 RUN mkdir notebooks
 
 RUN pip3 install jupyter
-RUN pip3 install py4j   pyspark
 RUN jupyter notebook --generate-config
 
 # Jupiter config entries
