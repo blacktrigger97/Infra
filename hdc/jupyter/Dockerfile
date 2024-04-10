@@ -4,6 +4,8 @@ ARG HDC_USER
 ARG HDC_PASS
 ARG DOCKER_DIR
 ARG SPARK_VERSION
+ARG GIT_DIR
+ARG GIT_REMOTE_ADDRESS
 
 WORKDIR $DOCKER_DIR
 
@@ -15,6 +17,8 @@ RUN echo "export PYSPARK_PYTHON=python3" >> .bashrc
 RUN echo "export PYSPARK_HADOOP_VERSION=3" >> .bashrc
 
 RUN mkdir notebooks
+RUN git clone $GIT_REMOTE_ADDRESS
+RUN rsync -avru $GIT_DIR/s_scripts/ s_scripts
 
 RUN pip3 install jupyter
 RUN pip3 install pyspark==${SPARK_VERSION}
