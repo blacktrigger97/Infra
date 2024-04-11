@@ -2,7 +2,7 @@ FROM projectnessie/nessie
 
 ARG DOCKER_USR
 ARG DOCKER_PASS
-ARG NESSIE_GC_VER
+ARG NESSIE_VER
 
 ENV JAVA_OPTS_APPEND="-Dnessie.server.authentication.enabled=false -Dnessie.version.store.type=JDBC -Dquarkus.datasource.db-kind=postgresql \
 -Dquarkus.datasource.jdbc.max-size=16 -Dquarkus.datasource.username=${DOCKER_USR} -Dquarkus.datasource.password=${DOCKER_PASS} \
@@ -12,7 +12,7 @@ ENV JAVA_OPTS_APPEND="-Dnessie.server.authentication.enabled=false -Dnessie.vers
 WORKDIR /home/jboss
 
 # Download Nessie GC Tool
-RUN curl -LJ -o nessie-gc https://github.com/projectnessie/nessie/releases/download/nessie-${NESSIE_GC_VER}/nessie-gc-${NESSIE_GC_VER}
+RUN curl -LJ -o nessie-gc https://github.com/projectnessie/nessie/releases/download/nessie-${NESSIE_VER}/nessie-gc-${NESSIE_VER}
 
 # Host & Start Scripts config
 #RUN mkdir -p hosts

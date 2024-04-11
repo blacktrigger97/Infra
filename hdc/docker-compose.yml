@@ -143,7 +143,7 @@ services:
       args:
         - DOCKER_USR=${DOCKER_USR}
         - DOCKER_PASS=${DOCKER_PASS}
-        - NESSIE_GC_VER=${NESSIE_GC_VER}
+        - NESSIE_VER=${NESSIE_VER}
     image: nessie
     container_name: nessie
     hostname: nessie.bdc.home
