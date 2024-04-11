@@ -57,7 +57,7 @@ RUN tar -zxf spark-${SPARK_VERSION}-bin-hadoop${SPARK_HDC_VERSION}.tgz && rm spa
 RUN mv spark-${SPARK_VERSION}-bin-hadoop${SPARK_HDC_VERSION} spark
 RUN wget https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime-${ICEBERG_SPARK_VER}/${ICEBERG_VER}/iceberg-spark-runtime-${ICEBERG_SPARK_VER}-${ICEBERG_VER}.jar -P spark/jars/
 RUN wget https://repo.maven.apache.org/maven2/org/projectnessie/nessie-integrations/nessie-spark-extensions-${NESSIE_SPARK_VER}/${NESSIE_VER}/nessie-spark-extensions-${NESSIE_SPARK_VER}-${NESSIE_VER}.jar -P spark/jars/
-RUN wget https://repo.maven.apache.org/maven2/org/projectnessie/nessie-integrations/nessie-spark-extensions-base_${NESSIE_BASE_VER}/${NESSIE_VER}/nessie-spark-extensions-base_${NESSIE_BASE_VER}-${NESSIE_VER}.jar -P /spark/jars/
+#RUN wget https://repo.maven.apache.org/maven2/org/projectnessie/nessie-integrations/nessie-spark-extensions-base_${NESSIE_BASE_VER}/${NESSIE_VER}/nessie-spark-extensions-base_${NESSIE_BASE_VER}-${NESSIE_VER}.jar -P /spark/jars/
 
 # Bashrc entries
 RUN echo "" >> .bashrc
