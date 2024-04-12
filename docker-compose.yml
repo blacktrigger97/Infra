@@ -19,7 +19,6 @@ services:
         - SPARK_VERSION=${SPARK_VERSION}
         - SPARK_HDC_VERSION=${SPARK_HDC_VERSION}
         - NESSIE_SPARK_VER=${NESSIE_SPARK_VER}
-        - NESSIE_BASE_VER=${NESSIE_BASE_VER}
     image: nrsh
   dn:
     build:
@@ -41,7 +40,6 @@ services:
         - SPARK_VERSION=${SPARK_VERSION}
         - SPARK_HDC_VERSION=${SPARK_HDC_VERSION}
         - NESSIE_SPARK_VER=${NESSIE_SPARK_VER}
-        - NESSIE_BASE_VER=${NESSIE_BASE_VER}
     image: dn
 volumes:
   docker:
