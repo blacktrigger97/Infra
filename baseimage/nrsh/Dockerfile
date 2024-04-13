@@ -77,10 +77,10 @@ RUN echo "########SPARK Exports########" >> .bashrc
 RUN echo "export SPARK_HOME=${DOCKER_DIR}spark" >> .bashrc
 RUN echo "export PATH=\$PATH:\$SPARK_HOME/bin:\$SPARK_HOME/sbin:/usr/sbin" >> .bashrc
 RUN echo "export LD_LIBRARY_PATH=/opt/hadoop/lib/native:\$LD_LIBRARY_PATH" >> .bashrc
-RUN echo "ssql () { spark-sql --packages org.apache.iceberg:iceberg-spark-runtime-${ICEBERG_SPARK_VER}:${ICEBERG_VER},org.projectnessie:nessie-spark-extensions-${NESSIE_SPARK_VER}:${NESSIE_VER} \
---conf spark.sql.extensions='org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions' \
---conf spark.sql.catalog.nessie.uri='http://nessie.bdc.home:19120/api/v1' --conf spark.sql.catalog.nessie.ref=main  --conf spark.sql.catalog.nessie.authentication.type=NONE \
---conf spark.sql.catalog.nessie.catalog-impl=org.apache.iceberg.nessie.NessieCatalog --conf spark.sql.catalog.nessie=org.apache.iceberg.spark.SparkCatalog \
+RUN echo -e "ssql () { spark-sql --packages org.apache.iceberg:iceberg-spark-runtime-${ICEBERG_SPARK_VER}:${ICEBERG_VER},org.projectnessie:nessie-spark-extensions-${NESSIE_SPARK_VER}:${NESSIE_VER} \\\n\
+--conf spark.sql.extensions='org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions' \\\n\
+--conf spark.sql.catalog.nessie.uri='http://nessie.bdc.home:19120/api/v1' --conf spark.sql.catalog.nessie.ref=main  --conf spark.sql.catalog.nessie.authentication.type=NONE \\\n\
+--conf spark.sql.catalog.nessie.catalog-impl=org.apache.iceberg.nessie.NessieCatalog --conf spark.sql.catalog.nessie=org.apache.iceberg.spark.SparkCatalog \\\n\
 --conf spark.sql.catalog.nessie.warehouse=hdfs://name-res.bdc.home:9000/root/nessie/warehouse \$@ }" >> .bashrc
 
 # Updating configuration files
