@@ -75,7 +75,7 @@ RUN echo "" >> .bashrc
 RUN echo "" >> .bashrc
 RUN echo "########SPARK Exports########" >> .bashrc
 RUN echo "export SPARK_HOME=${DOCKER_DIR}spark" >> .bashrc
-RUN echo "export PATH=\$PATH:\$SPARK_HOME/bin:\$SPARK_HOME/sbin:/usr/sbin" >> .bashrc
+RUN echo "export PATH=\$PATH:\$SPARK_HOME/bin:\$SPARK_HOME/sbin:/usr/sbin:\$SPARK_HOME/yarn" >> .bashrc
 RUN echo "export LD_LIBRARY_PATH=/opt/hadoop/lib/native:\$LD_LIBRARY_PATH" >> .bashrc
 RUN echo -e "ssql () { \nspark-sql --packages org.apache.iceberg:iceberg-spark-runtime-${ICEBERG_SPARK_VER}:${ICEBERG_VER},org.projectnessie:nessie-spark-extensions-${NESSIE_SPARK_VER}:${NESSIE_VER} \\\n\
 --conf spark.sql.extensions='org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions' \\\n\
