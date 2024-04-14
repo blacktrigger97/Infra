@@ -34,7 +34,7 @@ RUN rsync -avru $GIT_DIR/s_scripts/ s_scripts
 RUN pip3 install pynessie
 RUN nessie remote add http://nessie.bdc.home:19120/api/v1
 RUN pip3 install jupyter
-RUN pip3 install pyspark==${SPARK_VERSION}
+RUN pip3 install findspark pyspark==${SPARK_VERSION}
 RUN jupyter notebook --generate-config
 
 # Jupiter config entries
