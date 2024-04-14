@@ -12,19 +12,19 @@ ARG NESSIE_SPARK_VER
 WORKDIR $DOCKER_DIR
 
 # Bash Entries
-#RUN echo "export PYTHONPATH=\$SPARK_HOME/python:\$PYTHONPATH:\$SPARK_HOME/jars" >> .bashrc
-#RUN echo "export PYSPARK_DRIVER_PYTHON='jupyter'" >> .bashrc
-#RUN echo "export PYSPARK_DRIVER_PYTHON_OPTS='notebook'" >> .bashrc
-#RUN echo "export PYSPARK_PYTHON=python3" >> .bashrc
-#RUN echo "export PYSPARK_HADOOP_VERSION=3" >> .bashrc
-#RUN echo "" >> .bashrc
-#RUN echo "alias pyspark='pyspark --master yarn \
-#--packages org.apache.iceberg:iceberg-spark-runtime-${ICEBERG_SPARK_VER}:${ICEBERG_VER},org.projectnessie.nessie-integrations:nessie-spark-extensions-${NESSIE_SPARK_VER}:${NESSIE_VER} \
-#--conf spark.sql.extensions=org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions \
-#--conf spark.sql.catalog.nessie=org.apache.iceberg.spark.SparkCatalog --conf spark.sql.catalog.nessie.uri=http://nessie.bdc.home:19120/api/v1 \
-#--conf spark.sql.catalog.nessie.ref=main --conf spark.sql.catalog.nessie.authentication.type=NONE \
-#--conf spark.sql.catalog.nessie.catalog-impl=org.apache.iceberg.nessie.NessieCatalog \
-#--conf spark.sql.catalog.nessie.warehouse=hdfs://name-res.bdc.home:9000/root/nessie/warehouse'" >> .bashrc
+RUN echo "export PYTHONPATH=\$SPARK_HOME/python:\$PYTHONPATH:\$SPARK_HOME/jars" >> .bashrc
+RUN echo "export PYSPARK_DRIVER_PYTHON=ipython" >> .bashrc
+RUN echo "export PYSPARK_DRIVER_PYTHON_OPTS='notebook'" >> .bashrc
+RUN echo "export PYSPARK_PYTHON=python3" >> .bashrc
+RUN echo "export PYSPARK_HADOOP_VERSION=3" >> .bashrc
+RUN echo "" >> .bashrc
+RUN echo "alias pyspark='pyspark --master yarn --deploy-mode client \
+--packages org.apache.iceberg:iceberg-spark-runtime-${ICEBERG_SPARK_VER}:${ICEBERG_VER},org.projectnessie.nessie-integrations:nessie-spark-extensions-${NESSIE_SPARK_VER}:${NESSIE_VER} \
+--conf spark.sql.extensions=org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions \
+--conf spark.sql.catalog.nessie=org.apache.iceberg.spark.SparkCatalog --conf spark.sql.catalog.nessie.uri=http://nessie.bdc.home:19120/api/v1 \
+--conf spark.sql.catalog.nessie.ref=main --conf spark.sql.catalog.nessie.authentication.type=NONE \
+--conf spark.sql.catalog.nessie.catalog-impl=org.apache.iceberg.nessie.NessieCatalog \
+--conf spark.sql.catalog.nessie.warehouse=hdfs://name-res.bdc.home:9000/root/nessie/warehouse'" >> .bashrc
 
 
 RUN mkdir notebooks
