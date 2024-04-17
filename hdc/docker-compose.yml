@@ -163,10 +163,6 @@ services:
         - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
         - DOCKER_DIR=${DOCKER_DIR}
         - SPARK_VERSION=${SPARK_VERSION}
-        - ICEBERG_VER=${ICEBERG_VER}
-        - ICEBERG_SPARK_VER=${ICEBERG_SPARK_VER}
-        - NESSIE_VER=${NESSIE_VER}
-        - NESSIE_SPARK_VER=${NESSIE_SPARK_VER}
     user: root
     image: jupyter
     container_name: jupyter
