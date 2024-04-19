@@ -176,9 +176,18 @@ services:
       - /home/vishesh/notebooks:/root/notebooks
     depends_on:
       - dn
-    
+  hue:
+    image: gethue/hue:latest
+    hostname: hue
+    container_name: hue
+    ports:
+    - 8888:8888
+    volumes:
+      - ./hue/hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
+    depends_on: 
+      - postgresql
 
-
+ 
   #mysql:
   #  build:
   #    context: mysql
