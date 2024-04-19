@@ -177,7 +177,7 @@ services:
     depends_on:
       - dn
   hue:
-    image: gethue/hue:latest
+    image: gethue/hue:20240417-204512
     hostname: hue.bdc.home
     container_name: hue
     networks:
