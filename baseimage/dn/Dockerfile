@@ -90,7 +90,7 @@ RUN echo -e "ssql () { \nspark-sql --packages org.apache.iceberg:iceberg-spark-r
 --conf spark.sql.extensions='org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions' \\\n\
 --conf spark.sql.catalog.nessie.uri='http://nessie.bdc.home:19120/api/v1' --conf spark.sql.catalog.nessie.ref=main  --conf spark.sql.catalog.nessie.authentication.type=NONE \\\n\
 --conf spark.sql.catalog.nessie.catalog-impl=org.apache.iceberg.nessie.NessieCatalog --conf spark.sql.catalog.nessie=org.apache.iceberg.spark.SparkCatalog \\\n\
---conf spark.sql.catalog.nessie.warehouse=hdfs://name-res.bdc.home:9000/root/nessie/warehouse \$@ \n}" >> .bashrc
+--conf spark.sql.catalog.nessie.warehouse=hdfs://name-res.bdc.home:9000/user/root/nessie/warehouse \$@ \n}" >> .bashrc
 
 # Updating configuration files
 RUN echo "export JAVA_HOME=/usr/lib/jvm/jre/" >> hadoop/etc/hadoop/hadoop-env.sh
