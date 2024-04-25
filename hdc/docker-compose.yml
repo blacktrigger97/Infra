@@ -199,7 +199,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./trino/etc:/usr/lib/trino/etc:ro
+      - ./trino/etc:/etc/trino:ro
       - ./trino/catalog:/etc/trino/catalog    
 
  
