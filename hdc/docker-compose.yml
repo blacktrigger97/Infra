@@ -202,9 +202,9 @@ services:
       - ./trino/etc:/etc/trino
       - ./trino/catalog:/etc/trino/catalog
       - /root/docker/hdc_data/trino/data:/data/trino
-    depends_on:
-      - postgresql
-      - nessie
+    #depends_on:
+    #  - postgresql
+    #  - nessie
 
  
   #mysql:
