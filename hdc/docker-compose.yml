@@ -188,7 +188,8 @@ services:
     volumes:
       - ./hue/hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
     depends_on: 
-      - trino
+      - postgresql
+      - nessie
   trino:
     image: "trinodb/trino:445"
     hostname: trino.bdc.home
