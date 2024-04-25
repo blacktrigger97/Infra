@@ -189,6 +189,18 @@ services:
       - ./hue/hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
     depends_on: 
       - postgresql
+  trino:
+    image: "trinodb/trino:445"
+    hostname: trino.bdc.home
+    container_name: trino
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.47
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./trino/etc:/usr/lib/trino/etc:ro
+      - ./trino/catalog:/etc/trino/catalog    
 
  
   #mysql:
