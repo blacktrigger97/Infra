@@ -217,8 +217,8 @@ services:
       - ./trino/trino-wk/etc:/etc/trino
       - ./trino/trino-wk/catalog:/etc/trino/catalog
       - /root/docker/hdc_data/trino/data:/data/trino
-    depends_on:
-      - trino-co
+  #  depends_on:
+  #    - trino-co
   #trino-wk2:
   #  image: "trinodb/trino:445"
   #  hostname: trino-wk2.bdc.home
