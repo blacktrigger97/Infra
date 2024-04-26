@@ -22,7 +22,7 @@ $ORIGIN 1.168.192.in-addr.arpa.
 44  IN  PTR     nessie
 45  IN  PTR     jupyter
 46  IN  PTR     hue
-47  IN  PTR     dremio
+47  IN  PTR     trino
 51  IN  PTR     data-node1
 52  IN  PTR     data-node2
 
