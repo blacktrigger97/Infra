@@ -190,7 +190,7 @@ services:
     depends_on: 
       - nessie
   dremio:
-    image: dremio/dremio-oss:latest
+    image: dremio/dremio-custom-ncr:24.0.2
     hostname: dremio.bdc.home
     container_name: dremio
     networks:
