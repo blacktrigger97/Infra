@@ -188,38 +188,37 @@ services:
     volumes:
       - ./hue/hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
     depends_on: 
-      - nessie
-  dremio:
-    image: dremio/dremio-custom-ncr:24.0.2
-    hostname: dremio.bdc.home
-    container_name: dremio
+      - nessie 
+  trino:
+    image: "trinodb/trino:445"
+    hostname: trino.bdc.home
+    container_name: trino
     networks:
       bdCluster:
         ipv4_address: 192.168.1.47
-    ports:  
-      - 9047:9047 
-      - 31010:31010 
-      - 45678:45678
+    ports:
+      - "8080:8080"
     volumes:
-      - /root/docker/hdc_data/dremio/data:/opt/dremio/data
-    depends_on: 
-      - data-node1  
-  #trino:
-  #  image: "trinodb/trino:445"
-  #  hostname: trino.bdc.home
-  #  container_name: trino
+      - ./trino/etc:/etc/trino
+      - ./trino/catalog:/etc/trino/catalog
+      - /root/docker/hdc_data/trino/data:/data/trino
+    depends_on:
+      - data-node1
+  #dremio:
+  #  image: dremio/dremio-custom-ncr:24.0.2
+  #  hostname: dremio.bdc.home
+  #  container_name: dremio
   #  networks:
   #    bdCluster:
   #      ipv4_address: 192.168.1.47
-  #  ports:
-  #    - "8080:8080"
+  #  ports:  
+  #    - 9047:9047 
+  #    - 31010:31010 
+  #    - 45678:45678
   #  volumes:
-  #    - ./trino/etc:/etc/trino
-  #    - ./trino/catalog:/etc/trino/catalog
-  #    - /root/docker/hdc_data/trino/data:/data/trino
-  #  depends_on:
-  #    - postgresql
-  #    - nessie
+  #    - /root/docker/hdc_data/dremio/data:/opt/dremio/data
+  #  depends_on: 
+  #    - data-node1 
   #mysql:
   #  build:
   #    context: mysql
