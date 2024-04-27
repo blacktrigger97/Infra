@@ -41,5 +41,3 @@ services:
         - SPARK_HDC_VERSION=${SPARK_HDC_VERSION}
         - NESSIE_SPARK_VER=${NESSIE_SPARK_VER}
     image: dn
-volumes:
-  docker:
