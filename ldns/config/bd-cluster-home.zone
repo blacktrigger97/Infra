@@ -23,6 +23,10 @@ jupyter     IN      A       192.168.1.45
 hue         IN      A       192.168.1.46
 trino-co    IN      A       192.168.1.30
 trino-wk1   IN      A       192.168.1.31
+zookeeper-1 IN      A       192.168.1.60
+zookeeper-2 IN      A       192.168.1.61
+kafka-1     IN      A       192.168.1.70
+kafka-2     IN      A       192.168.1.71
 data-node1  IN      A       192.168.1.51
 data-node2  IN      A       192.168.1.52
 
