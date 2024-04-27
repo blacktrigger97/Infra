@@ -12,6 +12,7 @@ networks:
           gateway: 192.168.1.1
 
 services:
+
   postgresql:
     image: postgres:${DB_VER}
     container_name: postgresql
@@ -29,6 +30,7 @@ services:
     volumes: 
       - ./postgresql/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ${LOCAL_DIR}${DB_DIR}:/var/lib/postgresql/data
+
   nessie:
     build:
       context: nessie
@@ -48,6 +50,7 @@ services:
       - 19120:19120
     depends_on:
       - postgresql 
+
   trino-co:
     image: "trinodb/trino:445"
     hostname: trino-co.bdc.home
@@ -63,6 +66,7 @@ services:
       - /root/docker/hdc_data/trino/data:/data/trino
     depends_on:
       - nessie
+
   trino-wk1:
     image: "trinodb/trino:445"
     hostname: trino-wk1.bdc.home
@@ -78,6 +82,71 @@ services:
       - /root/docker/hdc_data/trino/data:/data/trino
     depends_on: 
       - trino-co
+
+  zookeeper-1:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    hostname: zookeeper-1.bdc.home
+    container_name: zookeeper-1
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.60
+    ports:
+      - 22181:2181
+
+  zookeeper-2:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    hostname: zookeeper-2.bdc.home
+    container_name: zookeeper-2
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.61
+    ports:
+      - 32181:2181
+  
+  kafka-1:
+    image: confluentinc/cp-kafka:latest
+    hostname: kafka-1.bdc.home
+    container_name: kafka-1
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.70
+    ports:
+      - 29092:29092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-1.bdc.home:2181,zookeeper-2.bdc.home:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-1.bdc.home:9092,PLAINTEXT_HOST://kafka-1.bdc.home:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    depends_on:
+      - zookeeper-1
+
+  kafka-2:
+    image: confluentinc/cp-kafka:latest
+    hostname: kafka-2.bdc.home
+    container_name: kafka-2
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.71
+    ports:
+      - 39092:39092
+    environment:
+      KAFKA_BROKER_ID: 2
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-1.bdc.home:2181,zookeeper-2.bdc.home:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-2.bdc.home:9092,PLAINTEXT_HOST://kafka-2.bdc.home:39092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    depends_on:
+      - zookeeper-2
+
   hue:
     image: gethue/hue:latest
     hostname: hue.bdc.home
@@ -91,3 +160,4 @@ services:
       - ./hue/hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
     depends_on: 
       - trino-co
+  
