@@ -3,7 +3,7 @@ services:
   nrsh:
     build:
       context: nrsh
-      dockerfile: ${HOST_DIR}/nrsh/Dockerfile
+      dockerfile: ./baseimage/nrsh/Dockerfile
       args:
         - JAVA_VER=${JAVA_VER}
         - OS_VER=${OS_VER}
@@ -23,7 +23,7 @@ services:
   dn:
     build:
       context: dn
-      dockerfile: ${HOST_DIR}/dn/Dockerfile
+      dockerfile: ./baseimage/dn/Dockerfile
       args:
         - JAVA_VER=${JAVA_VER}
         - OS_VER=${OS_VER}
