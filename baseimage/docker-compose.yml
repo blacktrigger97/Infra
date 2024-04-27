@@ -2,8 +2,8 @@ version: '3.8'
 services:
   nrsh:
     build:
-      context: baseimage/nrsh
-      dockerfile: ${HOST_DIR}/baseimage/nrsh/Dockerfile
+      context: nrsh
+      dockerfile: ${HOST_DIR}/nrsh/Dockerfile
       args:
         - JAVA_VER=${JAVA_VER}
         - OS_VER=${OS_VER}
@@ -22,8 +22,8 @@ services:
     image: nrsh
   dn:
     build:
-      context: baseimage/dn
-      dockerfile: ${HOST_DIR}/baseimage/dn/Dockerfile
+      context: dn
+      dockerfile: ${HOST_DIR}/dn/Dockerfile
       args:
         - JAVA_VER=${JAVA_VER}
         - OS_VER=${OS_VER}
