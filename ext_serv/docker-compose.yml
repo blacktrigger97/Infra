@@ -4,6 +4,7 @@ networks:
   bdCluster:
     name: bdCluster
     driver: ipvlan
+    external: true
     driver_opts:
       parent: ${ETHERNET_NAME}
     ipam:
@@ -34,7 +35,7 @@ services:
   nessie:
     build:
       context: nessie
-      dockerfile: ${HOST_DIR}/hdc/nessie/Dockerfile
+      dockerfile: ${HOST_DIR}/ext_serv/nessie/Dockerfile
       args:
         - DOCKER_USR=${DOCKER_USR}
         - DOCKER_PASS=${DOCKER_PASS}
