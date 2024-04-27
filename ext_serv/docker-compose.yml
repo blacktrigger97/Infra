@@ -1,0 +1,93 @@
+version: '3.8'
+
+networks:
+  bdCluster:
+    name: bdCluster
+    driver: ipvlan
+    driver_opts:
+      parent: ${ETHERNET_NAME}
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24
+          gateway: 192.168.1.1
+
+services:
+  postgresql:
+    image: postgres:${DB_VER}
+    container_name: postgresql
+    hostname: postgresql.bdc.home
+    cpus: 1
+    restart: unless-stopped
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.43
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=${DOCKER_PASS}
+    ports:
+      - 5432:5432
+    volumes: 
+      - ./postgresql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ${LOCAL_DIR}${DB_DIR}:/var/lib/postgresql/data
+  nessie:
+    build:
+      context: nessie
+      dockerfile: ${HOST_DIR}/hdc/nessie/Dockerfile
+      args:
+        - DOCKER_USR=${DOCKER_USR}
+        - DOCKER_PASS=${DOCKER_PASS}
+        - NESSIE_VER=${NESSIE_VER}
+    image: nessie
+    container_name: nessie
+    hostname: nessie.bdc.home
+    restart: unless-stopped
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.44
+    ports:
+      - 19120:19120
+    depends_on:
+      - postgresql 
+  trino-co:
+    image: "trinodb/trino:445"
+    hostname: trino-co.bdc.home
+    container_name: trino-co
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.30
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./trino/trino-co/etc:/etc/trino
+      - ./trino/trino-co/catalog:/etc/trino/catalog
+      - /root/docker/hdc_data/trino/data:/data/trino
+    depends_on:
+      - nessie
+  trino-wk1:
+    image: "trinodb/trino:445"
+    hostname: trino-wk1.bdc.home
+    container_name: trino-wk1
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.31
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./trino/trino-wk/etc:/etc/trino
+      - ./trino/trino-wk/catalog:/etc/trino/catalog
+      - /root/docker/hdc_data/trino/data:/data/trino
+    depends_on: 
+      - trino-co
+  hue:
+    image: gethue/hue:latest
+    hostname: hue.bdc.home
+    container_name: hue
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.46
+    ports:
+      - 8888:8888
+    volumes:
+      - ./hue/hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
+    depends_on: 
+      - trino-co
