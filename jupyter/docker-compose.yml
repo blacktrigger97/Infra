@@ -15,7 +15,7 @@ networks:
 services:
   jupyter:
     build: 
-      dockerfile: ${HOST_DIR}/hdc/jupyter/Dockerfile
+      dockerfile: ${HOST_DIR}/jupyter/Dockerfile
       args:
         - GIT_DIR=${GIT_DIR}
         - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
