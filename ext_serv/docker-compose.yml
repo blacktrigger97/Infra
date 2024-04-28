@@ -98,7 +98,7 @@ services:
       bdCluster:
         ipv4_address: 192.168.1.60
     ports:
-      - 22181:2181
+      - 2181:2181
 
   zookeeper-2:
     image: confluentinc/cp-zookeeper:latest
@@ -114,7 +114,7 @@ services:
       bdCluster:
         ipv4_address: 192.168.1.61
     ports:
-      - 32181:2181
+      - 2181:2181
   
   kafka-1:
     image: confluentinc/cp-kafka:latest
@@ -125,14 +125,19 @@ services:
       bdCluster:
         ipv4_address: 192.168.1.70
     ports:
+      - 9092:9092
       - 29092:29092
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper-1.bdc.home:2181,zookeeper-2.bdc.home:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-1.bdc.home:9092,PLAINTEXT_HOST://kafka-1.bdc.home:29092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
     depends_on:
       - zookeeper-1
 
@@ -145,16 +150,39 @@ services:
       bdCluster:
         ipv4_address: 192.168.1.71
     ports:
-      - 39092:39092
+      - 9092:9092
+      - 29092:29092
     environment:
       KAFKA_BROKER_ID: 2
       KAFKA_ZOOKEEPER_CONNECT: zookeeper-1.bdc.home:2181,zookeeper-2.bdc.home:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-2.bdc.home:9092,PLAINTEXT_HOST://kafka-2.bdc.home:39092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-2.bdc.home:9092,PLAINTEXT_HOST://kafka-2.bdc.home:29092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
     depends_on:
       - zookeeper-2
+
+  kafka-schema-registry:
+    image: confluentinc/cp-schema-registry:latest
+    hostname: kafka-sr.bdc.home
+    container_name: kafka-sr
+    restart: unless-stopped
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.65
+    depends_on:
+      - zookeeper-1
+      - kafka-1
+    ports:
+      - "8081:8081"
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: kafka-sr.bdc.home
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'PLAINTEXT://kafka-1.bdc.home:19092,PLAINTEXT://kafka-2.bdc.home:19092'
+      SCHEMA_REGISTRY_LISTENERS: http://kafka-sr.bdc.home:8081
 
   hue:
     image: gethue/hue:latest
@@ -170,22 +198,5 @@ services:
       - ./hue/hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
     depends_on: 
       - trino-co
-      
-  #kafka-schema-registry:
-  #  image: confluentinc/cp-schema-registry:latest
-  #  hostname: kafka-schema-registry
-  #  container_name: kafka-schema-registry
-  #  depends_on:
-  #    - zoo1
-  #    - zoo2
-  #    - zoo3
-  #    - kafka1
-  #    - kafka2
-  #    - kafka3
-  #  ports:
-  #    - "8081:8081"
-  #  environment:
-  #    SCHEMA_REGISTRY_HOST_NAME: kafka-schema-registry
-  #    SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'PLAINTEXT://kafka1:19092,PLAINTEXT://kafka2:19093'
-  #    SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+
   
