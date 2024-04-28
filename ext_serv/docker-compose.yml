@@ -198,7 +198,6 @@ services:
       KAFKA_REST_HOST_NAME: kafka-rest.bdc.home
       KAFKA_REST_LISTENERS: http://kafka-rest.bdc.home:8082
       KAFKA_REST_SCHEMA_REGISTRY_URL: http://kafka-sr.bdc.home:8081
-      #KAFKA_REST_ZOOKEEPER_CONNECT: zookeeper-1.bdc.home:2181,zookeeper-2.bdc.home:2181
       KAFKA_REST_BOOTSTRAP_SERVERS: PLAINTEXT://kafka-1.bdc.home:29092,PLAINTEXT://kafka-2.bdc.home:9092
     depends_on:
       - zookeeper-2
