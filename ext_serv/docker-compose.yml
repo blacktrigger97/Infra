@@ -130,7 +130,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper-1.bdc.home:2181,zookeeper-2.bdc.home:2181
-      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka-1.bdc.home:9092,PLAINTEXT_HOST://kafka-1.bdc.home:29092
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka-1.bdc.home:9092,EXTERNAL_HOST://kafka-1.bdc.home:29092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
       KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
