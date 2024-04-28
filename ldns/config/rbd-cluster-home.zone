@@ -26,6 +26,8 @@ $ORIGIN 1.168.192.in-addr.arpa.
 31  IN  PTR     trino-wk1
 60  IN  PTR     zookeeper-1
 61  IN  PTR     zookeeper-2
+65  IN  PTR     kafka-sr
+66  IN  PTR     kafka-rest
 70  IN  PTR     kafka-1
 71  IN  PTR     kafka-2
 51  IN  PTR     data-node1

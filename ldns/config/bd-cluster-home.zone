@@ -25,6 +25,8 @@ trino-co    IN      A       192.168.1.30
 trino-wk1   IN      A       192.168.1.31
 zookeeper-1 IN      A       192.168.1.60
 zookeeper-2 IN      A       192.168.1.61
+kafka-sr    IN      A       192.168.1.65
+kafka-rest  IN      A       192.168.1.66
 kafka-1     IN      A       192.168.1.70
 kafka-2     IN      A       192.168.1.71
 data-node1  IN      A       192.168.1.51
