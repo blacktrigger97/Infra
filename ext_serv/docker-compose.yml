@@ -81,8 +81,6 @@ services:
       - ./trino/trino-wk/etc:/etc/trino
       - ./trino/trino-wk/catalog:/etc/trino/catalog
       - /root/docker/hdc_data/trino/data:/data/trino
-    depends_on: 
-      - trino-co
 
   zookeeper-1:
     image: confluentinc/cp-zookeeper:latest
