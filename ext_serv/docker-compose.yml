@@ -202,7 +202,7 @@ services:
       KAFKA_REST_BOOTSTRAP_SERVERS: kafka-1.bdc.home:9092,kafka-2.bdc.home:9092
     depends_on:
       - zookeeper-2
-      - broker-2
+      - kafka-2
 
   hue:
     image: gethue/hue:latest
