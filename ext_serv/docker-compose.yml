@@ -166,7 +166,7 @@ services:
     depends_on:
       - zookeeper-2
 
-  kafka-schema-registry:
+  kafka-sr:
     image: confluentinc/cp-schema-registry:latest
     hostname: kafka-sr.bdc.home
     container_name: kafka-sr
@@ -174,15 +174,35 @@ services:
     networks:
       bdCluster:
         ipv4_address: 192.168.1.65
-    depends_on:
-      - zookeeper-1
-      - kafka-1
     ports:
-      - "8081:8081"
+      - 8081:8081
     environment:
       SCHEMA_REGISTRY_HOST_NAME: kafka-sr.bdc.home
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'PLAINTEXT://kafka-1.bdc.home:19092,PLAINTEXT://kafka-2.bdc.home:19092'
       SCHEMA_REGISTRY_LISTENERS: http://kafka-sr.bdc.home:8081
+    depends_on:
+      - zookeeper-1
+      - kafka-1
+  
+  kafka-rest:
+    image: confluentinc/cp-kafka-rest:latest
+    hostname: kafka-rest.bdc.home
+    container_name: kafka-rest
+    restart: unless-stopped
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.66
+    ports:
+      - 8082:8082
+    environment:
+      KAFKA_REST_HOST_NAME: kafka-rest.bdc.home
+      KAFKA_REST_LISTENERS: http://kafka-rest.bdc.home:8082
+      KAFKA_REST_SCHEMA_REGISTRY_URL: http://kafka-sr.bdc.home:8081
+      KAFKA_REST_ZOOKEEPER_CONNECT: zookeeper-1.bdc.home:2181,zookeeper-2.bdc.home:2181
+      KAFKA_REST_BOOTSTRAP_SERVERS: kafka-1.bdc.home:9092,kafka-2.bdc.home:9092
+    depends_on:
+      - zookeeper-2
+      - broker-2
 
   hue:
     image: gethue/hue:latest
