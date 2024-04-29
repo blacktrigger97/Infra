@@ -28,7 +28,7 @@ RUN cd /usr/src \
     && tar -xzf Python-${PY_VER}.tgz \
     && cd Python-${PY_VER} \
     && ./configure --enable-optimizations \
-    && make install
+    && make -j\$(nproc)
 
 # Pip & other Python library installation
 RUN yum install pip -y
