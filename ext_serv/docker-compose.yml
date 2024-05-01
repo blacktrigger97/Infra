@@ -180,7 +180,7 @@ services:
       - 8081:8081
     environment:
       SCHEMA_REGISTRY_HOST_NAME: kafka-sr.bdc.home
-      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://kafka-1.bdc.home:19092,PLAINTEXT://kafka-2.bdc.home:19092
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://kafka-1.bdc.home:19092,PLAINTEXT://kafka-2.bdc.home:29092
       SCHEMA_REGISTRY_LISTENERS: http://kafka-sr.bdc.home:8081
     depends_on:
       - kafka-2
