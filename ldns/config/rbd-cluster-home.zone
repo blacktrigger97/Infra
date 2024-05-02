@@ -16,6 +16,7 @@ $ORIGIN 1.168.192.in-addr.arpa.
 
 ;
 
+40  IN  PTR     dev-env
 41  IN  PTR     name-res
 42  IN  PTR     secon-hist
 43  IN  PTR     postgresql

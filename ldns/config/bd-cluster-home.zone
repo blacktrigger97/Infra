@@ -15,6 +15,7 @@ ns          IN      A       192.168.1.50
 
 ; -- add dns records below
 
+dev-env     IN      A       192.168.1.40
 name-res    IN      A       192.168.1.41
 secon-hist  IN      A       192.168.1.42
 postgresql  IN      A       192.168.1.43
