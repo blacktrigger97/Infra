@@ -8,7 +8,7 @@ ARG LOCAL_NAMENODE_DIR
 
 WORKDIR $DOCKER_DIR
 
-RUN echo "export DOCKER_DIR=$DOCKER_DIR" >> .bashrc
+#RUN echo "export DOCKER_DIR=$DOCKER_DIR" >> .bashrc
 RUN echo "export LOCAL_NAMENODE_DIR=$LOCAL_NAMENODE_DIR" >> .bashrc
 
 RUN git clone $GIT_REMOTE_ADDRESS
