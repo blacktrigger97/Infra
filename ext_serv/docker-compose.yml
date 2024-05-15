@@ -183,7 +183,7 @@ services:
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://kafka-1.bdc.home:19092,PLAINTEXT://kafka-2.bdc.home:29092
       SCHEMA_REGISTRY_LISTENERS: http://kafka-sr.bdc.home:8081
     depends_on:
-      - kafka-2
+      - kafka-1
 
   ksqldb:
     image: confluentinc/ksqldb-server:latest
