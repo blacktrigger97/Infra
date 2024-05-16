@@ -59,6 +59,7 @@ RUN wget https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime
 RUN wget https://repo.maven.apache.org/maven2/org/projectnessie/nessie-integrations/nessie-spark-extensions-${NESSIE_SPARK_VER}/${NESSIE_VER}/nessie-spark-extensions-${NESSIE_SPARK_VER}-${NESSIE_VER}.jar -P spark/jars/
 RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_${SPARK_KAFKA_VERSION}/${SPARK_VERSION}/spark-sql-kafka-0-10_${SPARK_KAFKA_VERSION}-${SPARK_VERSION}.jar -P spark/jars/
 RUN wget https://repo1.maven.org/maven2/org/apache/commons/commons-pool2/2.12.0/commons-pool2-2.12.0.jar -P spark/jars/
+RUN wget https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/3.6.2/kafka-clients-3.6.2.jar -P spark/jars/
 
 # Bashrc entries
 RUN echo "" >> .bashrc
