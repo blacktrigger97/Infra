@@ -53,7 +53,7 @@ services:
       - postgresql 
 
   trino-co:
-    image: "trinodb/trino:445"
+    image: "trinodb/trino:448"
     hostname: trino-co.bdc.home
     container_name: trino-co
     restart: unless-stopped
@@ -70,7 +70,7 @@ services:
       - nessie
 
   trino-wk1:
-    image: "trinodb/trino:445"
+    image: "trinodb/trino:448"
     hostname: trino-wk1.bdc.home
     container_name: trino-wk1
     restart: unless-stopped
