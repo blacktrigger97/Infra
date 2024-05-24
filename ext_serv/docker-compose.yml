@@ -62,6 +62,8 @@ services:
         ipv4_address: 192.168.1.30
     ports:
       - "8080:8080"
+    environment:
+      - TZ=Asia/Kolkata
     volumes:
       - ./trino/trino-co/etc:/etc/trino
       - ./trino/trino-co/catalog:/etc/trino/catalog
@@ -79,6 +81,8 @@ services:
         ipv4_address: 192.168.1.31
     ports:
       - "8081:8081"
+    environment:
+      - TZ=Asia/Kolkata
     volumes:
       - ./trino/trino-wk/etc:/etc/trino
       - ./trino/trino-wk/catalog:/etc/trino/catalog
