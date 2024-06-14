@@ -29,13 +29,13 @@ RUN cd /usr/src \
     && tar -xzf Python-${PY_VER}.tgz \
     && cd Python-${PY_VER} \
     && ./configure --enable-optimizations \
-    && make -j$(nproc)
+    && make install
 
 # Pip & other Python library installation
 #RUN yum install pip -y
-RUN pip3.11 install --upgrade pip
-RUN pip3.11 install numpy pandas matplotlib seaborn statsmodels scikit-learn 
-RUN pip3.11 install -U pip setuptools
+RUN pip3 install --upgrade pip
+RUN pip3 install numpy pandas matplotlib seaborn statsmodels scikit-learn 
+RUN pip3 install -U pip setuptools
 
 # SSH configuration
 RUN echo $DOCKER_PASS | passwd $DOCKER_USR --stdin
