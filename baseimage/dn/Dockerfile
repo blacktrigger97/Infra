@@ -23,7 +23,7 @@ RUN apt-get update && apt-get -y install zulu11-jdk
 RUN apt-get -y autoremove && apt-get -y clean
 
 # OS required package installation
-RUN apt-get -y net-tools iputils wget gcc git rsync openssh-server openssh openssh-clients which procps
+RUN apt-get -y install net-tools iputils wget gcc git rsync openssh-server openssh openssh-clients which procps
 
 # Python library installation
 RUN pip3 install --upgrade pip
