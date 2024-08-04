@@ -29,7 +29,6 @@ RUN apt-get -y install net-tools wget gcc git openssh-server which procps
 RUN systemctl enable ssh
 
 # Pip & other Python library installation
-RUN yum install pip -y
 RUN pip3 install --upgrade pip
 RUN pip3 install pynessie
 RUN nessie remote add http://nessie.bdc.home:19120/api/v1
@@ -41,12 +40,12 @@ RUN < /dev/zero ssh-keygen -q -N '' && cat ${DOCKER_DIR}.ssh/id_rsa.pub >> ${DOC
 WORKDIR ${DOCKER_DIR}
 
 # Start Scripts config
-RUN mkdir s_scripts
+# RUN mkdir s_scripts
 
 # Downloading Hadoop
-RUN wget https://downloads.apache.org/hadoop/common/hadoop-$HDC_VERSION/hadoop-$HDC_VERSION.tar.gz
-RUN tar -zxf hadoop-$HDC_VERSION.tar.gz && rm hadoop-$HDC_VERSION.tar.gz
-RUN mv hadoop-$HDC_VERSION hadoop
+# RUN wget https://downloads.apache.org/hadoop/common/hadoop-$HDC_VERSION/hadoop-$HDC_VERSION.tar.gz
+# RUN tar -zxf hadoop-$HDC_VERSION.tar.gz && rm hadoop-$HDC_VERSION.tar.gz
+# RUN mv hadoop-$HDC_VERSION hadoop
 
 # Bashrc entries
 RUN echo "" >> .bashrc
@@ -77,16 +76,16 @@ RUN echo "########SPARK Exports########" >> .bashrc
 RUN echo "export SPARK_HOME=${DOCKER_DIR}spark" >> .bashrc
 RUN echo "export PATH=\$PATH:\$JAVA_HOME/bin:\$SPARK_HOME/bin:\$SPARK_HOME/sbin:/usr/sbin:\$SPARK_HOME/yarn" >> .bashrc
 RUN echo "export LD_LIBRARY_PATH=/opt/hadoop/lib/native:\$LD_LIBRARY_PATH" >> .bashrc
-RUN echo -e "ssql () { \nspark-sql --packages org.apache.iceberg:iceberg-spark-runtime-${ICEBERG_SPARK_VER}:${ICEBERG_VER},org.projectnessie:nessie-spark-extensions-${NESSIE_SPARK_VER}:${NESSIE_VER} \\\n\
---conf spark.sql.extensions='org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions' \\\n\
---conf spark.sql.catalog.nessie.uri='http://nessie.bdc.home:19120/api/v1' --conf spark.sql.catalog.nessie.ref=main  --conf spark.sql.catalog.nessie.authentication.type=NONE \\\n\
---conf spark.sql.catalog.nessie.catalog-impl=org.apache.iceberg.nessie.NessieCatalog --conf spark.sql.catalog.nessie=org.apache.iceberg.spark.SparkCatalog \\\n\
---conf spark.sql.catalog.nessie.warehouse=hdfs://name-res.bdc.home:9000/user/root/nessie/warehouse \$@ \n}" >> .bashrc
+# RUN echo -e "ssql () { \nspark-sql --packages org.apache.iceberg:iceberg-spark-runtime-${ICEBERG_SPARK_VER}:${ICEBERG_VER},org.projectnessie:nessie-spark-extensions-${NESSIE_SPARK_VER}:${NESSIE_VER} \\\n\
+# --conf spark.sql.extensions='org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions' \\\n\
+# --conf spark.sql.catalog.nessie.uri='http://nessie.bdc.home:19120/api/v1' --conf spark.sql.catalog.nessie.ref=main  --conf spark.sql.catalog.nessie.authentication.type=NONE \\\n\
+# --conf spark.sql.catalog.nessie.catalog-impl=org.apache.iceberg.nessie.NessieCatalog --conf spark.sql.catalog.nessie=org.apache.iceberg.spark.SparkCatalog \\\n\
+# --conf spark.sql.catalog.nessie.warehouse=hdfs://name-res.bdc.home:9000/user/root/nessie/warehouse \$@ \n}" >> .bashrc
 
 # Updating configuration files
-RUN echo "export JAVA_HOME=/usr/lib/jvm/jre/" >> hadoop/etc/hadoop/hadoop-env.sh
-RUN git clone $GIT_REMOTE_ADDRESS
-RUN rsync -avru $GIT_DIR/hadoop/ hadoop
-RUN rm -rf $GIT_DIR
+# RUN echo "export JAVA_HOME=/usr/lib/jvm/jre/" >> hadoop/etc/hadoop/hadoop-env.sh
+# RUN git clone $GIT_REMOTE_ADDRESS
+# RUN rsync -avru $GIT_DIR/hadoop/ hadoop
+# RUN rm -rf $GIT_DIR
 
 EXPOSE 22
