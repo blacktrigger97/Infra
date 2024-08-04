@@ -1,6 +1,6 @@
 ARG PY_VER
 
-FROM rockylinux:${PY_VER}
+FROM python:${PY_VER}
 
 ARG JAVA_VER
 ARG DOCKER_USR
