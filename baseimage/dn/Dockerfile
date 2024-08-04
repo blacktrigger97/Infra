@@ -24,7 +24,7 @@ RUN apt-get -y autoremove && apt-get -y clean
 
 # OS required package installation
 RUN apt-get -y install net-tools wget gcc git rsync openssh-server which procps
-RUN systemctl enable --now ssh
+RUN systemctl enable ssh
 
 # Python library installation
 RUN pip3 install --upgrade pip
