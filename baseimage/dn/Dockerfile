@@ -32,7 +32,7 @@ RUN pip3 install pynessie
 RUN nessie remote add http://nessie.bdc.home:19120/api/v1
 
 # SSH configuration
-RUN echo $DOCKER_PASS | passwd --stdin $DOCKER_USR 
+RUN echo ${DOCKER_USR}:${DOCKER_PASS} | chpasswd
 RUN < /dev/zero ssh-keygen -q -N '' && cat ${DOCKER_DIR}.ssh/id_rsa.pub >> ${DOCKER_DIR}.ssh/authorized_keys && cat ${DOCKER_DIR}.ssh/id_rsa > ${DOCKER_DIR}.ssh/known_keys && chmod 600 ${DOCKER_DIR}.ssh/*_keys
 
 WORKDIR ${DOCKER_DIR}
