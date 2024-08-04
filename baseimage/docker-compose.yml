@@ -7,7 +7,7 @@ services:
       dockerfile: ${HOST_DIR}/baseimage/nrsh/Dockerfile
       args:
         - JAVA_VER=${JAVA_VER}
-        - OS_VER=${OS_VER}
+        - PY_VER=${PY_VER}
         - DOCKER_USR=${DOCKER_USR}
         - DOCKER_PASS=${DOCKER_PASS}
         - DOCKER_DIR=${DOCKER_DIR}
@@ -27,7 +27,6 @@ services:
       dockerfile: ${HOST_DIR}/baseimage/dn/Dockerfile
       args:
         - JAVA_VER=${JAVA_VER}
-        - OS_VER=${OS_VER}
         - PY_VER=${PY_VER}
         - DOCKER_USR=${DOCKER_USR}
         - DOCKER_PASS=${DOCKER_PASS}

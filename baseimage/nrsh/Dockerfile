@@ -1,6 +1,6 @@
-ARG OS_VER
+ARG PY_VER
 
-FROM rockylinux:${OS_VER}
+FROM rockylinux:${PY_VER}
 
 ARG JAVA_VER
 ARG DOCKER_USR
@@ -17,9 +17,16 @@ ARG SPARK_HDC_VERSION
 ARG NESSIE_SPARK_VER
 
 
-# Java, Python & Other Dependencies
-RUN yum install java-${JAVA_VER}-openjdk java-${JAVA_VER}-openjdk-devel -y
-RUN yum install net-tools iputils wget gcc git rsync openssh-server openssh openssh-clients which procps -y
+# Java installation
+RUN apt update && apt upgrade -y && apt install -y gnupg ca-certificates curl rsync
+RUN curl -s https://repos.azul.com/azul-repo.key | gpg --dearmor -o /usr/share/keyrings/azul.gpg
+RUN echo "deb [signed-by=/usr/share/keyrings/azul.gpg] https://repos.azul.com/zulu/deb stable main" | tee /etc/apt/sources.list.d/zulu.list
+RUN apt-get update && apt-get -y install zulu11-jdk
+RUN apt-get -y autoremove && apt-get -y clean
+
+# OS required package installation
+RUN apt-get -y install net-tools wget gcc git openssh-server which procps
+RUN systemctl enable ssh
 
 # Pip & other Python library installation
 RUN yum install pip -y
@@ -28,7 +35,7 @@ RUN pip3 install pynessie
 RUN nessie remote add http://nessie.bdc.home:19120/api/v1
 
 # SSH configuration
-RUN echo $DOCKER_PASS | passwd $DOCKER_USR --stdin
+RUN echo ${DOCKER_USR}:${DOCKER_PASS} | chpasswd
 RUN < /dev/zero ssh-keygen -q -N '' && cat ${DOCKER_DIR}.ssh/id_rsa.pub >> ${DOCKER_DIR}.ssh/authorized_keys && cat ${DOCKER_DIR}.ssh/id_rsa > ${DOCKER_DIR}.ssh/known_keys && chmod 600 ${DOCKER_DIR}.ssh/*_keys
 
 WORKDIR ${DOCKER_DIR}
@@ -40,13 +47,6 @@ RUN mkdir s_scripts
 RUN wget https://downloads.apache.org/hadoop/common/hadoop-$HDC_VERSION/hadoop-$HDC_VERSION.tar.gz
 RUN tar -zxf hadoop-$HDC_VERSION.tar.gz && rm hadoop-$HDC_VERSION.tar.gz
 RUN mv hadoop-$HDC_VERSION hadoop
-
-# Downloading Spark
-RUN wget https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${SPARK_HDC_VERSION}.tgz
-RUN tar -zxf spark-${SPARK_VERSION}-bin-hadoop${SPARK_HDC_VERSION}.tgz && rm spark-${SPARK_VERSION}-bin-hadoop${SPARK_HDC_VERSION}.tgz
-RUN mv spark-${SPARK_VERSION}-bin-hadoop${SPARK_HDC_VERSION} spark
-RUN wget https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime-${ICEBERG_SPARK_VER}/${ICEBERG_VER}/iceberg-spark-runtime-${ICEBERG_SPARK_VER}-${ICEBERG_VER}.jar -P spark/jars/
-RUN wget https://repo.maven.apache.org/maven2/org/projectnessie/nessie-integrations/nessie-spark-extensions-${NESSIE_SPARK_VER}/${NESSIE_VER}/nessie-spark-extensions-${NESSIE_SPARK_VER}-${NESSIE_VER}.jar -P spark/jars/
 
 # Bashrc entries
 RUN echo "" >> .bashrc
@@ -85,12 +85,8 @@ RUN echo -e "ssql () { \nspark-sql --packages org.apache.iceberg:iceberg-spark-r
 
 # Updating configuration files
 RUN echo "export JAVA_HOME=/usr/lib/jvm/jre/" >> hadoop/etc/hadoop/hadoop-env.sh
-RUN mv spark/conf/spark-defaults.conf.template spark/conf/spark-defaults.conf
-RUN mv spark/conf/spark-env.sh.template spark/conf/spark-env.sh
-RUN echo "export HADOOP_CONF_DIR=\$HADOOP_HOME/etc/hadoop" >> spark/conf/spark-env.sh
 RUN git clone $GIT_REMOTE_ADDRESS
 RUN rsync -avru $GIT_DIR/hadoop/ hadoop
-RUN rsync -avru $GIT_DIR/spark/ spark
 RUN rm -rf $GIT_DIR
 
 EXPOSE 22

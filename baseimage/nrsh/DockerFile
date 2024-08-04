@@ -1,9 +1,8 @@
-ARG PY_VER
+ARG OS_VER
 
-FROM python:${PY_VER}
+FROM rockylinux:${OS_VER}
 
 ARG JAVA_VER
-ARG PY_VER
 ARG DOCKER_USR
 ARG DOCKER_DIR
 ARG DOCKER_PASS
@@ -16,26 +15,20 @@ ARG NESSIE_VER
 ARG SPARK_VERSION
 ARG SPARK_HDC_VERSION
 ARG NESSIE_SPARK_VER
-ARG SPARK_KAFKA_VERSION
 
-# Java installation
-RUN apt update && apt upgrade -y && apt install -y gnupg ca-certificates curl rsync
-RUN curl -s https://repos.azul.com/azul-repo.key | gpg --dearmor -o /usr/share/keyrings/azul.gpg
-RUN echo "deb [signed-by=/usr/share/keyrings/azul.gpg] https://repos.azul.com/zulu/deb stable main" | tee /etc/apt/sources.list.d/zulu.list
-RUN apt-get update && apt-get -y install zulu11-jdk
-RUN apt-get -y autoremove && apt-get -y clean
 
-# OS required package installation
-RUN apt-get -y install net-tools wget gcc git openssh-server which procps
-RUN systemctl enable ssh
+# Java, Python & Other Dependencies
+RUN yum install java-${JAVA_VER}-openjdk java-${JAVA_VER}-openjdk-devel -y
+RUN yum install net-tools iputils wget gcc git rsync openssh-server openssh openssh-clients which procps -y
 
-# Python library installation
+# Pip & other Python library installation
+RUN yum install pip -y
 RUN pip3 install --upgrade pip
 RUN pip3 install pynessie
 RUN nessie remote add http://nessie.bdc.home:19120/api/v1
 
 # SSH configuration
-RUN echo ${DOCKER_USR}:${DOCKER_PASS} | chpasswd
+RUN echo $DOCKER_PASS | passwd $DOCKER_USR --stdin
 RUN < /dev/zero ssh-keygen -q -N '' && cat ${DOCKER_DIR}.ssh/id_rsa.pub >> ${DOCKER_DIR}.ssh/authorized_keys && cat ${DOCKER_DIR}.ssh/id_rsa > ${DOCKER_DIR}.ssh/known_keys && chmod 600 ${DOCKER_DIR}.ssh/*_keys
 
 WORKDIR ${DOCKER_DIR}
@@ -54,10 +47,6 @@ RUN tar -zxf spark-${SPARK_VERSION}-bin-hadoop${SPARK_HDC_VERSION}.tgz && rm spa
 RUN mv spark-${SPARK_VERSION}-bin-hadoop${SPARK_HDC_VERSION} spark
 RUN wget https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime-${ICEBERG_SPARK_VER}/${ICEBERG_VER}/iceberg-spark-runtime-${ICEBERG_SPARK_VER}-${ICEBERG_VER}.jar -P spark/jars/
 RUN wget https://repo.maven.apache.org/maven2/org/projectnessie/nessie-integrations/nessie-spark-extensions-${NESSIE_SPARK_VER}/${NESSIE_VER}/nessie-spark-extensions-${NESSIE_SPARK_VER}-${NESSIE_VER}.jar -P spark/jars/
-RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_${SPARK_KAFKA_VERSION}/${SPARK_VERSION}/spark-sql-kafka-0-10_${SPARK_KAFKA_VERSION}-${SPARK_VERSION}.jar -P spark/jars/
-RUN wget https://repo1.maven.org/maven2/org/apache/commons/commons-pool2/2.12.0/commons-pool2-2.12.0.jar -P spark/jars/
-RUN wget https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/3.6.2/kafka-clients-3.6.2.jar -P spark/jars/
-RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-token-provider-kafka-0-10_${SPARK_KAFKA_VERSION}/${SPARK_VERSION}/spark-token-provider-kafka-0-10_${SPARK_KAFKA_VERSION}-${SPARK_VERSION}.jar -P spark/jars/
 
 # Bashrc entries
 RUN echo "" >> .bashrc
@@ -81,12 +70,12 @@ RUN echo "export HDFS_SECONDARYNAMENODE_USER='root'" >> .bashrc
 RUN echo "export YARN_RESOURCEMANAGER_USER='root'" >> .bashrc
 RUN echo "export YARN_NODEMANAGER_USER='root'" >> .bashrc
 RUN echo "export YARN_CONF_DIR=\$HADOOP_HOME/etc/hadoop" >> .bashrc
-RUN echo "export DOCKER_DIR=$DOCKER_DIR" >> .bashrc
+RUN echo "export DOCKER_DIR=${DOCKER_DIR}" >> .bashrc
 RUN echo "" >> .bashrc
 RUN echo "" >> .bashrc
 RUN echo "########SPARK Exports########" >> .bashrc
 RUN echo "export SPARK_HOME=${DOCKER_DIR}spark" >> .bashrc
-RUN echo "export PATH=\$PATH:\$JAVA_HOME/bin:\$SPARK_HOME/bin:\$SPARK_HOME/sbin:/usr/sbin/:\$SPARK_HOME/yarn" >> .bashrc
+RUN echo "export PATH=\$PATH:\$JAVA_HOME/bin:\$SPARK_HOME/bin:\$SPARK_HOME/sbin:/usr/sbin:\$SPARK_HOME/yarn" >> .bashrc
 RUN echo "export LD_LIBRARY_PATH=/opt/hadoop/lib/native:\$LD_LIBRARY_PATH" >> .bashrc
 RUN echo -e "ssql () { \nspark-sql --packages org.apache.iceberg:iceberg-spark-runtime-${ICEBERG_SPARK_VER}:${ICEBERG_VER},org.projectnessie:nessie-spark-extensions-${NESSIE_SPARK_VER}:${NESSIE_VER} \\\n\
 --conf spark.sql.extensions='org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions' \\\n\
