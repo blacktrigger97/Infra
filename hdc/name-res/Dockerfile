@@ -16,7 +16,7 @@ RUN echo "export LOCAL_NAMENODE_DIR=$LOCAL_NAMENODE_DIR" >> .bashrc
 # RUN rsync -avru $GIT_DIR/hadoop/ hadoop
 # RUN rsync -avru $GIT_DIR/spark/ spark
 
-RUN mkdir -p {$DOCKER_NAMENODE_DIR,docker_$DOCKER_NAMENODE_DIR}
+RUN mkdir $DOCKER_NAMENODE_DIR docker_$DOCKER_NAMENODE_DIR
 RUN chown root:root -R $DOCKER_NAMENODE_DIR
 RUN chown root:root -R docker_$DOCKER_NAMENODE_DIR
 RUN chmod 777 -R $DOCKER_NAMENODE_DIR
