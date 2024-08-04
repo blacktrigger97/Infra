@@ -11,10 +11,10 @@ WORKDIR $DOCKER_DIR
 #RUN echo "export DOCKER_DIR=$DOCKER_DIR" >> .bashrc
 RUN echo "export LOCAL_NAMENODE_DIR=$LOCAL_NAMENODE_DIR" >> .bashrc
 
-RUN git clone $GIT_REMOTE_ADDRESS
-RUN rsync -avru $GIT_DIR/s_scripts/ s_scripts
-RUN rsync -avru $GIT_DIR/hadoop/ hadoop
-RUN rsync -avru $GIT_DIR/spark/ spark
+# RUN git clone $GIT_REMOTE_ADDRESS
+# RUN rsync -avru $GIT_DIR/s_scripts/ s_scripts
+# RUN rsync -avru $GIT_DIR/hadoop/ hadoop
+# RUN rsync -avru $GIT_DIR/spark/ spark
 
 RUN mkdir -p {$DOCKER_NAMENODE_DIR,docker_$DOCKER_NAMENODE_DIR}
 RUN chown root:root -R $DOCKER_NAMENODE_DIR
