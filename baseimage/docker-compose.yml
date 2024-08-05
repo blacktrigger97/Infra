@@ -44,7 +44,7 @@ services:
     image: dn
   hdc:
     build:
-      context: hdc
+      # context: hdc
       dockerfile: ${HOST_DIR}/baseimage/Dockerfile
       args:
         - JAVA_VER=${JAVA_VER}
