@@ -1,26 +1,6 @@
 version: '3.8'
 
 services:
-  nrsh:
-    build:
-      context: nrsh
-      dockerfile: ${HOST_DIR}/baseimage/nrsh/Dockerfile
-      args:
-        - JAVA_VER=${JAVA_VER}
-        - PY_VER=${PY_VER}
-        - DOCKER_USR=${DOCKER_USR}
-        - DOCKER_PASS=${DOCKER_PASS}
-        - DOCKER_DIR=${DOCKER_DIR}
-        - GIT_DIR=${GIT_DIR}
-        - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
-        - HDC_VERSION=${HDC_VERSION}
-        - ICEBERG_VER=${ICEBERG_VER}
-        - ICEBERG_SPARK_VER=${ICEBERG_SPARK_VER}
-        - NESSIE_VER=${NESSIE_VER}
-        - SPARK_VERSION=${SPARK_VERSION}
-        - SPARK_HDC_VERSION=${SPARK_HDC_VERSION}
-        - NESSIE_SPARK_VER=${NESSIE_SPARK_VER}
-    image: nrsh
   dn:
     build:
       context: dn
@@ -44,7 +24,6 @@ services:
     image: dn
   hdc:
     build:
-      # context: hdc
       dockerfile: ${HOST_DIR}/baseimage/Dockerfile
       args:
         - JAVA_VER=${JAVA_VER}
