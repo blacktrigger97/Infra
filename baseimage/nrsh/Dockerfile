@@ -60,7 +60,7 @@ RUN echo "export HADOOP_COMMON_HOME=\$HADOOP_HOME" >> .bashrc
 RUN echo "export HADOOP_HDFS_HOME=\$HADOOP_HOME" >> .bashrc
 RUN echo "export HADOOP_YARN_HOME=\$HADOOP_HOME" >> .bashrc
 RUN echo "export HADOOP_CONF_DIR=\$HADOOP_HOME/etc/hadoop" >> .bashrc
-RUN echo "export HADOOP_LOG_DIR=${DOCKER_DIR}/logs/hadoop" >> .bashrc
+RUN echo "export HADOOP_LOG_DIR=${DOCKER_DIR}logs/hadoop" >> .bashrc
 RUN echo "export HADOOP_COMMON_LIB_NATIVE_DIR=\$HADOOP_HOME/lib/native/" >> .bashrc 
 RUN echo 'export HADOOP_OPTS="-Djava.library.path=\$HADOOP_COMMON_LIB_NATIVE_DIR"' >> .bashrc
 RUN echo "export PATH=\$PATH:\$HADOOP_HOME/sbin:\$HADOOP_HOME/bin" >> .bashrc
