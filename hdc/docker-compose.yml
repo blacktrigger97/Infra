@@ -13,11 +13,7 @@ networks:
           
 
 services:
-  nrsh:
-    image: nrsh
-  dn:
-    image: dn
-    
+
   name-res:
     build: 
       context: name-res
