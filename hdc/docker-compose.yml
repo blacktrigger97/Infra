@@ -13,7 +13,9 @@ networks:
           
 
 services:
-
+  hdc:
+    image: hdc
+    
   name-res:
     build: 
       context: name-res
