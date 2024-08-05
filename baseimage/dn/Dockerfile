@@ -62,7 +62,7 @@ WORKDIR ${DOCKER_DIR}
 # Bashrc entries
 RUN echo "" >> .bashrc
 RUN echo "########JAVA Export########" >> .bashrc
-RUN echo "export JAVA_HOME=/usr/lib/jvm/jre/" >> .bashrc
+RUN echo "export JAVA_HOME=/usr/lib/jvm/zulu11/" >> .bashrc
 RUN echo "" >> .bashrc
 RUN echo "########HADOOP Exports########" >> .bashrc
 RUN echo "export HADOOP_HOME=${DOCKER_DIR}hadoop" >> .bashrc
