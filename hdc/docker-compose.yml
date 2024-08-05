@@ -72,6 +72,7 @@ services:
       - 19888:19888
     volumes:
       - ${LOCAL_DIR}${LOCAL_SECONDARY_NAMENODE_DIR}:${DOCKER_DIR}${DOCKER_SECONDARY_NAMENODE_DIR}
+      - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
     depends_on:
       - hdc
 
@@ -96,6 +97,8 @@ services:
       - net.ipv6.conf.all.disable_ipv6=0
     volumes:
       - ${LOCAL_DIR}${LOCAL_DATANODE_DIR1}:${DOCKER_DIR}${DOCKER_DATANODE_DIR}
+      - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
+      - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
     depends_on:
       - hdc
 
@@ -120,6 +123,8 @@ services:
       - net.ipv6.conf.all.disable_ipv6=0
     volumes:
       - ${LOCAL_DIR}${LOCAL_DATANODE_DIR2}:${DOCKER_DIR}${DOCKER_DATANODE_DIR}
+      - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
+      - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
     depends_on:
       - hdc
   
