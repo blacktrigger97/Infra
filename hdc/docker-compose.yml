@@ -46,7 +46,7 @@ services:
       - ${LOCAL_DIR}${LOCAL_NAMENODE_DIR}:${DOCKER_DIR}${DOCKER_NAMENODE_DIR}
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
     depends_on:
-      - nrsh
+      - hdc
 
   secon-hist:
     build: 
@@ -75,7 +75,7 @@ services:
     volumes:
       - ${LOCAL_DIR}${LOCAL_SECONDARY_NAMENODE_DIR}:${DOCKER_DIR}${DOCKER_SECONDARY_NAMENODE_DIR}
     depends_on:
-      - name-res
+      - hdc
 
   data-node1:
     build: 
@@ -99,7 +99,7 @@ services:
     volumes:
       - ${LOCAL_DIR}${LOCAL_DATANODE_DIR1}:${DOCKER_DIR}${DOCKER_DATANODE_DIR}
     depends_on:
-      - dn
+      - hdc
 
   data-node2:
     build: 
@@ -123,5 +123,5 @@ services:
     volumes:
       - ${LOCAL_DIR}${LOCAL_DATANODE_DIR2}:${DOCKER_DIR}${DOCKER_DATANODE_DIR}
     depends_on:
-      - dn
+      - hdc
   
