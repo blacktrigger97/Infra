@@ -40,7 +40,7 @@ RUN < /dev/zero ssh-keygen -q -N '' && cat ${DOCKER_DIR}.ssh/id_rsa.pub >> ${DOC
 WORKDIR ${DOCKER_DIR}
 
 # Start Scripts config
-RUN mkdir hadoop spark logs/hadoop logs/spark
+RUN mkdir -p hadoop spark logs/hadoop logs/spark
 
 # Downloading Hadoop
 # RUN wget https://downloads.apache.org/hadoop/common/hadoop-$HDC_VERSION/hadoop-$HDC_VERSION.tar.gz
