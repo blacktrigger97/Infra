@@ -16,7 +16,7 @@ RUN apt-get update && apt-get -y install zulu11-jdk
 RUN apt-get -y autoremove && apt-get -y clean
 
 # OS required package installation
-RUN apt-get -y install make net-tools wget gcc git openssh-server which procps libpq-dev sqlite-devel openssl-devel bzip2-devel libffi-devel zlib-devel
+RUN apt-get -y install make net-tools wget gcc git openssh-server which procps libpq-dev libsqlite3-dev libssl-dev libbz2-dev libffi-dev zlib1g-dev
 RUN systemctl enable ssh
 
 # Pip & other Python library installation
