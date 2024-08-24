@@ -40,10 +40,13 @@ services:
     ports:
       - 9870:9870
       - 8088:8088
+      - 8080:8080
+      - 5672:5672
     volumes:
       - ${LOCAL_DIR}${LOCAL_NAMENODE_DIR}:${DOCKER_DIR}${DOCKER_NAMENODE_DIR}
       - ${DOCKER_DIR}logs/namenode1:${DOCKER_DIR}logs/hadoop
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
+      - /root/${AIRFLOW_DIR}:/root/${AIRFLOW_DIR}
     depends_on:
       - hdc
 
