@@ -6,6 +6,7 @@ ARG JAVA_VER
 ARG DOCKER_USR
 ARG DOCKER_DIR
 ARG DOCKER_PASS
+ARG AIRFLOW_VER
 
 
 # Java installation
@@ -22,6 +23,11 @@ RUN systemctl enable ssh
 # Pip & other Python library installation
 RUN pip3 install --upgrade pip
 RUN pip3 install pynessie
+RUN pip3 install importlib-metadata
+RUN pip3 install apache-airflow==${AIRFLOW_VER}
+RUN pip3 install apache-airflow[celery]==${AIRFLOW_VER}
+RUN pip3 install apache-airflow[rabbitmq]==${AIRFLOW_VER}
+RUN pip3 install psycopg2
 RUN nessie remote add http://nessie.bdc.home:19120/api/v1
 
 # SSH configuration
@@ -31,7 +37,7 @@ RUN < /dev/zero ssh-keygen -q -N '' && cat ${DOCKER_DIR}.ssh/id_rsa.pub >> ${DOC
 WORKDIR ${DOCKER_DIR}
 
 # Start Scripts config
-RUN mkdir -p hadoop spark logs/hadoop logs/spark
+RUN mkdir -p hadoop spark aiflow/dags airflow/plugins logs/hadoop logs/spark logs/airflow logs/airflow/scheduler logs/airflow/webserver /run/airflow
 
 # Downloading Hadoop
 # RUN wget https://downloads.apache.org/hadoop/common/hadoop-$HDC_VERSION/hadoop-$HDC_VERSION.tar.gz
@@ -39,6 +45,8 @@ RUN mkdir -p hadoop spark logs/hadoop logs/spark
 # RUN mv hadoop-$HDC_VERSION hadoop
 
 # Bashrc entries
+RUN echo "########Airflow Exports########" >> .bashrc
+RUN echo "export AIRFLOW_HOME=/root/airflow/" >> .bashrc
 RUN echo "" >> .bashrc
 RUN echo "########JAVA Export########" >> .bashrc
 RUN echo "export JAVA_HOME=/usr/lib/jvm/zulu11/" >> .bashrc

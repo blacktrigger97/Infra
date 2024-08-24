@@ -1,27 +1,6 @@
 version: '3.8'
 
 services:
-  dn:
-    build:
-      context: dn
-      dockerfile: ${HOST_DIR}/baseimage/dn/Dockerfile
-      args:
-        - JAVA_VER=${JAVA_VER}
-        - PY_VER=${PY_VER}
-        - DOCKER_USR=${DOCKER_USR}
-        - DOCKER_PASS=${DOCKER_PASS}
-        - DOCKER_DIR=${DOCKER_DIR}
-        - GIT_DIR=${GIT_DIR}
-        - GIT_REMOTE_ADDRESS=${GIT_REMOTE_ADDRESS}
-        - HDC_VERSION=${HDC_VERSION}
-        - ICEBERG_VER=${ICEBERG_VER}
-        - ICEBERG_SPARK_VER=${ICEBERG_SPARK_VER}
-        - NESSIE_VER=${NESSIE_VER}
-        - SPARK_VERSION=${SPARK_VERSION}
-        - SPARK_HDC_VERSION=${SPARK_HDC_VERSION}
-        - NESSIE_SPARK_VER=${NESSIE_SPARK_VER}
-        - SPARK_KAFKA_VERSION=${SPARK_KAFKA_VERSION}
-    image: dn
   hdc:
     build:
       dockerfile: ${HOST_DIR}/baseimage/Dockerfile
@@ -31,4 +10,5 @@ services:
         - DOCKER_USR=${DOCKER_USR}
         - DOCKER_PASS=${DOCKER_PASS}
         - DOCKER_DIR=${DOCKER_DIR}
+        - AIRFLOW_VER=${AIRFLOW_VER}
     image: hdc
