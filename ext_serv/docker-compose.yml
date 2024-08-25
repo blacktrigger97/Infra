@@ -263,7 +263,7 @@ services:
       bdCluster:
         ipv4_address: 192.168.1.47
     ports:
-      - "5672:5672"
+      - "6379:6379"
   
 
   
