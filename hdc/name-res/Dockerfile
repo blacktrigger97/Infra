@@ -10,8 +10,7 @@ WORKDIR $DOCKER_DIR
 
 #RUN echo "export DOCKER_DIR=$DOCKER_DIR" >> .bashrc
 RUN echo "export LOCAL_NAMENODE_DIR=$LOCAL_NAMENODE_DIR" >> .bashrc
-RUN echo -e "afl() \n\
-{ \n\
+RUN echo -e "afl() { \n\
 airflow $@ -l=/root/logs/airflow/$@/$@.log --stderr=/root/logs/airflow/$@/$@.err --stdout /root/logs/airflow/$@/$@.out -D \n\
 }" >> .bashrc
 
