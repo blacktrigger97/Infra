@@ -27,7 +27,7 @@ RUN chmod 777 -R docker_$DOCKER_NAMENODE_DIR
 RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 
 RUN useradd -m -d /root/airflow airflow
-RUN passwd airflow
+RUN echo airflow:airflow | chpasswd
 RUN usermod -G wheel airflow
 RUN mkdir -p airflow airflow/dags airflow/plugins /run/airflow 
 
