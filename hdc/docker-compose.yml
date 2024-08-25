@@ -105,6 +105,7 @@ services:
       - ${DOCKER_DIR}logs/data-node1:${DOCKER_DIR}logs/hadoop
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
       - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
+      - /root/${AIRFLOW_DIR}:/root/${AIRFLOW_DIR}
     depends_on:
       - hdc
 
@@ -132,6 +133,7 @@ services:
       - ${DOCKER_DIR}logs/data-node2:${DOCKER_DIR}logs/hadoop
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
       - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
+      - /root/${AIRFLOW_DIR}:/root/${AIRFLOW_DIR}
     depends_on:
       - hdc
   
