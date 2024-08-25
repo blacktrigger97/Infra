@@ -257,7 +257,7 @@ services:
   redis:
     image: redis:latest
     hostname: redis.bdc.home
-    container_name: airflow-redis
+    container_name: redis
     restart: unless-stopped
     networks:
       bdCluster:
