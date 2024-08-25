@@ -18,12 +18,17 @@ RUN echo "aflc () { \nairflow celery \$@ -l=/root/logs/airflow/\$@/\$@.log --std
 RUN git clone $GIT_REMOTE_ADDRESS
 RUN rsync -avru $GIT_DIR/s_scripts/ s_scripts
 
-RUN mkdir $DOCKER_NAMENODE_DIR docker_$DOCKER_NAMENODE_DIR logs/airflow/webserver logs/airflow/scheduler logs/airflow/triggerer logs/airflow/flower
+RUN mkdir $DOCKER_NAMENODE_DIR docker_$DOCKER_NAMENODE_DIR logs/airflow/dag_processor_manager logs/airflow/webserver logs/airflow/scheduler logs/airflow/triggerer logs/airflow/flower
 RUN chown root:root -R $DOCKER_NAMENODE_DIR
 RUN chown root:root -R docker_$DOCKER_NAMENODE_DIR
 RUN chmod 777 -R $DOCKER_NAMENODE_DIR
 RUN chmod 777 -R docker_$DOCKER_NAMENODE_DIR
 
 RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+
+RUN useradd -m -d /root/airflow airflow
+RUN passwd airflow
+RUN usermod -G wheel airflow
+RUN mkdir -p airflow airflow/dags airflow/plugins /run/airflow 
 
 CMD ["/root/s_scripts/name-res.sh"]
