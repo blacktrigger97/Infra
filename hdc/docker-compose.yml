@@ -41,7 +41,6 @@ services:
       - 9870:9870
       - 8088:8088
       - 8080:8080
-      - 8794:8794
       - 5555:5555
     volumes:
       - ${LOCAL_DIR}${LOCAL_NAMENODE_DIR}:${DOCKER_DIR}${DOCKER_NAMENODE_DIR}
