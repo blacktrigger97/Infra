@@ -256,6 +256,12 @@ services:
       - ./hue/hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
   redis:
     image: redis:latest
+    hostname: redis.bdc.home
+    container_name: airflow-redis
+    restart: unless-stopped
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.47
     ports:
       - "5672:5672"
   
