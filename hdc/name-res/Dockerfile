@@ -12,11 +12,13 @@ WORKDIR $DOCKER_DIR
 RUN echo "export LOCAL_NAMENODE_DIR=$LOCAL_NAMENODE_DIR" >> .bashrc
 RUN echo "afl () { \nairflow \$@ -l=/root/logs/airflow/\$@/\$@.log --stderr=/root/logs/airflow/\$@/\$@.err --stdout /root/logs/airflow/\$@/\$@.out -D \n\
 }" >> .bashrc
+RUN echo "aflc () { \nairflow celery \$@ -l=/root/logs/airflow/\$@/\$@.log --stderr=/root/logs/airflow/\$@/\$@.err --stdout /root/logs/airflow/\$@/\$@.out -D \n\
+}" >> .bashrc
 
 RUN git clone $GIT_REMOTE_ADDRESS
 RUN rsync -avru $GIT_DIR/s_scripts/ s_scripts
 
-RUN mkdir $DOCKER_NAMENODE_DIR docker_$DOCKER_NAMENODE_DIR
+RUN mkdir $DOCKER_NAMENODE_DIR docker_$DOCKER_NAMENODE_DIR logs/airflow/webserver logs/airflow/scheduler logs/airflow/triggerer logs/airflow/flower
 RUN chown root:root -R $DOCKER_NAMENODE_DIR
 RUN chown root:root -R docker_$DOCKER_NAMENODE_DIR
 RUN chmod 777 -R $DOCKER_NAMENODE_DIR

@@ -37,7 +37,7 @@ RUN < /dev/zero ssh-keygen -q -N '' && cat ${DOCKER_DIR}.ssh/id_rsa.pub >> ${DOC
 WORKDIR ${DOCKER_DIR}
 
 # Start Scripts config
-RUN mkdir -p hadoop spark airflow/dags airflow/plugins logs/hadoop logs/spark logs/airflow logs/airflow/webserver logs/airflow/scheduler logs/airflow/triggerer logs/airflow/flower /run/airflow
+RUN mkdir -p hadoop spark airflow/dags airflow/plugins logs/hadoop logs/spark logs/airflow /run/airflow
 
 # Downloading Hadoop
 # RUN wget https://downloads.apache.org/hadoop/common/hadoop-$HDC_VERSION/hadoop-$HDC_VERSION.tar.gz
