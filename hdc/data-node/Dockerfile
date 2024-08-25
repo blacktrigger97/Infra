@@ -9,6 +9,10 @@ WORKDIR $DOCKER_DIR
 
 #RUN echo "export DOCKER_DIR=$DOCKER_DIR" >> .bashrc
 RUN echo "export DOCKER_DATANODE_DIR=$DOCKER_DATANODE_DIR" >> .bashrc
+RUN echo "afl() \
+{ \
+airflow celery $@ -l=/root/logs/airflow/$@/$@.log --stderr=/root/logs/airflow/$@/$@.err --stdout /root/logs/airflow/$@/$@.out -D \
+}" >> .bashrc
 
 RUN git clone $GIT_REMOTE_ADDRESS
 RUN rsync -avru $GIT_DIR/s_scripts/ s_scripts
