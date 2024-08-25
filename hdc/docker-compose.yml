@@ -136,9 +136,5 @@ services:
       - /root/${AIRFLOW_DIR}:/root/${AIRFLOW_DIR}
     depends_on:
       - hdc
-  redis:
-    image: redis:latest
-    ports:
-      - "5672:5672"
   
   

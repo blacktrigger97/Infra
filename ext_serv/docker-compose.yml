@@ -254,5 +254,10 @@ services:
       - 8888:8888
     volumes:
       - ./hue/hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
+  redis:
+    image: redis:latest
+    ports:
+      - "5672:5672"
+  
 
   
