@@ -239,6 +239,7 @@ services:
       context: airflow
       dockerfile: ${HOST_DIR}/ext_serv/airflow/Dockerfile
       args:
+        - PY_VER=${PY_VER}
         - DOCKER_USR=${DOCKER_USR}
         - DOCKER_PASS=${DOCKER_PASS}
         - DOCKER_DIR=${DOCKER_DIR}
