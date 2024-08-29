@@ -10,6 +10,7 @@ ARG GIT_AIRFLOW_ADDRESS
 
 
 # OS required package installation
+RUN apt update && apt upgrade -y && apt install -y gnupg ca-certificates curl rsync
 RUN apt-get -y install make net-tools wget gcc git openssh-server which procps libpq-dev libsqlite3-dev libssl-dev libbz2-dev libffi-dev zlib1g-dev
 RUN systemctl enable ssh
 
