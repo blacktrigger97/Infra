@@ -15,7 +15,7 @@ RUN git clone $GIT_CONFIG_ADDRESS
 RUN rsync -avru $GIT_DIR/s_scripts/ s_scripts
 RUN git clone $GIT_AIRFLOW_ADDRESS
 
-RUN mkdir -p $DOCKER_NAMENODE_DIR docker_$DOCKER_NAMENODE_DIR logs/airflow/worker
+RUN mkdir -p $DOCKER_NAMENODE_DIR docker_$DOCKER_NAMENODE_DIR logs/airflow/worker /run/airflow 
 RUN chown root:root -R $DOCKER_NAMENODE_DIR
 RUN chown root:root -R docker_$DOCKER_NAMENODE_DIR
 RUN chmod 777 -R $DOCKER_NAMENODE_DIR
@@ -26,6 +26,6 @@ RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 RUN useradd -m -d /root/airflow airflow
 RUN echo airflow:airflow | chpasswd
 RUN usermod -aG sudo airflow
-RUN mkdir -p airflow airflow/dags airflow/plugins /run/airflow 
+#RUN mkdir -p airflow airflow/dags airflow/plugins /run/airflow 
 
 CMD ["/root/s_scripts/name-res.sh"]
