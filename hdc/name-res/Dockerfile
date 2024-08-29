@@ -1,24 +1,21 @@
 FROM hdc
 
 ARG GIT_DIR
-ARG GIT_REMOTE_ADDRESS
+ARG GIT_CONFIG_ADDRESS
 ARG DOCKER_DIR
 ARG DOCKER_NAMENODE_DIR
 ARG LOCAL_NAMENODE_DIR
+ARG GIT_AIRFLOW_ADDRESS
 
 WORKDIR $DOCKER_DIR
 
-#RUN echo "export DOCKER_DIR=$DOCKER_DIR" >> .bashrc
 RUN echo "export LOCAL_NAMENODE_DIR=$LOCAL_NAMENODE_DIR" >> .bashrc
-RUN echo "afl () { \nairflow \$@ -l=/root/logs/airflow/\$@/\$@.log --stderr=/root/logs/airflow/\$@/\$@.err --stdout=/root/logs/airflow/\$@/\$@.out --pid=/run/airflow/airflow-\$@.pid -D \n\
-}" >> .bashrc
-RUN echo "aflc () { \nairflow celery \$@ -l=/root/logs/airflow/\$@/\$@.log --stderr=/root/logs/airflow/\$@/\$@.err --stdout=/root/logs/airflow/\$@/\$@.out --pid=/run/airflow/airflow-\$@.pid -D \n\
-}" >> .bashrc
 
-RUN git clone $GIT_REMOTE_ADDRESS
+RUN git clone $GIT_CONFIG_ADDRESS
 RUN rsync -avru $GIT_DIR/s_scripts/ s_scripts
+RUN git clone $GIT_AIRFLOW_ADDRESS
 
-RUN mkdir $DOCKER_NAMENODE_DIR docker_$DOCKER_NAMENODE_DIR logs/airflow/dag_processor_manager logs/airflow/webserver logs/airflow/scheduler logs/airflow/triggerer logs/airflow/flower
+RUN mkdir -p $DOCKER_NAMENODE_DIR docker_$DOCKER_NAMENODE_DIR logs/airflow/worker
 RUN chown root:root -R $DOCKER_NAMENODE_DIR
 RUN chown root:root -R docker_$DOCKER_NAMENODE_DIR
 RUN chmod 777 -R $DOCKER_NAMENODE_DIR

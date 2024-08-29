@@ -1,7 +1,7 @@
 FROM hdc
 
 ARG GIT_DIR
-ARG GIT_REMOTE_ADDRESS
+ARG GIT_CONFIG_ADDRESS
 ARG DOCKER_DIR
 ARG DOCKER_SECONDARY_NAMENODE_DIR
 
@@ -11,7 +11,7 @@ WORKDIR $DOCKER_DIR
 #RUN echo "export DOCKER_DIR=$DOCKER_DIR" >> .bashrc
 RUN echo "export DOCKER_SECONDARY_NAMENODE_DIR=$DOCKER_SECONDARY_NAMENODE_DIR" >> .bashrc
 
-RUN git clone $GIT_REMOTE_ADDRESS
+RUN git clone $GIT_CONFIG_ADDRESS
 RUN rsync -avru $GIT_DIR/s_scripts/ s_scripts
 # RUN rsync -avru $GIT_DIR/hadoop/ hadoop
 # RUN rsync -avru $GIT_DIR/spark/ spark

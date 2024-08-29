@@ -3,7 +3,7 @@ FROM dn
 ARG DOCKER_DIR
 ARG SPARK_VERSION
 ARG GIT_DIR
-ARG GIT_REMOTE_ADDRESS
+ARG GIT_CONFIG_ADDRESS
 
 WORKDIR $DOCKER_DIR
 
@@ -24,7 +24,7 @@ WORKDIR $DOCKER_DIR
 
 
 RUN mkdir notebooks
-RUN git clone $GIT_REMOTE_ADDRESS
+RUN git clone $GIT_CONFIG_ADDRESS
 RUN rsync -avru $GIT_DIR/s_scripts/ s_scripts
 
 RUN pip3 install pynessie

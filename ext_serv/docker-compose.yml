@@ -209,6 +209,51 @@ services:
       KSQL_KSQL_LOGGING_PROCESSING_TOPIC_AUTO_CREATE: "true"
     depends_on:
       - kafka-sr
+
+  hue:
+    image: gethue/hue:latest
+    hostname: hue.bdc.home
+    container_name: hue
+    restart: unless-stopped
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.46
+    ports:
+      - 8888:8888
+    volumes:
+      - ./hue/hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
+
+  redis:
+    image: redis:latest
+    hostname: redis.bdc.home
+    container_name: redis
+    restart: unless-stopped
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.47
+    ports:
+      - "6379:6379"
+  
+  airflow:
+    build:
+      context: airflow
+      dockerfile: ${HOST_DIR}/ext_serv/airflow/Dockerfile
+      args:
+        - DOCKER_USR=${DOCKER_USR}
+        - DOCKER_PASS=${DOCKER_PASS}
+        - DOCKER_DIR=${DOCKER_DIR}
+        - AIRFLOW_VER=${AIRFLOW_VER}
+        - GIT_AIRFLOW_ADDRESS=${GIT_AIRFLOW_ADDRESS}
+    image: airflow
+    container_name: airflow
+    hostname: airflow.bdc.home
+    restart: unless-stopped
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.48
+    ports:
+      - 8080:8080
+      - 5555:5555
   
   #ksql:
   #  image: confluentinc/ksqldb-cli:latest
@@ -242,28 +287,7 @@ services:
   #    - zookeeper-2
   #    - kafka-2
 
-  hue:
-    image: gethue/hue:latest
-    hostname: hue.bdc.home
-    container_name: hue
-    restart: unless-stopped
-    networks:
-      bdCluster:
-        ipv4_address: 192.168.1.46
-    ports:
-      - 8888:8888
-    volumes:
-      - ./hue/hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
-  redis:
-    image: redis:latest
-    hostname: redis.bdc.home
-    container_name: redis
-    restart: unless-stopped
-    networks:
-      bdCluster:
-        ipv4_address: 192.168.1.47
-    ports:
-      - "6379:6379"
+  
   
 
   

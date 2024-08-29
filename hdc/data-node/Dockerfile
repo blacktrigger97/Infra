@@ -1,23 +1,18 @@
 FROM hdc
 
 ARG GIT_DIR
-ARG GIT_REMOTE_ADDRESS
+ARG GIT_CONFIG_ADDRESS
 ARG DOCKER_DIR
 ARG DOCKER_DATANODE_DIR
+ARG GIT_AIRFLOW_ADDRESS
 
 WORKDIR $DOCKER_DIR
 
-#RUN echo "export DOCKER_DIR=$DOCKER_DIR" >> .bashrc
 RUN echo "export DOCKER_DATANODE_DIR=$DOCKER_DATANODE_DIR" >> .bashrc
-RUN echo "afl () { \nairflow \$@ -l=/root/logs/airflow/\$@/\$@.log --stderr=/root/logs/airflow/\$@/\$@.err --stdout=/root/logs/airflow/\$@/\$@.out --pid=/run/airflow/airflow-\$@.pid -D \n\
-}" >> .bashrc
-RUN echo "aflc () { \nairflow celery \$@ -l=/root/logs/airflow/\$@/\$@.log --stderr=/root/logs/airflow/\$@/\$@.err --stdout=/root/logs/airflow/\$@/\$@.out --pid=/run/airflow/airflow-\$@.pid -D \n\
-}" >> .bashrc
 
-RUN git clone $GIT_REMOTE_ADDRESS
+RUN git clone $GIT_CONFIG_ADDRESS
 RUN rsync -avru $GIT_DIR/s_scripts/ s_scripts
-# RUN rsync -avru $GIT_DIR/hadoop/ hadoop
-# RUN rsync -avru $GIT_DIR/spark/ spark
+RUN git clone $GIT_AIRFLOW_ADDRESS
 
 RUN mkdir -p $DOCKER_DATANODE_DIR logs/airflow/worker
 RUN chown root:root -R $DOCKER_DATANODE_DIR
