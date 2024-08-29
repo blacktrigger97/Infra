@@ -9,10 +9,6 @@ ARG AIRFLOW_VER
 ARG GIT_AIRFLOW_ADDRESS
 
 
-# SSH configuration
-RUN echo ${DOCKER_USR}:${DOCKER_PASS} | chpasswd
-RUN < /dev/zero ssh-keygen -q -N '' && cat ${DOCKER_DIR}.ssh/id_rsa.pub >> ${DOCKER_DIR}.ssh/authorized_keys && cat ${DOCKER_DIR}.ssh/id_rsa > ${DOCKER_DIR}.ssh/known_keys && chmod 600 ${DOCKER_DIR}.ssh/*_keys
-
 # OS required package installation
 RUN apt-get -y install make net-tools wget gcc git openssh-server which procps libpq-dev libsqlite3-dev libssl-dev libbz2-dev libffi-dev zlib1g-dev
 RUN systemctl enable ssh
@@ -24,6 +20,10 @@ RUN pip3 install apache-airflow==${AIRFLOW_VER}
 RUN pip3 install apache-airflow[celery]==${AIRFLOW_VER}
 RUN pip3 install apache-airflow[rabbitmq]==${AIRFLOW_VER}
 RUN pip3 install psycopg2
+
+# SSH configuration
+RUN echo ${DOCKER_USR}:${DOCKER_PASS} | chpasswd
+RUN < /dev/zero ssh-keygen -q -N '' && cat ${DOCKER_DIR}.ssh/id_rsa.pub >> ${DOCKER_DIR}.ssh/authorized_keys && cat ${DOCKER_DIR}.ssh/id_rsa > ${DOCKER_DIR}.ssh/known_keys && chmod 600 ${DOCKER_DIR}.ssh/*_keys
 
 WORKDIR ${DOCKER_DIR}
 
