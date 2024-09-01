@@ -22,7 +22,6 @@ RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 
 RUN useradd -m -d /root/airflow airflow
 RUN echo airflow:airflow | chpasswd
-RUN usermod -aG sudo airflow
-#RUN mkdir -p airflow airflow/dags airflow/plugins /run/airflow 
+RUN usermod -aG sudo airflow 
 
 CMD ["/root/s_scripts/data-node.sh"]

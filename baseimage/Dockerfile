@@ -22,11 +22,13 @@ RUN systemctl enable ssh
 
 # Pip & other Python library installation
 RUN pip3 install --upgrade pip
+RUN pip3 install pyspark==${SPARK_VERSION}
 RUN pip3 install pynessie
 RUN pip3 install importlib-metadata
 RUN pip3 install apache-airflow==${AIRFLOW_VER}
 RUN pip3 install apache-airflow[celery]==${AIRFLOW_VER}
 RUN pip3 install apache-airflow[rabbitmq]==${AIRFLOW_VER}
+RUN pip3 install apache-airflow-providers-apache-spark
 RUN pip3 install psycopg2
 RUN nessie remote add http://nessie.bdc.home:19120/api/v1
 
