@@ -247,6 +247,7 @@ services:
         - GIT_CONFIG_DIR=${GIT_CONFIG_DIR}
         - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
         - GIT_AIRFLOW_ADDRESS=${GIT_AIRFLOW_ADDRESS}
+        - SPARK_VERSION=${SPARK_VERSION}
     image: airflow
     container_name: airflow
     hostname: airflow.bdc.home
