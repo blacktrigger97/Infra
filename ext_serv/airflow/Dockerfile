@@ -43,6 +43,10 @@ RUN git clone $GIT_CONFIG_ADDRESS
 RUN rsync -avru $GIT_DIR/s_scripts/ s_scripts
 RUN git clone $GIT_AIRFLOW_ADDRESS
 
+RUN useradd -m -d /root/airflow airflow
+RUN echo airflow:airflow | chpasswd
+RUN usermod -aG sudo airflow
+
 # Bashrc entries
 RUN echo "########Airflow Exports########" >> .bashrc
 RUN echo "export AIRFLOW_HOME=/root/airflow/" >> .bashrc
