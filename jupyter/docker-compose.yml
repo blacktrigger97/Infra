@@ -21,7 +21,7 @@ services:
     build: 
       dockerfile: ${HOST_DIR}/jupyter/Dockerfile
       args:
-        - GIT_DIR=${GIT_DIR}
+        - GIT_CONFIG_DIR=${GIT_CONFIG_DIR}
         - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
         - DOCKER_DIR=${DOCKER_DIR}
         - SPARK_VERSION=${SPARK_VERSION}

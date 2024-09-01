@@ -5,7 +5,7 @@ FROM python:${PY_VER}
 ARG DOCKER_USR
 ARG DOCKER_DIR
 ARG DOCKER_PASS
-ARG GIT_DIR
+ARG GIT_CONFIG_DIR
 ARG GIT_CONFIG_ADDRESS
 ARG AIRFLOW_VER
 ARG GIT_AIRFLOW_ADDRESS
@@ -37,7 +37,7 @@ WORKDIR ${DOCKER_DIR}
 RUN mkdir -p logs/airflow logs/airflow/dag_processor_manager logs/airflow/webserver logs/airflow/scheduler logs/airflow/triggerer logs/airflow/flower /run/airflow
 
 RUN git clone $GIT_CONFIG_ADDRESS
-RUN rsync -avru $GIT_DIR/s_scripts/ s_scripts
+RUN rsync -avru $GIT_CONFIG_DIR/s_scripts/ s_scripts
 RUN git clone $GIT_AIRFLOW_ADDRESS
 
 RUN useradd -m -d /root/airflow airflow

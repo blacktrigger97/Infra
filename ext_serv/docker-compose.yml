@@ -244,7 +244,7 @@ services:
         - DOCKER_PASS=${DOCKER_PASS}
         - DOCKER_DIR=${DOCKER_DIR}
         - AIRFLOW_VER=${AIRFLOW_VER}
-        - GIT_DIR=${GIT_DIR}
+        - GIT_CONFIG_DIR=${GIT_CONFIG_DIR}
         - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
         - GIT_AIRFLOW_ADDRESS=${GIT_AIRFLOW_ADDRESS}
     image: airflow

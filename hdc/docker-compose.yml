@@ -21,7 +21,7 @@ services:
       context: name-res
       dockerfile: ${HOST_DIR}/hdc/name-res/Dockerfile
       args:
-        - GIT_DIR=${GIT_DIR}
+        - GIT_CONFIG_DIR=${GIT_CONFIG_DIR}
         - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
         - GIT_AIRFLOW_ADDRESS=${GIT_AIRFLOW_ADDRESS}
         - DOCKER_DIR=${DOCKER_DIR}
@@ -54,7 +54,7 @@ services:
       context: secon-hist
       dockerfile: ${HOST_DIR}/hdc/secon-hist/Dockerfile
       args:
-        - GIT_DIR=${GIT_DIR}
+        - GIT_CONFIG_DIR=${GIT_CONFIG_DIR}
         - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
         - DOCKER_DIR=${DOCKER_DIR}
         - DOCKER_SECONDARY_NAMENODE_DIR=${DOCKER_SECONDARY_NAMENODE_DIR}
@@ -85,7 +85,7 @@ services:
       context: data-node
       dockerfile: ${HOST_DIR}/hdc/data-node/Dockerfile
       args:
-        - GIT_DIR=${GIT_DIR}
+        - GIT_CONFIG_DIR=${GIT_CONFIG_DIR}
         - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
         - GIT_AIRFLOW_ADDRESS=${GIT_AIRFLOW_ADDRESS}
         - DOCKER_DIR=${DOCKER_DIR}
@@ -114,7 +114,7 @@ services:
       context: data-node
       dockerfile: ${HOST_DIR}/hdc/data-node/Dockerfile
       args:
-        - GIT_DIR=${GIT_DIR}
+        - GIT_CONFIG_DIR=${GIT_CONFIG_DIR}
         - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
         - GIT_AIRFLOW_ADDRESS=${GIT_AIRFLOW_ADDRESS}
         - DOCKER_DIR=${DOCKER_DIR}
