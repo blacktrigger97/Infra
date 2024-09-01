@@ -7,7 +7,7 @@ ARG DOCKER_USR
 ARG DOCKER_DIR
 ARG DOCKER_PASS
 ARG AIRFLOW_VER
-
+ARG SPARK_VERSION
 
 # Java installation
 RUN apt update && apt upgrade -y && apt install -y gnupg ca-certificates curl rsync
