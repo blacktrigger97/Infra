@@ -5,12 +5,12 @@ networks:
     name: bdCluster
     driver: ipvlan
     external: true
-    driver_opts:
-      parent: ${ETHERNET_NAME}
-    ipam:
-      config:
-        - subnet: 192.168.1.0/24
-          gateway: 192.168.1.1
+    # driver_opts:
+    #   parent: ${ETHERNET_NAME}
+    # ipam:
+    #   config:
+    #     - subnet: 192.168.1.0/24
+    #       gateway: 192.168.1.1
 
 services:
 
@@ -31,6 +31,22 @@ services:
     volumes: 
       - ./postgresql/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ${LOCAL_DIR}${DB_DIR}:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4
+    cpus: 1
+    restart: unless-stopped
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.35
+    environment:
+      PGADMIN_DEFAULT_EMAIL: root@domain-name.com
+      PGADMIN_DEFAULT_PASSWORD: ${DOCKER_PASS}
+    ports:
+      - 8888:8888
+    volumes:
+      - ${LOCAL_DIR}${DB_DIR_ADMIN}:/var/lib/pgadmin
 
   nessie:
     build:
@@ -143,7 +159,7 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: true
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
     depends_on:
       - zookeeper-1
 
@@ -170,7 +186,7 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: true
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
     depends_on:
       - zookeeper-2
 
