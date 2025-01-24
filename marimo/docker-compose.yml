@@ -20,5 +20,5 @@ services:
         ipv4_address: 192.168.1.47
     ports:
       - 8091:8091
-    volumes:
-      - /home/vishesh/notebooks:/root/notebooks
+    #volumes:
+    #  - /root/:/root/notebooks
