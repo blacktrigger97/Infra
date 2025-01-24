@@ -10,6 +10,8 @@ COPY --link requirements.txt .
 # Install the requirements using uv
 RUN uv pip install -r requirements.txt
 
+RUN apt-get -y install git 
+
 WORKDIR /root
 
 RUN mkdir notebooks
