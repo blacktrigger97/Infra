@@ -66,7 +66,7 @@ RUN echo "export HDFS_DATANODE_USER='root'" >> .bashrc
 RUN echo "export HDFS_SECONDARYNAMENODE_USER='root'" >> .bashrc
 RUN echo "export YARN_RESOURCEMANAGER_USER='root'" >> .bashrc
 RUN echo "export YARN_NODEMANAGER_USER='root'" >> .bashrc
-RUN echo "export YARN_CONF_DIR=\$HADOOP_HOME/etc/hadoop" >> .bashrc
+#RUN echo "export YARN_CONF_DIR=\$HADOOP_HOME/etc/hadoop" >> .bashrc
 RUN echo "export DOCKER_DIR=${DOCKER_DIR}" >> .bashrc
 RUN echo "" >> .bashrc
 RUN echo "########SPARK Exports########" >> .bashrc

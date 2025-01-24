@@ -16,24 +16,32 @@ $ORIGIN 1.168.192.in-addr.arpa.
 
 ;
 
+11  IN  PTR     name-res1
+12  IN  PTR     name-res2
+13  IN  PTR     name-res3
+14  IN  PTR     secon-hist
+15  IN  PTR     zookeeper-1
+16  IN  PTR     zookeeper-2
+17  IN  PTR     zookeeper-3
+21  IN  PTR     postgresql
+26  IN  PTR     redis
+31  IN  PTR     nessie
+32  IN  PTR     hue
+33  IN  PTR     trino-co
+34  IN  PTR     airflow
+35  IN  PTR     kafka-sr
+36  IN  PTR     ksqldb
+41  IN  PTR     trino-wk1
+42  IN  PTR     trino-wk2
+43  IN  PTR     trino-wk3
+51  IN  PTR     kafka-1
+52  IN  PTR     kafka-2
+53  IN  PTR     kafka-3
 40  IN  PTR     dev-env
-41  IN  PTR     name-res
-42  IN  PTR     secon-hist
-43  IN  PTR     postgresql
-44  IN  PTR     nessie
-45  IN  PTR     jupyter
-46  IN  PTR     hue
-47  IN  PTR     redis
-48  IN  PTR     airflow
-30  IN  PTR     trino-co
-31  IN  PTR     trino-wk1
-60  IN  PTR     zookeeper-1
-61  IN  PTR     zookeeper-2
-65  IN  PTR     kafka-sr
-66  IN  PTR     ksqldb
-70  IN  PTR     kafka-1
-71  IN  PTR     kafka-2
-51  IN  PTR     data-node1
-52  IN  PTR     data-node2
+46  IN  PTR     jupyter
+47  IN  PTR     marimo
+101  IN  PTR     data-node1
+102  IN  PTR     data-node2
+
 
 ;

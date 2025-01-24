@@ -13,9 +13,9 @@ RUN echo "export LOCAL_NAMENODE_DIR=$LOCAL_NAMENODE_DIR" >> .bashrc
 
 RUN git clone $GIT_CONFIG_ADDRESS
 RUN rsync -avru $GIT_CONFIG_DIR/s_scripts/ s_scripts
-RUN git clone $GIT_AIRFLOW_ADDRESS
+#RUN git clone $GIT_AIRFLOW_ADDRESS
 
-RUN mkdir -p $DOCKER_NAMENODE_DIR docker_$DOCKER_NAMENODE_DIR 
+RUN mkdir -p $DOCKER_NAMENODE_DIR docker_$DOCKER_NAMENODE_DIR journalnode
 # logs/airflow/worker /run/airflow 
 RUN chown root:root -R $DOCKER_NAMENODE_DIR
 RUN chown root:root -R docker_$DOCKER_NAMENODE_DIR

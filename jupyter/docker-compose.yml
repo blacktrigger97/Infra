@@ -18,7 +18,8 @@ services:
     image: dn
   
   jupyter:
-    build: 
+    build:
+      context: '' 
       dockerfile: ${HOST_DIR}/jupyter/Dockerfile
       args:
         - GIT_CONFIG_DIR=${GIT_CONFIG_DIR}

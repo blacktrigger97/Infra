@@ -15,25 +15,32 @@ ns          IN      A       192.168.1.50
 
 ; -- add dns records below
 
+name-res1   IN      A       192.168.1.11
+name-res2   IN      A       192.168.1.12
+name-res3   IN      A       192.168.1.13
+secon-hist  IN      A       192.168.1.14
+zookeeper-1 IN      A       192.168.1.15
+zookeeper-2 IN      A       192.168.1.16
+zookeeper-3 IN      A       192.168.1.17
+postgresql  IN      A       192.168.1.21
+redis       IN      A       192.168.1.26
+nessie      IN      A       192.168.1.31
+hue         IN      A       192.168.1.32
+trino-co    IN      A       192.168.1.33
+airflow     IN      A       192.168.1.34
+kafka-sr    IN      A       192.168.1.35
+ksqldb      IN      A       192.168.1.36
+trino-wk1   IN      A       192.168.1.41
+trino-wk2   IN      A       192.168.1.42
+trino-wk3   IN      A       192.168.1.43
+kafka-1     IN      A       192.168.1.51
+kafka-2     IN      A       192.168.1.52
+kafka-3     IN      A       192.168.1.53
 dev-env     IN      A       192.168.1.40
-name-res    IN      A       192.168.1.41
-secon-hist  IN      A       192.168.1.42
-postgresql  IN      A       192.168.1.43
-nessie      IN      A       192.168.1.44
-jupyter     IN      A       192.168.1.45
-hue         IN      A       192.168.1.46
-redis       IN      A       192.168.1.47
-airflow     IN      A       192.168.1.48
-trino-co    IN      A       192.168.1.30
-trino-wk1   IN      A       192.168.1.31
-zookeeper-1 IN      A       192.168.1.60
-zookeeper-2 IN      A       192.168.1.61
-kafka-sr    IN      A       192.168.1.65
-ksqldb      IN      A       192.168.1.66
-kafka-1     IN      A       192.168.1.70
-kafka-2     IN      A       192.168.1.71
-data-node1  IN      A       192.168.1.51
-data-node2  IN      A       192.168.1.52
+jupyter     IN      A       192.168.1.46
+marimo      IN      A       192.168.1.47
+data-node1  IN      A       192.168.1.101
+data-node2  IN      A       192.168.1.102
 
 ; -- demo servers
 
