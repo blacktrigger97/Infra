@@ -15,13 +15,6 @@ ns          IN      A       192.168.1.50
 
 ; -- add dns records below
 
-name-res1   IN      A       192.168.1.11
-name-res2   IN      A       192.168.1.12
-name-res3   IN      A       192.168.1.13
-secon-hist  IN      A       192.168.1.14
-zookeeper-1 IN      A       192.168.1.15
-zookeeper-2 IN      A       192.168.1.16
-zookeeper-3 IN      A       192.168.1.17
 postgresql  IN      A       192.168.1.21
 redis       IN      A       192.168.1.26
 nessie      IN      A       192.168.1.31
@@ -39,6 +32,13 @@ kafka-3     IN      A       192.168.1.53
 dev-env     IN      A       192.168.1.40
 jupyter     IN      A       192.168.1.46
 marimo      IN      A       192.168.1.47
+name-res1   IN      A       192.168.1.91
+name-res2   IN      A       192.168.1.92
+name-res3   IN      A       192.168.1.93
+secon-hist  IN      A       192.168.1.94
+zookeeper-1 IN      A       192.168.1.95
+zookeeper-2 IN      A       192.168.1.96
+zookeeper-3 IN      A       192.168.1.97
 data-node1  IN      A       192.168.1.101
 data-node2  IN      A       192.168.1.102
 
