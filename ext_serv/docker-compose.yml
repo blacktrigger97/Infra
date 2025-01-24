@@ -290,7 +290,6 @@ services:
         - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
         - GIT_AIRFLOW_ADDRESS=${GIT_AIRFLOW_ADDRESS}
         - SPARK_VERSION=${SPARK_VERSION}
-    image: airflow
     container_name: airflow
     hostname: airflow.bdc.home
     restart: unless-stopped
@@ -303,8 +302,8 @@ services:
 
   marimo:
     build: 
-      context: ''
-      dockerfile: ${HOST_DIR}/marimo/Dockerfile
+      context: marimo
+      dockerfile: ${HOST_DIR}/ext_serv/marimo/Dockerfile
     user: root
     container_name: marimo
     hostname: marimo.bdc.home
