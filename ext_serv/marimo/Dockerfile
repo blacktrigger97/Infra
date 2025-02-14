@@ -10,10 +10,10 @@ COPY --link requirements.txt .
 # Install the requirements using uv
 RUN uv pip install -r requirements.txt
 
-RUN apt-get -y install git 
+RUN apt update && apt upgrade -y && apt-get -y install wget
 
-WORKDIR /root
+RUN mkdir /root/notebooks
 
-RUN mkdir notebooks
+WORKDIR /root/notebooks
 
-CMD ["marimo", "edit", "--no-token", "-p", "8091", "--host", "marimo.bdc.home"]
+CMD ["marimo", "edit", "--no-token", "-p", "8091", "--host", "marimo"]

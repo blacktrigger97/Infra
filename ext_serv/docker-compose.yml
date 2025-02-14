@@ -304,17 +304,19 @@ services:
     build: 
       context: marimo
       dockerfile: ${HOST_DIR}/ext_serv/marimo/Dockerfile
-    user: root
     container_name: marimo
     hostname: marimo.bdc.home
+    user: root
     networks:
       bdCluster:
         ipv4_address: 192.168.1.47
     ports:
       - 8091:8091
     restart: unless-stopped
-    #volumes:
-    #  - /root/development:/root/notebooks
+    environment:
+      - TZ=Asia/Kolkata
+    volumes:
+      - /root/notebooks:/root/notebooks
   
   #ksql:
   #  image: confluentinc/ksqldb-cli:latest
