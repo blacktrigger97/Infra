@@ -4,7 +4,7 @@ networks:
   bdCluster:
     name: bdCluster
     driver: ipvlan
-    external: true
+    # external: true
     driver_opts:
       parent: ${ETHERNET_NAME}
     ipam:
@@ -14,28 +14,23 @@ networks:
 
 services:
 
-  dn:
-    image: dn
-  
   jupyter:
     build:
       context: '' 
       dockerfile: ${HOST_DIR}/jupyter/Dockerfile
-      args:
-        - GIT_CONFIG_DIR=${GIT_CONFIG_DIR}
-        - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
-        - DOCKER_DIR=${DOCKER_DIR}
-        - SPARK_VERSION=${SPARK_VERSION}
+      # args:
+      #   - GIT_CONFIG_DIR=${GIT_CONFIG_DIR}
+      #   - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
+      #   - DOCKER_DIR=${DOCKER_DIR}
+      #   - SPARK_VERSION=${SPARK_VERSION}
     user: root
     image: jupyter
     container_name: jupyter
     hostname: jupyter.bdc.home
     networks:
       bdCluster:
-        ipv4_address: 192.168.1.45
+        ipv4_address: 192.168.1.46
     ports:
       - 8091:8091
     volumes:
       - /home/vishesh/notebooks:/root/notebooks
-    depends_on:
-      - dn

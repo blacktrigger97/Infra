@@ -1,0 +1,12 @@
+polars
+pyarrow
+numpy
+seaborn
+scikit-learn
+matplotlib
+fastexcel
+pandas
+altair>=5.4.0
+openpyxl
+plotly
+duckdb

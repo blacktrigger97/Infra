@@ -1,11 +1,11 @@
-FROM dn
+FROM jupyter/datascience-notebook
 
-ARG DOCKER_DIR
-ARG SPARK_VERSION
-ARG GIT_CONFIG_DIR
-ARG GIT_CONFIG_ADDRESS
+#ARG DOCKER_DIR
+#ARG SPARK_VERSION
+#ARG GIT_CONFIG_DIR
+#ARG GIT_CONFIG_ADDRESS
 
-WORKDIR $DOCKER_DIR
+#WORKDIR $DOCKER_DIR
 
 # Bash Entries
 #RUN echo "export PYTHONPATH=\$SPARK_HOME/python:\$PYTHONPATH:\$SPARK_HOME/jars" >> .bashrc
@@ -22,15 +22,24 @@ WORKDIR $DOCKER_DIR
 #--conf spark.sql.catalog.nessie.catalog-impl=org.apache.iceberg.nessie.NessieCatalog \
 #--conf spark.sql.catalog.nessie.warehouse=hdfs://name-res.bdc.home:9000/root/nessie/warehouse pyspark-shell'" >> .bashrc
 
+# Install uv for fast package management
+COPY --from=ghcr.io/astral-sh/uv:0.4.20 /uv /bin/uv
+ENV UV_SYSTEM_PYTHON=1
 
-RUN mkdir notebooks
-RUN git clone $GIT_CONFIG_ADDRESS
-RUN rsync -avru $GIT_CONFIG_DIR/s_scripts/ s_scripts
+# Copy requirements file
+COPY --link requirements.txt .
 
-RUN pip3 install pynessie
-RUN nessie remote add http://nessie.bdc.home:19120/api/v1
-RUN pip3 install jupyter
-RUN pip3 install pyspark==${SPARK_VERSION}
+# Install the requirements using uv
+RUN uv pip install -r requirements.txt
+
+RUN mkdir /root/notebooks
+# UN git clone $GIT_CONFIG_ADDRESS
+# RUN rsync -avru $GIT_CONFIG_DIR/s_scripts/ s_scripts
+
+# RUN pip3 install pynessie
+# RUN nessie remote add http://nessie.bdc.home:19120/api/v1
+#RUN pip3 install jupyter
+# RUN pip3 install pyspark==${SPARK_VERSION}
 RUN jupyter notebook --generate-config
 
 # Jupiter config entries
