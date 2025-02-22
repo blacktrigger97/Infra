@@ -1,4 +1,6 @@
-FROM jupyter/datascience-notebook
+ARG PY_VER
+
+FROM python:${PY_VER}
 
 #ARG DOCKER_DIR
 #ARG SPARK_VERSION
