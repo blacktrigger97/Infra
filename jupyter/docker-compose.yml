@@ -20,6 +20,7 @@ services:
       dockerfile: ${HOST_DIR}/jupyter/Dockerfile
       args:
         - PY_VER=${PY_VER}
+        - DOCKER_DIR=${DOCKER_DIR}
     user: root
     image: jupyter
     container_name: jupyter

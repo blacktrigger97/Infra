@@ -2,7 +2,7 @@ ARG PY_VER
 
 FROM python:${PY_VER}
 
-#ARG DOCKER_DIR
+ARG DOCKER_DIR
 #ARG SPARK_VERSION
 #ARG GIT_CONFIG_DIR
 #ARG GIT_CONFIG_ADDRESS
@@ -40,7 +40,7 @@ RUN mkdir /root/notebooks
 
 # RUN pip3 install pynessie
 # RUN nessie remote add http://nessie.bdc.home:19120/api/v1
-#RUN pip3 install jupyter
+RUN pip3 install jupyter
 # RUN pip3 install pyspark==${SPARK_VERSION}
 RUN jupyter notebook --generate-config
 
