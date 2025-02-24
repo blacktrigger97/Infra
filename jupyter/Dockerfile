@@ -56,4 +56,4 @@ RUN echo "c.NotebookApp.allow_root=True" >> /root/.jupyter/jupyter_notebook_conf
 EXPOSE 8091
 
 #CMD ["/root/s_scripts/jupyter.sh"]
-CMD ["jupyter","notebook"]
+ENTRYPOINT ["jupyter","notebook"]
