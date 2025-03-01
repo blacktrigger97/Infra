@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 networks:
   bdCluster:
@@ -12,20 +12,45 @@ networks:
           gateway: 192.168.1.1
 
 services:
-  ldns:
-    container_name: ldns
+  bind9:
+    container_name: bind9
     image: ubuntu/bind9:latest
     environment:
       - BIND9_USER=root
       - TZ=Asia/Kolkata
     volumes:
-      - ./config:/etc/bind
-      - ./cache:/var/cache/bind
-      - ./records:/var/lib/bind
+      - ./bind9/config:/etc/bind
+      - ./bind9/cache:/var/cache/bind
+      - ./bind9/records:/var/lib/bind
     networks:
       bdCluster:
         ipv4_address: 192.168.1.50
     ports:
       - "53:53/tcp"
       - "53:53/udp"
-    restart: always
+    restart: unless-stopped
+
+  pihole:
+    image: docker.io/pihole/pihole:latest
+    container_name: pihole
+    restart: unless-stopped
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "67:67/udp"
+      - "8082:80/tcp"
+    volumes:
+      - ./pihole/etc-pihole:/etc/pihole:z
+      - ./pihole/etc-dnsmasq:/etc/dnsmasq.d:z
+    environment:
+      - TZ=Asia/Kolkata
+      - WEBPASSWD=password123
+      - PIHOLE_DNS_=9.9.9.9;149.112.112.112
+      - DHCP_ACTIVE=true
+      - DHCP_START=192.168.1.11
+      - DHCP_END=192.168.1.200
+      - DHCP_ROUTER=192.168.1.1
+      - DHCP_rapid_commit=true
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
