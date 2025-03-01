@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 networks:
   bdCluster:
@@ -10,12 +10,11 @@ networks:
       config:
         - subnet: 192.168.1.0/24
           gateway: 192.168.1.1
-          
 
 services:
   hdc:
     build:
-      context: ''
+      context: ""
       dockerfile: ${HOST_DIR}/baseimage/Dockerfile
       args:
         - JAVA_VER=${JAVA_VER}
@@ -35,8 +34,8 @@ services:
       ZOO_INIT_LIMIT: 5
       ZOO_SYNC_LIMIT: 2
       ZOOKEEPER_SERVER_ID: 1
-      ZOO_STANDALONE_ENABLED: 'true'
-      ZOO_ADMINSERVER_ENABLED: 'true'
+      ZOO_STANDALONE_ENABLED: "true"
+      ZOO_ADMINSERVER_ENABLED: "true"
       ZOOKEEPER_SERVERS: zookeeper-1:2888:3888;zookeeper-2:2888:3888;zookeeper-3:2888:3888
     hostname: zookeeper-1.bdc.home
     container_name: zookeeper-1
@@ -55,8 +54,8 @@ services:
       ZOO_INIT_LIMIT: 5
       ZOO_SYNC_LIMIT: 2
       ZOOKEEPER_SERVER_ID: 2
-      ZOO_STANDALONE_ENABLED: 'true'
-      ZOO_ADMINSERVER_ENABLED: 'true'
+      ZOO_STANDALONE_ENABLED: "true"
+      ZOO_ADMINSERVER_ENABLED: "true"
       ZOOKEEPER_SERVERS: zookeeper-1:2888:3888;zookeeper-2:2888:3888;zookeeper-3:2888:3888
     hostname: zookeeper-2.bdc.home
     container_name: zookeeper-2
@@ -75,8 +74,8 @@ services:
       ZOO_INIT_LIMIT: 5
       ZOO_SYNC_LIMIT: 2
       ZOOKEEPER_SERVER_ID: 3
-      ZOO_STANDALONE_ENABLED: 'true'
-      ZOO_ADMINSERVER_ENABLED: 'true'
+      ZOO_STANDALONE_ENABLED: "true"
+      ZOO_ADMINSERVER_ENABLED: "true"
       ZOOKEEPER_SERVERS: zookeeper-1:2888:3888;zookeeper-2:2888:3888;zookeeper-3:2888:3888
     hostname: zookeeper-3.bdc.home
     container_name: zookeeper-3
@@ -86,9 +85,9 @@ services:
         ipv4_address: 192.168.1.17
     ports:
       - 2181:2181
-    
+
   name-res1:
-    build: 
+    build:
       context: name-res
       dockerfile: ${HOST_DIR}/hdc/name-res/Dockerfile
       args:
@@ -122,7 +121,7 @@ services:
       - hdc
 
   name-res2:
-    build: 
+    build:
       context: name-res
       dockerfile: ${HOST_DIR}/hdc/name-res/Dockerfile
       args:
@@ -156,7 +155,7 @@ services:
       - hdc
 
   name-res3:
-    build: 
+    build:
       context: name-res
       dockerfile: ${HOST_DIR}/hdc/name-res/Dockerfile
       args:
@@ -190,7 +189,7 @@ services:
       - hdc
 
   secon-hist:
-    build: 
+    build:
       context: secon-hist
       dockerfile: ${HOST_DIR}/hdc/secon-hist/Dockerfile
       args:
@@ -221,7 +220,7 @@ services:
       - hdc
 
   data-node1:
-    build: 
+    build:
       context: data-node
       dockerfile: ${HOST_DIR}/hdc/data-node/Dockerfile
       args:
@@ -241,7 +240,7 @@ services:
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
     volumes:
-      - ${LOCAL_DIR}${LOCAL_DATANODE_DIR1}:${DOCKER_DIR}${DOCKER_DATANODE_DIR}
+      - ${LOCAL_DIR}${LOCAL_DATANODE_DIR}1:${DOCKER_DIR}${DOCKER_DATANODE_DIR}
       - ${DOCKER_DIR}logs/data-node1:${DOCKER_DIR}logs/hadoop
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
       - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
@@ -250,7 +249,7 @@ services:
       - hdc
 
   data-node2:
-    build: 
+    build:
       context: data-node
       dockerfile: ${HOST_DIR}/hdc/data-node/Dockerfile
       args:
@@ -270,12 +269,10 @@ services:
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
     volumes:
-      - ${LOCAL_DIR}${LOCAL_DATANODE_DIR2}:${DOCKER_DIR}${DOCKER_DATANODE_DIR}
+      - ${LOCAL_DIR}${LOCAL_DATANODE_DIR}2:${DOCKER_DIR}${DOCKER_DATANODE_DIR}
       - ${DOCKER_DIR}logs/data-node2:${DOCKER_DIR}logs/hadoop
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
       - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
       #- /root/${AIRFLOW_DIR}:/root/${AIRFLOW_DIR}
     depends_on:
       - hdc
-  
-  
