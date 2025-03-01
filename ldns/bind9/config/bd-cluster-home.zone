@@ -32,6 +32,7 @@ kafka-3     IN      A       192.168.1.53
 dev-env     IN      A       192.168.1.40
 jupyter     IN      A       192.168.1.46
 marimo      IN      A       192.168.1.47
+bind9       IN      A       192.168.1.50
 name-res1   IN      A       192.168.1.91
 name-res2   IN      A       192.168.1.92
 name-res3   IN      A       192.168.1.93
@@ -43,5 +44,3 @@ data-node1  IN      A       192.168.1.101
 data-node2  IN      A       192.168.1.102
 
 ; -- demo servers
-
-
