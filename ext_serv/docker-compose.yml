@@ -356,7 +356,7 @@ services:
       - QDB_PG_PASSWORD=${DOCKER_PASS}
       - QDB_TELEMETRY_ENABLED=false
       - QDB_HTTP_ENABLED=true
-      - QDB_HTTP_BIND_TO=questdb.bdc.home:9000
+      - QDB_HTTP_BIND_TO=0.0.0.0:9000
       - QDB_HTTP_SECURITY_READONLY=false
   
   #ksql:
