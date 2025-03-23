@@ -31,7 +31,7 @@ services:
       - 5432:5432
     volumes: 
       - ./postgresql/init.sql:/docker-entrypoint-initdb.d/init.sql
-      - ${LOCAL_DIR}${DB_DIR}:/var/lib/postgresql/data
+      - ${LOCAL_DIR}${PG_DB_DIR}:/var/lib/postgresql/data
 
   # pgadmin:
   #   image: dpage/pgadmin4
@@ -330,6 +330,30 @@ services:
       - TZ=Asia/Kolkata
     volumes:
       - /root/notebooks:/root/notebooks
+
+  questdb:
+    image: questdb/questdb
+    container_name: questdb
+    hostname: questdb.bdc.home
+    restart: unless-stopped
+    ports:
+      - 9000:9000
+      - 9009:9009
+      - 8812:8812
+      - 9003:9003
+    volumes:
+      - ${LOCAL_DIR}${QS_DB_DIR}:/root/.questdb
+    environment:
+      - QDB_LOG_W_STDOUT_LEVEL=ERROR
+      - QDB_LOG_W_FILE_LEVEL=ERROR
+      - QDB_LOG_W_HTTP_MIN_LEVEL=ERROR
+      - QDB_SHARED_WORKER_COUNT=8
+      - QDB_PG_USER=${DOCKER_USR}
+      - QDB_PG_PASSWORD=${DOCKER_PASS}
+      - QDB_TELEMETRY_ENABLED=false
+      - QDB_HTTP_ENABLED=false
+      - QDB_HTTP_BIND_TO=questdb.bdc.home:9000
+      - QDB_HTTP_SECURITY_READONLY=false
   
   #ksql:
   #  image: confluentinc/ksqldb-cli:latest
