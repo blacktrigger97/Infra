@@ -336,6 +336,9 @@ services:
     container_name: questdb
     hostname: questdb.bdc.home
     restart: unless-stopped
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.37
     ports:
       - 9000:9000
       - 9009:9009
@@ -344,6 +347,7 @@ services:
     volumes:
       - ${LOCAL_DIR}${QS_DB_DIR}:/root/.questdb
     environment:
+      - TZ=Asia/Kolkata
       - QDB_LOG_W_STDOUT_LEVEL=ERROR
       - QDB_LOG_W_FILE_LEVEL=ERROR
       - QDB_LOG_W_HTTP_MIN_LEVEL=ERROR
