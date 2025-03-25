@@ -258,12 +258,10 @@ services:
       - 8088:8088
     environment:
       KSQL_LISTENERS: http://ksqldb.bdc.home:8088
-      KSQL_BOOTSTRAP_SERVERS: kafka-1.bdc.home:29092,kafka-2.bdc.home:9092
+      KSQL_BOOTSTRAP_SERVERS: kafka-1.bdc.home:29092,kafka-2.bdc.home:9092,,kafka-3.bdc.home:9092
       KSQL_KSQL_SCHEMA_REGISTRY_URL: http://kafka-sr.bdc.home:8081
       KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE: "true"
       KSQL_KSQL_LOGGING_PROCESSING_TOPIC_AUTO_CREATE: "true"
-    depends_on:
-      - kafka-sr
 
   hue:
     image: gethue/hue:latest
