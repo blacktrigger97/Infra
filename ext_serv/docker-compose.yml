@@ -274,8 +274,8 @@ services:
       - 9021:9021
     environment:
       CONTROL_CENTER_BOOTSTRAP_SERVERS: kafka-1.bdc.home:29092,kafka-2.bdc.home:9092,,kafka-3.bdc.home:9092
-      CONTROL_CENTER_CONNECT_CONNECT-DEFAULT_CLUSTER: 'connect:8083'
-      CONTROL_CENTER_CONNECT_HEALTHCHECK_ENDPOINT: '/connectors'
+      # CONTROL_CENTER_CONNECT_CONNECT-DEFAULT_CLUSTER: 'connect:8083'
+      # CONTROL_CENTER_CONNECT_HEALTHCHECK_ENDPOINT: '/connectors'
       CONTROL_CENTER_KSQL_KSQLDB1_URL: http://ksqldb.bdc.home:8088
       CONTROL_CENTER_KSQL_KSQLDB1_ADVERTISED_URL: http://ksqldb.bdc.home:8088
       CONTROL_CENTER_SCHEMA_REGISTRY_URL: http://kafka-sr.bdc.home:8081
