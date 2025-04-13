@@ -38,6 +38,7 @@ services:
 
   pihole:
     image: pihole/pihole:latest
+    hostname: pihole.bdc.home
     container_name: pihole
     restart: unless-stopped
     ports:
@@ -53,18 +54,19 @@ services:
         ipv4_address: 192.168.100.2
         priority: 900
     volumes:
-      - ./pihole/etc-pihole/custom.list:/etc/pihole/hosts/custom.list:z
-      - ./pihole/etc-pihole/dnsmasq.conf:/etc/dnsmasq.d/dnsmasq.conf:z
+      - ./pihole/pihole.toml:/etc/pihole/pihole.toml:z
     environment:
       TZ: "Asia/Kolkata"
       FTLCONF_webserver_api_password: "password123"
-      DNSMASQ_LISTENING: local
-      PIHOLE_DNS_: "192.168.1.15#53"
+      FTLCONF_dns_listeningMode: 'all'
+      FTLCONF_misc_etc_dnsmasq_d: 'true'
+      FTLCONF_dns_upstreams: 'unbound.bdc.home#53'
     cap_add:
       - NET_ADMIN
 
   unbound:
     container_name: unbound
+    hostname: unbound.bdc.home
     image: "mvance/unbound:latest"
     ports:
       - "53:53/tcp"
