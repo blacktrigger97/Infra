@@ -30,15 +30,14 @@
 192.168.1.34 airflow.bdc.home
 192.168.1.35 kafka-sr.bdc.home
 192.168.1.36 ksqldb.bdc.home
-192.168.1.37 questdb.bdc.home
+192.168.1.37 kconcen.bdc.home
+192.168.1.40 pystream.bdc.home
 192.168.1.41 trino-wk1.bdc.home
 192.168.1.42 trino-wk2.bdc.home
 192.168.1.43 trino-wk3.bdc.home
 192.168.1.51 kafka-1.bdc.home
 192.168.1.52 kafka-2.bdc.home
 192.168.1.53 kafka-3.bdc.home
-192.168.1.40 dev-env.bdc.home
-192.168.1.46 jupyter.bdc.home
 192.168.1.91 name-res1.bdc.home
 192.168.1.92 name-res2.bdc.home
 192.168.1.93 name-res3.bdc.home
@@ -49,6 +48,6 @@
 192.168.1.101 data-node1.bdc.home
 192.168.1.102 data-node2.bdc.home
 192.168.1.103 data-node3.bdc.home
-192.168.100.3 pystream.bdc.home
+192.168.1.201 jupyter.bdc.home
 
 # There are 27 entries in this file

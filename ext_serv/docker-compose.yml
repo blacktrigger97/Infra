@@ -277,7 +277,7 @@ services:
     container_name: kconcen
     networks:
       bdCluster:
-        ipv4_address: 192.168.1.201
+        ipv4_address: 192.168.1.37
     ports:
       - 9021:9021
     environment:
