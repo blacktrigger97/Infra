@@ -53,8 +53,8 @@ services:
         ipv4_address: 192.168.100.2
         priority: 900
     volumes:
-      - ./pihole/etc-pihole:/etc/pihole:z
-      - ./pihole/etc-dnsmasq:/etc/dnsmasq.d:z
+      - ./pihole/etc-pihole/custom.list:/etc/pihole/hosts/custom.list:z
+      - ./pihole/etc-pihole/dnsmasq.conf:/etc/dnsmasq.d/dnsmasq.conf:z
     environment:
       TZ: "Asia/Kolkata"
       FTLCONF_webserver_api_password: "password123"
