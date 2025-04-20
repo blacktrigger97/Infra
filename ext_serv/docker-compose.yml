@@ -150,6 +150,7 @@ services:
     ports:
       - 9092:9092
       - 29092:29092
+      - 29093:29093
     environment:
       KAFKA_KRAFT_MODE: "true"
       KAFKA_NODE_ID: 1
@@ -182,6 +183,7 @@ services:
     ports:
       - 9092:9092
       - 29092:29092
+      - 29093:29093
     environment:
       KAFKA_KRAFT_MODE: "true"
       KAFKA_NODE_ID: 2
@@ -214,6 +216,7 @@ services:
     ports:
       - 9092:9092
       - 29092:29092
+      - 29093:29093
     environment:
       KAFKA_KRAFT_MODE: "true"
       KAFKA_NODE_ID: 3
