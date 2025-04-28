@@ -58,9 +58,13 @@ services:
     environment:
       TZ: "Asia/Kolkata"
       FTLCONF_webserver_api_password: "password123"
-      FTLCONF_dns_listeningMode: 'all'
-      FTLCONF_misc_etc_dnsmasq_d: 'true'
+      FTLCONF_dns_dnssec: 'false'
+      FTLCONF_dns_revServers: 'true,192.168.1.0/24,192.168.1.1,bdc.home'
+      FTLCONF_dns_listeningMode: 'local'
+      FTLCONF_dns_bogusPriv: 'false'
+      FTLCONF_dns_domainNeeded: 'false'
       FTLCONF_dns_upstreams: 'unbound.bdc.home#53'
+      FTLCONF_debug_api: 'true'
     cap_add:
       - NET_ADMIN
 
