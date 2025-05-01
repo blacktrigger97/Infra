@@ -12,37 +12,42 @@ $TTL 20
 
            IN      NS       ns.bdc.home.
 $ORIGIN 1.168.192.in-addr.arpa.
-50          IN      PTR      ns.bdc.home.
+11          IN      PTR      ns.bdc.home.
 
 ;
 
-21  IN  PTR     postgresql
-26  IN  PTR     redis
-31  IN  PTR     nessie
-32  IN  PTR     hue
-33  IN  PTR     trino-co
-34  IN  PTR     airflow
-35  IN  PTR     kafka-sr
-36  IN  PTR     ksqldb
-40  IN  PTR     dev-env
-41  IN  PTR     trino-wk1
-42  IN  PTR     trino-wk2
-43  IN  PTR     trino-wk3
-46  IN  PTR     jupyter
-47  IN  PTR     marimo
-50  IN  PTR     bind9
-51  IN  PTR     kafka-1
-52  IN  PTR     kafka-2
-53  IN  PTR     kafka-3
-91  IN  PTR     name-res1
-92  IN  PTR     name-res2
-93  IN  PTR     name-res3
-94  IN  PTR     secon-hist
-95  IN  PTR     zookeeper-1
-96  IN  PTR     zookeeper-2
-97  IN  PTR     zookeeper-3
-101  IN  PTR     data-node1
-102  IN  PTR     data-node2
+11	IN	PTR	bind9
+12	IN	PTR	worker1
+13	IN	PTR	worker2
+14	IN	PTR	worker3
+15	IN	PTR	unbound
+21	IN	PTR	postgresql
+26	IN	PTR	redis
+31	IN	PTR	nessie
+32	IN	PTR	hue
+33	IN	PTR	trino-co
+34	IN	PTR	airflow
+35	IN	PTR	kafka-sr
+36	IN	PTR	ksqldb
+37	IN	PTR	kconcen
+40	IN	PTR	pystream
+41	IN	PTR	trino-wk1
+42	IN	PTR	trino-wk2
+43	IN	PTR	trino-wk3
+51	IN	PTR	kafka-1
+52	IN	PTR	kafka-2
+53	IN	PTR	kafka-3
+91	IN	PTR	name-res1
+92	IN	PTR	name-res2
+93	IN	PTR	name-res3
+94	IN	PTR	secon-hist
+95	IN	PTR	zookeeper-1
+96	IN	PTR	zookeeper-2
+97	IN	PTR	zookeeper-3
+101	IN	PTR	data-node1
+102	IN	PTR	data-node2
+103	IN	PTR	data-node3
+201	IN	PTR	jupyter
 
 
 ;
