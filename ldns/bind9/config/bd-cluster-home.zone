@@ -1,25 +1,24 @@
-$TTL 20
+$TTL 2d
 
 $ORIGIN bdc.home.
 
-@           IN      SOA     ns.bdc.home.  root.bdc.home. (
-                            2
-                            20
-                            20
-                            20
-                            20
+@           IN      SOA     bind9.bdc.home.  root.bdc.home. (
+                            2025050700
+                            12h
+                            15m
+                            3w
+                            2h
                             );
 
-@           IN      NS      ns.bdc.home.
-ns          IN      A       192.168.1.11
+            IN      NS      bind9.bdc.home.
+bind9          IN      A       192.168.1.10
 
 ; -- add dns records below
 
-bind9	IN	A	192.168.1.11
-worker1	IN	A	192.168.1.12
-worker2	IN	A	192.168.1.13
-worker3	IN	A	192.168.1.14
-unbound	IN	A	192.168.1.15
+worker1	IN	A	192.168.1.11
+worker2	IN	A	192.168.1.12
+worker3	IN	A	192.168.1.13
+worker4	IN	A	192.168.1.14
 postgresql	IN	A	192.168.1.21
 redis	IN	A	192.168.1.26
 nessie	IN	A	192.168.1.31
