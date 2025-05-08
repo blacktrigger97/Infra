@@ -11,10 +11,9 @@ ARG SPARK_VERSION
 
 # Java installation
 RUN RUN apk update && apk add openjdk11
-RUN apt-get -y autoremove && apt-get -y clean
 
 # OS required package installation
-RUN apt-get -y install make net-tools wget gcc git openssh-server which procps libpq-dev libsqlite3-dev libssl-dev libbz2-dev libffi-dev zlib1g-dev
+RUN apk add make net-tools wget gcc git openssh-server which procps libpq-dev libsqlite3-dev libssl-dev libbz2-dev libffi-dev zlib1g-dev
 RUN rc-service sshd start && rc-service sshd boot
 
 # Pip & other Python library installation

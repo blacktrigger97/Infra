@@ -1,8 +1,7 @@
 services:
   hdc:
     build:
-      context: ""
-      dockerfile: ${HOST_DIR}/baseimage/Dockerfile
+      dockerfile: Dockerfile
       args:
         - JAVA_VER=${JAVA_VER}
         - PY_VER=${PY_VER}
