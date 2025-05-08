@@ -27,67 +27,7 @@ services:
         - SPARK_VERSION=${SPARK_VERSION}
     image: hdc
 
-  zookeeper-1:
-    image: confluentinc/cp-zookeeper:latest
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-      ZOO_INIT_LIMIT: 5
-      ZOO_SYNC_LIMIT: 2
-      ZOOKEEPER_SERVER_ID: 1
-      ZOO_STANDALONE_ENABLED: "true"
-      ZOO_ADMINSERVER_ENABLED: "true"
-      ZOOKEEPER_SERVERS: zookeeper-1:2888:3888;zookeeper-2:2888:3888;zookeeper-3:2888:3888
-    hostname: zookeeper-1.bdc.home
-    container_name: zookeeper-1
-    restart: unless-stopped
-    networks:
-      bdCluster:
-        ipv4_address: 192.168.1.15
-    ports:
-      - 2181:2181
-
-  zookeeper-2:
-    image: confluentinc/cp-zookeeper:latest
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-      ZOO_INIT_LIMIT: 5
-      ZOO_SYNC_LIMIT: 2
-      ZOOKEEPER_SERVER_ID: 2
-      ZOO_STANDALONE_ENABLED: "true"
-      ZOO_ADMINSERVER_ENABLED: "true"
-      ZOOKEEPER_SERVERS: zookeeper-1:2888:3888;zookeeper-2:2888:3888;zookeeper-3:2888:3888
-    hostname: zookeeper-2.bdc.home
-    container_name: zookeeper-2
-    restart: unless-stopped
-    networks:
-      bdCluster:
-        ipv4_address: 192.168.1.16
-    ports:
-      - 2181:2181
-
-  zookeeper-3:
-    image: confluentinc/cp-zookeeper:latest
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-      ZOO_INIT_LIMIT: 5
-      ZOO_SYNC_LIMIT: 2
-      ZOOKEEPER_SERVER_ID: 3
-      ZOO_STANDALONE_ENABLED: "true"
-      ZOO_ADMINSERVER_ENABLED: "true"
-      ZOOKEEPER_SERVERS: zookeeper-1:2888:3888;zookeeper-2:2888:3888;zookeeper-3:2888:3888
-    hostname: zookeeper-3.bdc.home
-    container_name: zookeeper-3
-    restart: unless-stopped
-    networks:
-      bdCluster:
-        ipv4_address: 192.168.1.17
-    ports:
-      - 2181:2181
-
-  name-res1:
+  name-res:
     build:
       context: name-res
       dockerfile: ${HOST_DIR}/hdc/name-res/Dockerfile
@@ -96,94 +36,25 @@ services:
         - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
         - GIT_AIRFLOW_ADDRESS=${GIT_AIRFLOW_ADDRESS}
         - DOCKER_DIR=${DOCKER_DIR}
-        - DOCKER_NAMENODE_DIR=${DOCKER_NAMENODE_DIR}
-        - LOCAL_NAMENODE_DIR=${LOCAL_NAMENODE_DIR}
+        - DOCKER_NAMENODE_DIR=${NAMENODE_DIR}
+        - LOCAL_NAMENODE_DIR=${NAMENODE_DIR}
     user: root
     image: name-res
-    container_name: name-res1
+    container_name: name-res
     restart: unless-stopped
-    hostname: name-res1.bdc.home
+    hostname: name-res.bdc.home
     cpus: 1
     networks:
       bdCluster:
-        ipv4_address: 192.168.1.11
+        ipv4_address: 192.168.1.91
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
     ports:
       - 9870:9870
       - 8088:8088
-      - 14000:14000
     volumes:
-      - ${LOCAL_DIR}${LOCAL_NAMENODE_DIR}1:${DOCKER_DIR}${DOCKER_NAMENODE_DIR}
-      - ${LOCAL_DIR}logs/namenode1:${DOCKER_DIR}logs/hadoop
-      - ${LOCAL_DIR}hadoop:${DOCKER_DIR}hadoop:ro
-      #- /root/${AIRFLOW_DIR}:/root/${AIRFLOW_DIR}
-    depends_on:
-      - hdc
-
-  name-res2:
-    build:
-      context: name-res
-      dockerfile: ${HOST_DIR}/hdc/name-res/Dockerfile
-      args:
-        - GIT_CONFIG_DIR=${GIT_CONFIG_DIR}
-        - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
-        - GIT_AIRFLOW_ADDRESS=${GIT_AIRFLOW_ADDRESS}
-        - DOCKER_DIR=${DOCKER_DIR}
-        - DOCKER_NAMENODE_DIR=${DOCKER_NAMENODE_DIR}
-        - LOCAL_NAMENODE_DIR=${LOCAL_NAMENODE_DIR}
-    user: root
-    image: name-res
-    container_name: name-res2
-    restart: unless-stopped
-    hostname: name-res2.bdc.home
-    cpus: 1
-    networks:
-      bdCluster:
-        ipv4_address: 192.168.1.12
-    sysctls:
-      - net.ipv6.conf.all.disable_ipv6=0
-    ports:
-      - 9870:9870
-      - 8088:8088
-      - 14000:14000
-    volumes:
-      - ${LOCAL_DIR}${LOCAL_NAMENODE_DIR}2:${DOCKER_DIR}${DOCKER_NAMENODE_DIR}
-      - ${LOCAL_DIR}logs/namenode2:${DOCKER_DIR}logs/hadoop
-      - ${LOCAL_DIR}hadoop:${DOCKER_DIR}hadoop:ro
-      #- /root/${AIRFLOW_DIR}:/root/${AIRFLOW_DIR}
-    depends_on:
-      - hdc
-
-  name-res3:
-    build:
-      context: name-res
-      dockerfile: ${HOST_DIR}/hdc/name-res/Dockerfile
-      args:
-        - GIT_CONFIG_DIR=${GIT_CONFIG_DIR}
-        - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
-        - GIT_AIRFLOW_ADDRESS=${GIT_AIRFLOW_ADDRESS}
-        - DOCKER_DIR=${DOCKER_DIR}
-        - DOCKER_NAMENODE_DIR=${DOCKER_NAMENODE_DIR}
-        - LOCAL_NAMENODE_DIR=${LOCAL_NAMENODE_DIR}
-    user: root
-    image: name-res
-    container_name: name-res3
-    restart: unless-stopped
-    hostname: name-res3.bdc.home
-    cpus: 1
-    networks:
-      bdCluster:
-        ipv4_address: 192.168.1.13
-    sysctls:
-      - net.ipv6.conf.all.disable_ipv6=0
-    ports:
-      - 9870:9870
-      - 8088:8088
-      - 14000:14000
-    volumes:
-      - ${LOCAL_DIR}${LOCAL_NAMENODE_DIR}3:${DOCKER_DIR}${DOCKER_NAMENODE_DIR}
-      - ${LOCAL_DIR}logs/namenode3:${DOCKER_DIR}logs/hadoop
+      - ${LOCAL_DIR}${NAMENODE_DIR}:${DOCKER_DIR}${NAMENODE_DIR}
+      # - ${LOCAL_DIR}logs/namenode1:${DOCKER_DIR}logs/hadoop
       - ${LOCAL_DIR}hadoop:${DOCKER_DIR}hadoop:ro
       #- /root/${AIRFLOW_DIR}:/root/${AIRFLOW_DIR}
     depends_on:
@@ -197,7 +68,7 @@ services:
         - GIT_CONFIG_DIR=${GIT_CONFIG_DIR}
         - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
         - DOCKER_DIR=${DOCKER_DIR}
-        - DOCKER_SECONDARY_NAMENODE_DIR=${DOCKER_SECONDARY_NAMENODE_DIR}
+        - DOCKER_SECONDARY_NAMENODE_DIR=${SECONDARY_NAMENODE_DIR}
     user: root
     image: secon-hist
     container_name: secon-hist
@@ -206,7 +77,7 @@ services:
     cpus: 1
     networks:
       bdCluster:
-        ipv4_address: 192.168.1.14
+        ipv4_address: 192.168.1.94
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
     ports:
@@ -214,8 +85,8 @@ services:
       - 9868:9868
       - 19888:19888
     volumes:
-      - ${LOCAL_DIR}${LOCAL_SECONDARY_NAMENODE_DIR}:${DOCKER_DIR}${DOCKER_SECONDARY_NAMENODE_DIR}
-      - ${DOCKER_DIR}logs/secondary:${DOCKER_DIR}logs/hadoop
+      - ${LOCAL_DIR}${SECONDARY_NAMENODE_DIR}:${DOCKER_DIR}${SECONDARY_NAMENODE_DIR}
+      # - ${DOCKER_DIR}logs/secondary:${DOCKER_DIR}logs/hadoop
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
     depends_on:
       - hdc
@@ -229,7 +100,7 @@ services:
         - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
         - GIT_AIRFLOW_ADDRESS=${GIT_AIRFLOW_ADDRESS}
         - DOCKER_DIR=${DOCKER_DIR}
-        - DOCKER_DATANODE_DIR=${DOCKER_DATANODE_DIR}
+        - DOCKER_DATANODE_DIR=${DATANODE_DIR}
     user: root
     image: data-node1
     container_name: data-node1
@@ -241,8 +112,8 @@ services:
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
     volumes:
-      - ${LOCAL_DIR}${LOCAL_DATANODE_DIR}1:${DOCKER_DIR}${DOCKER_DATANODE_DIR}
-      - ${DOCKER_DIR}logs/data-node1:${DOCKER_DIR}logs/hadoop
+      - ${LOCAL_DIR}${DATANODE_DIR}1:${DOCKER_DIR}${DATANODE_DIR}
+      # - ${DOCKER_DIR}logs/data-node1:${DOCKER_DIR}logs/hadoop
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
       - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
       #- /root/${AIRFLOW_DIR}:/root/${AIRFLOW_DIR}
@@ -258,7 +129,7 @@ services:
         - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
         - GIT_AIRFLOW_ADDRESS=${GIT_AIRFLOW_ADDRESS}
         - DOCKER_DIR=${DOCKER_DIR}
-        - DOCKER_DATANODE_DIR=${DOCKER_DATANODE_DIR}
+        - DOCKER_DATANODE_DIR=${DATANODE_DIR}
     user: root
     image: data-node2
     container_name: data-node2
@@ -270,8 +141,37 @@ services:
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
     volumes:
-      - ${LOCAL_DIR}${LOCAL_DATANODE_DIR}2:${DOCKER_DIR}${DOCKER_DATANODE_DIR}
-      - ${DOCKER_DIR}logs/data-node2:${DOCKER_DIR}logs/hadoop
+      - ${LOCAL_DIR}${DATANODE_DIR}2:${DOCKER_DIR}${DATANODE_DIR}
+      # - ${DOCKER_DIR}logs/data-node2:${DOCKER_DIR}logs/hadoop
+      - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
+      - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
+      #- /root/${AIRFLOW_DIR}:/root/${AIRFLOW_DIR}
+    depends_on:
+      - hdc
+
+  data-node3:
+    build:
+      context: data-node
+      dockerfile: ${HOST_DIR}/hdc/data-node/Dockerfile
+      args:
+        - GIT_CONFIG_DIR=${GIT_CONFIG_DIR}
+        - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
+        - GIT_AIRFLOW_ADDRESS=${GIT_AIRFLOW_ADDRESS}
+        - DOCKER_DIR=${DOCKER_DIR}
+        - DOCKER_DATANODE_DIR=${DATANODE_DIR}
+    user: root
+    image: data-node3
+    container_name: data-node3
+    restart: unless-stopped
+    hostname: data-node3.bdc.home
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.103
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0
+    volumes:
+      - ${LOCAL_DIR}${DATANODE_DIR}3:${DOCKER_DIR}${DATANODE_DIR}
+      # - ${DOCKER_DIR}logs/data-node3:${DOCKER_DIR}logs/hadoop
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
       - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
       #- /root/${AIRFLOW_DIR}:/root/${AIRFLOW_DIR}

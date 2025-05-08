@@ -10,12 +10,15 @@ ARG AIRFLOW_VER
 ARG SPARK_VERSION
 
 # Java installation
-RUN RUN apk update && apk add openjdk11
+RUN apt update && apt upgrade -y && apt install -y gnupg ca-certificates curl rsync
+RUN curl -s https://repos.azul.com/azul-repo.key | gpg --dearmor -o /usr/share/keyrings/azul.gpg
+RUN echo "deb [signed-by=/usr/share/keyrings/azul.gpg] https://repos.azul.com/zulu/deb stable main" | tee /etc/apt/sources.list.d/zulu.list
+RUN apt-get update && apt-get -y install zulu11-jdk
 RUN apt-get -y autoremove && apt-get -y clean
 
 # OS required package installation
 RUN apt-get -y install make net-tools wget gcc git openssh-server which procps libpq-dev libsqlite3-dev libssl-dev libbz2-dev libffi-dev zlib1g-dev
-RUN rc-service sshd start && rc-service sshd boot
+RUN systemctl enable ssh
 
 # Pip & other Python library installation
 RUN pip3 install --upgrade pip
@@ -30,7 +33,7 @@ RUN pip3 install psycopg2
 RUN nessie remote add http://nessie.bdc.home:19120/api/v1
 
 # SSH configuration
-RUN echo ${DOCKER_PASS} | passwd --stdin ${DOCKER_USR}
+RUN echo ${DOCKER_USR}:${DOCKER_PASS} | chpasswd
 RUN < /dev/zero ssh-keygen -q -N '' && cat ${DOCKER_DIR}.ssh/id_rsa.pub >> ${DOCKER_DIR}.ssh/authorized_keys && cat ${DOCKER_DIR}.ssh/id_rsa > ${DOCKER_DIR}.ssh/known_keys && chmod 600 ${DOCKER_DIR}.ssh/*_keys
 
 WORKDIR ${DOCKER_DIR}
