@@ -13,7 +13,7 @@ ARG SPARK_VERSION
 RUN apk update && apk add openjdk11
 
 # OS required package installation
-RUN apk add --no-cache net-tools wget gcc g++ git openrc openssh which procps cifs-utils libpq-dev sqlite-dev openssl-dev bzip2-dev libffi-dev zlib-dev re2-dev python3-dev musl-dev linux-headers
+RUN apk add --no-cache rsync net-tools wget gcc g++ git openrc openssh which procps cifs-utils libpq-dev sqlite-dev openssl-dev bzip2-dev libffi-dev zlib-dev re2-dev python3-dev musl-dev linux-headers
 RUN rc-update add sshd default
 
 # SSH configuration
