@@ -15,8 +15,8 @@ networks:
 services:
   hdc:
     build:
-      context: ""
-      dockerfile: ${HOST_DIR}/baseimage/Dockerfile
+      context: "../baseimage/"
+      dockerfile: Dockerfile
       args:
         - JAVA_VER=${JAVA_VER}
         - PY_VER=${PY_VER}
