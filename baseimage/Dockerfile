@@ -22,6 +22,7 @@ RUN < /dev/zero ssh-keygen -q -N ''
 RUN export ssh_fl=`cd /root/.ssh && ls *.pub | cut -d'.' -f1` && cat ${DOCKER_DIR}.ssh/${ssh_fl} > ${DOCKER_DIR}.ssh/known_keys
 RUN cat ${DOCKER_DIR}.ssh/*.pub >> ${DOCKER_DIR}.ssh/authorized_keys
 RUN chmod 600 ${DOCKER_DIR}.ssh/*_keys
+RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 
 # Pip & other Python library installation
 RUN pip3 install --upgrade pip
