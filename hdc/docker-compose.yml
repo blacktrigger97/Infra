@@ -36,8 +36,8 @@ services:
         - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
         - GIT_AIRFLOW_ADDRESS=${GIT_AIRFLOW_ADDRESS}
         - DOCKER_DIR=${DOCKER_DIR}
-        - DOCKER_NAMENODE_DIR=${DOCKER_NAMENODE_DIR}
-        - LOCAL_NAMENODE_DIR=${LOCAL_NAMENODE_DIR}
+        - DOCKER_NAMENODE_DIR=${NAMENODE_DIR}
+        - LOCAL_NAMENODE_DIR=${NAMENODE_DIR}
     user: root
     image: name-res
     container_name: name-res
@@ -54,7 +54,7 @@ services:
       - 8088:8088
       - 14000:14000
     volumes:
-      - ${LOCAL_DIR}${LOCAL_NAMENODE_DIR}:${DOCKER_DIR}${DOCKER_NAMENODE_DIR}
+      - ${LOCAL_DIR}${NAMENODE_DIR}:${DOCKER_DIR}${NAMENODE_DIR}
       # - ${LOCAL_DIR}logs/namenode1:${DOCKER_DIR}logs/hadoop
       - ${LOCAL_DIR}hadoop:${DOCKER_DIR}hadoop:ro
       #- cifs_mount:/root/${AIRFLOW_DIR}
@@ -69,7 +69,7 @@ services:
         - GIT_CONFIG_DIR=${GIT_CONFIG_DIR}
         - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
         - DOCKER_DIR=${DOCKER_DIR}
-        - DOCKER_SECONDARY_NAMENODE_DIR=${DOCKER_SECONDARY_NAMENODE_DIR}
+        - SECONDARY_NAMENODE_DIR=${SECONDARY_NAMENODE_DIR}
     user: root
     image: secon-hist
     container_name: secon-hist
@@ -86,7 +86,7 @@ services:
       - 9868:9868
       - 19888:19888
     volumes:
-      - ${LOCAL_DIR}${LOCAL_SECONDARY_NAMENODE_DIR}:${DOCKER_DIR}${DOCKER_SECONDARY_NAMENODE_DIR}
+      - ${LOCAL_DIR}${SECONDARY_NAMENODE_DIR}:${DOCKER_DIR}${SECONDARY_NAMENODE_DIR}
       # - ${DOCKER_DIR}logs/secondary:${DOCKER_DIR}logs/hadoop
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
     depends_on:
@@ -101,7 +101,7 @@ services:
         - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
         - GIT_AIRFLOW_ADDRESS=${GIT_AIRFLOW_ADDRESS}
         - DOCKER_DIR=${DOCKER_DIR}
-        - DOCKER_DATANODE_DIR=${DOCKER_DATANODE_DIR}
+        - DOCKER_DATANODE_DIR=${DATANODE_DIR}
     user: root
     image: data-node
     container_name: data-node1
@@ -113,7 +113,7 @@ services:
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
     volumes:
-      - ${LOCAL_DIR}${LOCAL_DATANODE_DIR}1:${DOCKER_DIR}${DOCKER_DATANODE_DIR}
+      - ${LOCAL_DIR}${DATANODE_DIR}1:${DOCKER_DIR}${DATANODE_DIR}
       # - ${DOCKER_DIR}logs/data-node1:${DOCKER_DIR}logs/hadoop
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
       - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
@@ -130,7 +130,7 @@ services:
         - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
         - GIT_AIRFLOW_ADDRESS=${GIT_AIRFLOW_ADDRESS}
         - DOCKER_DIR=${DOCKER_DIR}
-        - DOCKER_DATANODE_DIR=${DOCKER_DATANODE_DIR}
+        - DOCKER_DATANODE_DIR=${DATANODE_DIR}
     user: root
     image: data-node
     container_name: data-node2
@@ -142,7 +142,7 @@ services:
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
     volumes:
-      - ${LOCAL_DIR}${LOCAL_DATANODE_DIR}2:${DOCKER_DIR}${DOCKER_DATANODE_DIR}
+      - ${LOCAL_DIR}${DATANODE_DIR}2:${DOCKER_DIR}${DATANODE_DIR}
       # - ${DOCKER_DIR}logs/data-node2:${DOCKER_DIR}logs/hadoop
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
       - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
@@ -159,7 +159,7 @@ services:
         - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
         - GIT_AIRFLOW_ADDRESS=${GIT_AIRFLOW_ADDRESS}
         - DOCKER_DIR=${DOCKER_DIR}
-        - DOCKER_DATANODE_DIR=${DOCKER_DATANODE_DIR}
+        - DOCKER_DATANODE_DIR=${DATANODE_DIR}
     user: root
     image: data-node
     container_name: data-node3
@@ -171,7 +171,7 @@ services:
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
     volumes:
-      - ${LOCAL_DIR}${LOCAL_DATANODE_DIR}3:${DOCKER_DIR}${DOCKER_DATANODE_DIR}
+      - ${LOCAL_DIR}${DATANODE_DIR}3:${DOCKER_DIR}${DATANODE_DIR}
       # - ${DOCKER_DIR}logs/data-node2:${DOCKER_DIR}logs/hadoop
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
       - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
