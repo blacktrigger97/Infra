@@ -33,22 +33,6 @@ services:
       - ./postgresql/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ${LOCAL_DIR}${PG_DB_DIR}:/var/lib/postgresql/data
 
-  # pgadmin:
-  #   image: dpage/pgadmin4
-  #   container_name: pgadmin4
-  #   cpus: 1
-  #   restart: unless-stopped
-  #   networks:
-  #     bdCluster:
-  #       ipv4_address: 192.168.1.35
-  #   environment:
-  #     PGADMIN_DEFAULT_EMAIL: root@domain-name.com
-  #     PGADMIN_DEFAULT_PASSWORD: ${DOCKER_PASS}
-  #   ports:
-  #     - 8888:8888
-  #   volumes:
-  #     - ${LOCAL_DIR}${DB_DIR_ADMIN}:/var/lib/pgadmin
-
   nessie:
     build:
       context: nessie
@@ -316,7 +300,7 @@ services:
       KAFKA_REST_HOST_NAME: kafka-rest.bdc.home
       KAFKA_REST_LISTENERS: http://kafka-rest.bdc.home:8082
       KAFKA_REST_SCHEMA_REGISTRY_URL: http://kafka-sr.bdc.home:8081
-      KAFKA_REST_BOOTSTRAP_SERVERS: PLAINTEXT://kafka-1.bdc.home:29092,PLAINTEXT://kafka-2.bdc.home:9092,,PLAINTEXT://kafka-3.bdc.home:9092
+      KAFKA_REST_BOOTSTRAP_SERVERS: PLAINTEXT://kafka-1.bdc.home:9092,PLAINTEXT://kafka-2.bdc.home:9092,,PLAINTEXT://kafka-3.bdc.home:9092
     depends_on:
       - kafka-3
 
