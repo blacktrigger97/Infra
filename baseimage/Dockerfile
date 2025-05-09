@@ -40,7 +40,7 @@ RUN nessie remote add http://nessie.bdc.home:19120/api/v2
 WORKDIR ${DOCKER_DIR}
 
 # Start Scripts config
-RUN mkdir -p airflow hadoop spark logs/hadoop logs/spark logs/airflow
+RUN mkdir -p s_scripts airflow hadoop spark logs/hadoop logs/spark logs/airflow
 
 # Bashrc entries
 RUN echo "" >> .profile
