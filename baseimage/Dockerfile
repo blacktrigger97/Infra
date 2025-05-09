@@ -10,27 +10,31 @@ ARG AIRFLOW_VER
 ARG SPARK_VERSION
 
 # Java installation
-RUN RUN apk update && apk add openjdk11
+RUN apk update && apk add openjdk11
 
 # OS required package installation
-RUN apk add make net-tools wget gcc git openssh-server which procps libpq-dev libsqlite3-dev libssl-dev libbz2-dev libffi-dev zlib1g-dev
-RUN rc-service sshd start && rc-service sshd boot
+RUN apk add --no-cache net-tools wget gcc g++ git openrc openssh which procps libpq-dev sqlite-dev openssl-dev bzip2-dev libffi-dev zlib-dev re2-dev python3-dev musl-dev linux-headers
+RUN rc-update add sshd default
+
+# SSH configuration
+RUN echo ${DOCKER_USR}:${DOCKER_PASS} | chpasswd
+RUN < /dev/zero ssh-keygen -q -N ''
+RUN export ssh_fl=`cd /root/.ssh && ls *.pub | cut -d'.' -f1` && cat ${DOCKER_DIR}.ssh/${ssh_fl} > ${DOCKER_DIR}.ssh/known_keys
+RUN cat ${DOCKER_DIR}.ssh/*.pub >> ${DOCKER_DIR}.ssh/authorized_keys
+RUN chmod 600 ${DOCKER_DIR}.ssh/*_keys
 
 # Pip & other Python library installation
 RUN pip3 install --upgrade pip
 RUN pip3 install pyspark==${SPARK_VERSION}
 RUN pip3 install pynessie
 RUN pip3 install importlib-metadata
+RUN pip3 install pybind11[global]
 RUN pip3 install apache-airflow==${AIRFLOW_VER}
 RUN pip3 install apache-airflow[celery]==${AIRFLOW_VER}
 RUN pip3 install apache-airflow[rabbitmq]==${AIRFLOW_VER}
 RUN pip3 install apache-airflow-providers-apache-spark
 RUN pip3 install psycopg2
-RUN nessie remote add http://nessie.bdc.home:19120/api/v1
-
-# SSH configuration
-RUN echo ${DOCKER_PASS} | passwd --stdin ${DOCKER_USR}
-RUN < /dev/zero ssh-keygen -q -N '' && cat ${DOCKER_DIR}.ssh/id_rsa.pub >> ${DOCKER_DIR}.ssh/authorized_keys && cat ${DOCKER_DIR}.ssh/id_rsa > ${DOCKER_DIR}.ssh/known_keys && chmod 600 ${DOCKER_DIR}.ssh/*_keys
+RUN nessie remote add http://nessie.bdc.home:19120/api/v2
 
 WORKDIR ${DOCKER_DIR}
 
