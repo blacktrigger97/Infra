@@ -12,6 +12,13 @@ networks:
           ip_range: 192.168.1.0/24
           gateway: 192.168.1.1
 
+volumes: 
+  cifs-volume:
+    driver_opts:
+      type: cifs 
+      o: nounix,rw
+      device: //192.168.1.10/airflow
+
 services:
   hdc:
     build:
@@ -56,7 +63,7 @@ services:
       - ${LOCAL_DIR}${NAMENODE_DIR}:${DOCKER_DIR}${NAMENODE_DIR}
       # - ${LOCAL_DIR}logs/namenode1:${DOCKER_DIR}logs/hadoop
       - ${LOCAL_DIR}hadoop:${DOCKER_DIR}hadoop:ro
-      #- /root/${AIRFLOW_DIR}:/root/${AIRFLOW_DIR}
+      - cifs-volume:/root/${AIRFLOW_DIR}
     depends_on:
       - hdc
 
@@ -116,7 +123,7 @@ services:
       # - ${DOCKER_DIR}logs/data-node1:${DOCKER_DIR}logs/hadoop
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
       - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
-      #- /root/${AIRFLOW_DIR}:/root/${AIRFLOW_DIR}
+      - cifs-volume:/root/${AIRFLOW_DIR}
     depends_on:
       - hdc
 
@@ -145,7 +152,7 @@ services:
       # - ${DOCKER_DIR}logs/data-node2:${DOCKER_DIR}logs/hadoop
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
       - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
-      #- /root/${AIRFLOW_DIR}:/root/${AIRFLOW_DIR}
+      - cifs-volume:/root/${AIRFLOW_DIR}
     depends_on:
       - hdc
 
@@ -174,6 +181,6 @@ services:
       # - ${DOCKER_DIR}logs/data-node3:${DOCKER_DIR}logs/hadoop
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
       - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
-      #- /root/${AIRFLOW_DIR}:/root/${AIRFLOW_DIR}
+      - cifs-volume:/root/${AIRFLOW_DIR}
     depends_on:
       - hdc
