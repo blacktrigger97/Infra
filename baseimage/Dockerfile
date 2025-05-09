@@ -74,10 +74,8 @@ RUN echo "export SPARK_HOME=${DOCKER_DIR}spark" >> .bashrc
 RUN echo "export PATH=\$PATH:\$JAVA_HOME/bin:\$SPARK_HOME/bin:\$SPARK_HOME/sbin:/usr/sbin:\$SPARK_HOME/yarn" >> .bashrc
 RUN echo "export LD_LIBRARY_PATH=/opt/hadoop/lib/native:\$LD_LIBRARY_PATH" >> .bashrc
 RUN echo "" >> .bashrc
-RUN echo "afl () { \nairflow \$@ -l=/root/logs/airflow/\$@/\$@.log --stderr=/root/logs/airflow/\$@/\$@.err --stdout=/root/logs/airflow/\$@/\$@.out --pid=/run/airflow/airflow-\$@.pid -D \n\
-}" >> .bashrc
-RUN echo "aflc () { \nairflow celery \$@ -l=/root/logs/airflow/\$@/\$@.log --stderr=/root/logs/airflow/\$@/\$@.err --stdout=/root/logs/airflow/\$@/\$@.out --pid=/run/airflow/airflow-\$@.pid -D \n\
-}" >> .bashrc
+RUN echo "afl () { \nairflow \$@ -l=/root/logs/airflow/\$@.log --stderr=/root/logs/airflow/\$@.err --stdout=/root/logs/airflow/\$@.out --pid=/run/airflow/\$@.pid -D \n}" >> .bashrc
+RUN echo "aflc () { \nairflow celery \$@ -l=/root/logs/airflow/\$@.log --stderr=/root/logs/airflow/\$@.err --stdout=/root/logs/airflow/\$@.out --pid=/run/airflow/\$@.pid -D \n}" >> .bashrc
 
 
 EXPOSE 22
