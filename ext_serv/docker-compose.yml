@@ -60,7 +60,7 @@ services:
       bdCluster:
         ipv4_address: 192.168.1.33
     ports:
-      - 192.168.1.11:8081:8081
+      - 192.168.1.11:8081:8080
     environment:
       - TZ=Asia/Kolkata
     volumes:
@@ -239,7 +239,7 @@ services:
     environment:
       SCHEMA_REGISTRY_HOST_NAME: kafka-sr.bdc.home
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://kafka-1.bdc.home:9092,PLAINTEXT://kafka-2.bdc.home:9092,PLAINTEXT://kafka-3.bdc.home:9092
-      SCHEMA_REGISTRY_LISTENERS: http://kafka-sr.bdc.home:8082
+      SCHEMA_REGISTRY_LISTENERS: http://kafka-sr.bdc.home:8081
 
   ksqldb:
     image: confluentinc/ksqldb-server:latest
@@ -252,9 +252,9 @@ services:
     ports:
       - 192.168.1.11:8090:8088
     environment:
-      KSQL_LISTENERS: http://ksqldb.bdc.home:8090
+      KSQL_LISTENERS: http://ksqldb.bdc.home:8088
       KSQL_BOOTSTRAP_SERVERS: kafka-1.bdc.home:9092,kafka-2.bdc.home:9092,,kafka-3.bdc.home:9092
-      KSQL_KSQL_SCHEMA_REGISTRY_URL: http://kafka-sr.bdc.home:8082
+      KSQL_KSQL_SCHEMA_REGISTRY_URL: http://kafka-sr.bdc.home:8081
       KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE: "true"
       KSQL_KSQL_LOGGING_PROCESSING_TOPIC_AUTO_CREATE: "true"
     depends_on:
@@ -273,9 +273,9 @@ services:
       CONTROL_CENTER_BOOTSTRAP_SERVERS: kafka-1.bdc.home:9092,kafka-2.bdc.home:9092,,kafka-3.bdc.home:9092
       # CONTROL_CENTER_CONNECT_CONNECT-DEFAULT_CLUSTER: 'connect:8083'
       # CONTROL_CENTER_CONNECT_HEALTHCHECK_ENDPOINT: '/connectors'
-      CONTROL_CENTER_KSQL_KSQLDB1_URL: http://ksqldb.bdc.home:8090
+      CONTROL_CENTER_KSQL_KSQLDB1_URL: http://ksqldb.bdc.home:8088
       # CONTROL_CENTER_KSQL_KSQLDB1_ADVERTISED_URL: http://ksqldb.bdc.home:8088
-      CONTROL_CENTER_SCHEMA_REGISTRY_URL: http://kafka-sr.bdc.home:8082
+      CONTROL_CENTER_SCHEMA_REGISTRY_URL: http://kafka-sr.bdc.home:8081
       CONTROL_CENTER_REPLICATION_FACTOR: 1
       CONTROL_CENTER_INTERNAL_TOPICS_PARTITIONS: 1
       CONTROL_CENTER_MONITORING_INTERCEPTOR_TOPIC_PARTITIONS: 1
