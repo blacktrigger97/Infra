@@ -64,7 +64,8 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - TZ=Asia/Kolkata
+      - TZ: Asia/Kolkata
+      - NODE_ID: trino-co
     volumes:
       - ./trino/trino-co/etc:/etc/trino
       - ./trino/trino-co/catalog:/etc/trino/catalog
@@ -83,7 +84,8 @@ services:
     ports:
       - "8081:8081"
     environment:
-      - TZ=Asia/Kolkata
+      - TZ: Asia/Kolkata
+      - NODE_ID: trino-wk1
     volumes:
       - ./trino/trino-wk/etc:/etc/trino
       - ./trino/trino-wk/catalog:/etc/trino/catalog
@@ -100,7 +102,8 @@ services:
     ports:
       - "8081:8081"
     environment:
-      - TZ=Asia/Kolkata
+      - TZ: Asia/Kolkata
+      - NODE_ID: trino-wk2
     volumes:
       - ./trino/trino-wk/etc:/etc/trino
       - ./trino/trino-wk/catalog:/etc/trino/catalog
@@ -117,7 +120,8 @@ services:
     ports:
       - "8081:8081"
     environment:
-      - TZ=Asia/Kolkata
+      - TZ: Asia/Kolkata
+      - NODE_ID: trino-wk3
     volumes:
       - ./trino/trino-wk/etc:/etc/trino
       - ./trino/trino-wk/catalog:/etc/trino/catalog
