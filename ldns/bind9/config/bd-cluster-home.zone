@@ -35,9 +35,7 @@ trino-wk3	IN	A	192.168.1.43
 kafka-1	IN	A	192.168.1.51
 kafka-2	IN	A	192.168.1.52
 kafka-3	IN	A	192.168.1.53
-name-res1	IN	A	192.168.1.91
-name-res2	IN	A	192.168.1.92
-name-res3	IN	A	192.168.1.93
+name-res	IN	A	192.168.1.91
 secon-hist	IN	A	192.168.1.94
 zookeeper-1	IN	A	192.168.1.95
 zookeeper-2	IN	A	192.168.1.96
