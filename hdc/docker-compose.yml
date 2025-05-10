@@ -63,7 +63,7 @@ services:
       - ${LOCAL_DIR}${NAMENODE_DIR}:${DOCKER_DIR}${NAMENODE_DIR}
       # - ${LOCAL_DIR}logs/namenode1:${DOCKER_DIR}logs/hadoop
       - ${LOCAL_DIR}hadoop:${DOCKER_DIR}hadoop:ro
-      - cifs-volume:/root/${AIRFLOW_DIR}
+      - cifs-volume:/root/${AIRFLOW_DIR}:z
     depends_on:
       - hdc
 
@@ -123,7 +123,7 @@ services:
       # - ${DOCKER_DIR}logs/data-node1:${DOCKER_DIR}logs/hadoop
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
       - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
-      - cifs-volume:/root/${AIRFLOW_DIR}
+      - cifs-volume:/root/${AIRFLOW_DIR}:z
     depends_on:
       - hdc
 
@@ -152,7 +152,7 @@ services:
       # - ${DOCKER_DIR}logs/data-node2:${DOCKER_DIR}logs/hadoop
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
       - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
-      - cifs-volume:/root/${AIRFLOW_DIR}
+      - cifs-volume:/root/${AIRFLOW_DIR}:z
     depends_on:
       - hdc
 
@@ -181,6 +181,6 @@ services:
       # - ${DOCKER_DIR}logs/data-node2:${DOCKER_DIR}logs/hadoop
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
       - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
-      - cifs-volume:/root/${AIRFLOW_DIR}
+      - cifs-volume:/root/${AIRFLOW_DIR}:z
     depends_on:
       - hdc
