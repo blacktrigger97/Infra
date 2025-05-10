@@ -68,7 +68,7 @@ services:
     volumes:
       - ./trino/trino-co/etc:/etc/trino
       - ./trino/trino-co/catalog:/etc/trino/catalog
-      - /root/docker/hdc_data/trino/data:/data/trino
+      #- /root/docker/hdc_data/trino/data:/data/trino
     depends_on:
       - nessie
 
@@ -85,9 +85,9 @@ services:
     environment:
       - TZ=Asia/Kolkata
     volumes:
-      - ./trino/trino-wk/etc:/etc/trino
+      - ./trino/trino-wk/etc1:/etc/trino
       - ./trino/trino-wk/catalog:/etc/trino/catalog
-      - /root/docker/hdc_data/trino/data:/data/trino
+      #- /root/docker/hdc_data/trino/data:/data/trino
 
   trino-wk2:
     image: "trinodb/trino:latest"
@@ -102,9 +102,9 @@ services:
     environment:
       - TZ=Asia/Kolkata
     volumes:
-      - ./trino/trino-wk/etc:/etc/trino
+      - ./trino/trino-wk/etc2:/etc/trino
       - ./trino/trino-wk/catalog:/etc/trino/catalog
-      - /root/docker/hdc_data/trino/data:/data/trino
+      #- /root/docker/hdc_data/trino/data:/data/trino
 
   trino-wk3:
     image: "trinodb/trino:latest"
@@ -119,9 +119,9 @@ services:
     environment:
       - TZ=Asia/Kolkata
     volumes:
-      - ./trino/trino-wk/etc:/etc/trino
+      - ./trino/trino-wk/etc3:/etc/trino
       - ./trino/trino-wk/catalog:/etc/trino/catalog
-      - /root/docker/hdc_data/trino/data:/data/trino
+      #- /root/docker/hdc_data/trino/data:/data/trino
 
   kafka-1:
     image: confluentinc/cp-kafka:latest
