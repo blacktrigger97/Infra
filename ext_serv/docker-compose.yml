@@ -28,7 +28,7 @@ services:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=${DOCKER_PASS}
     ports:
-      - 5432:5432
+      - 192.168.1.11:5432:5432
     volumes: 
       - ./postgresql/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ${LOCAL_DIR}${PG_DB_DIR}:/var/lib/postgresql/data
@@ -49,7 +49,7 @@ services:
       bdCluster:
         ipv4_address: 192.168.1.31
     ports:
-      - 19120:19120
+      - 192.168.1.11:19120:19120
     depends_on:
       - postgresql 
 
@@ -62,7 +62,7 @@ services:
       bdCluster:
         ipv4_address: 192.168.1.33
     ports:
-      - "8080:8080"
+      - 192.168.1.11:8080:8080
     environment:
       - TZ=Asia/Kolkata
     volumes:
@@ -81,7 +81,7 @@ services:
       bdCluster:
         ipv4_address: 192.168.1.41
     ports:
-      - "8081:8081"
+      - 8081:8081
     environment:
       - TZ=Asia/Kolkata
     volumes:
@@ -98,7 +98,7 @@ services:
       bdCluster:
         ipv4_address: 192.168.1.42
     ports:
-      - "8081:8081"
+      - 8081:8081
     environment:
       - TZ=Asia/Kolkata
     volumes:
@@ -115,7 +115,7 @@ services:
       bdCluster:
         ipv4_address: 192.168.1.43
     ports:
-      - "8081:8081"
+      - 8081:8081
     environment:
       - TZ=Asia/Kolkata
     volumes:
@@ -237,7 +237,7 @@ services:
       bdCluster:
         ipv4_address: 192.168.1.35
     ports:
-      - 8081:8081
+      - 192.168.1.11:8081:8081
     environment:
       SCHEMA_REGISTRY_HOST_NAME: kafka-sr.bdc.home
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://kafka-1.bdc.home:9092,PLAINTEXT://kafka-2.bdc.home:9092,PLAINTEXT://kafka-3.bdc.home:9092
@@ -252,7 +252,7 @@ services:
       bdCluster:
         ipv4_address: 192.168.1.36
     ports:
-      - 8088:8088
+      - 192.168.1.11:8088:8088
     environment:
       KSQL_LISTENERS: http://ksqldb.bdc.home:8088
       KSQL_BOOTSTRAP_SERVERS: kafka-1.bdc.home:9092,kafka-2.bdc.home:9092,,kafka-3.bdc.home:9092
@@ -270,7 +270,7 @@ services:
       bdCluster:
         ipv4_address: 192.168.1.37
     ports:
-      - 9021:9021
+      - 192.168.1.11:9021:9021
     environment:
       CONTROL_CENTER_BOOTSTRAP_SERVERS: kafka-1.bdc.home:9092,kafka-2.bdc.home:9092,,kafka-3.bdc.home:9092
       # CONTROL_CENTER_CONNECT_CONNECT-DEFAULT_CLUSTER: 'connect:8083'
@@ -313,7 +313,7 @@ services:
       bdCluster:
         ipv4_address: 192.168.1.32
     ports:
-      - 8888:8888
+      - 192.168.1.11:8888:8888
     volumes:
       - ./hue/hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
 
@@ -326,7 +326,7 @@ services:
       bdCluster:
         ipv4_address: 192.168.1.26
     ports:
-      - "6379:6379"
+      - 192.168.1.11:6379:6379
   
   airflow:
     build:
