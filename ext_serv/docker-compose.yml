@@ -235,7 +235,7 @@ services:
       bdCluster:
         ipv4_address: 192.168.1.35
     ports:
-      - 192.168.1.11:8082:8082
+      - 192.168.1.11:8082:8081
     environment:
       SCHEMA_REGISTRY_HOST_NAME: kafka-sr.bdc.home
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://kafka-1.bdc.home:9092,PLAINTEXT://kafka-2.bdc.home:9092,PLAINTEXT://kafka-3.bdc.home:9092
@@ -250,7 +250,7 @@ services:
       bdCluster:
         ipv4_address: 192.168.1.36
     ports:
-      - 192.168.1.11:8090:8090
+      - 192.168.1.11:8090:8088
     environment:
       KSQL_LISTENERS: http://ksqldb.bdc.home:8090
       KSQL_BOOTSTRAP_SERVERS: kafka-1.bdc.home:9092,kafka-2.bdc.home:9092,,kafka-3.bdc.home:9092
