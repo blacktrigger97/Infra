@@ -57,8 +57,8 @@ services:
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
     ports:
-      - 192.168.1.11:9870:9870
-      - 192.168.1.11:8088:8088
+      - 9870:9870
+      - 8088:8088
     volumes:
       - ${LOCAL_DIR}${NAMENODE_DIR}:${DOCKER_DIR}${NAMENODE_DIR}
       # - ${LOCAL_DIR}logs/namenode1:${DOCKER_DIR}logs/hadoop
