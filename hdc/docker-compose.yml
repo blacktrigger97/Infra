@@ -75,7 +75,7 @@ services:
         - GIT_CONFIG_DIR=${GIT_CONFIG_DIR}
         - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
         - DOCKER_DIR=${DOCKER_DIR}
-        - SECONDARY_NAMENODE_DIR=${SECONDARY_NAMENODE_DIR}
+        - DOCKER_SECONDARY_NAMENODE_DIR=${SECONDARY_NAMENODE_DIR}
     user: root
     image: secon-hist
     container_name: secon-hist
