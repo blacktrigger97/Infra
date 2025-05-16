@@ -18,23 +18,39 @@ networks:
           gateway: 192.168.1.1
 
 services:
-  # bind9:
-  #   container_name: bind9
-  #   image: ubuntu/bind9:latest
-  #   environment:
-  #     - BIND9_USER=root
-  #     - TZ=Asia/Kolkata
-  #   volumes:
-  #     - ./bind9/config:/etc/bind
-  #     - ./bind9/cache:/var/cache/bind
-  #     - ./bind9/records:/var/lib/bind
-  #   networks:
-  #     bdCluster:
-  #       ipv4_address: 192.168.1.50
-  #   ports:
-  #     - "53:53/tcp"
-  #     - "53:53/udp"
-  #   restart: unless-stopped
+  dns1:
+    container_name: dns1
+    hostname: dns1.bdc.home
+    image: ubuntu/bind9:latest
+    environment:
+      - BIND9_USER=root
+      - TZ=Asia/Kolkata
+    volumes:
+      - ./bind9/config:/etc/bind:z
+      - ./bind9/cache:/var/cache/bind:z
+      - ./bind9/records:/var/lib/bind:z
+    network_mode: host
+    ports:
+      - "192.168.1.10:53:53/tcp"
+      - "192.168.1.10:53:53/udp"
+    restart: unless-stopped
+
+  dns2:
+    container_name: dns2
+    hostname: dns2.bdc.home
+    image: ubuntu/bind9:latest
+    environment:
+      - BIND9_USER=root
+      - TZ=Asia/Kolkata
+    volumes:
+      - ./bind9/config:/etc/bind:z
+      - ./bind9/cache:/var/cache/bind:z
+      - ./bind9/records:/var/lib/bind:z
+    network_mode: host
+    ports:
+      - "192.168.1.12:53:53/tcp"
+      - "192.168.1.12:53:53/udp"
+    restart: unless-stopped
 
   pihole:
     image: pihole/pihole:latest

@@ -2,17 +2,17 @@ $TTL 2d
 
 
 
-1.168.192.in-addr.arpa.      IN      SOA     bind9.bdc.home.  root.bdc.home. (
-                            1
-                            20
-                            20
-                            20
-                            20
+1.168.192.in-addr.arpa.      IN      SOA     dns1.bdc.home.  root.bdc.home. (
+                            2025050700
+                            12h
+                            15m
+                            3w
+                            2h
                             );
 
-           IN      NS       bind9.bdc.home.
+           IN      NS       dns1.bdc.home.
 $ORIGIN 1.168.192.in-addr.arpa.
-10          IN      PTR      bind9.bdc.home.
+10          IN      PTR      dns1.bdc.home.
 
 ;
 
@@ -29,6 +29,7 @@ $ORIGIN 1.168.192.in-addr.arpa.
 35	IN	PTR	kafka-sr
 36	IN	PTR	ksqldb
 37	IN	PTR	kconcen
+39	IN	PTR	etl
 40	IN	PTR	pystream
 41	IN	PTR	trino-wk1
 42	IN	PTR	trino-wk2
