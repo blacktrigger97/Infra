@@ -71,8 +71,13 @@ RUN echo "export DOCKER_DIR=${DOCKER_DIR}" >> .bashrc
 RUN echo "" >> .bashrc
 RUN echo "########SPARK Exports########" >> .bashrc
 RUN echo "export SPARK_HOME=${DOCKER_DIR}spark" >> .bashrc
+RUN echo "export SPARK_MASTER='spark://name-res.bdc.home:7077'" >> .bashrc
+RUN echo "export SPARK_MASTER_HOST='name-res.bdc.home'" >> .bashrc
+RUN echo "export SPARK_MASTER_PORT='7077'" >> .bashrc
+RUN echo "export PYSPARK_PYTHON='python3'" >> .bashrc
+RUN echo "export PYTHONPATH=\$SPARK_HOME/python/:\$PYTHONPATH" >> .bashrc
 RUN echo "export PATH=\$PATH:\$JAVA_HOME/bin:\$SPARK_HOME/bin:\$SPARK_HOME/sbin:/usr/sbin:\$SPARK_HOME/yarn" >> .bashrc
-RUN echo "export LD_LIBRARY_PATH=/root/hadoop/lib/native:\$LD_LIBRARY_PATH" >> .bashrc
+RUN echo "export LD_LIBRARY_PATH=\$HADOOP_HOME/lib/native:\$LD_LIBRARY_PATH" >> .bashrc
 RUN echo "" >> .bashrc
 RUN echo "afl () { \nairflow \$@ -l=/root/logs/airflow/\$@.log --stderr=/root/logs/airflow/\$@.err --stdout=/root/logs/airflow/\$@.out --pid=/run/airflow/\$@.pid -D \n}" >> .bashrc
 RUN echo "aflc () { \nairflow celery \$@ -l=/root/logs/airflow/\$@.log --stderr=/root/logs/airflow/\$@.err --stdout=/root/logs/airflow/\$@.out --pid=/run/airflow/\$@.pid -D \n}" >> .bashrc
