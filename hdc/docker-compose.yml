@@ -119,6 +119,8 @@ services:
         ipv4_address: 192.168.1.101
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
+    ports:
+      - 8042:8042
     volumes:
       - ${LOCAL_DIR}${DATANODE_DIR}1:${DOCKER_DIR}${DATANODE_DIR}
       # - ${DOCKER_DIR}logs/data-node1:${DOCKER_DIR}logs/hadoop
@@ -148,6 +150,8 @@ services:
         ipv4_address: 192.168.1.102
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
+    ports:
+      - 8042:8042
     volumes:
       - ${LOCAL_DIR}${DATANODE_DIR}2:${DOCKER_DIR}${DATANODE_DIR}
       # - ${DOCKER_DIR}logs/data-node2:${DOCKER_DIR}logs/hadoop
@@ -177,6 +181,8 @@ services:
         ipv4_address: 192.168.1.103
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
+    ports:
+      - 8042:8042
     volumes:
       - ${LOCAL_DIR}${DATANODE_DIR}3:${DOCKER_DIR}${DATANODE_DIR}
       # - ${DOCKER_DIR}logs/data-node2:${DOCKER_DIR}logs/hadoop
