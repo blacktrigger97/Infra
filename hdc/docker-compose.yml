@@ -63,6 +63,8 @@ services:
       # - ${LOCAL_DIR}logs/namenode1:${DOCKER_DIR}logs/hadoop
       - ${LOCAL_DIR}hadoop:${DOCKER_DIR}hadoop:ro
       - cifs-volume:/root/${AIRFLOW_DIR}:z
+    depends_on:
+      - hdc 
 
   secon-hist:
     build:
@@ -92,6 +94,9 @@ services:
       - ${LOCAL_DIR}${SECONDARY_NAMENODE_DIR}:${DOCKER_DIR}${SECONDARY_NAMENODE_DIR}
       # - ${DOCKER_DIR}logs/secondary:${DOCKER_DIR}logs/hadoop
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
+      - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
+    depends_on:
+      - hdc 
 
   data-node1:
     build:
