@@ -13,6 +13,18 @@ networks:
 
 services:
 
+  registry:
+    image: registry:2
+    hostname: registry.bdc.home
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.161
+    ports:
+      - "5000:5000"
+    volumes:
+      - registry-data:/var/lib/registry
+    restart: always
+
   postgresql:
     image: postgres:${DB_VER}
     container_name: postgresql
