@@ -1,4 +1,4 @@
-FROM hdc
+FROM registry.bdc.home:5000/hdc
 
 ARG GIT_CONFIG_DIR
 ARG GIT_CONFIG_ADDRESS
