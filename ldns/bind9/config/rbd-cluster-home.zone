@@ -45,6 +45,7 @@ $ORIGIN 1.168.192.in-addr.arpa.
 101	IN	PTR	data-node1
 102	IN	PTR	data-node2
 103	IN	PTR	data-node3
+161 IN  PTR registry
 201	IN	PTR	jupyter
 
 

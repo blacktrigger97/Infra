@@ -44,6 +44,7 @@ zookeeper-3	IN	A	192.168.1.97
 data-node1	IN	A	192.168.1.101
 data-node2	IN	A	192.168.1.102
 data-node3	IN	A	192.168.1.103
+registry    IN  A   192.168.1.161
 jupyter	IN	A	192.168.1.201
 
 
