@@ -16,14 +16,17 @@ services:
   registry:
     image: registry:2
     hostname: registry.bdc.home
+    container_name: docker_registry
     networks:
       bdCluster:
         ipv4_address: 192.168.1.161
     ports:
       - "5000:5000"
+    environment:
+      REGISTRY_VALIDATION_DISABLED: 'true'
     volumes:
-      - registry-data:/var/lib/registry
-    restart: always
+      - ./registry-data:/var/lib/registry:z
+    restart: unless-stopped
 
   postgresql:
     image: postgres:${DB_VER}
