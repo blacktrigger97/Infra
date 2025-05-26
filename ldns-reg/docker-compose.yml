@@ -1,0 +1,110 @@
+networks:
+  # ph_bridge:
+  #   driver: bridge
+  #   ipam:
+  #     config:
+  #       - subnet: 192.168.100.0/24
+  #         gateway: 192.168.100.1
+  #         ip_range: 192.168.100.2/32
+  bdCluster:
+    name: bdCluster
+    driver: ipvlan
+    driver_opts:
+      parent: wlo1
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24
+          ip_range: 192.168.1.0/24
+          gateway: 192.168.1.1
+
+services:
+  dns1:
+    container_name: dns1
+    hostname: dns1.bdc.home
+    image: ubuntu/bind9:latest
+    environment:
+      - BIND9_USER=root
+      - TZ=Asia/Kolkata
+    volumes:
+      - ./bind9/config:/etc/bind:z
+      - ./bind9/cache:/var/cache/bind:z
+      - ./bind9/records:/var/lib/bind:z
+    network_mode: host
+    ports:
+      - "192.168.1.10:53:53/tcp"
+      - "192.168.1.10:53:53/udp"
+    restart: unless-stopped
+
+  registry:
+    image: registry:2
+    hostname: registry.bdc.home
+    container_name: docker_registry
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.161
+    ports:
+      - "5000:5000"
+    environment:
+      REGISTRY_VALIDATION_DISABLED: 'true'
+    volumes:
+      - ./registry-data:/var/lib/registry:z
+    restart: unless-stopped
+  # dns2:
+  #   container_name: dns2
+  #   hostname: dns2.bdc.home
+  #   image: ubuntu/bind9:latest
+  #   environment:
+  #     - BIND9_USER=root
+  #     - TZ=Asia/Kolkata
+  #   volumes:
+  #     - ./bind9/config:/etc/bind:z
+  #     - ./bind9/cache:/var/cache/bind:z
+  #     - ./bind9/records:/var/lib/bind:z
+  #   network_mode: host
+  #   ports:
+  #     - "192.168.1.12:53:53/tcp"
+  #     - "192.168.1.12:53:53/udp"
+  #   restart: unless-stopped
+
+  # pihole:
+  #   image: pihole/pihole:latest
+  #   hostname: pihole.bdc.home
+  #   container_name: pihole
+  #   restart: unless-stopped
+  #   ports:
+  #     - "53:53/tcp"
+  #     - "53:53/udp"
+  #     - "80:80/tcp"
+  #   networks:
+  #     bdCluster:
+  #       ipv4_address: 192.168.1.11
+  #       priority: 1000
+  #     ph_bridge:
+  #       ipv4_address: 192.168.100.2
+  #       priority: 900
+  #   volumes:
+  #     - ./pihole/pihole.toml:/etc/pihole/pihole.toml:z
+  #   environment:
+  #     TZ: "Asia/Kolkata"
+  #     FTLCONF_webserver_api_password: "password123"
+  #     FTLCONF_dns_dnssec: 'false'
+  #     FTLCONF_dns_listeningMode: 'local'
+  #     FTLCONF_dns_bogusPriv: 'true'
+  #     FTLCONF_dns_domainNeeded: 'true'
+  #     FTLCONF_dns_upstreams: 'unbound.bdc.home#5335'
+  #     FTLCONF_debug_api: 'true'
+
+
+  # unbound:
+  #   container_name: unbound
+  #   hostname: unbound.bdc.home
+  #   image: "mvance/unbound:latest"
+  #   ports:
+  #     - "5335:53/tcp"
+  #     - "5335:53/udp"
+  #   networks:
+  #     bdCluster:
+  #       ipv4_address: 192.168.1.15
+  #   volumes:
+  #     - ./unbound:/opt/unbound/etc/unbound:z
+  #   restart: unless-stopped
