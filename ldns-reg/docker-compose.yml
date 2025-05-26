@@ -6,16 +6,6 @@ networks:
   #       - subnet: 192.168.100.0/24
   #         gateway: 192.168.100.1
   #         ip_range: 192.168.100.2/32
-  bdCluster:
-    name: bdCluster
-    driver: ipvlan
-    driver_opts:
-      parent: wlo1
-    ipam:
-      config:
-        - subnet: 192.168.1.0/24
-          ip_range: 192.168.1.0/24
-          gateway: 192.168.1.1
 
 services:
   dns1:
@@ -30,20 +20,13 @@ services:
       - ./bind9/cache:/var/cache/bind:z
       - ./bind9/records:/var/lib/bind:z
     network_mode: host
-    ports:
-      - "192.168.1.10:53:53/tcp"
-      - "192.168.1.10:53:53/udp"
     restart: unless-stopped
 
   registry:
     image: registry:2
     hostname: registry.bdc.home
     container_name: docker_registry
-    networks:
-      bdCluster:
-        ipv4_address: 192.168.1.161
-    ports:
-      - "5000:5000"
+    network_mode: host
     environment:
       REGISTRY_VALIDATION_DISABLED: 'true'
     volumes:
