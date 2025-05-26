@@ -59,7 +59,7 @@ services:
       - 8088:8088
       - 7077:7077
     volumes:
-      - ${LOCAL_DIR}${NAMENODE_DIR}:${DOCKER_DIR}${NAMENODE_DIR}
+      - ${LOCAL_DIR}docker/${NAMENODE_DIR}:${DOCKER_DIR}${NAMENODE_DIR}
       # - ${LOCAL_DIR}logs/namenode1:${DOCKER_DIR}logs/hadoop
       - ${LOCAL_DIR}hadoop:${DOCKER_DIR}hadoop:ro
       - cifs-volume:/root/${AIRFLOW_DIR}:z
@@ -91,7 +91,7 @@ services:
       - 9868:9868
       - 19888:19888
     volumes:
-      - ${LOCAL_DIR}${SECONDARY_NAMENODE_DIR}:${DOCKER_DIR}${SECONDARY_NAMENODE_DIR}
+      - ${LOCAL_DIR}docker/${SECONDARY_NAMENODE_DIR}:${DOCKER_DIR}${SECONDARY_NAMENODE_DIR}
       # - ${DOCKER_DIR}logs/secondary:${DOCKER_DIR}logs/hadoop
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
       - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
@@ -121,7 +121,7 @@ services:
     ports:
       - 8042:8042
     volumes:
-      - ${LOCAL_DIR}${DATANODE_DIR}1:${DOCKER_DIR}${DATANODE_DIR}
+      - ${LOCAL_DIR}docker/${DATANODE_DIR}1:${DOCKER_DIR}${DATANODE_DIR}
       # - ${DOCKER_DIR}logs/data-node1:${DOCKER_DIR}logs/hadoop
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
       - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
@@ -150,7 +150,7 @@ services:
     ports:
       - 8042:8042
     volumes:
-      - ${LOCAL_DIR}${DATANODE_DIR}2:${DOCKER_DIR}${DATANODE_DIR}
+      - ${LOCAL_DIR}docker/${DATANODE_DIR}2:${DOCKER_DIR}${DATANODE_DIR}
       # - ${DOCKER_DIR}logs/data-node2:${DOCKER_DIR}logs/hadoop
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
       - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
@@ -179,7 +179,7 @@ services:
     ports:
       - 8042:8042
     volumes:
-      - ${LOCAL_DIR}${DATANODE_DIR}3:${DOCKER_DIR}${DATANODE_DIR}
+      - ${LOCAL_DIR}docker/${DATANODE_DIR}3:${DOCKER_DIR}${DATANODE_DIR}
       # - ${DOCKER_DIR}logs/data-node2:${DOCKER_DIR}logs/hadoop
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
       - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
