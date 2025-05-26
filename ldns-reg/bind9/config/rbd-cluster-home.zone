@@ -16,10 +16,12 @@ $ORIGIN 1.168.192.in-addr.arpa.
 
 ;
 
-11      IN      PTR     worker1
-12      IN      PTR     worker2
-13      IN      PTR     worker3
-14      IN      PTR     worker4
+10  IN  PTR registry
+10  IN  PTR worker0
+11  IN  PTR worker1
+12  IN  PTR worker2
+13  IN  PTR worker3
+14  IN  PTR worker4
 21	IN	PTR	postgresql
 26	IN	PTR	redis
 31	IN	PTR	nessie
@@ -29,8 +31,6 @@ $ORIGIN 1.168.192.in-addr.arpa.
 35	IN	PTR	kafka-sr
 36	IN	PTR	ksqldb
 37	IN	PTR	kconcen
-39	IN	PTR	etl
-40	IN	PTR	pystream
 41	IN	PTR	trino-wk1
 42	IN	PTR	trino-wk2
 43	IN	PTR	trino-wk3
@@ -45,8 +45,9 @@ $ORIGIN 1.168.192.in-addr.arpa.
 101	IN	PTR	data-node1
 102	IN	PTR	data-node2
 103	IN	PTR	data-node3
-161 IN  PTR registry
 201	IN	PTR	jupyter
+202	IN	PTR	etl
+203	IN	PTR	pystream
 
 
 ;
