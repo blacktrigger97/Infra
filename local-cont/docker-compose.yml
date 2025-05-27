@@ -35,6 +35,20 @@ services:
       - ${LOCAL_DIR}docker/registry-data:/var/lib/registry:z
     restart: unless-stopped
 
+  hdc:
+    build:
+      context: "../baseimage/"
+      dockerfile: Dockerfile
+      args:
+        - JAVA_VER=${JAVA_VER}
+        - PY_VER=${PY_VER}
+        - DOCKER_USR=${DOCKER_USR}
+        - DOCKER_PASS=${DOCKER_PASS}
+        - DOCKER_DIR=${DOCKER_DIR}
+        - AIRFLOW_VER=${AIRFLOW_VER}
+        - SPARK_VERSION=${SPARK_VERSION}
+    image: hdc
+
   secon-hist:
     build:
       context: secon-hist
