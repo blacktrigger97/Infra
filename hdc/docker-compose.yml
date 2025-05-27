@@ -49,7 +49,7 @@ services:
       - ${LOCAL_DIR}docker/${NAMENODE_DIR}:${DOCKER_DIR}${NAMENODE_DIR}
       # - ${LOCAL_DIR}logs/namenode1:${DOCKER_DIR}logs/hadoop
       - ${LOCAL_DIR}hadoop:${DOCKER_DIR}hadoop:ro
-      - cifs-volume:/root/${AIRFLOW_DIR}:z
+      # - cifs-volume:/root/${AIRFLOW_DIR}:z
 
   data-node1:
     build:

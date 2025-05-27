@@ -18,6 +18,7 @@ dns1          IN      A       192.168.1.10
 registry    IN  A   192.168.1.10
 secon-hist	IN	A	192.168.1.10
 worker0	    IN	A	192.168.1.10
+worker1	    IN	A	192.168.1.9
 worker1	    IN	A	192.168.1.11
 worker2	    IN	A	192.168.1.12
 worker3	    IN	A	192.168.1.13
