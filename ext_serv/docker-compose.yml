@@ -301,30 +301,6 @@ services:
   #   depends_on:
   #     - kafka-3
 
-  hue:
-    image: gethue/hue:latest
-    hostname: hue.bdc.home
-    container_name: hue
-    restart: unless-stopped
-    networks:
-      bdCluster:
-        ipv4_address: 192.168.1.32
-    ports:
-      - 8888:8888
-    volumes:
-      - ./hue/hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
-
-  redis:
-    image: redis:latest
-    hostname: redis.bdc.home
-    container_name: redis
-    restart: unless-stopped
-    networks:
-      bdCluster:
-        ipv4_address: 192.168.1.26
-    ports:
-      - 6379:6379
-
   marimo:
     build: 
       context: marimo

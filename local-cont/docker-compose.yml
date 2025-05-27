@@ -83,23 +83,26 @@ services:
     # ports:
     #   - 8080:8080
     #   - 5555:5555
+
+  redis:
+    image: redis:latest
+    hostname: redis.bdc.home
+    container_name: redis
+    restart: unless-stopped
+    network_mode: host
+    # ports:
+    #   - 6379:6379
   
-  # dns2:
-  #   container_name: dns2
-  #   hostname: dns2.bdc.home
-  #   image: ubuntu/bind9:latest
-  #   environment:
-  #     - BIND9_USER=root
-  #     - TZ=Asia/Kolkata
-  #   volumes:
-  #     - ./bind9/config:/etc/bind:z
-  #     - ./bind9/cache:/var/cache/bind:z
-  #     - ./bind9/records:/var/lib/bind:z
-  #   network_mode: host
-  #   ports:
-  #     - "192.168.1.12:53:53/tcp"
-  #     - "192.168.1.12:53:53/udp"
-  #   restart: unless-stopped
+  hue:
+    image: gethue/hue:latest
+    hostname: hue.bdc.home
+    container_name: hue
+    restart: unless-stopped
+    network_mode: host
+    # ports:
+    #   - 8888:8888
+    volumes:
+      - ./hue/hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
 
   # pihole:
   #   image: pihole/pihole:latest
