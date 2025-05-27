@@ -32,6 +32,37 @@ services:
     volumes:
       - ./registry-data:/var/lib/registry:z
     restart: unless-stopped
+
+  secon-hist:
+    build:
+      context: secon-hist
+      dockerfile: ${HOST_DIR}/hdc/secon-hist/Dockerfile
+      args:
+        - GIT_CONFIG_DIR=${GIT_CONFIG_DIR}
+        - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
+        - DOCKER_DIR=${DOCKER_DIR}
+        - DOCKER_SECONDARY_NAMENODE_DIR=${SECONDARY_NAMENODE_DIR}
+    user: root
+    image: secon-hist
+    container_name: secon-hist
+    restart: unless-stopped
+    hostname: secon-hist.bdc.home
+    cpus: 1
+    network_mode: host
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0
+    # ports:
+    #   - 18080:18080
+    #   - 9868:9868
+    #   - 19888:19888
+    volumes:
+      - ${LOCAL_DIR}docker/${SECONDARY_NAMENODE_DIR}:${DOCKER_DIR}${SECONDARY_NAMENODE_DIR}
+      # - ${DOCKER_DIR}logs/secondary:${DOCKER_DIR}logs/hadoop
+      - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
+      - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
+    depends_on:
+      - hdc 
+  
   # dns2:
   #   container_name: dns2
   #   hostname: dns2.bdc.home

@@ -17,6 +17,7 @@ $ORIGIN 1.168.192.in-addr.arpa.
 ;
 
 10  IN  PTR registry
+10	IN	PTR	secon-hist
 10  IN  PTR worker0
 11  IN  PTR worker1
 12  IN  PTR worker2
@@ -38,7 +39,6 @@ $ORIGIN 1.168.192.in-addr.arpa.
 52	IN	PTR	kafka-2
 53	IN	PTR	kafka-3
 91	IN	PTR	name-res
-94	IN	PTR	secon-hist
 95	IN	PTR	zookeeper-1
 96	IN	PTR	zookeeper-2
 97	IN	PTR	zookeeper-3
