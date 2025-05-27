@@ -52,7 +52,7 @@ services:
   secon-hist:
     build:
       context: secon-hist
-      dockerfile: ${HOST_DIR}/hdc/secon-hist/Dockerfile
+      dockerfile: ${HOST_DIR}/local-cont/secon-hist/Dockerfile
       args:
         - GIT_CONFIG_DIR=${GIT_CONFIG_DIR}
         - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
