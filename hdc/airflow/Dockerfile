@@ -1,5 +1,7 @@
 FROM registry.bdc.home:5000/hdc
 
+WORKDIR $DOCKER_DIR
+
 RUN git clone $GIT_CONFIG_ADDRESS
 RUN rsync -avru $GIT_CONFIG_DIR/s_scripts/ s_scripts
 
