@@ -40,8 +40,12 @@ services:
       - 8080:8080
       - 5555:5555
     environment:
-      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: "postgresql+psycopg2://${DOCKER_USR}:${DOCKER_PASS}@postgresql.bdc.home/airflow"
+      AIRFLOW__CORE__EXECUTOR: 'CeleryExecutor'
       AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
+      AIRFLOW__CELERY__RESULT_BACKEND: "db+postgresql://${DOCKER_USR}:${DOCKER_PASS}@postgresql.bdc.home/airflow"
+      AIRFLOW__CELERY__BROKER_URL: redis://redis.bdc.home:6379/0
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: "postgresql+psycopg2://${DOCKER_USR}:${DOCKER_PASS}@postgresql.bdc.home/airflow"
+      
     volumes:
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
       - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
