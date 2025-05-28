@@ -74,7 +74,7 @@ services:
       - ${LOCAL_DIR}docker/${SECONDARY_NAMENODE_DIR}:${DOCKER_DIR}${SECONDARY_NAMENODE_DIR}
       # - ${DOCKER_DIR}logs/secondary:${DOCKER_DIR}logs/hadoop
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
-      # - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
+      - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
 
   airflow:
     build:
