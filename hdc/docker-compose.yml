@@ -24,15 +24,12 @@ services:
       context: airflow
       dockerfile: ${HOST_DIR}/hdc/airflow/Dockerfile
       args:
-        - PY_VER=${PY_VER}
         - DOCKER_USR=${DOCKER_USR}
         - DOCKER_PASS=${DOCKER_PASS}
         - DOCKER_DIR=${DOCKER_DIR}
         - AIRFLOW_VER=${AIRFLOW_VER}
         - GIT_CONFIG_DIR=${GIT_CONFIG_DIR}
         - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
-        - GIT_AIRFLOW_ADDRESS=${GIT_AIRFLOW_ADDRESS}
-        - SPARK_VERSION=${SPARK_VERSION}
     container_name: airflow
     hostname: airflow.bdc.home
     restart: unless-stopped
@@ -42,6 +39,8 @@ services:
     ports:
       - 8080:8080
       - 5555:5555
+    environment:
+      AIRFLOW__CORE__SQL_ALCHEMY_CONN: "postgresql+psycopg2://${DOCKER_USR}:${DOCKER_PASS}@postgresql.bdc.home/airflow"
     volumes:
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
       - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
