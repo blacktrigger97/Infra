@@ -41,6 +41,7 @@ services:
       - 5555:5555
     environment:
       AIRFLOW__CORE__SQL_ALCHEMY_CONN: "postgresql+psycopg2://${DOCKER_USR}:${DOCKER_PASS}@postgresql.bdc.home/airflow"
+      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
     volumes:
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
       - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
