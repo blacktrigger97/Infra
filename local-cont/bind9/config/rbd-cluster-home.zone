@@ -16,6 +16,7 @@ $ORIGIN 1.168.192.in-addr.arpa.
 
 ;
 
+10	IN	PTR	redis
 10  IN  PTR registry
 10	IN	PTR	secon-hist
 10  IN  PTR worker0
@@ -25,7 +26,6 @@ $ORIGIN 1.168.192.in-addr.arpa.
 13  IN  PTR worker3
 14  IN  PTR worker4
 21	IN	PTR	postgresql
-26	IN	PTR	redis
 31	IN	PTR	nessie
 32	IN	PTR	hue
 33	IN	PTR	trino-co
