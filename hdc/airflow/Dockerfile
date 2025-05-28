@@ -12,4 +12,4 @@ RUN useradd -m -d /root/airflow airflow
 RUN echo airflow:airflow | chpasswd
 RUN usermod -aG sudo airflow
 
-CMD ["/root/s_scripts/air-flow.sh"]
+ENTRYPOINT ["/root/s_scripts/air-flow.sh"]
