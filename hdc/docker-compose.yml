@@ -46,7 +46,6 @@ services:
       CELERY_RESULT_BACKEND: "db+postgresql://${DOCKER_USR}:${DOCKER_PASS}@postgresql.bdc.home/airflow"
       CELERY_BROKER_URL: redis://redis.bdc.home:6379/0
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: "postgresql+psycopg2://${DOCKER_USR}:${DOCKER_PASS}@postgresql.bdc.home/airflow"
-      
     volumes:
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
       - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
@@ -106,6 +105,9 @@ services:
       - net.ipv6.conf.all.disable_ipv6=0
     ports:
       - 8042:8042
+    environment:
+      CELERY_RESULT_BACKEND: "db+postgresql://${DOCKER_USR}:${DOCKER_PASS}@postgresql.bdc.home/airflow"
+      CELERY_BROKER_URL: redis://redis.bdc.home:6379/0
     volumes:
       - ${LOCAL_DIR}docker/${DATANODE_DIR}1:${DOCKER_DIR}${DATANODE_DIR}
       # - ${DOCKER_DIR}logs/data-node1:${DOCKER_DIR}logs/hadoop
@@ -135,6 +137,9 @@ services:
       - net.ipv6.conf.all.disable_ipv6=0
     ports:
       - 8042:8042
+    environment:
+      CELERY_RESULT_BACKEND: "db+postgresql://${DOCKER_USR}:${DOCKER_PASS}@postgresql.bdc.home/airflow"
+      CELERY_BROKER_URL: redis://redis.bdc.home:6379/0  
     volumes:
       - ${LOCAL_DIR}docker/${DATANODE_DIR}2:${DOCKER_DIR}${DATANODE_DIR}
       # - ${DOCKER_DIR}logs/data-node2:${DOCKER_DIR}logs/hadoop
@@ -164,6 +169,9 @@ services:
       - net.ipv6.conf.all.disable_ipv6=0
     ports:
       - 8042:8042
+    environment:
+      CELERY_RESULT_BACKEND: "db+postgresql://${DOCKER_USR}:${DOCKER_PASS}@postgresql.bdc.home/airflow"
+      CELERY_BROKER_URL: redis://redis.bdc.home:6379/0
     volumes:
       - ${LOCAL_DIR}docker/${DATANODE_DIR}3:${DOCKER_DIR}${DATANODE_DIR}
       # - ${DOCKER_DIR}logs/data-node2:${DOCKER_DIR}logs/hadoop
