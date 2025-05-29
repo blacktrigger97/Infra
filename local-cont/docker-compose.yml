@@ -82,6 +82,8 @@ services:
     container_name: redis
     restart: unless-stopped
     network_mode: host
+    expose:
+      - 6379
     # ports:
     #   - 6379:6379
     healthcheck:
