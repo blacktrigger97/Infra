@@ -43,8 +43,8 @@ services:
       AIRFLOW__CORE__EXECUTOR: 'CeleryExecutor'
       AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
       AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
-      AIRFLOW__CELERY__RESULT_BACKEND: redis://redis.bdc.home:6379/0
-      AIRFLOW__CELERY__BROKER_URL: redis://redis.bdc.home:6379/0
+      AIRFLOW__CELERY__RESULT_BACKEND: redis://redis.bdc.home:6379
+      AIRFLOW__CELERY__BROKER_URL: redis://redis.bdc.home:6379
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: "postgresql+psycopg2://${DOCKER_USR}:${DOCKER_PASS}@postgresql.bdc.home/airflow"
       
     volumes:
