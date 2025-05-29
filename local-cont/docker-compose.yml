@@ -84,6 +84,11 @@ services:
     network_mode: host
     # ports:
     #   - 6379:6379
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 30s
+      retries: 50
   
   hue:
     image: gethue/hue:latest
