@@ -46,6 +46,11 @@ services:
       AIRFLOW__CORE__DAGS_FOLDER: ${DOCKER_DIR}/airflow/dags
       AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
       AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+      AIRFLOW__SCHEDULER__CATCHUP_BY_DEFAULT : 'false'
+      AIRFLOW__SCHEDULER__ALLOW_TRIGGER_IN_FUTURE: 'true'
+      AIRFLOW__WEBSERVER__BASE_URL: http://airflow.bdc.home:8080
+      AIRFLOW__LOGGING__BASE_LOG_FOLDER: ${DOCKER_DIR}/logs/airflow/
+      AIRFLOW__LOGGING__DAG_PROCESSOR_MANAGER_LOG_LOCATION: ${DOCKER_DIR}/logs/airflow/dag_processor_manager/dag_processor_manager.log
       CELERY_RESULT_BACKEND: "db+postgresql://${DOCKER_USR}:${DOCKER_PASS}@postgresql.bdc.home/airflow"
       CELERY_BROKER_URL: redis://redis.bdc.home:6379/0
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: "postgresql+psycopg2://${DOCKER_USR}:${DOCKER_PASS}@postgresql.bdc.home/airflow"
