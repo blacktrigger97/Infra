@@ -43,6 +43,7 @@ services:
       - 5555:5555
     environment:
       AIRFLOW__CORE__EXECUTOR: 'CeleryExecutor'
+      AIRFLOW__CORE__DAGS_FOLDER: ${DOCKER_DIR}/airflow/dags
       AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
       AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
       CELERY_RESULT_BACKEND: "db+postgresql://${DOCKER_USR}:${DOCKER_PASS}@postgresql.bdc.home/airflow"
