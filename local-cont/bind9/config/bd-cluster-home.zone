@@ -48,6 +48,7 @@ data-node3	IN	A	192.168.1.103
 jupyter	    IN	A	192.168.1.201
 etl	        IN	A	192.168.1.202
 pystream	IN	A	192.168.1.203
+airflow-dev	IN	A	192.168.1.204
 
 
 ; -- demo servers
