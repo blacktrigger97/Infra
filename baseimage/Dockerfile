@@ -24,7 +24,7 @@ RUN systemctl enable ssh
 RUN pip3 install --upgrade pip
 RUN pip3 install pyspark==${SPARK_VERSION}
 RUN pip3 install pynessie
-RUN pip3 install importlib-metadata
+# RUN pip3 install importlib-metadata
 RUN pip3 install apache-airflow==${AIRFLOW_VER}
 RUN pip3 install apache-airflow[celery]==${AIRFLOW_VER}
 RUN pip3 install apache-airflow[rabbitmq]==${AIRFLOW_VER}
