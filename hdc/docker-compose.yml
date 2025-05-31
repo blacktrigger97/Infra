@@ -30,6 +30,7 @@ services:
         - AIRFLOW_VER=${AIRFLOW_VER}
         - GIT_CONFIG_DIR=${GIT_CONFIG_DIR}
         - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
+        - GIT_AIRFLOW_ADDRESS=${GIT_AIRFLOW_ADDRESS}
     container_name: airflow
     hostname: airflow.bdc.home
     restart: unless-stopped
