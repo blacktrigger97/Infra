@@ -55,6 +55,7 @@ services:
       # CELERY_RESULT_BACKEND: "db+postgresql://${DOCKER_USR}:${DOCKER_PASS}@postgresql.bdc.home/airflow"
       # CELERY_BROKER_URL: redis://redis.bdc.home:6379/0
       # AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: "postgresql+psycopg2://${DOCKER_USR}:${DOCKER_PASS}@postgresql.bdc.home/airflow"
+      AIRFLOW__WEBSERVER__EXPOSE_CONFIG: 'true'
     volumes:
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
       - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
