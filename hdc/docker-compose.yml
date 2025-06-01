@@ -29,7 +29,6 @@ services:
         - DOCKER_DIR=${DOCKER_DIR}
         - AIRFLOW_VER=${AIRFLOW_VER}
         - GIT_CONFIG_DIR=${GIT_CONFIG_DIR}
-        - AIRFLOW_DIR=${AIRFLOW_DIR}
         - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
         - GIT_AIRFLOW_ADDRESS=${GIT_AIRFLOW_ADDRESS}
     container_name: airflow
