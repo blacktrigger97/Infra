@@ -11,9 +11,9 @@ RUN pip3 install pandas
 WORKDIR $DOCKER_DIR
 
 RUN git clone $GIT_CONFIG_ADDRESS
-RUN git clone $GIT_AIRFLOW_ADDRESS
+# RUN git clone $GIT_AIRFLOW_ADDRESS
 RUN rsync -avru $GIT_CONFIG_DIR/s_scripts/ s_scripts
-RUN rsync -avru $AIRFLOW_DIR airflow
+# RUN rsync -avru $AIRFLOW_DIR/ airflow
 
 # Start Scripts config
 RUN mkdir -p logs/airflow/dag_processor_manager logs/airflow/webserver logs/airflow/scheduler logs/airflow/triggerer logs/airflow/flower /run/airflow
