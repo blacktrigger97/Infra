@@ -7,6 +7,7 @@ ARG DOCKER_USR
 ARG DOCKER_DIR
 ARG DOCKER_PASS
 ARG AIRFLOW_VER
+ARG AIRFLOW_CLIENT_VER
 ARG SPARK_VERSION
 
 # Java installation
@@ -25,12 +26,12 @@ RUN pip3 install --upgrade pip
 RUN pip3 install pyspark==${SPARK_VERSION}
 RUN pip3 install pynessie
 # RUN pip3 install importlib-metadata
-RUN pip3 install apache-airflow==${AIRFLOW_VER}
-RUN pip3 install apache-airflow-client==${AIRFLOW_VER}
-RUN pip3 install apache-airflow[celery]==${AIRFLOW_VER}
-RUN pip3 install apache-airflow[rabbitmq]==${AIRFLOW_VER}
+RUN pip3 install apache-airflow[celery,postgres,spark,kafka]==${AIRFLOW_VER}
+RUN pip3 install apache-airflow-client==${AIRFLOW_CLIENT_VER}
+# RUN pip3 install apache-airflow[celery]==${AIRFLOW_VER}
+# RUN pip3 install apache-airflow[rabbitmq]==${AIRFLOW_VER}
 RUN pip3 install apache-airflow-providers-apache-spark
-RUN pip3 install psycopg2
+RUN pip3 install psycopg2-binary
 RUN nessie remote add http://nessie.bdc.home:19120/api/v2
 
 # SSH configuration
