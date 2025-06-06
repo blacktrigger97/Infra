@@ -40,6 +40,7 @@ services:
     ports:
       - 8080:8080
       - 5555:5555
+      - 8794:8794
     environment:
       TZ: "Asia/Kolkata"
       # AIRFLOW__CORE__EXECUTOR: 'CeleryExecutor'
@@ -116,6 +117,7 @@ services:
       - net.ipv6.conf.all.disable_ipv6=0
     ports:
       - 8042:8042
+      - 8793:8793
     environment:
       TZ: "Asia/Kolkata"
       # CELERY_RESULT_BACKEND: "db+postgresql://${DOCKER_USR}:${DOCKER_PASS}@postgresql.bdc.home/airflow"
@@ -149,6 +151,7 @@ services:
       - net.ipv6.conf.all.disable_ipv6=0
     ports:
       - 8042:8042
+      - 8793:8793
     environment:
       TZ: "Asia/Kolkata"
       # CELERY_RESULT_BACKEND: "db+postgresql://${DOCKER_USR}:${DOCKER_PASS}@postgresql.bdc.home/airflow"
@@ -182,6 +185,7 @@ services:
       - net.ipv6.conf.all.disable_ipv6=0
     ports:
       - 8042:8042
+      - 8793:8793
     environment:
       TZ: "Asia/Kolkata"
       # CELERY_RESULT_BACKEND: "db+postgresql://${DOCKER_USR}:${DOCKER_PASS}@postgresql.bdc.home/airflow"
