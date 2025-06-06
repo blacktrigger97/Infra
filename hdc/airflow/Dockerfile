@@ -6,7 +6,7 @@ ARG GIT_CONFIG_ADDRESS
 ARG GIT_AIRFLOW_ADDRESS
 ARG DOCKER_DIR
 
-RUN pip3 install pandas python-ldap
+RUN pip3 install pandas Flask-AppBuilder
 
 WORKDIR $DOCKER_DIR
 
