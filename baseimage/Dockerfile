@@ -32,7 +32,7 @@ RUN pip3 install apache-airflow[redis,celery,postgres,spark,kafka,client]==${AIR
 # RUN pip3 install apache-airflow[rabbitmq]==${AIRFLOW_VER}
 # RUN pip3 install apache-airflow-providers-apache-spark
 RUN pip3 install psycopg2-binary
-RUN nessie remote add http://nessie.bdc.home:19120/api/v2
+# RUN nessie remote add http://nessie.bdc.home:19120/api/v2
 
 # SSH configuration
 RUN echo ${DOCKER_USR}:${DOCKER_PASS} | chpasswd
