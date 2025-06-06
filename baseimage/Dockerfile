@@ -30,7 +30,7 @@ RUN pip3 install apache-airflow[celery,postgres,spark,kafka,client]==${AIRFLOW_V
 # RUN pip3 install apache-airflow-client==${AIRFLOW_CLIENT_VER}
 # RUN pip3 install apache-airflow[celery]==${AIRFLOW_VER}
 # RUN pip3 install apache-airflow[rabbitmq]==${AIRFLOW_VER}
-RUN pip3 install apache-airflow-providers-apache-spark
+# RUN pip3 install apache-airflow-providers-apache-spark
 RUN pip3 install psycopg2-binary
 RUN nessie remote add http://nessie.bdc.home:19120/api/v2
 
