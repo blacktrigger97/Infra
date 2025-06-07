@@ -37,7 +37,7 @@ RUN < /dev/zero ssh-keygen -q -N '' && cat ${DOCKER_DIR}.ssh/id_rsa.pub >> ${DOC
 WORKDIR ${DOCKER_DIR}
 
 # Start Scripts config
-RUN mkdir -p s_scripts hadoop spark logs/hadoop logs/spark logs/airflow
+RUN mkdir -p s_scripts hadoop spark logs/hadoop logs/spark
 
 # Bashrc entries
 RUN echo "" >> .bashrc
