@@ -14,7 +14,7 @@ RUN rsync -avru $GIT_CONFIG_DIR/s_scripts/ s_scripts
 # RUN rsync -avru $AIRFLOW_DIR/ airflow
 
 # Start Scripts config
-RUN mkdir -p airflow /run/airflow
+RUN mkdir -p airflow /run/airflow logs/airflow/worker
 
 RUN useradd -m -d /root/airflow airflow
 RUN echo airflow:airflow | chpasswd
