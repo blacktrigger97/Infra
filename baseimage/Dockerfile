@@ -22,7 +22,7 @@ RUN apt-get -y install make net-tools wget gcc git openssh-server which procps l
 RUN systemctl enable ssh
 
 # Pip & other Python library installation
-RUN pip3 install --upgrade pip
+RUN pip install --upgrade pip
 # RUN pip3 install pyspark==${SPARK_VERSION}
 RUN pip3 install pynessie
 RUN pip3 install pandas Flask-AppBuilder
