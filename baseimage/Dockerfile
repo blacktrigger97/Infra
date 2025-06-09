@@ -23,7 +23,7 @@ RUN systemctl enable ssh
 
 # Pip & other Python library installation
 RUN pip install --upgrade pip
-# RUN pip3 install pyspark==${SPARK_VERSION}
+RUN pip3 install pyspark==${SPARK_VERSION}
 RUN pip3 install pynessie
 RUN pip3 install pandas Flask-AppBuilder
 RUN pip3 install apache-airflow[redis,celery,postgres,client]==${AIRFLOW_VER}
