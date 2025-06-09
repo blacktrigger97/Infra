@@ -26,7 +26,7 @@ RUN pip install --upgrade pip
 RUN pip3 install pyspark==${SPARK_VERSION}
 RUN pip3 install pynessie pandas Flask-AppBuilder
 RUN pip3 install apache-airflow[redis,celery,postgres,client]==${AIRFLOW_VER}
-RUN pip3 install apache-airflow-providers-apache-spark
+RUN pip3 install --upgrade apache-airflow-providers-apache-spark
 RUN pip3 install apache-airflow-providers-apache-hdfs
 RUN pip3 install apache-airflow-providers-apache-kafka
 RUN pip3 install apache-airflow-providers-git
