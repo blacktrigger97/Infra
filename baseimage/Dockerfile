@@ -28,12 +28,12 @@ RUN pip3 install pynessie
 RUN pip3 install pandas Flask-AppBuilder
 RUN pip3 install apache-airflow[redis,celery,postgres,client]==${AIRFLOW_VER}
 RUN pip3 install apache-airflow-providers-apache-spark==5.2.1
-RUN pip3 install apache-airflow-providers-apache-hdfs
-RUN pip3 install apache-airflow-providers-apache-kafka
-RUN pip3 install apache-airflow-providers-git
-RUN pip3 install apache-airflow-providers-http
-RUN pip3 install apache-airflow-providers-jdbc
-RUN pip3 install apache-airflow-providers-trino
+RUN pip3 install apache-airflow-providers-apache-hdfs==4.8.1
+RUN pip3 install apache-airflow-providers-apache-kafka==1.8.1
+RUN pip3 install apache-airflow-providers-git==0.0.2
+RUN pip3 install apache-airflow-providers-http==5.2.2
+RUN pip3 install apache-airflow-providers-jdbc==5.1.0
+RUN pip3 install apache-airflow-providers-trino==6.1.2
 RUN pip3 install psycopg2-binary
 # RUN nessie remote add http://nessie.bdc.home:19120/api/v2
 
