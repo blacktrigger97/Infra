@@ -46,7 +46,7 @@ services:
     volumes:
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
       - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
-      - /mnt/dockerShare/airflow:/root/airflow:z
+      - /shares/airflow:/root/airflow:z
 
   name-res:
     build:
