@@ -36,7 +36,7 @@ RUN pip3 install pynessie
 # RUN pip3 install apache-airflow-providers-jdbc
 # RUN pip3 install apache-airflow-providers-trino
 # RUN pip3 install psycopg2-binary
-RUN nessie remote add http://nessie.bdc.home:19120/api/v2
+RUN nessie remote add "http://nessie.bdc.home:19120/api/v2"
 
 # SSH configuration
 RUN echo ${DOCKER_USR}:${DOCKER_PASS} | chpasswd
