@@ -75,7 +75,10 @@ services:
 
   nginx:
     image: nginx:1.19.2-alpine
-    hostname: nginx
+    hostname: nginx-minio.bdc.home
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.91
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
