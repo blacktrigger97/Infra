@@ -81,7 +81,7 @@ services:
     ports:
       - "9000:9000"
       - "9001:9001"
-    depends_on:
+    # depends_on:
       # - minio1
       # - minio2
       # - minio3
