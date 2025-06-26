@@ -44,8 +44,11 @@ $ORIGIN 1.168.192.in-addr.arpa.
 96	IN	PTR	zookeeper-2
 97	IN	PTR	zookeeper-3
 101	IN	PTR	data-node1
+101	IN	PTR	minio1
 102	IN	PTR	data-node2
+102	IN	PTR	minio2
 103	IN	PTR	data-node3
+103	IN	PTR	minio3
 201	IN	PTR	jupyter
 202	IN	PTR	etl
 203	IN	PTR	pystream

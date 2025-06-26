@@ -43,8 +43,11 @@ zookeeper-1	IN	A	192.168.1.95
 zookeeper-2	IN	A	192.168.1.96
 zookeeper-3	IN	A	192.168.1.97
 data-node1	IN	A	192.168.1.101
+minio1	    IN	A	192.168.1.101
 data-node2	IN	A	192.168.1.102
+minio2	    IN	A	192.168.1.102
 data-node3	IN	A	192.168.1.103
+minio3	    IN	A	192.168.1.103
 jupyter	    IN	A	192.168.1.201
 etl	        IN	A	192.168.1.202
 pystream	IN	A	192.168.1.203
