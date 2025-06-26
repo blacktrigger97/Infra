@@ -1,5 +1,18 @@
 version: '3.7'
 
+networks:
+  bdCluster:
+    name: bdCluster
+    # external: true
+    driver: ipvlan
+    driver_opts:
+      parent: ${ETHERNET_NAME}
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24
+          ip_range: 192.168.1.0/24
+          gateway: 192.168.1.1
+
 # Settings and configurations that are common for all containers
 x-minio-common: &minio-common
   image: quay.io/minio/minio:RELEASE.2025-06-13T11-33-47Z
@@ -69,9 +82,9 @@ services:
       - "9000:9000"
       - "9001:9001"
     depends_on:
-      - minio1
-      - minio2
-      - minio3
+      # - minio1
+      # - minio2
+      # - minio3
       # - minio4
 
 ## By default this config uses default local driver,
