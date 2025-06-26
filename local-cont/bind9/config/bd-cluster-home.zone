@@ -39,6 +39,7 @@ kafka-1	    IN	A	192.168.1.51
 kafka-2	    IN	A	192.168.1.52
 kafka-3	    IN	A	192.168.1.53
 name-res	IN	A	192.168.1.91
+nginx-minio IN	A	192.168.1.91
 zookeeper-1	IN	A	192.168.1.95
 zookeeper-2	IN	A	192.168.1.96
 zookeeper-3	IN	A	192.168.1.97
