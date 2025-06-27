@@ -96,7 +96,7 @@ services:
       timeout: 30s
       retries: 50
 
-  hue:
+  hue-hdfs:
     image: gethue/hue:latest
     hostname: hue.bdc.home
     container_name: hue
@@ -105,25 +105,18 @@ services:
     # ports:
     #   - 8888:8888
     volumes:
-      - ./hue/hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
+      - ./hue/hue_hdfs.ini:/usr/share/hue/desktop/conf/z-hue.ini
 
-  dremio:
-    image: dremio/dremio-oss:latest # Or a specific version
-    hostname: dremio.bdc.home
-    container_name: dremio
+  hue-minio:
+    image: gethue/hue:latest
+    hostname: hue.bdc.home
+    container_name: hue
+    restart: unless-stopped
     network_mode: host
     # ports:
-    #   - "9047:9047" # Dremio UI
-    #   - "31010:31010" # Dremio client port
-    #   - "32010:32010"
-    #   - "45678:45678"
+    #   - 8888:8888
     volumes:
-      - ./dremio/dremio.conf:/opt/dremio/conf/dremio.conf:z
-      - ./dremio/core-site.xml:/opt/dremio/conf/core-site.xml:z
-    environment:
-      - TZ=Asia/Kolkata
-      - DREMIO_HEAP_SIZE_MB=2048
-      - DREMIO_MAX_DIRECT_MEMORY_MB=4096
+      - ./hue/hue_minio.ini:/usr/share/hue/desktop/conf/z-hue.ini
 
   minio-mc:
     image: minio/mc:latest
@@ -136,10 +129,6 @@ services:
      - ./minio-mc/init.sh:/init.sh
     environment:
       - TZ=Asia/Kolkata
-      # - MC_HOST_minio1=http://minioadmin:minioadmin@minio1.bdc.home:9000
-      # - MC_HOST_minio2=http://minioadmin:minioadmin@minio2.bdc.home:9000
-      # - MC_HOST_minio3=http://minioadmin:minioadmin@minio3.bdc.home:9000
-      # - BUCKET_NAME=dos
 
   # pihole:
   #   image: pihole/pihole:latest
