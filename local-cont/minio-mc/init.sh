@@ -56,12 +56,12 @@ fi
 echo -e "\n*****************************************"
 echo -e "****** Started Bucket creation process ******"
 echo -e "*****************************************\n"
-mc mb minio/warehouse
-mc mb minio/spark
+mc mb minio1/warehouse
+mc mb minio1/spark
 if [ $? == 0 ];
 then
-  mc anonymous set public minio/warehouse
-  mc anonymous set public minio/spark
+  mc anonymous set public minio1/warehouse
+  mc anonymous set public minio1/spark
 else
   echo "Bucket Creation Failed."
   exit 1
