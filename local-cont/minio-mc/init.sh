@@ -25,8 +25,9 @@ do
 done
 
 # detect the replicated/non-replicated instances
-for instance in $HOSTS;
+for host in $HOSTS;
 do
+  instance=`echo $host | cut -d'.' -f 1`
   mc admin replicate info $instance #| grep http > /dev/null
   if [ $? == 0 ];
   then
