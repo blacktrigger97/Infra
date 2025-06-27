@@ -52,18 +52,18 @@ else
   echo -e "***************************************\n"
 fi
 
-echo -e "\n*****************************************"
-echo -e "****** started bucket creation process ******"
-echo -e "*****************************************\n"
-mc mb minio/dos
-if [ $? == 0 ];
-then
-  mc policy set public minio/dos
-else
-  echo "Bucket Creation Failed."
-  exit 1
-fi
-echo -e "\n*****************************************"
-echo -e "****** Bucket creation process Completed ******"
-echo -e "*****************************************\n"
+# echo -e "\n*****************************************"
+# echo -e "****** started bucket creation process ******"
+# echo -e "*****************************************\n"
+# mc mb minio/dos
+# if [ $? == 0 ];
+# then
+#   mc policy set public minio/dos
+# else
+#   echo "Bucket Creation Failed."
+#   exit 1
+# fi
+# echo -e "\n*****************************************"
+# echo -e "****** Bucket creation process Completed ******"
+# echo -e "*****************************************\n"
 
