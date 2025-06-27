@@ -57,10 +57,12 @@ echo -e "\n*****************************************"
 echo -e "****** Started Bucket creation process ******"
 echo -e "*****************************************\n"
 mc mb minio1/warehouse --ignore-existing
+mc mb minio1/dremiostorage --ignore-existing
 mc mb minio1/spark --ignore-existing
 if [ $? == 0 ];
 then
   mc anonymous set public minio1/warehouse
+  mc anonymous set public minio1/dremiostorage
   mc anonymous set public minio1/spark
 else
   echo "Bucket Creation Failed."

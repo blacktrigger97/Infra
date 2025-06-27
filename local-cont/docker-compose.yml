@@ -28,6 +28,7 @@ services:
     container_name: docker_registry
     network_mode: host
     environment:
+      TZ: Asia/Kolkata
       REGISTRY_VALIDATION_DISABLED: 'true'
     # ports:
     #   - 5000:5000
@@ -71,6 +72,8 @@ services:
     #   - 18080:18080
     #   - 9868:9868
     #   - 19888:19888
+    environment:
+      - TZ=Asia/Kolkata
     volumes:
       - ${LOCAL_DIR}docker/${SECONDARY_NAMENODE_DIR}:${DOCKER_DIR}${SECONDARY_NAMENODE_DIR}
       # - ${DOCKER_DIR}logs/secondary:${DOCKER_DIR}logs/hadoop
@@ -85,6 +88,8 @@ services:
     network_mode: host
     # ports:
     #   - 6379:6379
+    environment:
+      - TZ=Asia/Kolkata
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s
@@ -101,6 +106,20 @@ services:
     #   - 8888:8888
     volumes:
       - ./hue/hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
+
+  dremio:
+    image: dremio/dremio-oss:latest # Or a specific version
+    hostname: dremio.bdc.home
+    container_name: dremio
+    ports:
+      - "9047:9047" # Dremio UI
+      - "31010:31010" # Dremio client port
+      - "32010:32010"
+    volumes:
+      - ${LOCAL_DIR}docker/dremio:/opt/dremio/data
+      - ./dremio/dremio.conf:/opt/dremio/conf
+    environment:
+      - TZ=Asia/Kolkata
 
   minio-mc:
     image: minio/mc:latest
