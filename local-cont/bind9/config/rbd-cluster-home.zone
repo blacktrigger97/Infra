@@ -16,6 +16,7 @@ $ORIGIN 1.168.192.in-addr.arpa.
 
 ;
 
+10	IN	PTR	dremio
 10	IN	PTR	hue
 10	IN	PTR	redis
 10  IN  PTR registry
