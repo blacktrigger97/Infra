@@ -19,8 +19,8 @@ x-minio-common: &minio-common
     - "9000"
     - "9001"
   environment:
-    MINIO_ROOT_USER: minioadmin
-    MINIO_ROOT_PASSWORD: minioadmin
+    MINIO_ROOT_USER: admin
+    MINIO_ROOT_PASSWORD: minio
   healthcheck:
     test: ["CMD", "mc", "ready", "local"]
     interval: 5s
@@ -36,17 +36,19 @@ services:
     image: minio/mc:RELEASE.2025-05-21T01-59-54Z
     hostname: minio-mc.bdc.home
     container_name: minio-mc
-    restart: unless-stopped
+    # restart: unless-stopped
     networks:
       bdCluster:
         ipv4_address: 192.168.1.91
     entrypoint: ["/bin/bash", "/init.sh"]
     volumes:
-      - ./init.sh:/init.sh
-    environment:
-      - MC_HOST_minio1=http://minioadmin:minioadmin@minio1.bdc.home:9000
-      - MC_HOST_minio2=http://minioadmin:minioadmin@minio2.bdc.home:9000
-      - MC_HOST_minio3=http://minioadmin:minioadmin@minio3.bdc.home:9000
+     - ./init.sh:/init.sh
+    # environment:
+      # - MC_HOST_minio1=http://minioadmin:minioadmin@minio1.bdc.home:9000
+      # - MC_HOST_minio2=http://minioadmin:minioadmin@minio2.bdc.home:9000
+      # - MC_HOST_minio3=http://minioadmin:minioadmin@minio3.bdc.home:9000
+      # - BUCKET_NAME=dos
+    
 
   minio1:
     <<: *minio-common
