@@ -110,7 +110,7 @@ services:
     network_mode: host
     entrypoint: ["/bin/bash", "/init.sh"]
     volumes:
-     - ./init.sh:/init.sh
+     - ./minio-mc/init.sh:/init.sh
     # environment:
       # - MC_HOST_minio1=http://minioadmin:minioadmin@minio1.bdc.home:9000
       # - MC_HOST_minio2=http://minioadmin:minioadmin@minio2.bdc.home:9000
