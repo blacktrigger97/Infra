@@ -67,6 +67,6 @@ else
   exit 1
 fi
 echo -e "\n*****************************************"
-echo -e "****** Bucket creation process Completed ******"
+echo -e "**** Bucket creation process Completed ****"
 echo -e "*****************************************\n"
 
