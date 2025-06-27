@@ -19,6 +19,7 @@ x-minio-common: &minio-common
     - "9000"
     - "9001"
   environment:
+    TZ: Asia/Kolkata
     MINIO_ROOT_USER: admin
     MINIO_ROOT_PASSWORD: password
   healthcheck:
