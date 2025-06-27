@@ -115,11 +115,14 @@ services:
       - "9047:9047" # Dremio UI
       - "31010:31010" # Dremio client port
       - "32010:32010"
+      - "45678:45678"
     volumes:
-      - ${LOCAL_DIR}docker/dremio:/opt/dremio/data
-      - ./dremio/dremio.conf:/opt/dremio/conf
+      - ./dremio/dremio.conf:/opt/dremio/conf/dremio.conf:z
+      - ./dremio/core-site.xml:/opt/dremio/conf/core-site.xml:z
     environment:
       - TZ=Asia/Kolkata
+      - DREMIO_HEAP_SIZE_MB=2048
+      - DREMIO_MAX_DIRECT_MEMORY_MB=4096
 
   minio-mc:
     image: minio/mc:latest
