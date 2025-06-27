@@ -111,11 +111,12 @@ services:
     image: dremio/dremio-oss:latest # Or a specific version
     hostname: dremio.bdc.home
     container_name: dremio
-    ports:
-      - "9047:9047" # Dremio UI
-      - "31010:31010" # Dremio client port
-      - "32010:32010"
-      - "45678:45678"
+    network_mode: host
+    # ports:
+    #   - "9047:9047" # Dremio UI
+    #   - "31010:31010" # Dremio client port
+    #   - "32010:32010"
+    #   - "45678:45678"
     volumes:
       - ./dremio/dremio.conf:/opt/dremio/conf/dremio.conf:z
       - ./dremio/core-site.xml:/opt/dremio/conf/core-site.xml:z
