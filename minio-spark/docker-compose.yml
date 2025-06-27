@@ -39,7 +39,7 @@ services:
     restart: unless-stopped
     networks:
       bdCluster:
-        ipv4_address: 192.168.1.92
+        ipv4_address: 192.168.1.91
     entrypoint: ["/bin/bash", "/init.sh"]
     volumes:
       - ./init.sh:/init.sh
@@ -94,12 +94,10 @@ services:
   #     - data4-1:/data1
   #     - data4-2:/data2
 
-  nginx:
+  nginx-lb:
     image: nginx:1.19.2-alpine
-    hostname: nginx-minio.bdc.home
-    networks:
-      bdCluster:
-        ipv4_address: 192.168.1.91
+    hostname: nginx-lb.bdc.home
+    network_mode: host
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
