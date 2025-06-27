@@ -90,18 +90,6 @@ services:
       interval: 5s
       timeout: 30s
       retries: 50
-  
-  nginx-lb:
-    image: nginx:1.19.2-alpine
-    hostname: nginx-lb.bdc.home
-    container_name: nginx-lb
-    restart: unless-stopped
-    network_mode: host
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-    # ports:
-    #   - "9000:9000"
-    #   - "9001:9001"
 
   hue:
     image: gethue/hue:latest
@@ -113,6 +101,21 @@ services:
     #   - 8888:8888
     volumes:
       - ./hue/hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
+
+  minio-mc:
+    image: minio/mc:RELEASE.2025-05-21T01-59-54Z
+    hostname: minio-mc.bdc.home
+    container_name: minio-mc
+    # restart: unless-stopped
+    network_mode: host
+    entrypoint: ["/bin/bash", "/init.sh"]
+    volumes:
+     - ./init.sh:/init.sh
+    # environment:
+      # - MC_HOST_minio1=http://minioadmin:minioadmin@minio1.bdc.home:9000
+      # - MC_HOST_minio2=http://minioadmin:minioadmin@minio2.bdc.home:9000
+      # - MC_HOST_minio3=http://minioadmin:minioadmin@minio3.bdc.home:9000
+      # - BUCKET_NAME=dos
 
   # pihole:
   #   image: pihole/pihole:latest

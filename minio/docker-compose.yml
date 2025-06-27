@@ -30,25 +30,7 @@ x-minio-common: &minio-common
 # starts 4 docker containers running minio server instances.
 # using nginx reverse proxy, load balancing, you can access
 # it through port 9000.
-services:
-
-  minio-mc:
-    image: minio/mc:RELEASE.2025-05-21T01-59-54Z
-    hostname: minio-mc.bdc.home
-    container_name: minio-mc
-    # restart: unless-stopped
-    networks:
-      bdCluster:
-        ipv4_address: 192.168.1.91
-    entrypoint: ["/bin/bash", "/init.sh"]
-    volumes:
-     - ./init.sh:/init.sh
-    # environment:
-      # - MC_HOST_minio1=http://minioadmin:minioadmin@minio1.bdc.home:9000
-      # - MC_HOST_minio2=http://minioadmin:minioadmin@minio2.bdc.home:9000
-      # - MC_HOST_minio3=http://minioadmin:minioadmin@minio3.bdc.home:9000
-      # - BUCKET_NAME=dos
-    
+services:    
 
   minio1:
     <<: *minio-common
@@ -100,6 +82,20 @@ services:
       # - minio2
       # - minio3
       # - minio4
+  
+  nginx-lb:
+    image: nginx:1.19.2-alpine
+    hostname: nginx-lb.bdc.home
+    container_name: nginx-lb
+    restart: unless-stopped
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.91
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "9000:9000"
+      - "9001:9001"
 
 ## By default this config uses default local driver,
 ## For custom volumes replace with volume driver configuration.

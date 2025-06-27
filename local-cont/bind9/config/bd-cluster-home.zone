@@ -18,7 +18,7 @@ dns1          IN      A       192.168.1.10
 hue	        IN	A	192.168.1.10
 redis	    IN	A	192.168.1.10
 registry    IN  A   192.168.1.10
-nginx-lb    IN	A	192.168.1.10
+minio-mc    IN	A	192.168.1.10
 secon-hist	IN	A	192.168.1.10
 worker0	    IN	A	192.168.1.10
 worker1	    IN	A	192.168.1.9
@@ -40,7 +40,7 @@ kafka-1	    IN	A	192.168.1.51
 kafka-2	    IN	A	192.168.1.52
 kafka-3	    IN	A	192.168.1.53
 name-res	IN	A	192.168.1.91
-minio-mc    IN	A	192.168.1.91
+nginx-lb    IN	A	192.168.1.91
 zookeeper-1	IN	A	192.168.1.95
 zookeeper-2	IN	A	192.168.1.96
 zookeeper-3	IN	A	192.168.1.97
