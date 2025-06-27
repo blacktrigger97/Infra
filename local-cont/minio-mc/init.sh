@@ -18,7 +18,8 @@ minio3.bdc.home
 # waiting for all hosts to start responding
 for host in $HOSTS
 do
-  mc alias set $host http://${host}:9000 admin minio;
+  tmp=`echo $host | cut -d'.' -f 1`
+  mc alias set $tmp http://${host}:9000 admin minio;
   # until curl -s `echo ${host} | cut -d "=" -f 2` > /dev/null; do sleep 5 &&
   #   echo "host `echo $host | cut -d "@" -f 2` not up yet. retrying"; done
 done
