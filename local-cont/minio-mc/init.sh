@@ -70,3 +70,4 @@ echo -e "\n*****************************************"
 echo -e "**** Bucket creation process Completed ****"
 echo -e "*****************************************\n"
 
+sleep 600
