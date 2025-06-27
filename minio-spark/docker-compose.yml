@@ -32,7 +32,7 @@ x-minio-common: &minio-common
 # it through port 9000.
 services:
 
-  init:
+  minio-mc:
     image: minio/mc
     hostname: minio-mc.bdc.home
     container_name: minio-mc
