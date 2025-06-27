@@ -41,6 +41,7 @@ $ORIGIN 1.168.192.in-addr.arpa.
 53	IN	PTR	kafka-3
 91	IN	PTR	name-res
 91	IN	PTR	nginx-minio
+92	IN	PTR	minio-mc
 95	IN	PTR	zookeeper-1
 96	IN	PTR	zookeeper-2
 97	IN	PTR	zookeeper-3

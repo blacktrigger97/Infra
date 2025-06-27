@@ -13,7 +13,7 @@ networks:
 
 # Settings and configurations that are common for all containers
 x-minio-common: &minio-common
-  image: quay.io/minio/minio:RELEASE.2025-06-13T11-33-47Z
+  image: minio/minio:RELEASE.2025-06-13T11-33-47Z
   command: server --console-address ":9001" http://minio{1...3}.bdc.home/data
   expose:
     - "9000"
@@ -31,9 +31,28 @@ x-minio-common: &minio-common
 # using nginx reverse proxy, load balancing, you can access
 # it through port 9000.
 services:
+
+  init:
+    image: minio/mc
+    hostname: minio-mc.bdc.home
+    container_name: minio-mc
+    restart: unless-stopped
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.92
+    entrypoint: ["/bin/bash", "/init.sh"]
+    volumes:
+      - ./init.sh:/init.sh
+    environment:
+      - MC_HOST_minio1=http://minioadmin:minioadmin@minio1.bdc.home:9000
+      - MC_HOST_minio2=http://minioadmin:minioadmin@minio2.bdc.home:9000
+      - MC_HOST_minio3=http://minioadmin:minioadmin@minio3.bdc.home:9000
+
   minio1:
     <<: *minio-common
     hostname: minio1.bdc.home
+    container_name: minio1
+    restart: unless-stopped
     networks:
       bdCluster:
         ipv4_address: 192.168.1.101
@@ -45,6 +64,8 @@ services:
   minio2:
     <<: *minio-common
     hostname: minio2.bdc.home
+    container_name: minio2
+    restart: unless-stopped
     networks:
       bdCluster:
         ipv4_address: 192.168.1.102
@@ -56,6 +77,8 @@ services:
   minio3:
     <<: *minio-common
     hostname: minio3.bdc.home
+    container_name: minio3
+    restart: unless-stopped
     networks:
       bdCluster:
         ipv4_address: 192.168.1.103
