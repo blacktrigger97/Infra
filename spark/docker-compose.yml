@@ -28,12 +28,11 @@ services:
     environment:
       - TZ=Asia/Kolkata
       - SPARK_MODE=master
-      - SPARK_RPC_AUTHENTICATION_ENABLED=no
       - SPARK_EVENTLOG_ENABLED=true
       - SPARK_WORKER_CORES=2
       - SPARK_WORKER_MEMORY=4g
-    # volumes:
-    #   - ./spark_defaults.conf:/opt/spark/conf/spark_defaults.conf:z
+    volumes:
+      - ./spark_defaults.conf:/opt/bitnami/spark/conf/spark_defaults.conf:z
 
   sw1:
     image: bitnami/spark:latest
@@ -49,6 +48,8 @@ services:
       - SPARK_MASTER_URL=spark://sm.bdc.home:7077
       - SPARK_WORKER_CORES=2
       - SPARK_WORKER_MEMORY=8g
+    volumes:
+      - ./spark_defaults.conf:/opt/bitnami/spark/conf/spark_defaults.conf:z
 
 
   sw2:
@@ -65,6 +66,8 @@ services:
       - SPARK_MASTER_URL=spark://sm.bdc.home:7077
       - SPARK_WORKER_CORES=2
       - SPARK_WORKER_MEMORY=8g
+    volumes:
+      - ./spark_defaults.conf:/opt/bitnami/spark/conf/spark_defaults.conf:z
 
   sw3:
     image: bitnami/spark:latest
@@ -80,3 +83,5 @@ services:
       - SPARK_MASTER_URL=spark://sm.bdc.home:7077
       - SPARK_WORKER_CORES=2
       - SPARK_WORKER_MEMORY=8g
+    volumes:
+      - ./spark_defaults.conf:/opt/bitnami/spark/conf/spark_defaults.conf:z
