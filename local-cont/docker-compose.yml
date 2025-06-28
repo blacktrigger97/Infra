@@ -118,6 +118,21 @@ services:
     volumes:
       - ./hue/hue_minio.ini:/usr/share/hue/desktop/conf/z-hue.ini
 
+  shs:
+    image: bitnami/spark:latest
+    hostname: shs.bdc.home
+    container_name: spark-history
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - TZ=Asia/Kolkata
+      - SPARK_MASTER_URL=spark://sm.bdc.home:7077
+      - AWS_ACCESS_KEY_ID=admin
+      - AWS_SECRET_ACCESS_KEY=password
+      - MINIO_ENDPOINT=${MINIO_ENDPOINT}
+    # ports:
+    #   - '18080:18080'
+
   minio-mc:
     image: minio/mc:latest
     hostname: minio-mc.bdc.home

@@ -17,12 +17,9 @@ services:
       - SPARK_RPC_AUTHENTICATION_ENABLED=no
       - SPARK_EVENTLOG_ENABLED=true
       - SPARK_WORKER_CORES=2
-      - SPARK_WORKER_MEMORY=2g
-      - AWS_ACCESS_KEY_ID=admin
-      - AWS_SECRET_ACCESS_KEY=password
-      - AWS_REGION=ap-south-1
+      - SPARK_WORKER_MEMORY=4g
 
-  spark-worker-1:
+  sw1:
     image: bitnami/spark:latest
     container_name: spark-worker-1
     hostname: sw1.bdc.home
@@ -35,13 +32,10 @@ services:
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://sm.bdc.home:7077
       - SPARK_WORKER_CORES=2
-      - SPARK_WORKER_MEMORY=2g
-      - AWS_ACCESS_KEY_ID=admin
-      - AWS_SECRET_ACCESS_KEY=password
-      - AWS_REGION=ap-south-1
+      - SPARK_WORKER_MEMORY=8g
 
 
-  spark-worker-2:
+  sw2:
     image: bitnami/spark:latest
     container_name: spark-worker-2
     hostname: sw2.bdc.home
@@ -54,12 +48,9 @@ services:
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://sm.bdc.home:7077
       - SPARK_WORKER_CORES=2
-      - SPARK_WORKER_MEMORY=2g
-      - AWS_ACCESS_KEY_ID=admin
-      - AWS_SECRET_ACCESS_KEY=password
-      - AWS_REGION=ap-south-1
+      - SPARK_WORKER_MEMORY=8g
 
-  spark-worker-3:
+  sw3:
     image: bitnami/spark:latest
     container_name: spark-worker-3
     hostname: sw3.bdc.home
@@ -72,7 +63,4 @@ services:
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://sm.bdc.home:7077
       - SPARK_WORKER_CORES=2
-      - SPARK_WORKER_MEMORY=2g
-      - AWS_ACCESS_KEY_ID=admin
-      - AWS_SECRET_ACCESS_KEY=password
-      - AWS_REGION=ap-south-1
+      - SPARK_WORKER_MEMORY=8g

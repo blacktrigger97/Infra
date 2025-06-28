@@ -16,7 +16,6 @@ $ORIGIN 1.168.192.in-addr.arpa.
 
 ;
 
-10	IN	PTR	dremio
 10	IN	PTR	hue
 10	IN	PTR	redis
 10  IN  PTR registry
@@ -43,6 +42,7 @@ $ORIGIN 1.168.192.in-addr.arpa.
 53	IN	PTR	kafka-3
 91	IN	PTR	name-res
 91	IN	PTR	nginx-lb
+92	IN	PTR	sm
 95	IN	PTR	zookeeper-1
 96	IN	PTR	zookeeper-2
 97	IN	PTR	zookeeper-3
@@ -52,6 +52,9 @@ $ORIGIN 1.168.192.in-addr.arpa.
 102	IN	PTR	minio2
 103	IN	PTR	data-node3
 103	IN	PTR	minio3
+111	IN	PTR	sw1
+112	IN	PTR	sw2
+113	IN	PTR	sw3
 201	IN	PTR	jupyter
 202	IN	PTR	etl
 203	IN	PTR	pystream
