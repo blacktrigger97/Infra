@@ -1,0 +1,78 @@
+services:
+  sm:
+    image: bitnami/spark:latest
+    hostname: sm.bdc.home
+    container_name: spark-master
+    restart: unless-stopped
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.92      
+    ports:
+      - "4040:4040"
+      - "9090:8080"
+      - "7077:7077"
+    environment:
+      - TZ=Asia/Kolkata
+      - SPARK_MODE=master
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_EVENTLOG_ENABLED=true
+      - SPARK_WORKER_CORES=2
+      - SPARK_WORKER_MEMORY=2g
+      - AWS_ACCESS_KEY_ID=admin
+      - AWS_SECRET_ACCESS_KEY=password
+      - AWS_REGION=ap-south-1
+
+  spark-worker-1:
+    image: bitnami/spark:latest
+    container_name: spark-worker-1
+    hostname: sw1.bdc.home
+    restart: unless-stopped
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.111  
+    environment:
+      - TZ=Asia/Kolkata
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://sm.bdc.home:7077
+      - SPARK_WORKER_CORES=2
+      - SPARK_WORKER_MEMORY=2g
+      - AWS_ACCESS_KEY_ID=admin
+      - AWS_SECRET_ACCESS_KEY=password
+      - AWS_REGION=ap-south-1
+
+
+  spark-worker-2:
+    image: bitnami/spark:latest
+    container_name: spark-worker-2
+    hostname: sw2.bdc.home
+    restart: unless-stopped
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.112  
+    environment:
+      - TZ=Asia/Kolkata
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://sm.bdc.home:7077
+      - SPARK_WORKER_CORES=2
+      - SPARK_WORKER_MEMORY=2g
+      - AWS_ACCESS_KEY_ID=admin
+      - AWS_SECRET_ACCESS_KEY=password
+      - AWS_REGION=ap-south-1
+
+  spark-worker-3:
+    image: bitnami/spark:latest
+    container_name: spark-worker-3
+    hostname: sw3.bdc.home
+    restart: unless-stopped
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.113  
+    environment:
+      - TZ=Asia/Kolkata
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://sm.bdc.home:7077
+      - SPARK_WORKER_CORES=2
+      - SPARK_WORKER_MEMORY=2g
+      - AWS_ACCESS_KEY_ID=admin
+      - AWS_SECRET_ACCESS_KEY=password
+      - AWS_REGION=ap-south-1
