@@ -1,3 +1,17 @@
+networks:
+  bdCluster:
+    name: bdCluster
+    driver: ipvlan
+    # external: true
+    driver_opts:
+      parent: ${ETHERNET_NAME}
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24
+          ip_range: 192.168.1.0/24
+          gateway: 192.168.1.1
+
+
 services:
   sm:
     image: bitnami/spark:latest
