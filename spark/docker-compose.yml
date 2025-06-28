@@ -18,6 +18,8 @@ services:
       - SPARK_EVENTLOG_ENABLED=true
       - SPARK_WORKER_CORES=2
       - SPARK_WORKER_MEMORY=4g
+    # volumes:
+    #   - ./spark_defaults.conf:/opt/spark/conf/spark_defaults.conf:z
 
   sw1:
     image: bitnami/spark:latest
