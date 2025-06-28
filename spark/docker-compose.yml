@@ -11,10 +11,9 @@ networks:
           ip_range: 192.168.1.0/24
           gateway: 192.168.1.1
 
-
 services:
   sm:
-    image: bitnami/spark:latest
+    image: spark:latest
     hostname: sm.bdc.home
     container_name: sm
     restart: unless-stopped
@@ -35,7 +34,7 @@ services:
       - ./spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf:z
 
   sw1:
-    image: bitnami/spark:latest
+    image: spark:latest
     container_name: sw1
     hostname: sw1.bdc.home
     restart: unless-stopped
@@ -53,7 +52,7 @@ services:
 
 
   sw2:
-    image: bitnami/spark:latest
+    image: spark:latest
     container_name: sw2
     hostname: sw2.bdc.home
     restart: unless-stopped
@@ -70,7 +69,7 @@ services:
       - ./spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf:z
 
   sw3:
-    image: bitnami/spark:latest
+    image: spark:latest
     container_name: sw3
     hostname: sw3.bdc.home
     restart: unless-stopped
