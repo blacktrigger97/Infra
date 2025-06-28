@@ -32,7 +32,7 @@ services:
       - SPARK_WORKER_CORES=2
       - SPARK_WORKER_MEMORY=8g
     volumes:
-      - ./spark_defaults.conf:/opt/bitnami/spark/conf/spark_defaults.conf:z
+      - ./spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf:z
 
   sw1:
     image: bitnami/spark:latest
@@ -49,7 +49,7 @@ services:
       - SPARK_WORKER_CORES=6
       - SPARK_WORKER_MEMORY=20g
     volumes:
-      - ./spark_defaults.conf:/opt/bitnami/spark/conf/spark_defaults.conf:z
+      - ./spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf:z
 
 
   sw2:
@@ -67,7 +67,7 @@ services:
       - SPARK_WORKER_CORES=6
       - SPARK_WORKER_MEMORY=20g
     volumes:
-      - ./spark_defaults.conf:/opt/bitnami/spark/conf/spark_defaults.conf:z
+      - ./spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf:z
 
   sw3:
     image: bitnami/spark:latest
@@ -84,4 +84,4 @@ services:
       - SPARK_WORKER_CORES=6
       - SPARK_WORKER_MEMORY=20g
     volumes:
-      - ./spark_defaults.conf:/opt/bitnami/spark/conf/spark_defaults.conf:z
+      - ./spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf:z
