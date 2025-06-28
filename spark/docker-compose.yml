@@ -13,7 +13,7 @@ networks:
 
 services:
   sm:
-    image: spark:latest
+    image: registry.bdc.home:5000/spark:latest
     hostname: sm.bdc.home
     container_name: sm
     restart: unless-stopped
@@ -34,7 +34,7 @@ services:
       - ./spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf:z
 
   sw1:
-    image: spark:latest
+    image: registry.bdc.home:5000/spark:latest
     container_name: sw1
     hostname: sw1.bdc.home
     restart: unless-stopped
@@ -52,7 +52,7 @@ services:
 
 
   sw2:
-    image: spark:latest
+    image: registry.bdc.home:5000/spark:latest
     container_name: sw2
     hostname: sw2.bdc.home
     restart: unless-stopped
@@ -69,7 +69,7 @@ services:
       - ./spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf:z
 
   sw3:
-    image: spark:latest
+    image: registry.bdc.home:5000/spark:latest
     container_name: sw3
     hostname: sw3.bdc.home
     restart: unless-stopped
