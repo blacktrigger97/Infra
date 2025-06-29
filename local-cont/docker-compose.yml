@@ -123,6 +123,7 @@ services:
       context: "../spark/"
       dockerfile: Dockerfile
       args:
+        - AWS_SPARK=${AWS_SPARK}
         - COMMON_POOL_VER=${COMMON_POOL_VER}
         - ICEBERG_SPARK_VER=${ICEBERG_SPARK_VER}
         - ICEBERG_VER=${ICEBERG_VER}
