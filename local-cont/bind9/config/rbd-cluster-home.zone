@@ -55,6 +55,7 @@ $ORIGIN 1.168.192.in-addr.arpa.
 111	IN	PTR	sw1
 112	IN	PTR	sw2
 113	IN	PTR	sw3
+114	IN	PTR	sw4
 201	IN	PTR	jupyter
 202	IN	PTR	etl
 203	IN	PTR	pystream
