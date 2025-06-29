@@ -49,7 +49,7 @@ services:
       - TZ=Asia/Kolkata
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://sm.bdc.home:7077
-      - SPARK_WORKER_CORES=6
+      - SPARK_WORKER_CORES=5
       - SPARK_WORKER_MEMORY=20g
       - SPARK_RPC_AUTHENTICATION_ENABLED=no
       - SPARK_RPC_ENCRYPTION_ENABLED=no
@@ -71,7 +71,7 @@ services:
       - TZ=Asia/Kolkata
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://sm.bdc.home:7077
-      - SPARK_WORKER_CORES=6
+      - SPARK_WORKER_CORES=5
       - SPARK_WORKER_MEMORY=20g
       - SPARK_RPC_AUTHENTICATION_ENABLED=no
       - SPARK_RPC_ENCRYPTION_ENABLED=no
@@ -92,7 +92,7 @@ services:
       - TZ=Asia/Kolkata
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://sm.bdc.home:7077
-      - SPARK_WORKER_CORES=6
+      - SPARK_WORKER_CORES=5
       - SPARK_WORKER_MEMORY=20g
       - SPARK_RPC_AUTHENTICATION_ENABLED=no
       - SPARK_RPC_ENCRYPTION_ENABLED=no
