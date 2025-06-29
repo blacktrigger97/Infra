@@ -27,7 +27,6 @@ services:
     environment:
       - TZ=Asia/Kolkata
       - SPARK_MODE=master
-      - SPARK_EVENTLOG_ENABLED=true
       - SPARK_WORKER_CORES=2
       - SPARK_WORKER_MEMORY=8g
     volumes:
