@@ -29,6 +29,7 @@ services:
       - SPARK_MODE=master
       - SPARK_WORKER_CORES=2
       - SPARK_WORKER_MEMORY=8g
+      - SPARK_METRICS_ENABLED=true
     volumes:
       - ./spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf:z
 
