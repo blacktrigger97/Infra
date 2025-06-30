@@ -1,4 +1,4 @@
-SELECT 'CREATE DATABASE nessie_gc' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'nessie')\gexec
+SELECT 'CREATE DATABASE nessie' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'nessie')\gexec
 
 SELECT 'CREATE DATABASE hue' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'hue')\gexec
 
