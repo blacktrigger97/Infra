@@ -68,4 +68,6 @@ echo -e "\n*****************************************"
 echo -e "*** Bucket creation process Completed ***"
 echo -e "*****************************************\n"
 
-sleep 600
+while true; do
+ sleep 1
+done
