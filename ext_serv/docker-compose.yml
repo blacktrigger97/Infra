@@ -39,7 +39,7 @@ services:
     #     - DOCKER_USR=${DOCKER_USR}
     #     - DOCKER_PASS=${DOCKER_PASS}
     #     - NESSIE_VER=${NESSIE_VER}
-    image: nessieprojectnessie/nessie:${NESSIE_VER}
+    image: projectnessie/nessie:${NESSIE_VER}
     container_name: nessie
     hostname: nessie.bdc.home
     restart: unless-stopped
