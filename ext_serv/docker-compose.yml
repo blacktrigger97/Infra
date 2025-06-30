@@ -54,7 +54,7 @@ services:
       - quarkus.datasource.username=${DOCKER_USR}
       - quarkus.datasource.password=${DOCKER_PASS}
       - quarkus.debug.print-startup-times=true
-      - quarkus.profile=dev
+      # - quarkus.profile=prod
       - quarkus.datasource.driver='org.postgresql.Driver'
       - quarkus.http.port=19120
       - quarkus.http.host=nessie.bdc.home
