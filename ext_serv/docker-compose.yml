@@ -54,7 +54,7 @@ services:
       - quarkus.datasource.username=${DOCKER_USR}
       - quarkus.datasource.password=${DOCKER_PASS}
       - quarkus.debug.print-startup-times=true
-      # - quarkus.profile=prod
+      - quarkus.profile=prod
       - quarkus.datasource.driver='org.postgresql.Driver'
       - quarkus.http.port=19120
       - quarkus.http.host=nessie.bdc.home
@@ -68,7 +68,7 @@ services:
       - nessie.catalog.service.s3.default-options.access-key=urn:nessie-secret:quarkus:nessie.catalog.secrets.access-key
       - nessie.catalog.secrets.access-key.name=admin
       - nessie.catalog.secrets.access-key.secret=password
-      - nessie.catalog.service.s3.default-options.region=ap-south-1
+      - nessie.catalog.service.s3.default-options.region=us-east-1
       - nessie.server.authentication.enabled=false
     depends_on:
       - postgresql 
