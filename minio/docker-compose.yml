@@ -22,7 +22,7 @@ x-minio-common: &minio-common
     TZ: Asia/Kolkata
     MINIO_ROOT_USER: admin
     MINIO_ROOT_PASSWORD: password
-    MINIO_REGION: ap-south-1
+    MINIO_REGION: us-east-1
   healthcheck:
     test: ["CMD", "mc", "ready", "local"]
     interval: 5s
