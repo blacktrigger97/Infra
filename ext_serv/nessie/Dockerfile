@@ -1,3 +1,5 @@
+ARG NESSIE_VER
+
 FROM projectnessie/nessie
 
 ARG DOCKER_USR

@@ -32,14 +32,14 @@ services:
       - ${LOCAL_DIR}docker/${PG_DB_DIR}:/var/lib/postgresql/data
 
   nessie:
-    build:
-      context: nessie
-      dockerfile: ${HOST_DIR}/ext_serv/nessie/Dockerfile
-      args:
-        - DOCKER_USR=${DOCKER_USR}
-        - DOCKER_PASS=${DOCKER_PASS}
-        - NESSIE_VER=${NESSIE_VER}
-    image: nessie
+    # build:
+    #   context: nessie
+    #   dockerfile: ${HOST_DIR}/ext_serv/nessie/Dockerfile
+    #   args:
+    #     - DOCKER_USR=${DOCKER_USR}
+    #     - DOCKER_PASS=${DOCKER_PASS}
+    #     - NESSIE_VER=${NESSIE_VER}
+    image: nessieprojectnessie/nessie:${NESSIE_VER}
     container_name: nessie
     hostname: nessie.bdc.home
     restart: unless-stopped
@@ -48,6 +48,28 @@ services:
         ipv4_address: 192.168.1.31
     ports:
       - 19120:19120
+    environment:
+      - quarkus.datasource.db-kind=postgresql
+      - quarkus.datasource.jdbc.max-size=16
+      - quarkus.datasource.username=${DOCKER_USR}
+      - quarkus.datasource.password=${DOCKER_PASS}
+      - quarkus.debug.print-startup-times=true
+      - quarkus.profile=dev
+      - quarkus.datasource.driver='org.postgresql.Driver'
+      - quarkus.http.port=19120
+      - quarkus.http.host=nessie.bdc.home
+      - quarkus.datasource.jdbc.url=jdbc:postgresql://postgresql.bdc.home:5432/nessie
+      - quarkus.oidc.enabled="false"
+      - nessie.version.store.type=JDBC
+      - nessie.catalog.default-warehouse=warehouse
+      - nessie.catalog.warehouses.warehouse.location=s3://warehouse/
+      - nessie.catalog.service.s3.default-options.endpoint=${MINIO_ENDPOINT}
+      - nessie.catalog.service.s3.default-options.path-style-access=true
+      - nessie.catalog.service.s3.default-options.access-key=urn:nessie-secret:quarkus:nessie.catalog.secrets.access-key
+      - nessie.catalog.secrets.access-key.name=admin
+      - nessie.catalog.secrets.access-key.secret=password
+      - nessie.catalog.service.s3.default-options.region=ap-south-1
+      - nessie.server.authentication.enabled=false
     depends_on:
       - postgresql 
 
