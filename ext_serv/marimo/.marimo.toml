@@ -1,5 +1,0 @@
-[display]
-cell_output = "below"
-
-[package_management]
-manager = "uv"
