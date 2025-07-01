@@ -48,10 +48,10 @@ services:
     volumes:
       - /shares/airflow:/root/airflow:z
 
-  airflow-m:
+  airflow:
     <<: *airflow-common
-    container_name: airflow-m
-    hostname: airflow-m.bdc.home
+    container_name: airflow
+    hostname: airflow.bdc.home
     entrypoint: ["/bin/sh", "/root/s_scripts/airflow-m.sh"]
     networks:
       bdCluster:
