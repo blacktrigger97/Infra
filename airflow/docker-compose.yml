@@ -24,6 +24,7 @@ services:
     build:
       dockerfile: Dockerfile
       args:
+        - PY_VER=${PY_VER}
         - AWS_SPARK=${AWS_SPARK}
         - COMMON_POOL_VER=${COMMON_POOL_VER}
         - ICEBERG_SPARK_VER=${ICEBERG_SPARK_VER}
