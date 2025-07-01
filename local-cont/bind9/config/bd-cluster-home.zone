@@ -29,7 +29,7 @@ worker4	    IN	A	192.168.1.14
 postgresql	IN	A	192.168.1.21
 nessie	    IN	A	192.168.1.31
 trino-co	IN	A	192.168.1.33
-airflow	    IN	A	192.168.1.34
+airflow-m	    IN	A	192.168.1.34
 kafka-sr	IN	A	192.168.1.35
 ksqldb	    IN	A	192.168.1.36
 kconcen	    IN	A	192.168.1.37
@@ -42,7 +42,6 @@ kafka-3	    IN	A	192.168.1.53
 name-res	IN	A	192.168.1.91
 nginx-lb    IN	A	192.168.1.91
 sm          IN	A	192.168.1.92
-airflow-m   IN  A   192.168.1.93
 data-node1	IN	A	192.168.1.101
 minio1	    IN	A	192.168.1.101
 data-node2	IN	A	192.168.1.102
