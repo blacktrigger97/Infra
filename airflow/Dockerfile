@@ -78,5 +78,3 @@ RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-avro_${SCALA_VERS
 # RUN wget https://repo1.maven.org/maven2/software/amazon/awssdk/bundle/${AWS_SPARK}/bundle-${AWS_SPARK}.jar -P /root/spark/jars/
 # RUN wget https://repo1.maven.org/maven2/software/amazon/awssdk/url-connection-client/${AWS_SPARK}/url-connection-client-${AWS_SPARK}.jar -P /root/spark/jars/
 
-
-ENTRYPOINT ["/root/s_scripts/air-flow.sh"]
