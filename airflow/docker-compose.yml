@@ -22,7 +22,6 @@ services:
 
   x-airflow-common: &airflow-common
     build:
-      context: ''
       dockerfile: Dockerfile
       args:
         - AWS_SPARK=${AWS_SPARK}
