@@ -42,9 +42,7 @@ kafka-3	    IN	A	192.168.1.53
 name-res	IN	A	192.168.1.91
 nginx-lb    IN	A	192.168.1.91
 sm          IN	A	192.168.1.92
-zookeeper-1	IN	A	192.168.1.95
-zookeeper-2	IN	A	192.168.1.96
-zookeeper-3	IN	A	192.168.1.97
+airflow-m   IN  A   192.168.1.93
 data-node1	IN	A	192.168.1.101
 minio1	    IN	A	192.168.1.101
 data-node2	IN	A	192.168.1.102
@@ -54,7 +52,9 @@ minio3	    IN	A	192.168.1.103
 sw1         IN	A	192.168.1.111
 sw2         IN	A	192.168.1.112
 sw3         IN	A	192.168.1.113
-sw4         IN	A	192.168.1.114
+airflow-w1  IN  A   192.168.1.121
+airflow-w2  IN  A   192.168.1.122
+airflow-w3  IN  A   192.168.1.123
 jupyter	    IN	A	192.168.1.201
 etl	        IN	A	192.168.1.202
 pystream	IN	A	192.168.1.203

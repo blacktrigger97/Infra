@@ -43,9 +43,7 @@ $ORIGIN 1.168.192.in-addr.arpa.
 91	IN	PTR	name-res
 91	IN	PTR	nginx-lb
 92	IN	PTR	sm
-95	IN	PTR	zookeeper-1
-96	IN	PTR	zookeeper-2
-97	IN	PTR	zookeeper-3
+93  IN  PTR airflow-m
 101	IN	PTR	data-node1
 101	IN	PTR	minio1
 102	IN	PTR	data-node2
@@ -55,7 +53,9 @@ $ORIGIN 1.168.192.in-addr.arpa.
 111	IN	PTR	sw1
 112	IN	PTR	sw2
 113	IN	PTR	sw3
-114	IN	PTR	sw4
+121 IN  PTR airflow-w1
+122 IN  PTR airflow-w2
+123 IN  PTR airflow-w3
 201	IN	PTR	jupyter
 202	IN	PTR	etl
 203	IN	PTR	pystream
