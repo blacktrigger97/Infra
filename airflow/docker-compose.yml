@@ -52,7 +52,7 @@ services:
     <<: *airflow-common
     container_name: airflow
     hostname: airflow.bdc.home
-    entrypoint: ["/bin/sh", "/root/s_scripts/airflow-m.sh"]
+    entrypoint: ["/bin/bash", "/root/s_scripts/airflow-m.sh"]
     networks:
       bdCluster:
         ipv4_address: 192.168.1.34
@@ -65,7 +65,7 @@ services:
     <<: *airflow-common
     container_name: airflow-w1
     hostname: airflow-w1.bdc.home
-    entrypoint: ["/bin/sh", "/root/s_scripts/airflow-w.sh"]
+    entrypoint: ["/bin/bash", "/root/s_scripts/airflow-w.sh"]
     networks:
       bdCluster:
         ipv4_address: 192.168.1.34
@@ -76,7 +76,7 @@ services:
     <<: *airflow-common
     container_name: airflow-w2
     hostname: airflow-w2.bdc.home
-    entrypoint: ["/bin/sh", "/root/s_scripts/airflow-w.sh"]
+    entrypoint: ["/bin/bash", "/root/s_scripts/airflow-w.sh"]
     networks:
       bdCluster:
         ipv4_address: 192.168.1.34
@@ -87,7 +87,7 @@ services:
     <<: *airflow-common
     container_name: airflow-w3
     hostname: airflow-w3.bdc.home
-    entrypoint: ["/bin/sh", "/root/s_scripts/airflow-w.sh"]
+    entrypoint: ["/bin/bash", "/root/s_scripts/airflow-w.sh"]
     networks:
       bdCluster:
         ipv4_address: 192.168.1.34
