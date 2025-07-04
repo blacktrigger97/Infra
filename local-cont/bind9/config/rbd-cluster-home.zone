@@ -22,7 +22,6 @@ $ORIGIN 1.168.192.in-addr.arpa.
 10	IN	PTR	minio-mc
 10	IN	PTR	secon-hist
 10  IN  PTR worker0
-9   IN  PTR worker1
 11  IN  PTR worker1
 12  IN  PTR worker2
 13  IN  PTR worker3
