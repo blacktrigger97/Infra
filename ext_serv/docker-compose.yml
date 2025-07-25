@@ -62,7 +62,7 @@ services:
       - quarkus.oidc.enabled="false"
       - nessie.version.store.type=JDBC
       - nessie.catalog.default-warehouse=warehouse
-      - nessie.catalog.warehouses.warehouse.location=s3://warehouse/
+      - nessie.catalog.warehouses.warehouse.location=s3a://warehouse/
       - nessie.catalog.service.s3.default-options.endpoint=${MINIO_ENDPOINT}
       - nessie.catalog.service.s3.default-options.path-style-access=true
       - nessie.catalog.service.s3.default-options.region=us-east-1
