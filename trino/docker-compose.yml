@@ -29,8 +29,6 @@ services:
       - ./trino/trino-co/etc:/etc/trino
       - ./trino/trino-co/catalog:/etc/trino/catalog
       # - /root/docker/trino/data:/data/trino
-    depends_on:
-      - nessie
 
   trino-wk1:
     image: "trinodb/trino:latest"
