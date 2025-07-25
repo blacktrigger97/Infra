@@ -1,7 +1,7 @@
 networks:
   bdCluster:
     name: bdCluster
-    # external: true
+    external: true
     driver: ipvlan
     driver_opts:
       parent: ${ETHERNET_NAME}
@@ -43,7 +43,7 @@ services:
       bdCluster:
         ipv4_address: 192.168.1.101
     volumes:
-      - ${LOCAL_DIR}docker/minio-objstrg1:/data
+      - ${LOCAL_DIR}docker/minio:/data
       # - data1-1:/data1
       # - data1-2:/data2
 
@@ -56,7 +56,7 @@ services:
       bdCluster:
         ipv4_address: 192.168.1.102
     volumes:
-      - ${LOCAL_DIR}docker/minio-objstrg2:/data
+      - ${LOCAL_DIR}docker/minio:/data
       # - data2-1:/data1
       # - data2-2:/data2
 
@@ -69,7 +69,7 @@ services:
       bdCluster:
         ipv4_address: 192.168.1.103
     volumes:
-      - ${LOCAL_DIR}docker/minio-objstrg3:/data
+      - ${LOCAL_DIR}docker/minio:/data
       # - data3-1:/data1
       # - data3-2:/data2
 

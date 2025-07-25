@@ -1,0 +1,86 @@
+networks:
+  bdCluster:
+    name: bdCluster
+    driver: ipvlan
+    external: true
+    driver_opts:
+      parent: ${ETHERNET_NAME}
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24
+          ip_range: 192.168.1.0/24
+          gateway: 192.168.1.1
+
+services:
+
+  trino-co:
+    image: "trinodb/trino:latest"
+    hostname: trino-co.bdc.home
+    container_name: trino-co
+    restart: unless-stopped
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.33
+    ports:
+      - 8081:8080
+    environment:
+      - TZ=Asia/Kolkata
+    volumes:
+      - ./trino/trino-co/etc:/etc/trino
+      - ./trino/trino-co/catalog:/etc/trino/catalog
+      # - /root/docker/trino/data:/data/trino
+    depends_on:
+      - nessie
+
+  trino-wk1:
+    image: "trinodb/trino:latest"
+    hostname: trino-wk1.bdc.home
+    container_name: trino-wk1
+    restart: unless-stopped
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.41
+    ports:
+      - 8081:8081
+    environment:
+      - TZ=Asia/Kolkata
+    volumes:
+      - ./trino/trino-wk/etc1:/etc/trino
+      - ./trino/trino-wk/catalog:/etc/trino/catalog
+      # - /root/docker/trino/data:/data/trino
+
+  trino-wk2:
+    image: "trinodb/trino:latest"
+    hostname: trino-wk2.bdc.home
+    container_name: trino-wk2
+    restart: unless-stopped
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.42
+    ports:
+      - 8081:8081
+    environment:
+      - TZ=Asia/Kolkata
+    volumes:
+      - ./trino/trino-wk/etc2:/etc/trino
+      - ./trino/trino-wk/catalog:/etc/trino/catalog
+      # - /root/docker/trino/data:/data/trino
+
+  trino-wk3:
+    image: "trinodb/trino:latest"
+    hostname: trino-wk3.bdc.home
+    container_name: trino-wk3
+    restart: unless-stopped
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.43
+    ports:
+      - 8081:8081
+    environment:
+      - TZ=Asia/Kolkata
+    volumes:
+      - ./trino/trino-wk/etc3:/etc/trino
+      - ./trino/trino-wk/catalog:/etc/trino/catalog
+      # - /root/docker/trino/data:/data/trino
+
+  
