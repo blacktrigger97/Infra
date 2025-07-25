@@ -73,6 +73,19 @@ services:
     depends_on:
       - postgresql 
 
+  hue-minio:
+    image: gethue/hue:latest
+    hostname: hue.bdc.home
+    container_name: hue
+    restart: unless-stopped
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.32
+    ports:
+      - 8888:8888
+    volumes:
+      - ./hue/hue_minio.ini:/usr/share/hue/desktop/conf/z-hue.ini
+
   marimo:
     build: 
       context: marimo
