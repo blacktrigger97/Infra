@@ -26,8 +26,8 @@ services:
     environment:
       - TZ=Asia/Kolkata
     volumes:
-      - ./trino/trino-co/etc:/etc/trino
-      - ./trino/trino-co/catalog:/etc/trino/catalog
+      - ./trino-co/etc:/etc/trino
+      - ./trino-co/catalog:/etc/trino/catalog
       # - /root/docker/trino/data:/data/trino
 
   trino-wk1:
@@ -43,8 +43,8 @@ services:
     environment:
       - TZ=Asia/Kolkata
     volumes:
-      - ./trino/trino-wk/etc1:/etc/trino
-      - ./trino/trino-wk/catalog:/etc/trino/catalog
+      - ./trino-wk/etc1:/etc/trino
+      - ./trino-wk/catalog:/etc/trino/catalog
       # - /root/docker/trino/data:/data/trino
 
   trino-wk2:
@@ -60,8 +60,8 @@ services:
     environment:
       - TZ=Asia/Kolkata
     volumes:
-      - ./trino/trino-wk/etc2:/etc/trino
-      - ./trino/trino-wk/catalog:/etc/trino/catalog
+      - ./trino-wk/etc2:/etc/trino
+      - ./trino-wk/catalog:/etc/trino/catalog
       # - /root/docker/trino/data:/data/trino
 
   trino-wk3:
@@ -77,8 +77,8 @@ services:
     environment:
       - TZ=Asia/Kolkata
     volumes:
-      - ./trino/trino-wk/etc3:/etc/trino
-      - ./trino/trino-wk/catalog:/etc/trino/catalog
+      - ./trino-wk/etc3:/etc/trino
+      - ./trino-wk/catalog:/etc/trino/catalog
       # - /root/docker/trino/data:/data/trino
 
   
