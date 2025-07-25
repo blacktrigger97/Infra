@@ -65,10 +65,10 @@ services:
       - nessie.catalog.warehouses.warehouse.location=s3://warehouse/
       - nessie.catalog.service.s3.default-options.endpoint=${MINIO_ENDPOINT}
       - nessie.catalog.service.s3.default-options.path-style-access=true
+      - nessie.catalog.service.s3.default-options.region=us-east-1
       - nessie.catalog.service.s3.default-options.access-key=urn:nessie-secret:quarkus:nessie.catalog.secrets.access-key
       - nessie.catalog.secrets.access-key.name=admin
       - nessie.catalog.secrets.access-key.secret=password
-      - nessie.catalog.service.s3.default-options.region=us-east-1
       - nessie.server.authentication.enabled=false
     depends_on:
       - postgresql 
