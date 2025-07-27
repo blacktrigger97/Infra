@@ -59,7 +59,7 @@ mc mb minio1/spark --ignore-existing
 mc mb minio1/tmp --ignore-existing
 if [ $? == 0 ];
 then
-  mc anonymous set public minio1/warehouse
+  mc anonymous set public minio1/warehouse/nessie
   mc anonymous set public minio1/spark
   mc anonymous set public minio1/tmp
 else
