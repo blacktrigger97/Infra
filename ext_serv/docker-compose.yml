@@ -87,7 +87,7 @@ services:
       - 8888:8888
     volumes:
       - ./hue/hue_minio.ini:/usr/share/hue/desktop/conf/z-hue.ini
-      - ./hue/hive-site.xml:/usr/share/hue/desktop/conf/hive-site.xml
+      - ./hue/core-site.xml:/usr/share/hue/desktop/conf/core-site.xml
 
   marimo:
     build: 
