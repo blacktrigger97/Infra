@@ -20,7 +20,11 @@
         <value>org.apache.hadoop.fs.s3a.S3AFileSystem</value>
     </property>
     <property>
-        <name>fs.s3a.region</name>
+        <name>fs.s3a.endpoint.region</name>
         <value>us-east-1</value>
+    </property>
+    <property>
+        <name>fs.s3a.connection.ssl.enabled</name>
+        <value>true</value>
     </property>
 </configuration>
