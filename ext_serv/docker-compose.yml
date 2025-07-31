@@ -14,14 +14,6 @@ networks:
 services:
 
   nessie:
-    # build:
-    #   context: nessie
-    #   dockerfile: ${HOST_DIR}/ext_serv/nessie/Dockerfile
-    #   args:
-    #     - DOCKER_USR=${DOCKER_USR}
-    #     - DOCKER_PASS=${DOCKER_PASS}
-    #     - NESSIE_VER=${NESSIE_VER}
-    # image: bitnami/nessie:${NESSIE_VER}
     image: ghcr.io/projectnessie/nessie:${NESSIE_VER}
     container_name: nessie
     hostname: nessie.bdc.home
@@ -67,7 +59,7 @@ services:
       - 8888:8888
     volumes:
       - ./hue/hue_minio.ini:/usr/share/hue/desktop/conf/z-hue.ini
-      - ./hue/core-site.xml:/usr/share/hue/desktop/conf/core-site.xml
+      - ./hue/core-site.xml:/usr/share/hue/desktop/conf/core-site.xml:z
 
   hue-hdfs:
     image: gethue/hue:latest
