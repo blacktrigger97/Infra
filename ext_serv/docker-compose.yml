@@ -13,24 +13,6 @@ networks:
 
 services:
 
-  postgresql:
-    image: postgres:${DB_VER}
-    container_name: postgresql
-    hostname: postgresql.bdc.home
-    cpus: 1
-    restart: unless-stopped
-    networks:
-      bdCluster:
-        ipv4_address: 192.168.1.21
-    environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=${DOCKER_PASS}
-    ports:
-      - 5432:5432
-    volumes: 
-      - ./postgresql/init.sql:/docker-entrypoint-initdb.d/init.sql
-      - ${LOCAL_DIR}docker/${PG_DB_DIR}:/var/lib/postgresql/data
-
   nessie:
     # build:
     #   context: nessie
@@ -72,8 +54,6 @@ services:
       - nessie.catalog.secrets.access-key.name=admin
       - nessie.catalog.secrets.access-key.secret=password
       - nessie.server.authentication.enabled=false
-    depends_on:
-      - postgresql 
 
   hue-minio:
     image: gethue/hue:latest
@@ -88,6 +68,17 @@ services:
     volumes:
       - ./hue/hue_minio.ini:/usr/share/hue/desktop/conf/z-hue.ini
       - ./hue/core-site.xml:/usr/share/hue/desktop/conf/core-site.xml
+
+  hue-hdfs:
+    image: gethue/hue:latest
+    hostname: hue.bdc.home
+    container_name: hue
+    restart: unless-stopped
+    network_mode: host
+    # ports:
+    #   - 8888:8888
+    volumes:
+      - ./hue/hue_hdfs.ini:/usr/share/hue/desktop/conf/z-hue.ini
 
   marimo:
     build: 
@@ -107,34 +98,6 @@ services:
     volumes:
       - /root/notebooks:/root/notebooks
 
-  questdb:
-    image: questdb/questdb
-    container_name: questdb
-    hostname: questdb.bdc.home
-    restart: unless-stopped
-    networks:
-      bdCluster:
-        ipv4_address: 192.168.1.37
-    ports:
-      - 9000:9000
-      - 9009:9009
-      - 8812:8812
-      - 9003:9003
-    volumes:
-      - ${LOCAL_DIR}${QS_DB_DIR}:/root/.questdb
-    environment:
-      - TZ=Asia/Kolkata
-      - QDB_LOG_W_STDOUT_LEVEL=ERROR
-      - QDB_LOG_W_FILE_LEVEL=ERROR
-      - QDB_LOG_W_HTTP_MIN_LEVEL=ERROR
-      - QDB_SHARED_WORKER_COUNT=8
-      - QDB_PG_USER=${DOCKER_USR}
-      - QDB_PG_PASSWORD=${DOCKER_PASS}
-      - QDB_TELEMETRY_ENABLED=false
-      - QDB_HTTP_ENABLED=true
-      - QDB_HTTP_BIND_TO=0.0.0.0:9000
-      - QDB_HTTP_SECURITY_READONLY=false
-  
   
   
 
