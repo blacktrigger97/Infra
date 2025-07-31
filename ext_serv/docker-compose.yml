@@ -74,9 +74,11 @@ services:
     hostname: hue.bdc.home
     container_name: hue
     restart: unless-stopped
-    network_mode: host
-    # ports:
-    #   - 8888:8888
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.32
+    ports:
+      - 8888:8888
     volumes:
       - ./hue/hue_hdfs.ini:/usr/share/hue/desktop/conf/z-hue.ini
 

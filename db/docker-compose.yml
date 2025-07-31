@@ -58,22 +58,7 @@ services:
       - QDB_HTTP_ENABLED=true
       - QDB_HTTP_BIND_TO=0.0.0.0:9000
       - QDB_HTTP_SECURITY_READONLY=false
-  
-  redis:
-    image: redis:latest
-    hostname: redis.bdc.home
-    container_name: redis
-    restart: unless-stopped
-    network_mode: host
-    # ports:
-    #   - 6379:6379
-    environment:
-      - TZ=Asia/Kolkata
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 5s
-      timeout: 30s
-      retries: 50
+
   
 
   

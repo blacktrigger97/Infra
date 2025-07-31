@@ -69,7 +69,25 @@ services:
       - ${LOCAL_DIR}docker/${SECONDARY_NAMENODE_DIR}:${DOCKER_DIR}${SECONDARY_NAMENODE_DIR}
       # - ${DOCKER_DIR}logs/secondary:${DOCKER_DIR}logs/hadoop
       - ${DOCKER_DIR}hadoop:${DOCKER_DIR}hadoop:ro
-      - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro  
+      - ${DOCKER_DIR}spark:${DOCKER_DIR}spark:ro
+
+  redis:
+    image: redis:latest
+    hostname: redis.bdc.home
+    container_name: redis
+    restart: unless-stopped
+    network_mode: host
+    # ports:
+    #   - 6379:6379
+    environment:
+      - TZ=Asia/Kolkata
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 30s
+      retries: 50
+
+  
 
   spark:
     build:
