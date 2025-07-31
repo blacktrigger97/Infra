@@ -75,6 +75,3 @@ RUN wget https://repo1.maven.org/maven2/org/apache/commons/commons-pool2/${COMMO
 RUN wget https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/${KAFKA_CLIENT_VER}/kafka-clients-${KAFKA_CLIENT_VER}.jar -P /root/spark/jars/
 RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-token-provider-kafka-${SPARK_SQL_KAFKA_VER}_${SCALA_VERSION}/${SPARK_VERSION}/spark-token-provider-kafka-${SPARK_SQL_KAFKA_VER}_${SCALA_VERSION}-${SPARK_VERSION}.jar -P /root/spark/jars/
 RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-avro_${SCALA_VERSION}/${SPARK_VERSION}/spark-avro_${SCALA_VERSION}-${SPARK_VERSION}.jar -P /root/spark/jars/
-# RUN wget https://repo1.maven.org/maven2/software/amazon/awssdk/bundle/${AWS_SPARK}/bundle-${AWS_SPARK}.jar -P /root/spark/jars/
-# RUN wget https://repo1.maven.org/maven2/software/amazon/awssdk/url-connection-client/${AWS_SPARK}/url-connection-client-${AWS_SPARK}.jar -P /root/spark/jars/
-
