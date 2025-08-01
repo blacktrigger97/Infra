@@ -29,11 +29,9 @@ x-minio-common: &minio-common
     timeout: 5s
     retries: 5
 
-# starts 4 docker containers running minio server instances.
 # using nginx reverse proxy, load balancing, you can access
 # it through port 9000.
 services:    
-
   minio1:
     <<: *minio-common
     hostname: minio1.bdc.home
@@ -44,8 +42,6 @@ services:
         ipv4_address: 192.168.1.101
     volumes:
       - ${LOCAL_DIR}docker/minio:/data
-      # - data1-1:/data1
-      # - data1-2:/data2
 
   minio2:
     <<: *minio-common
@@ -57,8 +53,6 @@ services:
         ipv4_address: 192.168.1.102
     volumes:
       - ${LOCAL_DIR}docker/minio:/data
-      # - data2-1:/data1
-      # - data2-2:/data2
 
   minio3:
     <<: *minio-common
@@ -70,20 +64,6 @@ services:
         ipv4_address: 192.168.1.103
     volumes:
       - ${LOCAL_DIR}docker/minio:/data
-      # - data3-1:/data1
-      # - data3-2:/data2
-
-  # minio4:
-  #   <<: *minio-common
-  #   hostname: minio4
-  #   volumes:
-  #     - data4-1:/data1
-  #     - data4-2:/data2
-    # depends_on:
-      # - minio1
-      # - minio2
-      # - minio3
-      # - minio4
   
   nginx-lb:
     image: nginx:1.19.2-alpine
@@ -101,14 +81,3 @@ services:
       - "9000:9000"
       - "9001:9001"
 
-## By default this config uses default local driver,
-## For custom volumes replace with volume driver configuration.
-# volumes:
-#   data1-1:
-#   data1-2:
-#   data2-1:
-#   data2-2:
-#   data3-1:
-#   data3-2:
-#   data4-1:
-#   data4-2:
