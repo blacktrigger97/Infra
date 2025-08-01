@@ -27,5 +27,5 @@ services:
       KAFKA_CFG_RETENTION_BYTES: 524288000
       CLUSTER_ID: 'MkU3OEVBNTcwNTJENDM2Qk'
     volumes:
-      - ${LOCAL_DIR}docker/kafka/data:/var/lib/kafka/data
-      - ${LOCAL_DIR}docker/kafka/metadata:/var/lib/kafka/metadata
+      - ${LOCAL_DIR}docker/kafka/data:/var/lib/kafka/data:z
+      - ${LOCAL_DIR}docker/kafka/metadata:/var/lib/kafka/metadata:z
