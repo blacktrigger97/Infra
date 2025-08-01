@@ -1,6 +1,7 @@
 services:
   kafka:
     image: confluentinc/cp-kafka:latest
+    user: root
     restart: unless-stopped
     ports:
       - 9092:9092
@@ -22,7 +23,7 @@ services:
       KAFKA_NUM_PARTITIONS: 9
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
       KAFKA_LOG_DIRS: /var/lib/kafka/data
-      KAFKA_LOG_RETENTION_MS: 345600000
+      KAFKA_LOG_RETENTION_HOURS: 168
       KAFKA_LOG_RETENTION_CHECK_INTERVAL_MS: 5000
       KAFKA_CFG_RETENTION_BYTES: 524288000
       CLUSTER_ID: 'MkU3OEVBNTcwNTJENDM2Qk'
