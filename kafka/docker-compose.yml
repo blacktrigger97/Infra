@@ -13,41 +13,11 @@ networks:
 
 services:
 
-  x-kafka-common: &kafka-common
-    image: confluentinc/cp-kafka:latest
-    restart: unless-stopped
-    ports:
-      - 9092:9092
-      - 29092:29092
-      - 29093:29093
-    environment:
-      TZ: "Asia/Kolkata"
-      KAFKA_KRAFT_MODE: "true"
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT'
-      KAFKA_LISTENERS: 'INTERNAL://kafka-1.bdc.home:29092,CONTROLLER://kafka-1.bdc.home:29093,EXTERNAL://kafka-1.bdc.home:9092'
-      KAFKA_INTER_BROKER_LISTENER_NAME: 'INTERNAL'
-      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
-      KAFKA_PROCESS_ROLES: 'broker,controller'
-      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@kafka-1.bdc.home:29093,2@kafka-2.bdc.home:29093,3@kafka-3.bdc.home:29093'
-      KAFKA_LOG4J_LOGGERS: 'kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO'
-      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
-      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 3
-      KAFKA_NUM_PARTITIONS: 9
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
-      KAFKA_LOG_DIRS: /var/lib/kafka/data
-      KAFKA_LOG_RETENTION_MS: 345600000
-      KAFKA_LOG_RETENTION_CHECK_INTERVAL_MS: 5000
-      KAFKA_CFG_RETENTION_BYTES: 524288000
-      CLUSTER_ID: 'MkU3OEVBNTcwNTJENDM2Qk'
-    volumes:
-      - ${LOCAL_DIR}docker/kafka/data:/var/lib/kafka/data
-      - ${LOCAL_DIR}docker/kafka/metadata:/var/lib/kafka/metadata
-
-
   kafka-1:
-    <<: *kafka-common
-    image: confluentinc/cp-kafka:latest
+    extends:
+      file: common.yml
+      service: kafka
+    # image: confluentinc/cp-kafka:latest
     hostname: kafka-1.bdc.home
     container_name: kafka-1
     # restart: unless-stopped
@@ -82,7 +52,9 @@ services:
       # CLUSTER_ID: 'MkU3OEVBNTcwNTJENDM2Qk'
 
   kafka-2:
-    <<: *kafka-common
+    extends:
+      file: common.yml
+      service: kafka
     # image: confluentinc/cp-kafka:latest
     hostname: kafka-2.bdc.home
     container_name: kafka-2
@@ -118,7 +90,9 @@ services:
       # CLUSTER_ID: 'MkU3OEVBNTcwNTJENDM2Qk'
 
   kafka-3:
-    <<: *kafka-common
+    extends:
+      file: common.yml
+      service: kafka
     # image: confluentinc/cp-kafka:latest
     hostname: kafka-3.bdc.home
     container_name: kafka-3
