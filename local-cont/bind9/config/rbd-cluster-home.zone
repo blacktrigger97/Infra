@@ -33,6 +33,7 @@ $ORIGIN 1.168.192.in-addr.arpa.
 35	IN	PTR	kafka-sr
 36	IN	PTR	ksqldb
 37	IN	PTR	kconcen
+38	IN	PTR	kafka-rest
 41	IN	PTR	trino-wk1
 42	IN	PTR	trino-wk2
 43	IN	PTR	trino-wk3
