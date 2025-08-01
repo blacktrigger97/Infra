@@ -57,6 +57,7 @@ services:
       - SPARK_SSL_ENABLED=no
     volumes:
       - ./spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf:z
+      - ${LOCAL_DIR}docker/spark/extraJars:/opt/bitnami/spark/extraJars:z
 
 
   sw2:
@@ -79,6 +80,7 @@ services:
       - SPARK_SSL_ENABLED=no
     volumes:
       - ./spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf:z
+      - ${LOCAL_DIR}docker/spark/extraJars:/opt/bitnami/spark/extraJars:z
 
   sw3:
     image: registry.bdc.home:5000/spark:latest
@@ -100,3 +102,4 @@ services:
       - SPARK_SSL_ENABLED=no
     volumes:
       - ./spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf:z
+      - ${LOCAL_DIR}docker/spark/extraJars:/opt/bitnami/spark/extraJars:z
