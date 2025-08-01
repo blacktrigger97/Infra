@@ -12,6 +12,24 @@ networks:
           gateway: 192.168.1.1
 
 services:
+
+  spark:
+    build:
+      context: "../spark/"
+      dockerfile: Dockerfile
+      args:
+        - AWS_SPARK=${AWS_SPARK}
+        - COMMON_POOL_VER=${COMMON_POOL_VER}
+        - ICEBERG_SPARK_VER=${ICEBERG_SPARK_VER}
+        - ICEBERG_VER=${ICEBERG_VER}
+        - KAFKA_CLIENT_VER=${KAFKA_CLIENT_VER}
+        - NESSIE_SPARK_VER=${NESSIE_SPARK_VER}
+        - NESSIE_VER=${NESSIE_VER}
+        - SCALA_VERSION=${SCALA_VERSION}
+        - SPARK_VERSION=${SPARK_VERSION}
+        - SPARK_SQL_KAFKA_VER=${SPARK_SQL_KAFKA_VER}
+    image: spark
+    
   sm:
     image: registry.bdc.home:5000/spark:latest
     hostname: sm.bdc.home
