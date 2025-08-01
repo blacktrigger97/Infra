@@ -21,7 +21,7 @@ x-minio-common: &minio-common
   environment:
     TZ: Asia/Kolkata
     MINIO_ROOT_USER: admin
-    MINIO_ROOT_PASSWORD: password
+    MINIO_ROOT_PASSWORD: ${DOCKER_PASS}
     MINIO_REGION: us-east-1
   healthcheck:
     test: ["CMD", "mc", "ready", "local"]

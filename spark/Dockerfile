@@ -17,6 +17,7 @@ USER root
 RUN install_packages curl
 USER 1001
 RUN mkdir /opt/bitnami/spark/extraJars
+RUN touch /opt/bitnami/spark/conf/hadoop-metrics2-s3a-file-system.properties
 # RUN curl https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime-${ICEBERG_SPARK_VER}_${SCALA_VERSION}/${ICEBERG_VER}/iceberg-spark-runtime-${ICEBERG_SPARK_VER}_${SCALA_VERSION}-${ICEBERG_VER}.jar --output /opt/bitnami/spark/jars/iceberg-spark-runtime-${ICEBERG_SPARK_VER}_${SCALA_VERSION}-${ICEBERG_VER}.jar
 # RUN curl https://repo.maven.apache.org/maven2/org/projectnessie/nessie-integrations/nessie-spark-extensions-${NESSIE_SPARK_VER}_${SCALA_VERSION}/${NESSIE_VER}/nessie-spark-extensions-${NESSIE_SPARK_VER}_${SCALA_VERSION}-${NESSIE_VER}.jar --output /opt/bitnami/spark/jars/nessie-spark-extensions-${NESSIE_SPARK_VER}_${SCALA_VERSION}-${NESSIE_VER}.jar
 # RUN curl https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-${SPARK_SQL_KAFKA_VER}_${SCALA_VERSION}/${SPARK_VERSION}/spark-sql-kafka-${SPARK_SQL_KAFKA_VER}_${SCALA_VERSION}-${SPARK_VERSION}.jar --output /opt/bitnami/spark/jars/spark-sql-kafka-${SPARK_SQL_KAFKA_VER}_${SCALA_VERSION}-${SPARK_VERSION}.jar

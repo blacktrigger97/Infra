@@ -44,7 +44,7 @@ services:
       - nessie.catalog.service.s3.default-options.region=us-east-1
       - nessie.catalog.service.s3.default-options.access-key=urn:nessie-secret:quarkus:nessie.catalog.secrets.access-key
       - nessie.catalog.secrets.access-key.name=admin
-      - nessie.catalog.secrets.access-key.secret=password
+      - nessie.catalog.secrets.access-key.secret=${DOCKER_PASS}
       - nessie.server.authentication.enabled=false
 
   hue-minio:
