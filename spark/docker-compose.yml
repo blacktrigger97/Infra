@@ -45,8 +45,6 @@ services:
     environment:
       - TZ=Asia/Kolkata
       - SPARK_MODE=master
-      - SPARK_WORKER_CORES=2
-      - SPARK_WORKER_MEMORY=8g
       - SPARK_METRICS_ENABLED=true
       - SPARK_RPC_AUTHENTICATION_ENABLED=no
       - SPARK_RPC_ENCRYPTION_ENABLED=no
@@ -67,8 +65,8 @@ services:
       - TZ=Asia/Kolkata
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://sm.bdc.home:7077
-      - SPARK_WORKER_CORES=5
-      - SPARK_WORKER_MEMORY=20g
+      - SPARK_WORKER_CORES=4
+      - SPARK_WORKER_MEMORY=16g
       - SPARK_RPC_AUTHENTICATION_ENABLED=no
       - SPARK_RPC_ENCRYPTION_ENABLED=no
       - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
@@ -90,8 +88,8 @@ services:
       - TZ=Asia/Kolkata
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://sm.bdc.home:7077
-      - SPARK_WORKER_CORES=5
-      - SPARK_WORKER_MEMORY=20g
+      - SPARK_WORKER_CORES=4
+      - SPARK_WORKER_MEMORY=16g
       - SPARK_RPC_AUTHENTICATION_ENABLED=no
       - SPARK_RPC_ENCRYPTION_ENABLED=no
       - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
@@ -112,8 +110,8 @@ services:
       - TZ=Asia/Kolkata
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://sm.bdc.home:7077
-      - SPARK_WORKER_CORES=5
-      - SPARK_WORKER_MEMORY=20g
+      - SPARK_WORKER_CORES=4
+      - SPARK_WORKER_MEMORY=16g
       - SPARK_RPC_AUTHENTICATION_ENABLED=no
       - SPARK_RPC_ENCRYPTION_ENABLED=no
       - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
