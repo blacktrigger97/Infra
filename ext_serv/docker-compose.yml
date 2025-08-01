@@ -186,7 +186,7 @@ services:
     image: minio/mc:latest
     hostname: minio-mc.bdc.home
     container_name: minio-mc
-    # restart: unless-stopped
+    restart: unless-stopped
     network_mode: host
     entrypoint: ["/bin/bash", "/init.sh"]
     volumes:
