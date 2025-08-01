@@ -133,7 +133,6 @@ services:
         - DOCKER_PASS=${DOCKER_PASS}
         - DOCKER_DIR=${DOCKER_DIR}
         - AIRFLOW_VER=${AIRFLOW_VER}
-        # - AIRFLOW_CLIENT_VER=${AIRFLOW_CLIENT_VER}
         - SPARK_VERSION=${SPARK_VERSION}
     image: hdc
 
