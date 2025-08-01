@@ -12,120 +12,50 @@ networks:
           gateway: 192.168.1.1
 
 services:
-
   kafka-1:
     extends:
       file: common.yml
       service: kafka
-    # image: confluentinc/cp-kafka:latest
     hostname: kafka-1.bdc.home
     container_name: kafka-1
-    # restart: unless-stopped
     networks:
       bdCluster:
         ipv4_address: 192.168.1.51
-    # ports:
-    #   - 9092:9092
-    #   - 29092:29092
-    #   - 29093:29093
     environment:
-      # KAFKA_KRAFT_MODE: "true"
       KAFKA_NODE_ID: 1
-      # KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT'
       KAFKA_LISTENERS: 'INTERNAL://kafka-1.bdc.home:29092,CONTROLLER://kafka-1.bdc.home:29093,EXTERNAL://kafka-1.bdc.home:9092'
       KAFKA_ADVERTISED_LISTENERS: 'EXTERNAL://kafka-1.bdc.home:9092,INTERNAL://kafka-1.bdc.home:29092'
       KAFKA_ADVERTISED_HOST_NAME: 'kafka-1.bdc.home'
-      # KAFKA_INTER_BROKER_LISTENER_NAME: 'INTERNAL'
-      # KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
-      # KAFKA_PROCESS_ROLES: 'broker,controller'
-      # KAFKA_CONTROLLER_QUORUM_VOTERS: '1@kafka-1.bdc.home:29093,2@kafka-2.bdc.home:29093,3@kafka-3.bdc.home:29093'
-      # KAFKA_LOG4J_LOGGERS: 'kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO'
-      # KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
-      # KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
-      # KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 3
-      # KAFKA_NUM_PARTITIONS: 9
-      # KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
-      # KAFKA_LOG_DIRS: /var/lib/kafka/data
-      # KAFKA_LOG_RETENTION_MS: 345600000
-      # KAFKA_LOG_RETENTION_CHECK_INTERVAL_MS: 5000
-      # KAFKA_CFG_RETENTION_BYTES: 524288000
-      # CLUSTER_ID: 'MkU3OEVBNTcwNTJENDM2Qk'
 
   kafka-2:
     extends:
       file: common.yml
       service: kafka
-    # image: confluentinc/cp-kafka:latest
     hostname: kafka-2.bdc.home
     container_name: kafka-2
-    # restart: unless-stopped
     networks:
       bdCluster:
         ipv4_address: 192.168.1.52
-    # ports:
-    #   - 9092:9092
-    #   - 29092:29092
-    #   - 29093:29093
     environment:
-      # KAFKA_KRAFT_MODE: "true"
       KAFKA_NODE_ID: 2
-      # KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT'
       KAFKA_LISTENERS: 'INTERNAL://kafka-2.bdc.home:29092,CONTROLLER://kafka-2.bdc.home:29093,EXTERNAL://kafka-2.bdc.home:9092'
       KAFKA_ADVERTISED_LISTENERS: 'EXTERNAL://kafka-2.bdc.home:9092,INTERNAL://kafka-2.bdc.home:29092'
       KAFKA_ADVERTISED_HOST_NAME: 'kafka-2.bdc.home'
-      # KAFKA_INTER_BROKER_LISTENER_NAME: 'INTERNAL'
-      # KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
-      # KAFKA_PROCESS_ROLES: 'broker,controller'
-      # KAFKA_CONTROLLER_QUORUM_VOTERS: '1@kafka-1.bdc.home:29093,2@kafka-2.bdc.home:29093,3@kafka-3.bdc.home:29093'
-      # KAFKA_LOG4J_LOGGERS: 'kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO'
-      # KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
-      # KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
-      # KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 3
-      # KAFKA_NUM_PARTITIONS: 9
-      # KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
-      # KAFKA_LOG_DIRS: /var/lib/kafka/data
-      # KAFKA_LOG_RETENTION_MS: 345600000
-      # KAFKA_LOG_RETENTION_CHECK_INTERVAL_MS: 5000
-      # KAFKA_CFG_RETENTION_BYTES: 524288000
-      # CLUSTER_ID: 'MkU3OEVBNTcwNTJENDM2Qk'
 
   kafka-3:
     extends:
       file: common.yml
       service: kafka
-    # image: confluentinc/cp-kafka:latest
     hostname: kafka-3.bdc.home
     container_name: kafka-3
-    # restart: unless-stopped
     networks:
       bdCluster:
         ipv4_address: 192.168.1.53
-    # ports:
-    #   - 9092:9092
-    #   - 29092:29092
-    #   - 29093:29093
     environment:
-      # KAFKA_KRAFT_MODE: "true"
       KAFKA_NODE_ID: 3
-      # KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT'
       KAFKA_LISTENERS: 'INTERNAL://kafka-3.bdc.home:29092,CONTROLLER://kafka-3.bdc.home:29093,EXTERNAL://kafka-3.bdc.home:9092'
       KAFKA_ADVERTISED_LISTENERS: 'EXTERNAL://kafka-3.bdc.home:9092,INTERNAL://kafka-3.bdc.home:29092'
-      KAFKA_ADVERTISED_HOST_NAME: 'kafka-3.bdc.home'
-      # KAFKA_INTER_BROKER_LISTENER_NAME: 'INTERNAL'
-      # KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
-      # KAFKA_PROCESS_ROLES: 'broker,controller'
-      # KAFKA_CONTROLLER_QUORUM_VOTERS: '1@kafka-1.bdc.home:29093,2@kafka-2.bdc.home:29093,3@kafka-3.bdc.home:29093'
-      # KAFKA_LOG4J_LOGGERS: 'kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO'
-      # KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
-      # KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
-      # KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 3
-      # KAFKA_NUM_PARTITIONS: 9
-      # KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
-      # KAFKA_LOG_DIRS: /var/lib/kafka/data
-      # KAFKA_LOG_RETENTION_MS: 345600000
-      # KAFKA_LOG_RETENTION_CHECK_INTERVAL_MS: 5000
-      # KAFKA_CFG_RETENTION_BYTES: 524288000
-      # CLUSTER_ID: 'MkU3OEVBNTcwNTJENDM2Qk'        
+      KAFKA_ADVERTISED_HOST_NAME: 'kafka-3.bdc.home'      
 
   kafka-sr:
     image: confluentinc/cp-schema-registry:latest
@@ -172,7 +102,6 @@ services:
     environment:
       CONTROL_CENTER_BOOTSTRAP_SERVERS: kafka-1.bdc.home:9092,kafka-2.bdc.home:9092,kafka-3.bdc.home:9092
       # CONTROL_CENTER_CONNECT_CONNECT-DEFAULT_CLUSTER: 'connect:8083'
-      # CONTROL_CENTER_CONNECT_HEALTHCHECK_ENDPOINT: '/connectors'
       CONTROL_CENTER_KSQL_KSQLDB1_URL: http://ksqldb.bdc.home:8088
       CONTROL_CENTER_SCHEMA_REGISTRY_URL: http://kafka-sr.bdc.home:8081
       CONTROL_CENTER_REPLICATION_FACTOR: 1
