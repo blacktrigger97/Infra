@@ -55,6 +55,7 @@ airflow-w1  IN  A   192.168.1.121
 airflow-w2  IN  A   192.168.1.122
 airflow-w3  IN  A   192.168.1.123
 jupyter	    IN	A	192.168.1.201
+marimo	    IN	A	192.168.1.201
 etl	        IN	A	192.168.1.202
 pystream	IN	A	192.168.1.203
 airflow-dev	IN	A	192.168.1.204
