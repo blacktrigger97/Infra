@@ -55,8 +55,8 @@ echo -e "\n*****************************************"
 echo -e "****** Started Bucket creation process ******"
 echo -e "*****************************************\n"
 mc mb minio1/warehouse/nessie --ignore-existing
-mc mb minio1/spark --ignore-existing
-mc mb minio1/tmp --ignore-existing
+mc mb minio1/spark/logs --ignore-existing
+mc mb minio1/tmp/kafka/ --ignore-existing
 if [ $? == 0 ];
 then
   mc anonymous set public minio1/warehouse/nessie
