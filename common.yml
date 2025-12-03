@@ -1,5 +1,5 @@
 volumes:
-  cifs-volume-spark:
+  cifs-volume:
     driver_opts:
       type: cifs
       o: nounix,rw
@@ -48,4 +48,4 @@ services:
       - SPARK_SSL_ENABLED=no
     volumes:
       - ./spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf:z
-      - cifs-volume-spark:/opt/bitnami/spark/extraJars:z
+      - cifs-volume:/opt/bitnami/spark/extraJars:z
