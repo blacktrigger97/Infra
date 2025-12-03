@@ -1,3 +1,10 @@
+volumes:
+  cifs-volume-spark:
+    driver_opts:
+      type: cifs
+      o: nounix,rw
+      device: //worker1.bdc.home/extraJars
+
 services:
   kafka:
     image: confluentinc/cp-kafka:latest
