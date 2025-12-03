@@ -14,7 +14,7 @@ networks:
 services:
   kafka-1:
     extends:
-      file: common.yml
+      file: ../common.yml
       service: kafka
     hostname: kafka-1.bdc.home
     container_name: kafka-1
@@ -29,7 +29,7 @@ services:
 
   kafka-2:
     extends:
-      file: common.yml
+      file: ../common.yml
       service: kafka
     hostname: kafka-2.bdc.home
     container_name: kafka-2
@@ -44,7 +44,7 @@ services:
 
   kafka-3:
     extends:
-      file: common.yml
+      file: ../common.yml
       service: kafka
     hostname: kafka-3.bdc.home
     container_name: kafka-3

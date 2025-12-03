@@ -12,7 +12,7 @@ networks:
           gateway: 192.168.1.1
 
 volumes:
-  cifs-volume:
+  cifs-volume-airflow:
     driver_opts:
       type: cifs
       o: nounix,rw
@@ -72,7 +72,7 @@ services:
     ports:
       - 8793:8793
     volumes:
-      - cifs-volume:/root/airflow:z
+      - cifs-volume-airflow:/root/airflow:z
 
   airflow-w2:
     <<: *airflow-common
@@ -85,7 +85,7 @@ services:
     ports:
       - 8793:8793
     volumes:
-      - cifs-volume:/root/airflow:z
+      - cifs-volume-airflow:/root/airflow:z
 
   airflow-w3:
     <<: *airflow-common
@@ -98,4 +98,4 @@ services:
     ports:
       - 8793:8793
     volumes:
-      - cifs-volume:/root/airflow:z
+      - cifs-volume-airflow:/root/airflow:z

@@ -11,30 +11,27 @@ networks:
           ip_range: 192.168.1.0/24
           gateway: 192.168.1.1
 
+volumes:
+  cifs-volume-spark:
+    driver_opts:
+      type: cifs
+      o: nounix,rw
+      device: //worker1.bdc.home/extraJars
+
 services:
 
-  spark:
+  sparkimage:
     build:
       context: "../spark/"
       dockerfile: Dockerfile
-      args:
-        - AWS_SPARK=${AWS_SPARK}
-        - COMMON_POOL_VER=${COMMON_POOL_VER}
-        - ICEBERG_SPARK_VER=${ICEBERG_SPARK_VER}
-        - ICEBERG_VER=${ICEBERG_VER}
-        - KAFKA_CLIENT_VER=${KAFKA_CLIENT_VER}
-        - NESSIE_SPARK_VER=${NESSIE_SPARK_VER}
-        - NESSIE_VER=${NESSIE_VER}
-        - SCALA_VERSION=${SCALA_VERSION}
-        - SPARK_VERSION=${SPARK_VERSION}
-        - SPARK_SQL_KAFKA_VER=${SPARK_SQL_KAFKA_VER}
     image: spark
     
   sm:
-    image: registry.bdc.home:5000/spark:latest
+    extends:
+      file: ../common.yml
+      service: spark
     hostname: sm.bdc.home
     container_name: sm
-    restart: unless-stopped
     networks:
       bdCluster:
         ipv4_address: 192.168.1.92      
@@ -43,79 +40,53 @@ services:
       - "9090:8080"
       - "7077:7077"
     environment:
-      - TZ=Asia/Kolkata
       - SPARK_MODE=master
+      - SPARK_MASTER_CORES=4
+      - SPARK_MASTER_MEMORY=8g
       - SPARK_METRICS_ENABLED=true
-      - SPARK_RPC_AUTHENTICATION_ENABLED=no
-      - SPARK_RPC_ENCRYPTION_ENABLED=no
-      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
-      - SPARK_SSL_ENABLED=no
-    volumes:
-      - ./spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf:z
 
   sw1:
-    image: registry.bdc.home:5000/spark:latest
+    extends:
+      file: ../common.yml
+      service: spark
     container_name: sw1
     hostname: sw1.bdc.home
-    restart: unless-stopped
     networks:
       bdCluster:
         ipv4_address: 192.168.1.111  
     environment:
-      - TZ=Asia/Kolkata
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://sm.bdc.home:7077
-      - SPARK_WORKER_CORES=4
-      - SPARK_WORKER_MEMORY=16g
-      - SPARK_RPC_AUTHENTICATION_ENABLED=no
-      - SPARK_RPC_ENCRYPTION_ENABLED=no
-      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
-      - SPARK_SSL_ENABLED=no
-    volumes:
-      - ./spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf:z
-      - ${LOCAL_DIR}docker/spark/extraJars:/opt/bitnami/spark/extraJars:z
+      - SPARK_WORKER_CORES=6
+      - SPARK_WORKER_MEMORY=20g
 
 
   sw2:
-    image: registry.bdc.home:5000/spark:latest
+    extends:
+      file: ../common.yml
+      service: spark
     container_name: sw2
     hostname: sw2.bdc.home
-    restart: unless-stopped
     networks:
       bdCluster:
         ipv4_address: 192.168.1.112  
     environment:
-      - TZ=Asia/Kolkata
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://sm.bdc.home:7077
-      - SPARK_WORKER_CORES=4
-      - SPARK_WORKER_MEMORY=16g
-      - SPARK_RPC_AUTHENTICATION_ENABLED=no
-      - SPARK_RPC_ENCRYPTION_ENABLED=no
-      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
-      - SPARK_SSL_ENABLED=no
-    volumes:
-      - ./spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf:z
-      - ${LOCAL_DIR}docker/spark/extraJars:/opt/bitnami/spark/extraJars:z
+      - SPARK_WORKER_CORES=6
+      - SPARK_WORKER_MEMORY=20g
 
   sw3:
-    image: registry.bdc.home:5000/spark:latest
+    extends:
+      file: ../common.yml
+      service: spark
     container_name: sw3
     hostname: sw3.bdc.home
-    restart: unless-stopped
     networks:
       bdCluster:
         ipv4_address: 192.168.1.113  
     environment:
-      - TZ=Asia/Kolkata
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://sm.bdc.home:7077
-      - SPARK_WORKER_CORES=4
-      - SPARK_WORKER_MEMORY=16g
-      - SPARK_RPC_AUTHENTICATION_ENABLED=no
-      - SPARK_RPC_ENCRYPTION_ENABLED=no
-      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
-      - SPARK_SSL_ENABLED=no
-    volumes:
-      - ./spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf:z
-      - ${LOCAL_DIR}docker/spark/extraJars:/opt/bitnami/spark/extraJars:z
+      - SPARK_WORKER_CORES=6
+      - SPARK_WORKER_MEMORY=20g

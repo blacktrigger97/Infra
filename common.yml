@@ -29,3 +29,16 @@ services:
     volumes:
       - ${LOCAL_DIR}docker/kafka/data:/var/lib/kafka/data:z
       - ${LOCAL_DIR}docker/kafka/metadata:/var/lib/kafka/metadata:z
+
+  spark:
+    image: registry.bdc.home:5000/spark:latest
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Kolkata
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+    volumes:
+      - ./spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf:z
+      - cifs-volume-spark:/opt/bitnami/spark/extraJars:z
