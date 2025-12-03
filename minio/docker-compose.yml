@@ -80,3 +80,15 @@ services:
       - "9000:9000"
       - "9001:9001"
 
+  minio-mc:
+    image: minio/mc:latest
+    hostname: minio-mc.bdc.home
+    container_name: minio-mc
+    restart: unless-stopped
+    network_mode: host
+    entrypoint: ["/bin/bash", "/init.sh"]
+    volumes:
+     - ./init.sh:/init.sh
+    environment:
+      - TZ=Asia/Kolkata
+
