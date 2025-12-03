@@ -1,6 +1,6 @@
 ARG SPARK_VERSION
 
-FROM bitnami/spark:${SPARK_VERSION}
+FROM bitnamilegacy/spark:${SPARK_VERSION}
 
 USER root
 RUN install_packages curl
