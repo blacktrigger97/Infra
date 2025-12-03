@@ -47,7 +47,7 @@ services:
       - nessie.catalog.secrets.access-key.secret=${DOCKER_PASS}
       - nessie.server.authentication.enabled=false
 
-  hue-minio:
+  hue:
     image: gethue/hue:latest
     hostname: hue.bdc.home
     container_name: hue
