@@ -1,6 +1,7 @@
 networks:
   bdCluster:
     name: bdCluster
+    external: true
     driver: ipvlan
     driver_opts:
       parent: ${ETHERNET_NAME}
