@@ -40,5 +40,5 @@ services:
       - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
       - SPARK_SSL_ENABLED=no
     volumes:
-      - ./spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf:z
+      - ./spark/spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf:z
       - cifs-volume:/opt/bitnami/spark/extraJars:z
