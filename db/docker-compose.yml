@@ -3,7 +3,7 @@ networks:
     name: bdCluster
     driver: ipvlan
     driver_opts:
-      parent: ${ETHERNET_NAME}
+      parent: bond0
     ipam:
       config:
         - subnet: 192.168.1.0/24
