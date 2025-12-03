@@ -11,13 +11,6 @@ networks:
           ip_range: 192.168.1.0/24
           gateway: 192.168.1.1
 
-volumes:
-  cifs-volume-spark:
-    driver_opts:
-      type: cifs
-      o: nounix,rw
-      device: //worker1.bdc.home/extraJars
-
 services:
 
   sparkimage:
@@ -44,8 +37,6 @@ services:
       - SPARK_MASTER_CORES=4
       - SPARK_MASTER_MEMORY=8g
       - SPARK_METRICS_ENABLED=true
-    volumes:
-      - cifs-volume-spark:/opt/bitnami/spark/extraJars:z
 
   sw1:
     extends:
@@ -61,8 +52,6 @@ services:
       - SPARK_MASTER_URL=spark://sm.bdc.home:7077
       - SPARK_WORKER_CORES=6
       - SPARK_WORKER_MEMORY=20g
-    volumes:
-      - cifs-volume-spark:/opt/bitnami/spark/extraJars:z
 
 
   sw2:
@@ -79,8 +68,6 @@ services:
       - SPARK_MASTER_URL=spark://sm.bdc.home:7077
       - SPARK_WORKER_CORES=6
       - SPARK_WORKER_MEMORY=20g
-    volumes:
-      - cifs-volume-spark:/opt/bitnami/spark/extraJars:z
 
   sw3:
     extends:
@@ -96,5 +83,3 @@ services:
       - SPARK_MASTER_URL=spark://sm.bdc.home:7077
       - SPARK_WORKER_CORES=6
       - SPARK_WORKER_MEMORY=20g
-    volumes:
-      - cifs-volume-spark:/opt/bitnami/spark/extraJars:z
