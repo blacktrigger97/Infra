@@ -17,7 +17,7 @@ NON_REPLICATED_INSTANCES=''
 for host in $HOSTS
 do
   tmp=`echo $host | cut -d'.' -f 1`
-  mc alias set $tmp http://${host}:9000 admin password;
+  mc alias set $tmp http://${host}:9000 admin abcd1234;
   # until curl -s `echo ${host} | cut -d "=" -f 2` > /dev/null; do sleep 5 &&
   #   echo "host `echo $host | cut -d "@" -f 2` not up yet. retrying"; done
 done
