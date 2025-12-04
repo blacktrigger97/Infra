@@ -42,8 +42,9 @@ services:
       - 8081:8081
     environment:
       - TZ=Asia/Kolkata
+      - TRINO_NODE_ID=trino-wk1
     volumes:
-      - ./trino-wk/etc1:/etc/trino
+      - ./trino-wk/etc:/etc/trino
       - ./trino-wk/catalog:/etc/trino/catalog
       # - /root/docker/trino/data:/data/trino
 
@@ -59,8 +60,9 @@ services:
       - 8081:8081
     environment:
       - TZ=Asia/Kolkata
+      - TRINO_NODE_ID=trino-wk2
     volumes:
-      - ./trino-wk/etc2:/etc/trino
+      - ./trino-wk/etc:/etc/trino
       - ./trino-wk/catalog:/etc/trino/catalog
       # - /root/docker/trino/data:/data/trino
 
@@ -76,8 +78,9 @@ services:
       - 8081:8081
     environment:
       - TZ=Asia/Kolkata
+      - TRINO_NODE_ID=trino-wk3
     volumes:
-      - ./trino-wk/etc3:/etc/trino
+      - ./trino-wk/etc:/etc/trino
       - ./trino-wk/catalog:/etc/trino/catalog
       # - /root/docker/trino/data:/data/trino
 
