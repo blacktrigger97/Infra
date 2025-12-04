@@ -28,7 +28,6 @@ services:
     volumes:
       - ./trino-co/etc:/etc/trino
       - ./trino-co/catalog:/etc/trino/catalog
-      # - /root/docker/trino/data:/data/trino
 
   trino-wk1:
     image: "trinodb/trino:latest"
@@ -45,7 +44,6 @@ services:
     volumes:
       - ./trino-wk/etc:/etc/trino
       - ./trino-wk/catalog:/etc/trino/catalog
-      # - /root/docker/trino/data:/data/trino
 
   trino-wk2:
     image: "trinodb/trino:latest"
@@ -55,6 +53,8 @@ services:
     networks:
       bdCluster:
         ipv4_address: 192.168.1.42
+      aliases:
+
     ports:
       - 8081:8081
     environment:
@@ -62,7 +62,6 @@ services:
     volumes:
       - ./trino-wk/etc:/etc/trino
       - ./trino-wk/catalog:/etc/trino/catalog
-      # - /root/docker/trino/data:/data/trino
 
   trino-wk3:
     image: "trinodb/trino:latest"
@@ -80,6 +79,6 @@ services:
     volumes:
       - ./trino-wk/etc:/etc/trino
       - ./trino-wk/catalog:/etc/trino/catalog
-      # - /root/docker/trino/data:/data/trino
+
 
   
