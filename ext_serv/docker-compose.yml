@@ -59,7 +59,7 @@ services:
     ports:
       - 8888:8888
     volumes:
-      - ./hue/hue_minio.ini:/usr/share/hue/desktop/conf/z-hue.ini
+      - ./hue/hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
 
   jupyter:
     build:
