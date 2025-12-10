@@ -28,8 +28,11 @@ services:
         - SPARK_VERSION=${SPARK_VERSION}
     env_file:
       - airflow.env
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.204  
     volumes:
-      - /home/mayanksingh/Projects/airflow_setup/jobs:/opt/airflow/jobs:z
+      - cifs-volume-jobs:/opt/airflow/jobs:z
       - /home/mayanksingh/Projects/airflow_setup/dags:/opt/airflow/dags
       - /home/mayanksingh/Projects/airflow_setup/logs:/opt/airflow/logs
     network_mode: host
