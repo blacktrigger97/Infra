@@ -10,6 +10,6 @@ CREATE SCHEMA IF NOT EXISTS hue \gexec
 
 CREATE SCHEMA IF NOT EXISTS logs \gexec
 
-REVOKE CREATE ON SCHEMA public FROM root \gexec
+REVOKE ALL ON SCHEMA public FROM public \gexec
 
 -- REVOKE USAGE ON SCHEMA public FROM PUBLIC \gexec
