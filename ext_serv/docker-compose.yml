@@ -33,7 +33,7 @@ services:
       - quarkus.datasource.driver='org.postgresql.Driver'
       - quarkus.http.port=19120
       - quarkus.http.host=nessie.bdc.home
-      - quarkus.datasource.jdbc.url=jdbc:postgresql://postgresql.bdc.home:5432/nessie
+      - quarkus.datasource.jdbc.url=jdbc:postgresql://postgresql.bdc.home:5432/bdc?currentSchema=nessie
       - quarkus.oidc.enabled="false"
       - nessie.version.store.type=JDBC
       - nessie.catalog.default-warehouse=warehouse
