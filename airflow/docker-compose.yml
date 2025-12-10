@@ -2,7 +2,7 @@ networks:
   bdCluster:
     name: bdCluster
     driver: ipvlan
-    #external: true
+    external: true
     driver_opts:
       parent: wlo1
     ipam:
