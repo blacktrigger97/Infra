@@ -1,3 +1,5 @@
+CREATE ROLE hue LOGIN SUPERUSER PASSWORD 'abcd1234' \gexec
+
 SELECT 'CREATE DATABASE bdc' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'bdc')\gexec
 
 GRANT CONNECT ON DATABASE bdc TO hue \gexec
