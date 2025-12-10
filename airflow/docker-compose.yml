@@ -2,9 +2,9 @@ networks:
   bdCluster:
     name: bdCluster
     driver: ipvlan
-    # external: true
+    #external: true
     driver_opts:
-      parent: ${ETHERNET_NAME}
+      parent: wlo1
     ipam:
       config:
         - subnet: 192.168.1.0/24
@@ -12,91 +12,38 @@ networks:
           gateway: 192.168.1.1
 
 volumes:
-  cifs-volume-airflow:
+  cifs-volume-jobs:
     driver_opts:
       type: cifs
       o: nounix,rw
-      device: //worker1.bdc.home/airflow
+      device: //worker1.bdc.home/jobs
 
 services:
-
+  
   x-airflow-common: &airflow-common
     build:
+      context: .
       dockerfile: Dockerfile
       args:
-        - PY_VER=${PY_VER}
-        - AWS_SPARK=${AWS_SPARK}
-        - COMMON_POOL_VER=${COMMON_POOL_VER}
-        - ICEBERG_SPARK_VER=${ICEBERG_SPARK_VER}
-        - ICEBERG_VER=${ICEBERG_VER}
-        - KAFKA_CLIENT_VER=${KAFKA_CLIENT_VER}
-        - NESSIE_SPARK_VER=${NESSIE_SPARK_VER}
-        - NESSIE_VER=${NESSIE_VER}
-        - SCALA_VERSION=${SCALA_VERSION}
         - SPARK_VERSION=${SPARK_VERSION}
-        - SPARK_SQL_KAFKA_VER=${SPARK_SQL_KAFKA_VER}
-        - DOCKER_USR=${DOCKER_USR}
-        - DOCKER_PASS=${DOCKER_PASS}
-        - DOCKER_DIR=${DOCKER_DIR}
-        - AIRFLOW_VER=${AIRFLOW_VER}
-        - GIT_CONFIG_DIR=${GIT_CONFIG_DIR}
-        - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
-        - GIT_AIRFLOW_ADDRESS=${GIT_AIRFLOW_ADDRESS}
-    restart: unless-stopped
-    environment:
-      TZ: "Asia/Kolkata"
-
-  airflow:
-    <<: *airflow-common
-    container_name: airflow
-    hostname: airflow.bdc.home
-    entrypoint: ["/bin/bash", "/root/s_scripts/airflow-m.sh"]
+    env_file:
+      - airflow.env
+    volumes:
+      - /home/mayanksingh/Projects/airflow_setup/jobs:/opt/airflow/jobs:z
+      - /home/mayanksingh/Projects/airflow_setup/dags:/opt/airflow/dags
+      - /home/mayanksingh/Projects/airflow_setup/logs:/opt/airflow/logs
     network_mode: host
-    # networks:
-    #   bdCluster:
-    #     ipv4_address: 192.168.1.34
-    ports:
-      - 8080:8080
-      - 5555:5555
-      - 8794:8794
-    volumes:
-      - /shares/airflow:/root/airflow:z
-  
-  airflow-w1:
-    <<: *airflow-common
-    container_name: airflow-w1
-    hostname: airflow-w1.bdc.home
-    entrypoint: ["/bin/bash", "/root/s_scripts/airflow-w.sh"]
-    networks:
-      bdCluster:
-        ipv4_address: 192.168.1.34
-    ports:
-      - 8793:8793
-    volumes:
-      - cifs-volume-airflow:/root/airflow:z
 
-  airflow-w2:
+  api-server:
     <<: *airflow-common
-    container_name: airflow-w2
-    hostname: airflow-w2.bdc.home
-    entrypoint: ["/bin/bash", "/root/s_scripts/airflow-w.sh"]
-    networks:
-      bdCluster:
-        ipv4_address: 192.168.1.34
+    container_name: api-server
+    command: airflow api-server
     ports:
-      - 8793:8793
-    volumes:
-      - cifs-volume-airflow:/root/airflow:z
+      - "8080:8080"
+    depends_on:
+      - scheduler
 
-  airflow-w3:
+  scheduler:
     <<: *airflow-common
-    container_name: airflow-w3
-    hostname: airflow-w3.bdc.home
-    entrypoint: ["/bin/bash", "/root/s_scripts/airflow-w.sh"]
-    networks:
-      bdCluster:
-        ipv4_address: 192.168.1.34
-    ports:
-      - 8793:8793
-    volumes:
-      - cifs-volume-airflow:/root/airflow:z
+    container_name: scheduler
+    command: bash -c "airflow db migrate && airflow users create --username airflow --firstname Mayank --lastname Singh --role Admin --email dummy --password airflow && airflow scheduler"
