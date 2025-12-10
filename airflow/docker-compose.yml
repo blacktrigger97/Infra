@@ -30,8 +30,8 @@ services:
       - airflow.env
     volumes:
       - cifs-volume-jobs:/opt/airflow/jobs:z
-      - /root/airflow_setup/dags:/opt/airflow/dags
-      - /root/airflow_setup/logs:/opt/airflow/logs
+      - /root/airflow_setup/dags:/opt/airflow/dags:z
+      - /root/airflow_setup/logs:/opt/airflow/logs:z
     # network_mode: host
 
   api-server:
