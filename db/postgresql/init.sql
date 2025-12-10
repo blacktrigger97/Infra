@@ -1,9 +1,13 @@
-SELECT 'CREATE DATABASE nessie' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'nessie')\gexec
+SELECT 'CREATE DATABASE nessie' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'bdc')\gexec
 
-SELECT 'CREATE DATABASE hue' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'hue')\gexec
+CONNECT bdc \gexec
 
-SELECT 'CREATE DATABASE trino' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'trino')\gexec
+CREATE SCHEMA IF NOT EXISTS nessie \gexec
 
-SELECT 'CREATE DATABASE airflow' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'airflow')\gexec
+CREATE SCHEMA IF NOT EXISTS trino \gexec
 
-SELECT 'CREATE DATABASE logs' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'logs')\gexec
+CREATE SCHEMA IF NOT EXISTS airflow \gexec
+
+CREATE SCHEMA IF NOT EXISTS hue \gexec
+
+CREATE SCHEMA IF NOT EXISTS logs \gexec
