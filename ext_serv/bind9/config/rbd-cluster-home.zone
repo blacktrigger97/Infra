@@ -52,14 +52,14 @@ $ORIGIN 1.168.192.in-addr.arpa.
 111	IN	PTR	sw1
 112	IN	PTR	sw2
 113	IN	PTR	sw3
-121 IN  PTR airflow-w1
-122 IN  PTR airflow-w2
+121 IN  PTR airflow-server
+122 IN  PTR airflow-scheduler
 123 IN  PTR airflow-w3
 201	IN	PTR	jupyter
 201	IN	PTR	marimo
 202	IN	PTR	etl
 203	IN	PTR	pystream
-204	IN	PTR	airflow
+204	IN	PTR	airflow-dev
 
 
 ;
