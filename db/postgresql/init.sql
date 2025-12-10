@@ -1,6 +1,6 @@
-SELECT 'CREATE DATABASE nessie' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'bdc')\gexec
+SELECT 'CREATE DATABASE bdc' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'bdc')\gexec
 
-CONNECT bdc \gexec
+\c bdc \gexec
 
 CREATE SCHEMA IF NOT EXISTS nessie \gexec
 
