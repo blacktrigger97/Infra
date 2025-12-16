@@ -14,7 +14,8 @@ RUN apt-get -y autoremove && apt-get -y clean
 # Set JAVA_HOME environment variable
 ENV JAVA_HOME /usr/lib/jvm/zulu11/
 
-RUN mkdir -p /opt/airflow/jobs
+RUN mkdir -p /opt/airflow/jobs /opt/airflow/logs
+RUN chmod -R 777 /opt/airflow/logs
 RUN chmod u+s /opt/airflow/jobs
 
 USER airflow
