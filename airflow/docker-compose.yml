@@ -50,6 +50,7 @@ services:
         ipv4_address: 192.168.1.121
     ports:
       - "8080:8080"
+      - "8793:8793"
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://airflow-server.bdc.home:8080/api/v2/version"]
       interval: 30s
