@@ -30,7 +30,10 @@ services:
       - airflow.env
     volumes:
       - cifs-volume-jobs:/opt/airflow/jobs:z
-      - /root/airflow_setup/dags:/opt/airflow/dags:z
+      - type: bind
+        source: /root/airflow_setup/dags
+        target: /opt/airflow/dags
+        bind_propagation: rshared
       - /root/airflow_setup/plugins:/opt/airflow/plugins:z
       - /root/airflow_setup/logs:/opt/airflow/logs:z
     # network_mode: host
