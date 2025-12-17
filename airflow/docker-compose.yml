@@ -50,10 +50,10 @@ services:
     # volumes:
     #   - /shares/airflow:/root/airflow:z
   
-  airflow-w1:
+  airflow-wk1:
     <<: *airflow-common
-    container_name: airflow-w1
-    hostname: airflow-w1.bdc.home
+    container_name: airflow-wk1
+    hostname: airflow-wk1.bdc.home
     entrypoint: ["/bin/bash", "/root/s_scripts/airflow-w.sh"]
     networks:
       bdCluster:
@@ -63,10 +63,10 @@ services:
     # volumes:
     #   - cifs-volume-airflow:/root/airflow:z
 
-  airflow-w2:
+  airflow-wk2:
     <<: *airflow-common
-    container_name: airflow-w2
-    hostname: airflow-w2.bdc.home
+    container_name: airflow-wk2
+    hostname: airflow-wk2.bdc.home
     entrypoint: ["/bin/bash", "/root/s_scripts/airflow-w.sh"]
     networks:
       bdCluster:
@@ -76,10 +76,10 @@ services:
     # volumes:
     #   - cifs-volume-airflow:/root/airflow:z
 
-  airflow-w3:
+  airflow-wk3:
     <<: *airflow-common
-    container_name: airflow-w3
-    hostname: airflow-w3.bdc.home
+    container_name: airflow-wk3
+    hostname: airflow-wk3.bdc.home
     entrypoint: ["/bin/bash", "/root/s_scripts/airflow-w.sh"]
     networks:
       bdCluster:
