@@ -33,7 +33,7 @@ services:
     environment:
       TZ: "Asia/Kolkata"
     volumes:
-      - cifs-volume-airflow:/root/airflow:z
+      - cifs-volume-airflow:/opt/airflow:z
 
   airflow:
     <<: *airflow-common
