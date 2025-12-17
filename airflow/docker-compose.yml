@@ -39,6 +39,7 @@ services:
     <<: *airflow-common
     container_name: airflow
     hostname: airflow.bdc.home
+    user: root
     entrypoint: ["/bin/bash", "/root/s_scripts/airflow-m.sh"]
     networks:
       bdCluster:
