@@ -48,8 +48,5 @@ RUN mkdir s_scripts airflow
 RUN git clone $GIT_CONFIG_ADDRESS
 RUN rsync -avru $GIT_CONFIG_DIR/s_scripts/ s_scripts
 
-# Bash Configuration
-RUN echo "" >> .bashrc
-RUN echo "########JAVA Export########" >> .bashrc
-RUN echo "export JAVA_HOME=/usr/lib/jvm/zulu11/" >> .bashrc
-RUN echo "" >> .bashrc
+# JAVA HOMe Configuration
+ENV JAVA_HOME /usr/lib/jvm/zulu11/
