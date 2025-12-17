@@ -51,9 +51,9 @@ minio3	    IN	A	192.168.1.103
 sw1         IN	A	192.168.1.111
 sw2         IN	A	192.168.1.112
 sw3         IN	A	192.168.1.113
-airflow-server  IN  A   192.168.1.121
-airflow-scheduler  IN  A   192.168.1.122
-airflow-dagprocessor  IN  A   192.168.1.123
+airflow-wk1 IN  A   192.168.1.121
+airflow-wk2 IN  A   192.168.1.122
+airflow-wk3 IN  A   192.168.1.123
 jupyter	    IN	A	192.168.1.201
 marimo	    IN	A	192.168.1.201
 etl	        IN	A	192.168.1.202

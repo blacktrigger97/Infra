@@ -2,9 +2,9 @@ networks:
   bdCluster:
     name: bdCluster
     driver: ipvlan
-    external: true
+    # external: true
     driver_opts:
-      parent: wlo1
+      parent: ${ETHERNET_NAME}
     ipam:
       config:
         - subnet: 192.168.1.0/24
@@ -12,85 +12,78 @@ networks:
           gateway: 192.168.1.1
 
 volumes:
-  cifs-volume-jobs:
+  cifs-volume-airflow:
     driver_opts:
       type: cifs
       o: nounix,rw
-      device: //worker1.bdc.home/jobs
+      device: //worker1.bdc.home/airflow
 
 services:
-  
+
   x-airflow-common: &airflow-common
     build:
-      context: .
       dockerfile: Dockerfile
       args:
+        - PY_VER=${PY_VER}
         - SPARK_VERSION=${SPARK_VERSION}
-    env_file:
-      - airflow.env
-    volumes:
-      - cifs-volume-jobs:/opt/airflow/jobs:z
-      - /root/airflow_setup/plugins:/opt/airflow/plugins:z
-      - /root/airflow_setup/logs:/opt/airflow/logs:z
-      - type: bind
-        source: /root/airflow_setup/dags
-        target: /opt/airflow/dags
-        bind:
-          propagation: rshared
-    # network_mode: host
-
-  api-server:
-    <<: *airflow-common
-    container_name: api-server
-    command: airflow api-server
-    hostname: airflow-server.bdc.home
+        - DOCKER_DIR=${DOCKER_DIR}
+        - GIT_CONFIG_DIR=${GIT_CONFIG_DIR}
+        - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
     restart: unless-stopped
+    environment:
+      TZ: "Asia/Kolkata"
+
+  airflow:
+    <<: *airflow-common
+    container_name: airflow
+    hostname: airflow.bdc.home
+    entrypoint: ["/bin/bash", "/root/s_scripts/airflow-m.sh"]
+    network_mode: host
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.34
+    ports:
+      - 8080:8080
+      - 5555:5555
+      - 8794:8794
+    volumes:
+      - /shares/airflow:/root/airflow:z
+  
+  airflow-w1:
+    <<: *airflow-common
+    container_name: airflow-w1
+    hostname: airflow-w1.bdc.home
+    entrypoint: ["/bin/bash", "/root/s_scripts/airflow-w.sh"]
     networks:
       bdCluster:
         ipv4_address: 192.168.1.121
     ports:
-      - "8080:8080"
-      - "8793:8793"
-      - "8794:8794"
-    healthcheck:
-      test: ["CMD", "curl", "--fail", "http://airflow-server.bdc.home:8080/api/v2/version"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 30s
-    depends_on:
-      - scheduler
+      - 8793:8793
+    volumes:
+      - cifs-volume-airflow:/root/airflow:z
 
-  scheduler:
+  airflow-w2:
     <<: *airflow-common
-    container_name: scheduler
-    command: bash -c "airflow db migrate && airflow users create --username airflow --firstname Mayank --lastname Singh --role Admin --email dummy --password airflow && airflow scheduler"
-    hostname: airflow-scheduler.bdc.home
-    restart: unless-stopped
+    container_name: airflow-w2
+    hostname: airflow-w2.bdc.home
+    entrypoint: ["/bin/bash", "/root/s_scripts/airflow-w.sh"]
     networks:
       bdCluster:
         ipv4_address: 192.168.1.122
-    healthcheck:
-      test: ["CMD", "curl", "--fail", "http://airflow-scheduler.bdc.home:8974/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 30s
+    ports:
+      - 8793:8793
+    volumes:
+      - cifs-volume-airflow:/root/airflow:z
 
-  dag-processor:
+  airflow-w3:
     <<: *airflow-common
-    container_name: dag-processor
-    command: dag-processor
-    hostname: airflow-dagprocessor.bdc.home
-    restart: unless-stopped
+    container_name: airflow-w3
+    hostname: airflow-w3.bdc.home
+    entrypoint: ["/bin/bash", "/root/s_scripts/airflow-w.sh"]
     networks:
       bdCluster:
         ipv4_address: 192.168.1.123
-    healthcheck:
-      test: ["CMD-SHELL", 'airflow jobs check --job-type DagProcessorJob --hostname "$${HOSTNAME}"']
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 30s
-    depends_on:
-      - api-server
+    ports:
+      - 8793:8793
+    volumes:
+      - cifs-volume-airflow:/root/airflow:z
