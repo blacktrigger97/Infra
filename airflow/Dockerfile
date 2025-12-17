@@ -33,4 +33,4 @@ RUN chmod -R +x s_scripts
 # USER airflow
 
 RUN pip3 install --upgrade pip
-RUN pip3 install apache-airflow apache-airflow-providers-apache-spark pyspark==${SPARK_VERSION} psycopg2-binary asyncpg apache-airflow-providers-fab
+RUN pip3 install apache-airflow[redis,celery,postgres] apache-airflow-providers-apache-spark pyspark==${SPARK_VERSION} psycopg2-binary asyncpg apache-airflow-providers-fab
