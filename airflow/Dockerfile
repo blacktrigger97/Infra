@@ -28,6 +28,7 @@ WORKDIR ${DOCKER_DIR}
 RUN mkdir s_scripts
 RUN git clone $GIT_CONFIG_ADDRESS
 RUN rsync -avru $GIT_CONFIG_DIR/s_scripts/ s_scripts
+RUN chmod -R +x s_scripts
 
 USER airflow
 
