@@ -24,7 +24,7 @@ services:
     build:
       dockerfile: Dockerfile
       args:
-        - PY_VER=${PY_VER}
+        - AIRFLOW_VER=${AIRFLOW_VER}
         - SPARK_VERSION=${SPARK_VERSION}
         - DOCKER_DIR=${DOCKER_DIR}
         - GIT_CONFIG_DIR=${GIT_CONFIG_DIR}
@@ -32,6 +32,8 @@ services:
     restart: unless-stopped
     environment:
       TZ: "Asia/Kolkata"
+    volumes:
+      - cifs-volume-airflow:/root/airflow:z
 
   airflow:
     <<: *airflow-common
@@ -45,8 +47,8 @@ services:
       - 8080:8080
       - 5555:5555
       - 8794:8794
-    volumes:
-      - /shares/airflow:/root/airflow:z
+    # volumes:
+    #   - /shares/airflow:/root/airflow:z
   
   airflow-w1:
     <<: *airflow-common
@@ -58,8 +60,8 @@ services:
         ipv4_address: 192.168.1.121
     ports:
       - 8793:8793
-    volumes:
-      - cifs-volume-airflow:/root/airflow:z
+    # volumes:
+    #   - cifs-volume-airflow:/root/airflow:z
 
   airflow-w2:
     <<: *airflow-common
@@ -71,8 +73,8 @@ services:
         ipv4_address: 192.168.1.122
     ports:
       - 8793:8793
-    volumes:
-      - cifs-volume-airflow:/root/airflow:z
+    # volumes:
+    #   - cifs-volume-airflow:/root/airflow:z
 
   airflow-w3:
     <<: *airflow-common
@@ -84,5 +86,5 @@ services:
         ipv4_address: 192.168.1.123
     ports:
       - 8793:8793
-    volumes:
-      - cifs-volume-airflow:/root/airflow:z
+    # volumes:
+    #   - cifs-volume-airflow:/root/airflow:z
