@@ -29,7 +29,6 @@ $ORIGIN 1.168.192.in-addr.arpa.
 31	IN	PTR	nessie
 32	IN	PTR	hue
 33	IN	PTR	trino-co
-34	IN	PTR	airflow
 35	IN	PTR	kafka-sr
 36	IN	PTR	ksqldb
 37	IN	PTR	kconcen
@@ -40,14 +39,14 @@ $ORIGIN 1.168.192.in-addr.arpa.
 51	IN	PTR	kafka-1
 52	IN	PTR	kafka-2
 53	IN	PTR	kafka-3
-91	IN	PTR	name-res
+61	IN	PTR	airflow-server
+62	IN	PTR	airflow-scheduler
+63	IN	PTR	airflow-dagprocessor
+64	IN	PTR	airflow-triggerer
 91	IN	PTR	nginx-lb
 92	IN	PTR	sm
-101	IN	PTR	data-node1
 101	IN	PTR	minio1
-102	IN	PTR	data-node2
 102	IN	PTR	minio2
-103	IN	PTR	data-node3
 103	IN	PTR	minio3
 111	IN	PTR	sw1
 112	IN	PTR	sw2
