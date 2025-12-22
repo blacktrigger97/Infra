@@ -30,6 +30,7 @@ services:
         - GIT_CONFIG_DIR=${GIT_CONFIG_DIR}
         - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
     restart: unless-stopped
+    user: root
     environment:
       TZ: "Asia/Kolkata"
     volumes:
