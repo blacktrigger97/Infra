@@ -3,8 +3,8 @@ ARG AIRFLOW_VER
 FROM apache/airflow:${AIRFLOW_VER}
 
 ARG DOCKER_DIR
-# ARG GIT_CONFIG_DIR
-# ARG GIT_CONFIG_ADDRESS
+ARG GIT_CONFIG_DIR
+ARG GIT_CONFIG_ADDRESS
 ARG SPARK_VERSION
 
 USER root
@@ -24,7 +24,7 @@ RUN chmod -R 1777 /opt/airflow/jobs /opt/airflow/logs
 
 WORKDIR ${DOCKER_DIR}
 
-RUN git clone $GIT_AIRFLOW_ADDRESS
+# RUN git clone $GIT_AIRFLOW_ADDRESS
 RUN mkdir s_scripts
 RUN git clone $GIT_CONFIG_ADDRESS
 RUN rsync -avru $GIT_CONFIG_DIR/s_scripts/ s_scripts
