@@ -22,15 +22,15 @@ ENV JAVA_HOME /usr/lib/jvm/zulu11/
 RUN mkdir -p /opt/airflow/jobs /opt/airflow/logs
 RUN chmod -R 1777 /opt/airflow/jobs /opt/airflow/logs
 
-# WORKDIR ${DOCKER_DIR}
+WORKDIR ${DOCKER_DIR}
 
-# RUN git clone $GIT_AIRFLOW_ADDRESS
-# RUN mkdir s_scripts
-# RUN git clone $GIT_CONFIG_ADDRESS
-# RUN rsync -avru $GIT_CONFIG_DIR/s_scripts/ s_scripts
-# RUN chmod -R +x s_scripts
+RUN git clone $GIT_AIRFLOW_ADDRESS
+RUN mkdir s_scripts
+RUN git clone $GIT_CONFIG_ADDRESS
+RUN rsync -avru $GIT_CONFIG_DIR/s_scripts/ s_scripts
+RUN chmod -R +x s_scripts
 
-USER airflow
+# USER airflow
 
 RUN pip3 install --upgrade pip
-RUN pip3 install apache-airflow[redis,celery,postgres] flask-appbuilder apache-airflow-providers-apache-spark apache-airflow-providers-trino apache-airflow-providers-git pyspark==${SPARK_VERSION} psycopg2-binary
+RUN pip3 install apache-airflow[redis,celery,postgres] flask-appbuilder<5.0.0 apache-airflow-providers-apache-spark apache-airflow-providers-trino apache-airflow-providers-git pyspark==${SPARK_VERSION} psycopg2-binary
