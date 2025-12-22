@@ -47,8 +47,8 @@ services:
       - 8080:8080
       - 5555:5555
       - 8794:8794
-    volumes:
-      - /shares/airflow:/root/airflow:z
+    # volumes:
+    #   - /shares/airflow:/root/airflow:z
 
   airflow-wk1:
     <<: *airflow-common
