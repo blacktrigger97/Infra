@@ -43,7 +43,8 @@ services:
   api-server:
     <<: *airflow-common
     container_name: airflow-server
-    command: bash -c "airflow api-server -H `hostname` -D && airflow celery flower --hostname `hostname`"
+    command: "airflow api-server"
+    # command: "airflow api-server -H `hostname` -D && airflow celery flower --hostname `hostname`"
     hostname: airflow-server.bdc.home
     restart: unless-stopped
     networks:
