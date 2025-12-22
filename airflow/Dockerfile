@@ -2,7 +2,7 @@ ARG AIRFLOW_VER
 
 FROM apache/airflow:${AIRFLOW_VER}
 
-ARG DOCKER_DIR
+# ARG DOCKER_DIR
 ARG GIT_CONFIG_DIR
 ARG GIT_CONFIG_ADDRESS
 ARG SPARK_VERSION
@@ -19,17 +19,17 @@ RUN apt-get -y autoremove && apt-get -y clean
 # Set JAVA_HOME environment variable
 ENV JAVA_HOME /usr/lib/jvm/zulu11/
 
-RUN mkdir -p /opt/airflow/jobs /opt/airflow/logs
-RUN chmod -R 1777 /opt/airflow/jobs /opt/airflow/logs
+USER airflow
 
-WORKDIR ${DOCKER_DIR}
+# WORKDIR ${DOCKER_DIR}
 
 # Configuration Scripts
+WORKDIR /opt
 RUN mkdir s_scripts
 RUN git clone $GIT_CONFIG_ADDRESS
 RUN rsync -avru $GIT_CONFIG_DIR/s_scripts/ s_scripts
 RUN chmod -R +x s_scripts
 
-# Install Packages
+# Install PY Packages
 RUN pip3 install --upgrade pip
 RUN pip3 install apache-airflow[redis,celery,postgres] "flask-appbuilder<5.0.0" apache-airflow-providers-apache-spark apache-airflow-providers-trino apache-airflow-providers-git pyspark==${SPARK_VERSION} psycopg2-binary
