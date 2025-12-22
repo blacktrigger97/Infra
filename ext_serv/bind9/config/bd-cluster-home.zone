@@ -28,7 +28,6 @@ postgresql	IN	A	192.168.1.21
 nessie	    IN	A	192.168.1.31
 hue	        IN	A	192.168.1.32
 trino-co	IN	A	192.168.1.33
-airflow     IN	A	192.168.1.34
 kafka-sr	IN	A	192.168.1.35
 ksqldb	    IN	A	192.168.1.36
 kconcen	    IN	A	192.168.1.37
@@ -39,6 +38,10 @@ trino-wk3	IN	A	192.168.1.43
 kafka-1	    IN	A	192.168.1.51
 kafka-2	    IN	A	192.168.1.52
 kafka-3	    IN	A	192.168.1.53
+airflow-server	IN	A	192.168.1.61
+airflow-scheduler	IN	A	192.168.1.62
+airflow-dagprocessor	IN	A	192.168.1.63
+airflow-triggerer   IN	A	192.168.1.64
 nginx-lb    IN	A	192.168.1.91
 sm          IN	A	192.168.1.92
 minio1	    IN	A	192.168.1.101

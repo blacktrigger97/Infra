@@ -24,11 +24,11 @@ USER airflow
 # WORKDIR ${DOCKER_DIR}
 
 # Configuration Scripts
-WORKDIR /opt
-RUN mkdir s_scripts
-RUN git clone $GIT_CONFIG_ADDRESS
-RUN rsync -avru $GIT_CONFIG_DIR/s_scripts/ s_scripts
-RUN chmod -R +x s_scripts
+# WORKDIR /opt
+# RUN mkdir s_scripts
+# RUN git clone $GIT_CONFIG_ADDRESS
+# RUN rsync -avru $GIT_CONFIG_DIR/s_scripts/ s_scripts
+# RUN chmod -R +x s_scripts
 
 # Install PY Packages
 RUN pip3 install --upgrade pip
