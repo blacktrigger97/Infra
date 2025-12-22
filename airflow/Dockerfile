@@ -24,7 +24,7 @@ RUN chmod -R 1777 /opt/airflow/jobs /opt/airflow/logs
 
 WORKDIR ${DOCKER_DIR}
 
-# RUN git clone $GIT_AIRFLOW_ADDRESS
+# Configuration Scripts
 RUN mkdir s_scripts
 RUN git clone $GIT_CONFIG_ADDRESS
 RUN rsync -avru $GIT_CONFIG_DIR/s_scripts/ s_scripts
