@@ -107,8 +107,8 @@ x-airflow-common:
     - cifs-volume-airflow/plugins:/opt/airflow/plugins:z
     - cifs-volume-airflow/jobs:/opt/airflow/jobs:z
   user: "${AIRFLOW_UID:-50000}:0"
-  depends_on:
-    &airflow-common-depends-on
+  # depends_on:
+    # &airflow-common-depends-on
     # redis:
     #   condition: service_healthy
     # postgres:
@@ -162,7 +162,7 @@ services:
       start_period: 30s
     restart: unless-stopped
     depends_on:
-      <<: *airflow-common-depends-on
+      # <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
 
@@ -182,7 +182,7 @@ services:
       start_period: 30s
     restart: unless-stopped
     depends_on:
-      <<: *airflow-common-depends-on
+      # <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
 
@@ -202,7 +202,7 @@ services:
       start_period: 30s
     restart: unless-stopped
     depends_on:
-      <<: *airflow-common-depends-on
+      # <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
 
@@ -222,7 +222,7 @@ services:
       start_period: 30s
     restart: unless-stopped
     depends_on:
-      <<: *airflow-common-depends-on
+      # <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
   
@@ -246,7 +246,7 @@ services:
       start_period: 30s
     restart: always
     depends_on:
-      <<: *airflow-common-depends-on
+      # <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
 
@@ -274,7 +274,7 @@ services:
       DUMB_INIT_SETSID: "0"
     restart: unless-stopped
     depends_on:
-      <<: *airflow-common-depends-on
+      # <<: *airflow-common-depends-on
       # airflow-apiserver:
       #   condition: service_healthy
       airflow-init:
@@ -304,7 +304,7 @@ services:
       DUMB_INIT_SETSID: "0"
     restart: unless-stopped
     depends_on:
-      <<: *airflow-common-depends-on
+      # <<: *airflow-common-depends-on
       # airflow-apiserver:
       #   condition: service_healthy
       airflow-init:
@@ -334,7 +334,7 @@ services:
       DUMB_INIT_SETSID: "0"
     restart: unless-stopped
     depends_on:
-      <<: *airflow-common-depends-on
+      # <<: *airflow-common-depends-on
       # airflow-apiserver:
       #   condition: service_healthy
       airflow-init:
@@ -446,8 +446,8 @@ services:
       - bash
       - -c
       - airflow
-    depends_on:
-      <<: *airflow-common-depends-on
+    # depends_on:
+      # <<: *airflow-common-depends-on
 
   # You can enable flower by adding "--profile flower" option e.g. docker-compose --profile flower up
   # or by explicitly targeted on the command line e.g. docker-compose up flower.
