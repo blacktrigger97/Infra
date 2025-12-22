@@ -101,11 +101,11 @@ x-airflow-common:
     # The following line can be used to set a custom config file, stored in the local config folder
     AIRFLOW_CONFIG: '/opt/airflow/config/airflow.cfg'
   volumes:
-    - cifs-volume-airflow/dags:/opt/airflow/dags:z
-    - cifs-volume-airflow/logs:/opt/airflow/logs:z
-    - cifs-volume-airflow/config:/opt/airflow/config:z
-    - cifs-volume-airflow/plugins:/opt/airflow/plugins:z
-    - cifs-volume-airflow/jobs:/opt/airflow/jobs:z
+    - cifs-volume-airflow:/opt/airflow:z
+    # - cifs-volume-airflow/logs:/opt/airflow/logs:z
+    # - cifs-volume-airflow/config:/opt/airflow/config:z
+    # - cifs-volume-airflow/plugins:/opt/airflow/plugins:z
+    # - cifs-volume-airflow/jobs:/opt/airflow/jobs:z
   user: "${AIRFLOW_UID:-50000}:0"
   # depends_on:
     # &airflow-common-depends-on
