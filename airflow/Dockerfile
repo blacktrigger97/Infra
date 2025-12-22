@@ -30,5 +30,6 @@ RUN git clone $GIT_CONFIG_ADDRESS
 RUN rsync -avru $GIT_CONFIG_DIR/s_scripts/ s_scripts
 RUN chmod -R +x s_scripts
 
+# Install Packages
 RUN pip3 install --upgrade pip
 RUN pip3 install apache-airflow[redis,celery,postgres] "flask-appbuilder<5.0.0" apache-airflow-providers-apache-spark apache-airflow-providers-trino apache-airflow-providers-git pyspark==${SPARK_VERSION} psycopg2-binary
