@@ -38,10 +38,11 @@ trino-wk3	IN	A	192.168.1.43
 kafka-1	    IN	A	192.168.1.51
 kafka-2	    IN	A	192.168.1.52
 kafka-3	    IN	A	192.168.1.53
-airflow-server	IN	A	192.168.1.61
+airflow-apiserver	IN	A	192.168.1.61
 airflow-scheduler	IN	A	192.168.1.62
 airflow-dagprocessor	IN	A	192.168.1.63
 airflow-triggerer   IN	A	192.168.1.64
+flower      IN	A	192.168.1.65
 nginx-lb    IN	A	192.168.1.91
 sm          IN	A	192.168.1.92
 minio1	    IN	A	192.168.1.101
