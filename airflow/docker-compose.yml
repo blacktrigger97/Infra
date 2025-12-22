@@ -78,7 +78,7 @@ x-airflow-common:
     args:
       - AIRFLOW_IMAGE_NAME=${AIRFLOW_IMAGE_NAME}
   env_file:
-    - ${ENV_FILE_PATH:-.env}
+    - ${ENV_FILE_PATH:-../.env}
   environment:
     &airflow-common-env
     AIRFLOW__CORE__EXECUTOR: CeleryExecutor
