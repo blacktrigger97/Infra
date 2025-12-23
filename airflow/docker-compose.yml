@@ -60,7 +60,7 @@ services:
       bdCluster:
         ipv4_address: 192.168.1.121
     ports:
-      - 8795:8795
+      - 8793:8793
     volumes:
       - cifs-volume-airflow:/root/airflow:z
 
@@ -73,7 +73,7 @@ services:
       bdCluster:
         ipv4_address: 192.168.1.122
     ports:
-      - 8795:8795
+      - 8793:8793
     volumes:
       - cifs-volume-airflow:/root/airflow:z
 
@@ -86,6 +86,6 @@ services:
       bdCluster:
         ipv4_address: 192.168.1.123
     ports:
-      - 8795:8795
+      - 8793:8793
     volumes:
       - cifs-volume-airflow:/root/airflow:z
