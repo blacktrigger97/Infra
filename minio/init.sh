@@ -57,11 +57,13 @@ echo -e "*****************************************\n"
 mc mb minio1/warehouse/nessie --ignore-existing
 mc mb minio1/spark/logs --ignore-existing
 mc mb minio1/tmp/kafka/ --ignore-existing
+mc mb minio1/airflow/logs/ --ignore-existing
 if [ $? == 0 ];
 then
   mc anonymous set public minio1/warehouse/nessie
   mc anonymous set public minio1/spark
   mc anonymous set public minio1/tmp
+  mc anonymous set public airflow/logs
 else
   echo "Bucket Creation Failed."
   exit 1
