@@ -22,7 +22,7 @@ ENV JAVA_HOME /usr/lib/jvm/zulu11/
 WORKDIR ${DOCKER_DIR}
 
 # Start scripts
-RUN mkdir s_scripts airflow
+RUN mkdir s_scripts airflow /run/airflow
 RUN git clone $GIT_CONFIG_ADDRESS
 RUN rsync -avru $GIT_CONFIG_DIR/s_scripts/ s_scripts
 
