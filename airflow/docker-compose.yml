@@ -35,6 +35,7 @@ services:
       TZ: "Asia/Kolkata"
       AIRFLOW_CONFIG: '/root/airflow/config/airflow.cfg'
       AIRFLOW__API__SECRET_KEY: txf41yD4RZ3Uz2g52aMmVA==
+      AIRFLOW__CORE__FERNET_KEY: ''
 
   airflow:
     <<: *airflow-common
