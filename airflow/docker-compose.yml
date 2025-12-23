@@ -33,7 +33,7 @@ services:
     restart: unless-stopped
     environment:
       TZ: "Asia/Kolkata"
-      AIRFLOW_CONFIG: '/opt/airflow/config/airflow.cfg'
+      AIRFLOW_CONFIG: '/root/airflow/config/airflow.cfg'
 
   airflow:
     <<: *airflow-common
