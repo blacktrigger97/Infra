@@ -31,6 +31,7 @@ services:
         - GIT_CONFIG_DIR=${GIT_CONFIG_DIR}
         - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
     restart: unless-stopped
+    dns: 192.168.1.10
     environment:
       AIRFLOW_CONFIG: '/root/airflow/config/airflow.cfg'
       AIRFLOW_CONN_MINIO: '{"conn_type": "aws", "login": "admin", "password": "abcd1234", "extra": {"region_name": "us-east-1", "endpoint_url": "http://nginx-lb.bdc.home:9000"}}'
@@ -40,7 +41,7 @@ services:
     container_name: airflow
     hostname: airflow.bdc.home
     entrypoint: ["/bin/bash", "/root/s_scripts/airflow-m.sh"]
-    # dns: 192.168.1.10
+    
     networks:
       bdCluster:
         ipv4_address: 192.168.1.34
