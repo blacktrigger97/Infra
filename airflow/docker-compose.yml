@@ -34,6 +34,7 @@ services:
     environment:
       TZ: "Asia/Kolkata"
       AIRFLOW_CONFIG: '/root/airflow/config/airflow.cfg'
+      AIRFLOW_CONN_MINIO: '{"conn_type": "aws", "login": "admin", "password": "abcd1234", "extra": {"region_name": "us-east-1", "endpoint_url": "http://nginx-lb.bdc.home:9000"}}'
 
   airflow:
     <<: *airflow-common
