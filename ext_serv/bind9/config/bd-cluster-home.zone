@@ -39,9 +39,6 @@ trino-wk3	IN	A	192.168.1.43
 kafka-1	    IN	A	192.168.1.51
 kafka-2	    IN	A	192.168.1.52
 kafka-3	    IN	A	192.168.1.53
-airflow-wk1	IN	A	192.168.1.61
-airflow-wk2	IN	A	192.168.1.62
-airflow-wk2	IN	A	192.168.1.63
 nginx-lb    IN	A	192.168.1.91
 sm          IN	A	192.168.1.92
 minio1	    IN	A	192.168.1.101

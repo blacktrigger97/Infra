@@ -40,9 +40,6 @@ $ORIGIN 1.168.192.in-addr.arpa.
 51	IN	PTR	kafka-1
 52	IN	PTR	kafka-2
 53	IN	PTR	kafka-3
-61	IN	PTR	airflow-wk1
-62	IN	PTR	airflow-wk2
-63	IN	PTR	airflow-wk3
 91	IN	PTR	nginx-lb
 92	IN	PTR	sm
 101	IN	PTR	minio1
