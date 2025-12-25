@@ -49,7 +49,7 @@ services:
       - nessie.server.authentication.enabled=false
 
   hue:
-    image: gethue/hue:20250414-140101
+    image: gethue/hue:latest
     hostname: hue.bdc.home
     container_name: hue
     restart: unless-stopped
