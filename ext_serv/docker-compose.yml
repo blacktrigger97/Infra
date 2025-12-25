@@ -60,6 +60,7 @@ services:
       - 8888:8888
     volumes:
       - ./hue/hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
+      - ./hue/startup.sh:/usr/share/hue/startup.sh
 
   jupyter:
     build:

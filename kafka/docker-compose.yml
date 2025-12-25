@@ -127,18 +127,16 @@ services:
       KAFKA_REST_SCHEMA_REGISTRY_URL: http://kafka-sr.bdc.home:8081
       KAFKA_REST_BOOTSTRAP_SERVERS: PLAINTEXT://kafka-1.bdc.home:9092,PLAINTEXT://kafka-2.bdc.home:9092,,PLAINTEXT://kafka-3.bdc.home:9092
 
-  #ksql:
-    #  image: confluentinc/ksqldb-cli:latest
-    #  hostname: ksql.bdc.home
-    #  container_name: ksql
-    #  restart: unless-stopped
-    #  networks:
-    #    bdCluster:
-    #      ipv4_address: 192.168.1.67
-    #  entrypoint: /bin/sh
-    #  tty: true
-    #  depends_on:
-    #    - ksqldb-server
+  ksql:
+    image: confluentinc/ksqldb-cli:latest
+    hostname: ksql.bdc.home
+    container_name: ksql
+    restart: unless-stopped
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.67
+    entrypoint: /bin/sh
+    tty: true
     
 
   

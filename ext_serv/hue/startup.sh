@@ -1,0 +1,5 @@
+#!/bin/sh
+
+./build/env/bin/pip install ksql
+./build/env/bin/hue migrate
+./build/env/bin/supervisor
