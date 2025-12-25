@@ -86,8 +86,13 @@ services:
       KSQL_LISTENERS: http://ksqldb.bdc.home:8088
       KSQL_BOOTSTRAP_SERVERS: kafka-1.bdc.home:9092,kafka-2.bdc.home:9092,kafka-3.bdc.home:9092
       KSQL_KSQL_SCHEMA_REGISTRY_URL: http://kafka-sr.bdc.home:8081
+      KSQL_PRODUCER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor"
+      KSQL_CONSUMER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor"
+      # KSQL_KSQL_CONNECT_URL: "http://connect:8083"
+      KSQL_KSQL_LOGGING_PROCESSING_TOPIC_REPLICATION_FACTOR: 1
       KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE: "true"
       KSQL_KSQL_LOGGING_PROCESSING_TOPIC_AUTO_CREATE: "true"
+    
 
 
   kconcen:
@@ -134,7 +139,7 @@ services:
     restart: unless-stopped
     networks:
       bdCluster:
-        ipv4_address: 192.168.1.67
+        ipv4_address: 192.168.1.37
     entrypoint: /bin/sh
     tty: true
     
