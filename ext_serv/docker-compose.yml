@@ -61,6 +61,7 @@ services:
     volumes:
       - ./hue/hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
       - ./hue/startup.sh:/usr/share/hue/startup.sh
+      - ./__init__.py:/usr/share/hue/build/env/lib/python3.11/site-packages/hyper/__init__.py
 
   jupyter:
     build:
