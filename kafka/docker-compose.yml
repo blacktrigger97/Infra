@@ -93,55 +93,68 @@ services:
       KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE: "true"
       KSQL_KSQL_LOGGING_PROCESSING_TOPIC_AUTO_CREATE: "true"
     
-
-
-  kconcen:
-    image: confluentinc/cp-enterprise-control-center:latest
-    hostname: kconcen.bdc.home
-    container_name: kconcen
-    networks:
-      bdCluster:
-        ipv4_address: 192.168.1.37
-    ports:
-      - 9021:9021
-    environment:
-      CONTROL_CENTER_BOOTSTRAP_SERVERS: kafka-1.bdc.home:9092,kafka-2.bdc.home:9092,kafka-3.bdc.home:9092
-      # CONTROL_CENTER_CONNECT_CONNECT-DEFAULT_CLUSTER: 'connect:8083'
-      CONTROL_CENTER_KSQL_KSQLDB1_URL: http://ksqldb.bdc.home:8088
-      CONTROL_CENTER_SCHEMA_REGISTRY_URL: http://kafka-sr.bdc.home:8081
-      CONTROL_CENTER_REPLICATION_FACTOR: 1
-      CONTROL_CENTER_INTERNAL_TOPICS_PARTITIONS: 1
-      CONTROL_CENTER_MONITORING_INTERCEPTOR_TOPIC_PARTITIONS: 1
-      CONFLUENT_METRICS_TOPIC_REPLICATION: 1
-      PORT: 9021
-
-
-  kafka-rest:
-    image: confluentinc/cp-kafka-rest:latest
-    hostname: kafka-rest.bdc.home
-    container_name: kafka-rest
-    restart: unless-stopped
-    networks:
-      bdCluster:
-        ipv4_address: 192.168.1.38
-    ports:
-      - 8082:8082
-    environment:
-      KAFKA_REST_HOST_NAME: kafka-rest.bdc.home
-      KAFKA_REST_LISTENERS: http://kafka-rest.bdc.home:8082
-      KAFKA_REST_SCHEMA_REGISTRY_URL: http://kafka-sr.bdc.home:8081
-      KAFKA_REST_BOOTSTRAP_SERVERS: PLAINTEXT://kafka-1.bdc.home:9092,PLAINTEXT://kafka-2.bdc.home:9092,,PLAINTEXT://kafka-3.bdc.home:9092
-
-  ksql:
-    image: confluentinc/ksqldb-cli:latest
-    hostname: ksql.bdc.home
-    container_name: ksql
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    hostname: kafka-ui.bdc.home
+    container_name: kafka-ui
     restart: unless-stopped
     networks:
       bdCluster:
         ipv4_address: 192.168.1.37
-    entrypoint: /bin/sh
-    tty: true
+    ports:
+      - "8080:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: 'MkU3OEVBNTcwNTJENDM2Qk'
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka-1.bdc.home:9092,kafka-2.bdc.home:9092,kafka-3.bdc.home:9092
+      DYNAMIC_CONFIG_ENABLED: true
+
+  # kafka-ui:
+  #   image: confluentinc/cp-enterprise-control-center:latest
+  #   hostname: kafka-ui.bdc.home
+  #   container_name: kafka-ui
+  #   networks:
+  #     bdCluster:
+  #       ipv4_address: 192.168.1.37
+  #   ports:
+  #     - 9021:9021
+  #   environment:
+  #     CONTROL_CENTER_BOOTSTRAP_SERVERS: kafka-1.bdc.home:9092,kafka-2.bdc.home:9092,kafka-3.bdc.home:9092
+  #     # CONTROL_CENTER_CONNECT_CONNECT-DEFAULT_CLUSTER: 'connect:8083'
+  #     CONTROL_CENTER_KSQL_KSQLDB1_URL: http://ksqldb.bdc.home:8088
+  #     CONTROL_CENTER_SCHEMA_REGISTRY_URL: http://kafka-sr.bdc.home:8081
+  #     CONTROL_CENTER_REPLICATION_FACTOR: 1
+  #     CONTROL_CENTER_INTERNAL_TOPICS_PARTITIONS: 1
+  #     CONTROL_CENTER_MONITORING_INTERCEPTOR_TOPIC_PARTITIONS: 1
+  #     CONFLUENT_METRICS_TOPIC_REPLICATION: 1
+  #     PORT: 9021
+
+
+  # kafka-rest:
+  #   image: confluentinc/cp-kafka-rest:latest
+  #   hostname: kafka-rest.bdc.home
+  #   container_name: kafka-rest
+  #   restart: unless-stopped
+  #   networks:
+  #     bdCluster:
+  #       ipv4_address: 192.168.1.38
+  #   ports:
+  #     - 8082:8082
+  #   environment:
+  #     KAFKA_REST_HOST_NAME: kafka-rest.bdc.home
+  #     KAFKA_REST_LISTENERS: http://kafka-rest.bdc.home:8082
+  #     KAFKA_REST_SCHEMA_REGISTRY_URL: http://kafka-sr.bdc.home:8081
+  #     KAFKA_REST_BOOTSTRAP_SERVERS: PLAINTEXT://kafka-1.bdc.home:9092,PLAINTEXT://kafka-2.bdc.home:9092,,PLAINTEXT://kafka-3.bdc.home:9092
+
+  # ksql:
+  #   image: confluentinc/ksqldb-cli:latest
+  #   hostname: ksql.bdc.home
+  #   container_name: ksql
+  #   restart: unless-stopped
+  #   networks:
+  #     bdCluster:
+  #       ipv4_address: 192.168.1.39
+  #   entrypoint: /bin/sh
+  #   tty: true
     
 
   
