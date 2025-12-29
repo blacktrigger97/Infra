@@ -20,7 +20,7 @@ volumes:
 
 services:
 
-  x-airflow-common: &airflow-common
+  airflowimage:
     build:
       dockerfile: Dockerfile
       args:
@@ -30,14 +30,13 @@ services:
         - AIRFLOW_IMAGE_NAME=${AIRFLOW_IMAGE_NAME}
         - GIT_CONFIG_DIR=${GIT_CONFIG_DIR}
         - GIT_CONFIG_ADDRESS=${GIT_CONFIG_ADDRESS}
-    restart: unless-stopped
-    dns: 192.168.1.10
-    environment:
-      AIRFLOW_CONFIG: '/root/airflow/config/airflow.cfg'
-      AIRFLOW_CONN_MINIO: '{"conn_type": "aws", "login": "admin", "password": "abcd1234", "extra": {"region_name": "us-east-1", "endpoint_url": "http://nginx-lb.bdc.home:9000"}}'
+    image: airflow
 
+  
   airflow:
-    <<: *airflow-common
+    extends:
+      file: ../common.yml
+      service: airflow-common
     container_name: airflow
     hostname: airflow.bdc.home
     entrypoint: ["/bin/bash", "/root/s_scripts/airflow-m.sh"]
@@ -49,11 +48,11 @@ services:
       - 8080:8080
       - 5555:5555
       - 8794:8794
-    volumes:
-      - cifs-volume-airflow:/root/airflow:z
   
   airflow-wk1:
-    <<: *airflow-common
+    extends:
+      file: ../common.yml
+      service: airflow-common
     container_name: airflow-wk1
     hostname: airflow-wk1.bdc.home
     entrypoint: ["/bin/bash", "/root/s_scripts/airflow-w.sh"]
@@ -62,11 +61,11 @@ services:
         ipv4_address: 192.168.1.121
     ports:
       - 8793:8793
-    volumes:
-      - cifs-volume-airflow:/root/airflow:z
 
   airflow-wk2:
-    <<: *airflow-common
+    extends:
+      file: ../common.yml
+      service: airflow-common
     container_name: airflow-wk2
     hostname: airflow-wk2.bdc.home
     entrypoint: ["/bin/bash", "/root/s_scripts/airflow-w.sh"]
@@ -75,11 +74,11 @@ services:
         ipv4_address: 192.168.1.122
     ports:
       - 8793:8793
-    volumes:
-      - cifs-volume-airflow:/root/airflow:z
 
   airflow-wk3:
-    <<: *airflow-common
+    extends:
+      file: ../common.yml
+      service: airflow-common
     container_name: airflow-wk3
     hostname: airflow-wk3.bdc.home
     entrypoint: ["/bin/bash", "/root/s_scripts/airflow-w.sh"]
@@ -88,5 +87,3 @@ services:
         ipv4_address: 192.168.1.123
     ports:
       - 8793:8793
-    volumes:
-      - cifs-volume-airflow:/root/airflow:z

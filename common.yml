@@ -42,3 +42,13 @@ services:
     volumes:
       - ./spark/spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf:z
       - cifs-volume:/opt/bitnami/spark/extraJars:z
+
+  airflow-common:
+    image: registry.bdc.home:5000/airflow:latest
+    restart: unless-stopped
+    dns: 192.168.1.10
+    environment:
+      AIRFLOW_CONFIG: '/root/airflow/config/airflow.cfg'
+      AIRFLOW_CONN_MINIO: '{"conn_type": "aws", "login": "admin", "password": "abcd1234", "extra": {"region_name": "us-east-1", "endpoint_url": "http://nginx-lb.bdc.home:9000"}}'
+    volumes:
+      - cifs-volume-airflow:/root/airflow:z
