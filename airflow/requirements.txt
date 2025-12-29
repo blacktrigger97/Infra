@@ -9,3 +9,4 @@ flask-appbuilder
 pandas
 asyncpg
 starlette
+pandas_market_calendars
