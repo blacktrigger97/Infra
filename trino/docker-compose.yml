@@ -27,8 +27,8 @@ services:
       - TZ=Asia/Kolkata
       - TRINO_NODE_TYPE=coordinator
     volumes:
-      - ./trino/etc:/etc/trino
-      - ./trino/catalog:/etc/trino/catalog
+      - ./etc:/etc/trino
+      - ./catalog:/etc/trino/catalog
 
   trino-wk1:
     image: "trinodb/trino:latest"
@@ -44,8 +44,8 @@ services:
       - TZ=Asia/Kolkata
       - TRINO_NODE_TYPE=worker
     volumes:
-      - ./trino/etc:/etc/trino
-      - ./trino/catalog:/etc/trino/catalog
+      - ./etc:/etc/trino
+      - ./catalog:/etc/trino/catalog
 
   trino-wk2:
     image: "trinodb/trino:latest"
@@ -61,8 +61,8 @@ services:
       - TZ=Asia/Kolkata
       - TRINO_NODE_TYPE=worker
     volumes:
-      - ./trino/etc:/etc/trino
-      - ./trino/catalog:/etc/trino/catalog
+      - ./etc:/etc/trino
+      - ./catalog:/etc/trino/catalog
 
   trino-wk3:
     image: "trinodb/trino:latest"
@@ -78,8 +78,8 @@ services:
       - TZ=Asia/Kolkata
       - TRINO_NODE_TYPE=worker
     volumes:
-      - ./trino/etc:/etc/trino
-      - ./trino/catalog:/etc/trino/catalog
+      - ./etc:/etc/trino
+      - ./catalog:/etc/trino/catalog
 
 
   
