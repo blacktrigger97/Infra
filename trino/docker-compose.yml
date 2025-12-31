@@ -42,7 +42,6 @@ services:
       - 8081:8081
     environment:
       - TZ=Asia/Kolkata
-      - TRINO_NODE_TYPE=worker
     volumes:
       - ./etc:/etc/trino
       - ./catalog:/etc/trino/catalog
@@ -59,7 +58,6 @@ services:
       - 8081:8081
     environment:
       - TZ=Asia/Kolkata
-      - TRINO_NODE_TYPE=worker
     volumes:
       - ./etc:/etc/trino
       - ./catalog:/etc/trino/catalog
@@ -76,7 +74,6 @@ services:
       - 8081:8081
     environment:
       - TZ=Asia/Kolkata
-      - TRINO_NODE_TYPE=worker
     volumes:
       - ./etc:/etc/trino
       - ./catalog:/etc/trino/catalog
