@@ -36,8 +36,8 @@ services:
     ports:
       - 8081:8081
     volumes:
-      - ./etc:/etc/trino
-      - ./catalog:/etc/trino/catalog
+      - ./trino/etc:/etc/trino
+      - ./trino/catalog:/etc/trino/catalog
 
   spark:
     image: registry.bdc.home:5000/spark:latest
