@@ -30,6 +30,15 @@ services:
       - ${LOCAL_DIR}docker/kafka/data:/var/lib/kafka/data:z
       - ${LOCAL_DIR}docker/kafka/metadata:/var/lib/kafka/metadata:z
 
+  trino:
+    image: "trinodb/trino:latest"
+    restart: unless-stopped
+    ports:
+      - 8081:8081
+    volumes:
+      - ./etc:/etc/trino
+      - ./catalog:/etc/trino/catalog
+
   spark:
     image: registry.bdc.home:5000/spark:latest
     restart: unless-stopped
