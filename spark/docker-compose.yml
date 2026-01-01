@@ -43,8 +43,8 @@ services:
       - "7077:7077"
     environment:
       - SPARK_MODE=master
-      - SPARK_MASTER_CORES=3
-      - SPARK_MASTER_MEMORY=8g
+      - SPARK_MASTER_CORES=2
+      - SPARK_MASTER_MEMORY=4g
       - SPARK_METRICS_ENABLED=true
 
   sw1:
@@ -59,8 +59,8 @@ services:
     environment:
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://sm.bdc.home:7077
-      - SPARK_WORKER_CORES=6
-      - SPARK_WORKER_MEMORY=18g
+      - SPARK_WORKER_CORES=4
+      - SPARK_WORKER_MEMORY=10g
 
 
   sw2:
@@ -75,8 +75,8 @@ services:
     environment:
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://sm.bdc.home:7077
-      - SPARK_WORKER_CORES=6
-      - SPARK_WORKER_MEMORY=18g
+      - SPARK_WORKER_CORES=4
+      - SPARK_WORKER_MEMORY=10g
 
   sw3:
     extends:
@@ -90,5 +90,5 @@ services:
     environment:
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://sm.bdc.home:7077
-      - SPARK_WORKER_CORES=6
-      - SPARK_WORKER_MEMORY=18g
+      - SPARK_WORKER_CORES=4
+      - SPARK_WORKER_MEMORY=10g
