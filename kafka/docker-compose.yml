@@ -71,10 +71,10 @@ services:
       SCHEMA_REGISTRY_HOST_NAME: kafka-sr.bdc.home
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://kafka-1.bdc.home:9092,PLAINTEXT://kafka-2.bdc.home:9092,PLAINTEXT://kafka-3.bdc.home:9092
       SCHEMA_REGISTRY_LISTENERS: http://kafka-sr.bdc.home:8081
-      SCHEMA_REGISTRY_STORAGE_TYPE: postgres
-      SCHEMA_REGISTRY_STORE_JDBC_URL: jdbc:postgresql://postgresql.bdc.home:5432/bdc?currentSchema=kafka
-      SCHEMA_REGISTRY_STORE_JDBC_USERNAME: kafka
-      SCHEMA_REGISTRY_STORE_JDBC_PASSWORD: ${DOCKER_PASS}
+      # SCHEMA_REGISTRY_STORAGE_TYPE: postgres
+      # SCHEMA_REGISTRY_STORE_JDBC_URL: jdbc:postgresql://postgresql.bdc.home:5432/bdc?currentSchema=kafka
+      # SCHEMA_REGISTRY_STORE_JDBC_USERNAME: kafka
+      # SCHEMA_REGISTRY_STORE_JDBC_PASSWORD: ${DOCKER_PASS}
 
   ksqldb:
     image: confluentinc/ksqldb-server:latest
