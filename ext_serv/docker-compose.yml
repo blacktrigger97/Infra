@@ -48,6 +48,7 @@ services:
       - nessie.catalog.secrets.s3.access-key.secret=${DOCKER_PASS}
       - nessie.catalog.service.s3.path-style-access=true
       - nessie.catalog.service.s3.endpoint=${MINIO_ENDPOINT}
+      - nessie.catalog.service.s3.region=us-east-1
       - nessie.server.authentication.enabled=false
 
   hue:
