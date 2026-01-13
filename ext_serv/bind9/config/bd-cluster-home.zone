@@ -26,7 +26,7 @@ worker3	    IN	A	192.168.1.13
 worker4	    IN	A	192.168.1.14
 postgresql	IN	A	192.168.1.21
 nessie	    IN	A	192.168.1.31
-hue	        IN	A	192.168.1.32
+superset    IN	A	192.168.1.32
 trino-co	IN	A	192.168.1.33
 airflow     IN  A   192.168.1.34
 kafka-sr	IN	A	192.168.1.35
