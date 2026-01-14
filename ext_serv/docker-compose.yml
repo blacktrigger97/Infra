@@ -39,17 +39,17 @@ services:
       - nessie.catalog.default-warehouse=warehouse
       - nessie.catalog.warehouses.warehouse.location=s3://warehouse/nessie
       # - nessie.catalog.service.s3.default-options.request-signing-enabled=false
-      # - nessie.catalog.service.s3.default-options.endpoint=${MINIO_ENDPOINT}
-      # - nessie.catalog.service.s3.default-options.path-style-access=true
-      # - nessie.catalog.service.s3.default-options.auth-type=STATIC
-      # - nessie.catalog.service.s3.default-options.region=us-east-1
-      # - nessie.catalog.service.s3.default-options.access-key=urn:nessie-secret:quarkus:nessie.catalog.secrets.access-key
-      - nessie.catalog.service.s3.auth-type=STATIC
+      - nessie.catalog.service.s3.default-options.endpoint=${MINIO_ENDPOINT}
+      - nessie.catalog.service.s3.default-options.path-style-access=true
+      - nessie.catalog.service.s3.default-options.auth-type=STATIC
+      - nessie.catalog.service.s3.default-options.region=us-east-1
+      - nessie.catalog.service.s3.default-options.access-key=urn:nessie-secret:quarkus:nessie.catalog.secrets.access-key
+      # - nessie.catalog.service.s3.auth-type=STATIC
       - nessie.catalog.secrets.s3.access-key.name=admin
       - nessie.catalog.secrets.s3.access-key.secret=${DOCKER_PASS}
-      - nessie.catalog.service.s3.path-style-access=true
-      - nessie.catalog.service.s3.endpoint=${MINIO_ENDPOINT}
-      - nessie.catalog.service.s3.region=us-east-1
+      # - nessie.catalog.service.s3.path-style-access=true
+      # - nessie.catalog.service.s3.endpoint=${MINIO_ENDPOINT}
+      # - nessie.catalog.service.s3.region=us-east-1
       - nessie.server.authentication.enabled=false
 
   hue:
