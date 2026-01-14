@@ -40,7 +40,6 @@ services:
     container_name: airflow
     hostname: airflow.bdc.home
     entrypoint: ["/bin/bash", "/root/s_scripts/airflow-m.sh"]
-    
     networks:
       bdCluster:
         ipv4_address: 192.168.1.34
