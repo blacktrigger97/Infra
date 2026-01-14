@@ -44,6 +44,7 @@ services:
       # - nessie.catalog.service.s3.default-options.auth-type=STATIC
       # - nessie.catalog.service.s3.default-options.region=us-east-1
       # - nessie.catalog.service.s3.default-options.access-key=urn:nessie-secret:quarkus:nessie.catalog.secrets.access-key
+      - nessie.catalog.service.s3.auth-type=STATIC
       - nessie.catalog.secrets.s3.access-key.name=admin
       - nessie.catalog.secrets.s3.access-key.secret=${DOCKER_PASS}
       - nessie.catalog.service.s3.path-style-access=true
