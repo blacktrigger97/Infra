@@ -26,7 +26,7 @@ services:
     volumes:
       - ./etc-co:/etc/trino
       - ./catalog:/etc/trino/catalog
-      - ${LOCAL_DIR}docker/trino/data:/data/trino
+      - ${LOCAL_DIR}docker/trino/data:/data/trino:z
 
   trino-wk1:
     image: "trinodb/trino:${TRINO_VER}"
@@ -41,7 +41,7 @@ services:
     volumes:
       - ./etc-wk:/etc/trino
       - ./catalog:/etc/trino/catalog
-      - ${LOCAL_DIR}docker/trino/data:/data/trino
+      - ${LOCAL_DIR}docker/trino/data:/data/trino:z
 
   trino-wk2:
     image: "trinodb/trino:${TRINO_VER}"
@@ -56,7 +56,7 @@ services:
     volumes:
       - ./etc-wk:/etc/trino
       - ./catalog:/etc/trino/catalog
-      - ${LOCAL_DIR}docker/trino/data:/data/trino
+      - ${LOCAL_DIR}docker/trino/data:/data/trino:z
 
 
   trino-wk3:
@@ -72,7 +72,7 @@ services:
     volumes:
       - ./etc-wk:/etc/trino
       - ./catalog:/etc/trino/catalog
-      - ${LOCAL_DIR}docker/trino/data:/data/trino
+      - ${LOCAL_DIR}docker/trino/data:/data/trino:z
 
 
   
