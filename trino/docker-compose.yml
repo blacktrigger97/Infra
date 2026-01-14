@@ -21,6 +21,7 @@ services:
     networks:
       bdCluster:
         ipv4_address: 192.168.1.33
+    dns: 192.168.1.10
     ports:
       - 8080:8080
     volumes:
@@ -35,6 +36,7 @@ services:
     networks:
       bdCluster:
         ipv4_address: 192.168.1.41
+    dns: 192.168.1.10
     ports:
       - 8081:8081
     volumes:
@@ -49,6 +51,7 @@ services:
     networks:
       bdCluster:
         ipv4_address: 192.168.1.42
+    dns: 192.168.1.10
     ports:
       - 8081:8081
     volumes:
@@ -63,6 +66,7 @@ services:
     networks:
       bdCluster:
         ipv4_address: 192.168.1.43
+    dns: 192.168.1.10
     ports:
       - 8081:8081
     volumes:
