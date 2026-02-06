@@ -30,6 +30,7 @@ services:
 
   pypi-server:
     image: pypiserver/pypiserver:latest
+    network_mode: host
     ports:
       - 8081:8080
     volumes:
