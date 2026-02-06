@@ -1,86 +1,4 @@
-networks:
-  bdCluster:
-    name: bdCluster
-    driver: ipvlan
-    external: true
-    driver_opts:
-      parent: ${ETHERNET_NAME}
-    ipam:
-      config:
-        - subnet: 192.168.1.0/24
-          ip_range: 192.168.1.0/24
-          gateway: 192.168.1.1
-
 services:
-
-  nessie:
-    image: ghcr.io/projectnessie/nessie:${NESSIE_VER}
-    container_name: nessie
-    hostname: nessie.bdc.home
-    restart: unless-stopped
-    networks:
-      bdCluster:
-        ipv4_address: 192.168.1.31
-    ports:
-      - 19120:19120
-    environment:
-      - quarkus.datasource.db-kind=postgresql
-      - quarkus.datasource.jdbc.max-size=16
-      - quarkus.datasource.username=${DOCKER_USR}
-      - quarkus.datasource.password=${DOCKER_PASS}
-      - quarkus.debug.print-startup-times=true
-      - quarkus.profile=prod
-      - quarkus.datasource.driver='org.postgresql.Driver'
-      - quarkus.http.port=19120
-      - quarkus.http.host=nessie.bdc.home
-      - quarkus.datasource.jdbc.url=jdbc:postgresql://postgresql.bdc.home:5432/bdc?currentSchema=nessie
-      - quarkus.oidc.enabled="false"
-      - nessie.version.store.type=JDBC
-      - nessie.catalog.default-warehouse=warehouse
-      - nessie.catalog.warehouses.warehouse.location=s3://warehouse/nessie
-      - nessie.catalog.service.s3.default-options.endpoint=${MINIO_ENDPOINT}
-      - nessie.catalog.service.s3.default-options.path-style-access=true
-      - nessie.catalog.service.s3.default-options.auth-type=STATIC
-      - nessie.catalog.service.s3.default-options.region=us-east-1
-      - nessie.catalog.service.s3.default-options.access-key=urn:nessie-secret:quarkus:nessie.catalog.secrets.access-key
-      - nessie.catalog.secrets.access-key.name=admin
-      - nessie.catalog.secrets.access-key.secret=${DOCKER_PASS}
-      - nessie.server.authentication.enabled=false
-
-  hue:
-    image: gethue/hue:latest
-    hostname: hue.bdc.home
-    container_name: hue
-    restart: unless-stopped
-    networks:
-      bdCluster:
-        ipv4_address: 192.168.1.32
-    ports:
-      - 8888:8888
-    volumes:
-      - ./hue/hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
-      - ./hue/startup.sh:/usr/share/hue/startup.sh
-      - ./hue/__init__.py:/usr/share/hue/build/env/lib/python3.11/site-packages/hyper/__init__.py
-
-  jupyter:
-    build:
-      context: jupyter 
-      dockerfile: ${HOST_DIR}/ext_serv/jupyter/Dockerfile
-      args:
-        - PY_VER=${PY_VER}
-        - DOCKER_DIR=${DOCKER_DIR}
-    user: root
-    image: jupyter
-    container_name: jupyter
-    hostname: jupyter.bdc.home
-    entrypoint: ["jupyter","notebook"]
-    networks:
-      bdCluster:
-        ipv4_address: 192.168.1.201
-    ports:
-      - 8091:8091
-    volumes:
-      - ./jupyter/notebooks:/root/notebooks
 
   dns1:
     container_name: dns1
@@ -110,6 +28,15 @@ services:
       - ${LOCAL_DIR}docker/registry-data:/var/lib/registry:z
     restart: unless-stopped
 
+  pypi-server:
+    image: pypiserver/pypiserver:latest
+    ports:
+      - 8080:8080
+    volumes:
+      - pypi-server-data:/data/packages
+    command: "-P . -a . /data/packages" # Allows unauthorized uploads and serves from /data/packages
+    restart: always
+
   redis:
     image: redis:latest
     hostname: redis.bdc.home
@@ -126,7 +53,20 @@ services:
       timeout: 30s
       retries: 50
 
-  
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    hostname: kafka-ui.bdc.home
+    container_name: kafka-ui
+    restart: unless-stopped
+    network_mode: host
+    # ports:
+    #   - 8080:8080
+    environment:
+      KAFKA_CLUSTERS_0_NAME: 'BDC-KAFKA'
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka-1.bdc.home:9092,kafka-2.bdc.home:9092,kafka-3.bdc.home:9092
+      KAFKA_CLUSTERS_0_SCHEMAREGISTRY: http://kafka-sr.bdc.home:8081
+      KAFKA_CLUSTERS_0_KSQLDB_SERVER: http://ksqldb.bdc.home:8088
+      DYNAMIC_CONFIG_ENABLED: true
   
   
 

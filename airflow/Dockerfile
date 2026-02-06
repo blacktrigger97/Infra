@@ -29,3 +29,5 @@ RUN rsync -avru $GIT_CONFIG_DIR/s_scripts/ s_scripts
 COPY requirements.txt .
 RUN pip3 install --upgrade pip
 RUN pip3 install apache-airflow[redis,celery,postgres]==${AIRFLOW_IMAGE_NAME} pyspark==${SPARK_VERSION} -r requirements.txt
+
+ENV INFRA_ENV="DEV"

@@ -16,9 +16,9 @@ dns1          IN      A       192.168.1.10
 ; -- add dns records below
 
 redis	    IN	A	192.168.1.10
+kafka-ui    IN	A	192.168.1.10
 registry    IN  A   192.168.1.10
 minio-mc    IN	A	192.168.1.10
-secon-hist	IN	A	192.168.1.10
 worker0	    IN	A	192.168.1.10
 worker1	    IN	A	192.168.1.11
 worker2	    IN	A	192.168.1.12
@@ -31,8 +31,6 @@ trino-co	IN	A	192.168.1.33
 airflow     IN  A   192.168.1.34
 kafka-sr	IN	A	192.168.1.35
 ksqldb	    IN	A	192.168.1.36
-kafka-ui    IN	A	192.168.1.37
-kafka-rest	IN	A	192.168.1.38
 trino-wk1	IN	A	192.168.1.41
 trino-wk2	IN	A	192.168.1.42
 trino-wk3	IN	A	192.168.1.43

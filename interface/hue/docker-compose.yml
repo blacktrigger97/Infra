@@ -1,0 +1,49 @@
+networks:
+  bdCluster:
+    name: bdCluster
+    driver: ipvlan
+    external: true
+    driver_opts:
+      parent: ${ETHERNET_NAME}
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24
+          ip_range: 192.168.1.0/24
+          gateway: 192.168.1.1
+
+services:
+
+  hue:
+    image: gethue/hue:latest
+    hostname: hue.bdc.home
+    container_name: hue
+    restart: unless-stopped
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.32
+    ports:
+      - 8888:8888
+    volumes:
+      - ./hue/hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
+      - ./hue/startup.sh:/usr/share/hue/startup.sh
+      - ./hue/__init__.py:/usr/share/hue/build/env/lib/python3.11/site-packages/hyper/__init__.py
+
+  jupyter:
+    build:
+      context: jupyter 
+      dockerfile: ${HOST_DIR}/ext_serv/jupyter/Dockerfile
+      args:
+        - PY_VER=${PY_VER}
+        - DOCKER_DIR=${DOCKER_DIR}
+    user: root
+    image: jupyter
+    container_name: jupyter
+    hostname: jupyter.bdc.home
+    entrypoint: ["jupyter","notebook"]
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.201
+    ports:
+      - 8091:8091
+    volumes:
+      - ./jupyter/notebooks:/root/notebooks
