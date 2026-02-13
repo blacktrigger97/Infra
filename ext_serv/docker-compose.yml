@@ -63,6 +63,7 @@ services:
     # ports:
     #   - 8080:8080
     environment:
+      TZ: "Asia/Kolkata"
       KAFKA_CLUSTERS_0_NAME: 'BDC-KAFKA'
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka-1.bdc.home:9092,kafka-2.bdc.home:9092,kafka-3.bdc.home:9092
       KAFKA_CLUSTERS_0_SCHEMAREGISTRY: http://kafka-sr.bdc.home:8081
