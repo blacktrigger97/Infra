@@ -63,7 +63,7 @@ then
   mc anonymous set public minio1/warehouse
   mc anonymous set public minio1/lakehouse
   mc anonymous set public minio1/tmp
-  mc anonymous set public airflow/logs
+  mc anonymous set public minio1/airflow/logs
 else
   echo "Bucket Creation Failed."
   exit 1
