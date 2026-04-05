@@ -9,11 +9,8 @@ minio2.bdc.home
 minio3.bdc.home
 '
 
-USER=$DOCKER_USR
-PASS=$DOCKER_PASS
-
-echo "user: $USER"
-echo "pass: $PASS"
+echo -e "user: $DOCKER_USR"
+echo -e"pass: $DOCKER_PASS"
 
 # like: minio1 minio2 ...
 # INSTANCES=`for host in $HOSTS; do echo $host; done`
@@ -24,7 +21,7 @@ NON_REPLICATED_INSTANCES=''
 for host in $HOSTS
 do
   tmp=`echo $host | cut -d'.' -f 1`
-  mc alias set $tmp http://${host}:9000 ${USER} ${PASS};
+  mc alias set $tmp http://${host}:9000 ${DOCKER_USR} ${DOCKER_PASS};
   # until curl -s `echo ${host} | cut -d "=" -f 2` > /dev/null; do sleep 5 &&
   #   echo "host `echo $host | cut -d "@" -f 2` not up yet. retrying"; done
 done
