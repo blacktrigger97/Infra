@@ -9,8 +9,11 @@ minio2.bdc.home
 minio3.bdc.home
 '
 
-USER=${DOCKER_USR}
-PASS=${DOCKER_PASS}
+USER=$DOCKER_USR
+PASS=$DOCKER_PASS
+
+echo "user: $USER"
+echo "pass: $PASS"
 
 # like: minio1 minio2 ...
 # INSTANCES=`for host in $HOSTS; do echo $host; done`
