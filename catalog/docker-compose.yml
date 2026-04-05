@@ -28,22 +28,22 @@ services:
     environment:
       TZ: Asia/Kolkata
       POLARIS_METASTORE_TYPE: eclipse-link
-      polaris.persistence.type: jdbc
-      polaris.persistence.jdbc.url: jdbc:postgresql://postgresql.bdc.home:5432/bdc?currentSchema=polaris
-      polaris.persistence.jdbc.user: root
-      polaris.persistence.jdbc.password: abcd1234
+      QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgresql.bdc.home:5432/bdc?currentSchema=polaris
+      QUARKUS_DATASOURCE_USERNAME: ${DOCKER_USR}
+      QUARKUS_DATASOURCE_PASSWORD: ${DOCKER_PASS}
       AWS_ACCESS_KEY_ID: admin
       AWS_SECRET_ACCESS_KEY: ${DOCKER_PASS}
       AWS_REGION: us-east-1
       AWS_ENDPOINT_URL_S3: ${MINIO_ENDPOINT}
       AWS_ENDPOINT_URL_STS: ${MINIO_ENDPOINT}
       POLARIS_BOOTSTRAP_CREDENTIALS: default,admin,${DOCKER_PASS}
+      POLARIS_SERVER_BIND_HOST: polaris.bdc.home
       polaris.catalogs.default.warehouse.location: s3://warehouse
-      polaris.catalogs.default.warehouse.credentials: default
-      polaris.catalogs.default.warehouse.credentials.default.access-key: admin
-      polaris.catalogs.default.warehouse.credentials.default.secret-key: ${DOCKER_PASS}
-      polaris.catalogs.default.warehouse.credentials.default.region: us-east-1
-      polaris.catalogs.default.warehouse.credentials.default.endpoint: ${MINIO_ENDPOINT}
+      # polaris.catalogs.default.warehouse.credentials: default
+      # polaris.catalogs.default.warehouse.credentials.default.access-key: admin
+      # polaris.catalogs.default.warehouse.credentials.default.secret-key: ${DOCKER_PASS}
+      # polaris.catalogs.default.warehouse.credentials.default.region: us-east-1
+      # polaris.catalogs.default.warehouse.credentials.default.endpoint: ${MINIO_ENDPOINT}
       polaris.realm-context.realms: default
       polaris.features.DROP_WITH_PURGE_ENABLED: "true"
       polaris.features.QUERY_HISTORY_ENABLED: "true"
