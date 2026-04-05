@@ -37,8 +37,7 @@ services:
       AWS_REGION: us-east-1
       AWS_ENDPOINT_URL_S3: ${MINIO_ENDPOINT}
       AWS_ENDPOINT_URL_STS: ${MINIO_ENDPOINT}
-      POLARIS_BOOTSTRAP_CREDENTIALS: default,admin,abcd1234
-      POLARIS_SERVER_BIND_HOST: polaris.bdc.home
+      polaris.bootstrap.credentials: default,admin,abcd1234
       # polaris.catalogs.default.warehouse.location: s3://warehouse
       # polaris.catalogs.default.warehouse.credentials: default
       # polaris.catalogs.default.warehouse.credentials.default.access-key: admin
