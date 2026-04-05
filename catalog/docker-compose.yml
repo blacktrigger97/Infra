@@ -32,11 +32,11 @@ services:
       # - quarkus.datasource.username=${DOCKER_USR}
       # - quarkus.datasource.password=${DOCKER_PASS}
       # - quarkus.datasource.jdbc.url=jdbc:postgresql://postgresql.bdc.home:5432/bdc?currentSchema=polaris
-      - AWS_ACCESS_KEY_ID=${DOCKER_USR}
-      - AWS_SECRET_ACCESS_KEY=${DOCKER_PASS}
-      - AWS_REGION=us-east-1
-      - AWS_ENDPOINT_URL_S3=${MINIO_ENDPOINT}
-      - AWS_ENDPOINT_URL_STS=${MINIO_ENDPOINT}
+      # - AWS_ACCESS_KEY_ID=${DOCKER_USR}
+      # - AWS_SECRET_ACCESS_KEY=${DOCKER_PASS}
+      # - AWS_REGION=us-east-1
+      # - AWS_ENDPOINT_URL_S3=${MINIO_ENDPOINT}
+      # - AWS_ENDPOINT_URL_STS=${MINIO_ENDPOINT}
       - polaris.bootstrap.credentials=default,root,abcd1234
       # polaris.catalogs.default.warehouse.location: s3://warehouse
       # polaris.catalogs.default.warehouse.credentials: default
