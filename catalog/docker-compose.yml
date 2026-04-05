@@ -27,8 +27,8 @@ services:
         ipv4_address: 192.168.1.30
     environment:
       - TZ=Asia/Kolkata
-      - POLARIS_BOOTSTRAP=true
-      - POLARIS_HOME=/app
+      - polaris.bootstrap=true
+      - polaris.home=/app
       - polaris.persistence.type=relational-jdbc
       - quarkus.datasource.db-kind=postgresql
       - quarkus.datasource.username=${DOCKER_USR}
