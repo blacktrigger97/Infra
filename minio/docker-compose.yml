@@ -19,7 +19,7 @@ x-minio-common: &minio-common
     - "9001"
   environment:
     TZ: Asia/Kolkata
-    MINIO_ROOT_USER: admin
+    MINIO_ROOT_USER: ${DOCKER_USR}
     MINIO_ROOT_PASSWORD: ${DOCKER_PASS}
     MINIO_REGION: us-east-1
   healthcheck:
