@@ -57,7 +57,7 @@ services:
       QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgresql.bdc.home:5432/bdc?currentSchema=polaris
       QUARKUS_DATASOURCE_USERNAME: ${DOCKER_USR}
       QUARKUS_DATASOURCE_PASSWORD: ${DOCKER_PASS}
-    command: ['bootstrap --realm=POLARIS -c=POLARIS,${DOCKER_USR},${DOCKER_PASS}']
+    command: ['bootstrap -r=POLARIS -c=POLARIS,${DOCKER_USR},${DOCKER_PASS}']
 
 
   polaris-ui:
