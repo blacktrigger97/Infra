@@ -10,7 +10,7 @@ minio3.bdc.home
 '
 
 echo -e "user: $DOCKER_USR"
-echo -e"pass: $DOCKER_PASS"
+echo -e "pass: $DOCKER_PASS"
 
 # like: minio1 minio2 ...
 # INSTANCES=`for host in $HOSTS; do echo $host; done`

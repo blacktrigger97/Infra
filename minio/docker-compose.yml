@@ -91,4 +91,6 @@ services:
      - ./init.sh:/init.sh
     environment:
       - TZ=Asia/Kolkata
+      - DOCKER_USR=${DOCKER_USR}
+      - DOCKER_PASS=${DOCKER_PASS}
 
