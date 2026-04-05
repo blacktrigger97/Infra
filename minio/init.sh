@@ -55,12 +55,14 @@ echo -e "\n*****************************************"
 echo -e "****** Started Bucket creation process ******"
 echo -e "*****************************************\n"
 mc mb minio1/warehouse --ignore-existing
+mc mb minio1/lakehouse --ignore-existing
 # mc mb minio1/spooling --ignore-existing
 mc mb minio1/tmp/kafka/ --ignore-existing
 mc mb minio1/airflow/logs/ --ignore-existing
 if [ $? == 0 ];
 then
   mc anonymous set public minio1/warehouse
+  mc anonymous set public minio1/lakehouse  
   # mc anonymous set public minio1/spooling
   mc anonymous set public minio1/tmp
   mc anonymous set public airflow/logs
