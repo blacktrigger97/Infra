@@ -27,17 +27,17 @@ services:
         ipv4_address: 192.168.1.30
     environment:
       - TZ=Asia/Kolkata
-      - polaris.persistence.type=relational-jdbc
-      - quarkus.datasource.db-kind=postgresql
-      - quarkus.datasource.username=${DOCKER_USR}
-      - quarkus.datasource.password=${DOCKER_PASS}
-      - quarkus.datasource.jdbc.url=jdbc:postgresql://postgresql.bdc.home:5432/bdc?currentSchema=polaris
+      # - polaris.persistence.type=relational-jdbc
+      # - quarkus.datasource.db-kind=postgresql
+      # - quarkus.datasource.username=${DOCKER_USR}
+      # - quarkus.datasource.password=${DOCKER_PASS}
+      # - quarkus.datasource.jdbc.url=jdbc:postgresql://postgresql.bdc.home:5432/bdc?currentSchema=polaris
       - AWS_ACCESS_KEY_ID=admin
       - AWS_SECRET_ACCESS_KEY=${DOCKER_PASS}
       - AWS_REGION=us-east-1
       - AWS_ENDPOINT_URL_S3=${MINIO_ENDPOINT}
       - AWS_ENDPOINT_URL_STS=${MINIO_ENDPOINT}
-      - polaris.bootstrap.credentials=default,admin,password
+      - polaris.bootstrap.credentials=default,admin,abcd1234
       # polaris.catalogs.default.warehouse.location: s3://warehouse
       # polaris.catalogs.default.warehouse.credentials: default
       # polaris.catalogs.default.warehouse.credentials.default.access-key: admin
