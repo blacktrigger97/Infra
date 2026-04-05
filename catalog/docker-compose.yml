@@ -37,8 +37,8 @@ services:
       - AWS_REGION=us-east-1
       - AWS_ENDPOINT_URL_S3=${MINIO_ENDPOINT}
       - AWS_ENDPOINT_URL_STS=${MINIO_ENDPOINT}
-      - polaris.bootstrap.credentials=default,${DOCKER_USR},${DOCKER_PASS}
-      - polaris.realm-context.realms=default
+      - polaris.bootstrap.credentials=POLARIS,${DOCKER_USR},${DOCKER_PASS}
+      - polaris.realm-context.realms=POLARIS
       - polaris.features.DROP_WITH_PURGE_ENABLED=true
       - polaris.features.QUERY_HISTORY_ENABLED=true
       - polaris.features.QUERY_HISTORY_RETENTION_DAYS=7
@@ -56,7 +56,7 @@ services:
       QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgresql.bdc.home:5432/bdc?currentSchema=polaris
       QUARKUS_DATASOURCE_USERNAME: ${DOCKER_USR}
       QUARKUS_DATASOURCE_PASSWORD: ${DOCKER_PASS}
-    command: ["bootstrap"]
+    command: ["bootstrap --realm=POLARIS -c=POLARIS,${DOCKER_USR},${DOCKER_PASS}"]
 
 
   polaris-ui:
