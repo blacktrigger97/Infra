@@ -40,16 +40,10 @@ services:
       # - AWS_ENDPOINT_URL_S3=${MINIO_ENDPOINT}
       # - AWS_ENDPOINT_URL_STS=${MINIO_ENDPOINT}
       # - polaris.bootstrap.credentials=default,root,abcd1234
-      # polaris.catalogs.default.warehouse.location: s3://warehouse
-      # polaris.catalogs.default.warehouse.credentials: default
-      # polaris.catalogs.default.warehouse.credentials.default.access-key: admin
-      # polaris.catalogs.default.warehouse.credentials.default.secret-key: ${DOCKER_PASS}
-      # polaris.catalogs.default.warehouse.credentials.default.region: us-east-1
-      # polaris.catalogs.default.warehouse.credentials.default.endpoint: ${MINIO_ENDPOINT}
       # - polaris.realm-context.realms=default
       # - polaris.features.DROP_WITH_PURGE_ENABLED=true
-      # polaris.features.QUERY_HISTORY_ENABLED: "true"
-      # polaris.features.QUERY_HISTORY_RETENTION_DAYS: 7
+      # - polaris.features.QUERY_HISTORY_ENABLED: "true"
+      # - polaris.features.QUERY_HISTORY_RETENTION_DAYS: 7
     # volumes:
     #   - ./polaris/application.properties:/deployment/config/application.properties:z
     healthcheck:
