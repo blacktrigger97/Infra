@@ -13,6 +13,34 @@ networks:
 
 services:
 
+  polaris:
+    image: apache/polaris:latest
+    container_name: polaris
+    hostname: polaris.bdc.home
+    platform: linux/amd64
+    ports:
+      - 8181:8181
+      - 8182:8182
+    restart: unless-stopped
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.30
+    environment:
+      AWS_ACCESS_KEY_ID: ${DOCKER_USR}
+      AWS_SECRET_ACCESS_KEY: ${DOCKER_PASS}
+      AWS_REGION: us-east-1
+      AWS_ENDPOINT_URL_S3: ${MINIO_ENDPOINT}
+      AWS_ENDPOINT_URL_STS: ${MINIO_ENDPOINT}
+      POLARIS_BOOTSTRAP_CREDENTIALS: default,${DOCKER_USR},${DOCKER_PASS}
+      polaris.realm-context.realms: default
+      polaris.features.DROP_WITH_PURGE_ENABLED: "true"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://polaris.bdc.home:8181/healthcheck"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  
+
   nessie:
     image: ghcr.io/projectnessie/nessie:${NESSIE_VER}
     container_name: nessie

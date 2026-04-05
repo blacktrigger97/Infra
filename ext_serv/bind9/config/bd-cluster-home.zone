@@ -25,6 +25,7 @@ worker2	    IN	A	192.168.1.12
 worker3	    IN	A	192.168.1.13
 worker4	    IN	A	192.168.1.14
 postgresql	IN	A	192.168.1.21
+polaris	    IN	A	192.168.1.30
 nessie	    IN	A	192.168.1.31
 hue         IN	A	192.168.1.32
 trino-co	IN	A	192.168.1.33
