@@ -4,14 +4,13 @@ echo -e "****** started replication process ******"
 echo -e "*****************************************\n"
 
 # HOSTS=`env | grep MC_HOST`
-# HOSTS='minio1.bdc.home
-# minio2.bdc.home
-# minio3.bdc.home
-# '
-HOSTS=`cat ../ext_serv/bind9/config/bd-cluster-home.zone | grep -E 'minio[0-9]' | awk '{print $1}' | xargs -Iz echo -e "z.bdc.home"`
+HOSTS='minio1.bdc.home
+minio2.bdc.home
+minio3.bdc.home
+'
 
-USER=`cat ../.env | grep "DOCKER_USR" | cut -d '=' -f2`
-PASS=`cat ../.env | grep "DOCKER_PASS" | cut -d '=' -f2`
+USER=${DOCKER_USR}
+PASS=${DOCKER_PASS}
 
 # like: minio1 minio2 ...
 # INSTANCES=`for host in $HOSTS; do echo $host; done`
