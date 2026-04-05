@@ -28,9 +28,9 @@ services:
     environment:
       TZ: Asia/Kolkata
       POLARIS_METASTORE_TYPE: eclipse-link
-      QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgresql.bdc.home:5432/bdc?currentSchema=polaris
-      QUARKUS_DATASOURCE_USERNAME: ${DOCKER_USR}
-      QUARKUS_DATASOURCE_PASSWORD: ${DOCKER_PASS}
+      # QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgresql.bdc.home:5432/bdc?currentSchema=polaris
+      # QUARKUS_DATASOURCE_USERNAME: ${DOCKER_USR}
+      # QUARKUS_DATASOURCE_PASSWORD: ${DOCKER_PASS}
       AWS_ACCESS_KEY_ID: admin
       AWS_SECRET_ACCESS_KEY: ${DOCKER_PASS}
       AWS_REGION: us-east-1
@@ -46,9 +46,10 @@ services:
       # polaris.catalogs.default.warehouse.credentials.default.endpoint: ${MINIO_ENDPOINT}
       polaris.realm-context.realms: default
       polaris.features.DROP_WITH_PURGE_ENABLED: "true"
-      polaris.features.QUERY_HISTORY_ENABLED: "true"
-      polaris.features.QUERY_HISTORY_RETENTION_DAYS: 7
-
+      # polaris.features.QUERY_HISTORY_ENABLED: "true"
+      # polaris.features.QUERY_HISTORY_RETENTION_DAYS: 7
+    volumes:
+      - polaris/application.properties:/deployment/config/application.properties:z
     healthcheck:
       test: ["CMD", "curl", "-f", "http://polaris.bdc.home:8181/healthcheck"]
       interval: 5s
