@@ -49,7 +49,7 @@ services:
       # polaris.features.QUERY_HISTORY_ENABLED: "true"
       # polaris.features.QUERY_HISTORY_RETENTION_DAYS: 7
     volumes:
-      - polaris/application.properties:/deployment/config/application.properties:z
+      - ./polaris/application.properties:/deployment/config/application.properties:z
     healthcheck:
       test: ["CMD", "curl", "-f", "http://polaris.bdc.home:8181/healthcheck"]
       interval: 5s
