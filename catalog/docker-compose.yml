@@ -64,17 +64,18 @@ services:
 
 
   polaris-ui:
-    image: ghcr.io/binarycat0/apache-polaris-ui:latest
+    image: apache/polaris-console:latest
     container_name: polaris-ui
     hostname: polaris-ui.bdc.home
-    ports:
-      - 3000:3000
     restart: unless-stopped
     network_mode: host
     environment:
-      - POLARIS_MANAGEMENT_API_URL=http://polaris.bdc.home:8182/api/management/v1
-      - POLARIS_CATALOG_API_URL=http://polaris.bdc.home:8181/api/catalog/v1
-
+      - VITE_POLARIS_API_URL=http://polaris.bdc.home:8181
+      - VITE_POLARIS_REALM=POLARIS 
+      - VITE_POLARIS_REALM_HEADER_NAME=Polaris-Realm                    # optional, defaults to "Polaris-Realm"
+      - VITE_OAUTH_TOKEN_URL=http://polaris.bdc.home:8181/api/v1/oauth/tokens
+      - VITE_OAUTH_CLIENT_ID=${DOCKER_USR}
+      - VITE_OAUTH_CLIENT_SECRET=${DOCKER_PASS}
 
   nessie:
     image: ghcr.io/projectnessie/nessie:${NESSIE_VER}
