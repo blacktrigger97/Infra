@@ -28,7 +28,7 @@ services:
       - ./catalog:/etc/trino/catalog
     environment:
       - TZ=Asia/Kolkata
-      - NODE_TRINO_COORDINATOR=true
+      - TRINO_COORDINATOR=true
 
   trino-wk1:
     image: "trinodb/trino:${TRINO_VER}"
@@ -46,7 +46,7 @@ services:
       # - ${LOCAL_DIR}docker/trino/data:/data/trino:z
     environment:
       - TZ=Asia/Kolkata
-      - NODE_TRINO_COORDINATOR=false
+      - TRINO_COORDINATOR=false
 
   trino-wk2:
     image: "trinodb/trino:${TRINO_VER}"
@@ -64,7 +64,7 @@ services:
       # - ${LOCAL_DIR}docker/trino/data:/data/trino:z
     environment:
       - TZ=Asia/Kolkata
-      - NODE_TRINO_COORDINATOR=false
+      - TRINO_COORDINATOR=false
 
 
   trino-wk3:
@@ -83,7 +83,7 @@ services:
       # - ${LOCAL_DIR}docker/trino/data:/data/trino:z
     environment:
       - TZ=Asia/Kolkata
-      - NODE_TRINO_COORDINATOR=false
+      - TRINO_COORDINATOR=false
 
 
   
