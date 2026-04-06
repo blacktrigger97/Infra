@@ -13,6 +13,18 @@ networks:
 
 services:
 
+  polaris-bootstrap:
+    image: apache/polaris-admin-tool:latest # Must support JDBC
+    container_name: polaris-bootstrap
+    environment:
+      - quarkus.datasource.db-kind=postgresql
+      - quarkus.datasource.username=${DOCKER_USR}
+      - quarkus.datasource.password=${DOCKER_PASS}
+      - quarkus.datasource.jdbc.url=jdbc:postgresql://postgresql.bdc.home:5432/bdc?currentSchema=polaris
+      - quarkus.datasource.jdbc.acquisition-timeout=30s
+    command: ["bootstrap", "-r", "POLARIS", "-c", "POLARIS,${DOCKER_USR},${DOCKER_PASS}"]
+
+
   polaris:
     image: apache/polaris:latest
     container_name: polaris
@@ -51,17 +63,6 @@ services:
       timeout: 5s
       retries: 5
   
-  polaris-bootstrap:
-    image: apache/polaris-admin-tool:latest # Must support JDBC
-    container_name: polaris-bootstrap
-    environment:
-      - quarkus.datasource.db-kind=postgresql
-      - quarkus.datasource.username=${DOCKER_USR}
-      - quarkus.datasource.password=${DOCKER_PASS}
-      - quarkus.datasource.jdbc.url=jdbc:postgresql://postgresql.bdc.home:5432/bdc?currentSchema=polaris
-      - quarkus.datasource.jdbc.acquisition-timeout=30s
-    command: ["bootstrap", "-r", "POLARIS", "-c", "POLARIS,${DOCKER_USR},${DOCKER_PASS}"]
-
 
   polaris-ui:
     image: ghcr.io/binarycat0/apache-polaris-ui:latest
@@ -75,8 +76,8 @@ services:
       - TZ=Asia/Kolkata
       - POLARIS_MANAGEMENT_API_URL=http://polaris.bdc.home:8182/api/management/v1
       - POLARIS_CATALOG_API_URL=http://polaris.bdc.home:8181/api/catalog/v1
-      - POLARIS_AUTH_TYPE=none
-      - POLARIS_AUTH_CREDENTIALS=POLARIS,${DOCKER_USR},${DOCKER_PASS}    
+      - POLARIS_AUTH_TYPE=token
+      - POLARIS_AUTH_TOKEN=POLARIS,${DOCKER_USR},${DOCKER_PASS}
 
 
   nessie:
