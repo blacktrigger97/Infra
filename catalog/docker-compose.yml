@@ -58,7 +58,7 @@ services:
     depends_on:
       - polaris-bootstrap
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://polaris.bdc.home:8181/health"]
+      test: ["CMD", "curl", "-f", "http://polaris.bdc.home:8182/q/health"]
       interval: 5s
       timeout: 5s
       retries: 5
