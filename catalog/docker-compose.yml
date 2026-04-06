@@ -69,9 +69,7 @@ services:
     ports:
       - 3000:3000
     restart: unless-stopped
-    networks:
-      bdCluster:
-        ipv4_address: 192.168.1.37
+    network_mode: host
     environment:
       - POLARIS_MANAGEMENT_API_URL=http://polaris.bdc.home:8182/api/management/v1
       - POLARIS_CATALOG_API_URL=http://polaris.bdc.home:8181/api/catalog/v1
