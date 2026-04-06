@@ -64,6 +64,8 @@ services:
 
 
   polaris-ui:
+    build:
+      dockerfile: ./polaris/Dockerfile
     image: apache/polaris-console:latest
     container_name: polaris-ui
     hostname: polaris-ui.bdc.home
