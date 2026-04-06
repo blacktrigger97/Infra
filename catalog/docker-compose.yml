@@ -73,8 +73,7 @@ services:
     environment:
       - POLARIS_MANAGEMENT_API_URL=http://polaris.bdc.home:8182/api/management/v1
       - POLARIS_CATALOG_API_URL=http://polaris.bdc.home:8181/api/catalog/v1
-    depends_on:
-      - polaris
+
 
   nessie:
     image: ghcr.io/projectnessie/nessie:${NESSIE_VER}
