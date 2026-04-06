@@ -20,7 +20,6 @@ $ORIGIN 1.168.192.in-addr.arpa.
 10	IN	PTR	kafka-ui
 10  IN  PTR registry
 10	IN	PTR	minio-mc
-10	IN	PTR	polaris-ui
 10  IN  PTR worker0
 11  IN  PTR worker1
 12  IN  PTR worker2
@@ -34,6 +33,7 @@ $ORIGIN 1.168.192.in-addr.arpa.
 34	IN	PTR	airflow
 35	IN	PTR	kafka-sr
 36	IN	PTR	ksqldb
+37	IN	PTR	polaris-ui
 41	IN	PTR	trino-wk1
 42	IN	PTR	trino-wk2
 43	IN	PTR	trino-wk3

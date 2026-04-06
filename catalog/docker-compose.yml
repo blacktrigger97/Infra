@@ -69,9 +69,11 @@ services:
     container_name: polaris-ui
     hostname: polaris-ui.bdc.home
     restart: unless-stopped
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.37
     ports:
-      - 8081:80
-    network_mode: host
+      - 8080:80
     environment:
       - VITE_POLARIS_API_URL=http://polaris.bdc.home:8181
       - VITE_POLARIS_REALM=POLARIS 
