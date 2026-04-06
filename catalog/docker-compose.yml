@@ -77,7 +77,10 @@ services:
       - POLARIS_MANAGEMENT_API_URL=http://polaris.bdc.home:8182/api/management/v1
       - POLARIS_CATALOG_API_URL=http://polaris.bdc.home:8181/api/catalog/v1
       - POLARIS_AUTH_TYPE=token
-      - POLARIS_AUTH_TOKEN=POLARIS,${DOCKER_USR},${DOCKER_PASS}
+      - POLARIS_AUTH_REALM=POLARIS
+      - POLARIS_AUTH_CLIENT_ID=${DOCKER_USR}
+      - POLARIS_AUTH_CLIENT_SECRET=${DOCKER_PASS}
+      - POLARIS_AUTH_TOKEN_URL=http://polaris.bdc.home:8182/api/management/v1/auth/token
 
 
   nessie:
