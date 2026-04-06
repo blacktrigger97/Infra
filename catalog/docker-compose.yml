@@ -60,7 +60,7 @@ services:
       - quarkus.datasource.password=${DOCKER_PASS}
       - quarkus.datasource.jdbc.url=jdbc:postgresql://postgresql.bdc.home:5432/bdc?currentSchema=polaris
       - quarkus.datasource.jdbc.acquisition-timeout=30s
-    command: ["bootstrap", "-r 'POLARIS'", "-c 'POLARIS,${DOCKER_USR},${DOCKER_PASS}'"]
+    command: ["bootstrap", "-r", "POLARIS", "-c", "POLARIS,${DOCKER_USR},${DOCKER_PASS}"]
 
 
   polaris-ui:
