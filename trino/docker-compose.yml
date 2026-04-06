@@ -29,6 +29,7 @@ services:
     environment:
       - TZ=Asia/Kolkata
       - NODE_TYPE=coordinator
+      - NODE_ENVIRONMENT=prod
 
   trino-wk1:
     image: "trinodb/trino:${TRINO_VER}"
@@ -47,6 +48,7 @@ services:
     environment:
       - TZ=Asia/Kolkata
       - NODE_TYPE=worker
+      - NODE_ENVIRONMENT=prod
 
   trino-wk2:
     image: "trinodb/trino:${TRINO_VER}"
@@ -65,6 +67,7 @@ services:
     environment:
       - TZ=Asia/Kolkata
       - NODE_TYPE=worker
+      - NODE_ENVIRONMENT=prod
 
 
   trino-wk3:
@@ -83,7 +86,8 @@ services:
       # - ${LOCAL_DIR}docker/trino/data:/data/trino:z
     environment:
       - TZ=Asia/Kolkata
-      - NODE_TYPE=worker  
+      - NODE_TYPE=worker
+      - NODE_ENVIRONMENT=prod
 
 
   
