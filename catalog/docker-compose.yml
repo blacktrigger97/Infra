@@ -76,10 +76,7 @@ services:
       - POLARIS_MANAGEMENT_API_URL=http://polaris.bdc.home:8182/api/management/v1
       - POLARIS_CATALOG_API_URL=http://polaris.bdc.home:8181/api/catalog/v1
       - POLARIS_AUTH_TYPE=none
-      - POLARIS_AUTH_CREDENTIALS=POLARIS,${DOCKER_USR},${DOCKER_PASS}
-    depends_on:
-      - polaris
-      
+      - POLARIS_AUTH_CREDENTIALS=POLARIS,${DOCKER_USR},${DOCKER_PASS}    
 
 
   nessie:
