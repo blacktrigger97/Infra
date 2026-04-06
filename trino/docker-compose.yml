@@ -24,7 +24,7 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - ./etc:/etc/trino
+      - ./etc-co:/etc/trino
       - ./catalog:/etc/trino/catalog
     environment:
       - TZ=Asia/Kolkata
@@ -42,7 +42,7 @@ services:
     ports:
       - 8081:8081
     volumes:
-      - ./etc:/etc/trino
+      - ./etc-wk:/etc/trino
       - ./catalog:/etc/trino/catalog
       # - ${LOCAL_DIR}docker/trino/data:/data/trino:z
     environment:
@@ -61,7 +61,7 @@ services:
     ports:
       - 8081:8081
     volumes:
-      - ./etc:/etc/trino
+      - ./etc-wk:/etc/trino
       - ./catalog:/etc/trino/catalog
       # - ${LOCAL_DIR}docker/trino/data:/data/trino:z
     environment:
@@ -81,7 +81,7 @@ services:
     ports:
       - 8081:8081
     volumes:
-      - ./etc:/etc/trino
+      - ./etc-wk:/etc/trino
       - ./catalog:/etc/trino/catalog
       # - ${LOCAL_DIR}docker/trino/data:/data/trino:z
     environment:
