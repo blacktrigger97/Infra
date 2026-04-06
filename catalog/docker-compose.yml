@@ -52,6 +52,7 @@ services:
       - AWS_ENDPOINT_URL_STS=${MINIO_ENDPOINT}
       - polaris.bootstrap.credentials=POLARIS,${DOCKER_USR},${DOCKER_PASS}
       - polaris.realm-context.realms=POLARIS
+      - polaris.realm-context.require-header=Polaris-Realm
       - polaris.features.DROP_WITH_PURGE_ENABLED=true
       - polaris.features.QUERY_HISTORY_ENABLED=true
       - polaris.features.QUERY_HISTORY_RETENTION_DAYS=7
