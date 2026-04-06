@@ -19,8 +19,6 @@ GRANT CONNECT ON DATABASE bdc TO airflow \gexec
 
 -- CREATE SCHEMAs
 
-CREATE SCHEMA IF NOT EXISTS polaris \gexec
-
 -- CREATE SCHEMA IF NOT EXISTS nessie \gexec
 
 CREATE SCHEMA IF NOT EXISTS airflow \gexec
