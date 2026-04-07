@@ -49,7 +49,8 @@ services:
     restart: unless-stopped
     dns: 192.168.1.10
     environment:
+
       AIRFLOW_CONFIG: '/root/airflow/config/airflow.cfg'
-      AIRFLOW_CONN_MINIO: '{"conn_type": "aws", "login": "${DOCKER_USR}", "password": "${DOCKER_PASS}", "extra": {"region_name": "us-east-1", "endpoint_url": "http://nginx-lb.bdc.home:9000"}}'
+      AIRFLOW_CONN_MINIO: '{"conn_type": "aws", "login": ${DOCKER_USR}, "password": ${DOCKER_PASS}, "extra": {"region_name": "us-east-1", "endpoint_url": "http://nginx-lb.bdc.home:9000"}}'
     volumes:
       - cifs-volume-airflow:/root/airflow:z
