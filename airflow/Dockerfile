@@ -10,7 +10,7 @@ ARG GIT_CONFIG_ADDRESS
 ARG GIT_AIRFLOW_ADDRESS
 
 # Java installation
-RUN apk upgrade && apk add --upgrade apk-tools && apk upgrade --available && apk add curl rsync openjdk11-jdk gcc openssh-client bash ripgrep
+RUN apk upgrade && apk add --upgrade apk-tools && apk upgrade --available && apk add curl rsync openjdk11-jdk gcc openssh-client bash ripgrep git
 # RUN apt update && apt upgrade -y && apt install -y gnupg ca-certificates curl rsync
 # RUN curl -s https://repos.azul.com/azul-repo.key | gpg --dearmor -o /usr/share/keyrings/azul.gpg
 # RUN echo "deb [signed-by=/usr/share/keyrings/azul.gpg] https://repos.azul.com/zulu/deb stable main" | tee /etc/apt/sources.list.d/zulu.list
