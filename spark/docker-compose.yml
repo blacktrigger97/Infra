@@ -19,7 +19,6 @@ volumes:
       device: //worker1.bdc.home/extraJars
 
 services:
-
   sparkimage:
     build:
       context: "../spark/"
@@ -27,7 +26,8 @@ services:
       args:
         - SPARK_VERSION=${SPARK_VERSION}
     image: spark
-    
+    platform: linux/amd64
+
   sm:
     extends:
       file: ../common.yml
@@ -36,7 +36,7 @@ services:
     container_name: sm
     networks:
       bdCluster:
-        ipv4_address: 192.168.1.92      
+        ipv4_address: 192.168.1.92
     ports:
       - "4040:4040"
       - "9090:8080"
@@ -55,13 +55,12 @@ services:
     hostname: sw1.bdc.home
     networks:
       bdCluster:
-        ipv4_address: 192.168.1.111  
+        ipv4_address: 192.168.1.111
     environment:
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://sm.bdc.home:7077
       - SPARK_WORKER_CORES=4
       - SPARK_WORKER_MEMORY=10g
-
 
   sw2:
     extends:
@@ -71,7 +70,7 @@ services:
     hostname: sw2.bdc.home
     networks:
       bdCluster:
-        ipv4_address: 192.168.1.112  
+        ipv4_address: 192.168.1.112
     environment:
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://sm.bdc.home:7077
@@ -86,7 +85,7 @@ services:
     hostname: sw3.bdc.home
     networks:
       bdCluster:
-        ipv4_address: 192.168.1.113  
+        ipv4_address: 192.168.1.113
     environment:
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://sm.bdc.home:7077
