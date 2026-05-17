@@ -24,7 +24,7 @@ GRANT CONNECT ON DATABASE bdc TO cfgloghndlr \gexec
 
 -- CREATE SCHEMAs
 
-CREATE SCHEMA IF NOT EXISTS config \gexec
+CREATE SCHEMA IF NOT EXISTS controls \gexec
 
 CREATE SCHEMA IF NOT EXISTS airflow \gexec
 
@@ -39,7 +39,7 @@ GRANT ALL ON SCHEMA hue TO hue \gexec
 
 GRANT ALL ON SCHEMA airflow TO airflow \gexec
 
-GRANT ALL ON SCHEMA config TO cfgloghndlr \gexec
+GRANT ALL ON SCHEMA controls TO cfgloghndlr \gexec
 
 GRANT ALL ON SCHEMA runlogs TO cfgloghndlr \gexec
 
