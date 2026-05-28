@@ -12,18 +12,23 @@ networks:
           gateway: 192.168.1.1
 
 services:
-
   polaris-bootstrap:
     image: apache/polaris-admin-tool:latest # Must support JDBC
     container_name: polaris-bootstrap
     environment:
       - quarkus.datasource.db-kind=postgresql
-      - quarkus.datasource.username=${DOCKER_USR}
+      - quarkus.datasource.username=polaris
       - quarkus.datasource.password=${DOCKER_PASS}
-      - quarkus.datasource.jdbc.url=jdbc:postgresql://postgresql.bdc.home:5432/bdc
+      - quarkus.datasource.jdbc.url=jdbc:postgresql://postgresql.bdc.home:5432/bdc?currentSchema=polaris
       - quarkus.datasource.jdbc.acquisition-timeout=30s
-    command: ["bootstrap", "-r", "POLARIS", "-c", "POLARIS,${DOCKER_USR},${DOCKER_PASS}"]
-
+    command:
+      [
+        "bootstrap",
+        "-r",
+        "POLARIS",
+        "-c",
+        "POLARIS,${DOCKER_USR},${DOCKER_PASS}",
+      ]
 
   polaris:
     image: apache/polaris:latest
@@ -42,9 +47,9 @@ services:
       - polaris.bootstrap=true
       - polaris.persistence.type=relational-jdbc
       - quarkus.datasource.db-kind=postgresql
-      - quarkus.datasource.username=${DOCKER_USR}
+      - quarkus.datasource.username=polaris
       - quarkus.datasource.password=${DOCKER_PASS}
-      - quarkus.datasource.jdbc.url=jdbc:postgresql://postgresql.bdc.home:5432/bdc
+      - quarkus.datasource.jdbc.url=jdbc:postgresql://postgresql.bdc.home:5432/bdc?currentSchema=polaris
       - AWS_ACCESS_KEY_ID=${DOCKER_USR}
       - AWS_SECRET_ACCESS_KEY=${DOCKER_PASS}
       - AWS_REGION=us-east-1
@@ -61,7 +66,6 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-  
 
   polaris-ui:
     image: apache/polaris-console:latest
@@ -75,12 +79,11 @@ services:
       - 8080:80
     environment:
       - VITE_POLARIS_API_URL=http://polaris.bdc.home:8181
-      - VITE_POLARIS_REALM=POLARIS 
+      - VITE_POLARIS_REALM=POLARIS
       - VITE_POLARIS_REALM_HEADER_NAME=Polaris-Realm
       - VITE_OAUTH_TOKEN_URL=http://polaris.bdc.home:8181/api/v1/oauth/tokens
-      - VITE_OAUTH_CLIENT_ID=${DOCKER_USR}
+      - VITE_OAUTH_CLIENT_ID=polaris
       - VITE_OAUTH_CLIENT_SECRET=${DOCKER_PASS}
-
 
   nessie:
     image: ghcr.io/projectnessie/nessie:${NESSIE_VER}

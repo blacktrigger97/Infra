@@ -4,7 +4,10 @@ CREATE ROLE hue LOGIN PASSWORD 'abcd1234' \gexec
 
 CREATE ROLE airflow LOGIN PASSWORD 'abcd1234' \gexec
 
+CREATE ROLE polaris LOGIN PASSWORD 'abcd1234' \gexec
+
 CREATE ROLE cfgloghndlr LOGIN PASSWORD 'abcd1234' \gexec
+
 
 -- Grant Access to bdc database to roles above
 
@@ -13,6 +16,8 @@ SELECT 'CREATE DATABASE bdc' WHERE NOT EXISTS (SELECT FROM pg_database WHERE dat
 GRANT CONNECT ON DATABASE bdc TO hue \gexec
 
 GRANT CONNECT ON DATABASE bdc TO airflow \gexec
+
+GRANT CONNECT ON DATABASE bdc TO polaris \gexec
 
 GRANT CONNECT ON DATABASE bdc TO cfgloghndlr \gexec
 
@@ -32,12 +37,16 @@ CREATE SCHEMA IF NOT EXISTS runlogs \gexec
 
 CREATE SCHEMA IF NOT EXISTS hue \gexec
 
+CREATE SCHEMA IF NOT EXISTS polaris \gexec
+
 
 -- GRANT ALL PERMISSION ON SCHEMA
 
 GRANT ALL ON SCHEMA hue TO hue \gexec
 
 GRANT ALL ON SCHEMA airflow TO airflow \gexec
+
+GRANT ALL ON SCHEMA polaris TO polaris \gexec
 
 GRANT ALL ON SCHEMA controls TO cfgloghndlr \gexec
 
@@ -50,6 +59,8 @@ ALTER USER hue SET search_path = hue \gexec
 
 ALTER USER airflow SET search_path = airflow \gexec
 
+ALTER USER polaris SET search_path = polaris \gexec
+
 
 -- REVOKE ALL PERMISSIONS FROM PUBLIC SCHEMA
 
@@ -58,10 +69,10 @@ REVOKE ALL ON SCHEMA public FROM public \gexec
 
 -- CONNECTION LIMIT
 
-ALTER ROLE hue CONNECTION LIMIT 2 \gexec
+-- ALTER ROLE hue CONNECTION LIMIT 2 \gexec
 
-ALTER ROLE airflow CONNECTION LIMIT 2 \gexec
+-- ALTER ROLE airflow CONNECTION LIMIT 2 \gexec
 
-ALTER ROLE cfgloghndlr CONNECTION LIMIT 10 \gexec
+-- ALTER ROLE cfgloghndlr CONNECTION LIMIT 10 \gexec
 
-ALTER ROLE root CONNECTION LIMIT 2 \gexec
+-- ALTER ROLE root CONNECTION LIMIT 2 \gexec

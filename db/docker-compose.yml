@@ -17,19 +17,31 @@ services:
     container_name: postgresql
     hostname: postgresql.bdc.home
     cpus: 1
-    mem_limit: 8g
+    mem_limit: 2g
     restart: unless-stopped
     networks:
       bdCluster:
         ipv4_address: 192.168.1.21
     environment:
-      - POSTGRES_USER=${DOCKER_USR}
+      - POSTGRES_USER=polaris
       - POSTGRES_PASSWORD=${DOCKER_PASS}
     ports:
       - 5432:5432
     volumes:
       - ./postgresql/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ${LOCAL_DIR}docker/${PG_DB_DIR}:/var/lib/postgresql/data
+
+  pgbouncer:
+    image: edoburu/pgbouncer:latest
+    container_name: pgbouncer_pool
+    mem_limit: 4g
+    ports:
+      - "6432:6432"
+    volumes:
+      - ./postgresql/pgbouncer.ini:/etc/pgbouncer/pgbouncer.ini:ro
+      - ./postgresql/userlist.txt:/etc/pgbouncer/userlist.txt:ro
+    depends_on:
+      - postgresql
 
   questdb:
     platform: linux/amd64
