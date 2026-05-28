@@ -82,7 +82,7 @@ services:
       - VITE_POLARIS_REALM=POLARIS
       - VITE_POLARIS_REALM_HEADER_NAME=Polaris-Realm
       - VITE_OAUTH_TOKEN_URL=http://polaris.bdc.home:8181/api/v1/oauth/tokens
-      - VITE_OAUTH_CLIENT_ID=polaris
+      - VITE_OAUTH_CLIENT_ID=${DOCKER_USR}
       - VITE_OAUTH_CLIENT_SECRET=${DOCKER_PASS}
 
   nessie:
