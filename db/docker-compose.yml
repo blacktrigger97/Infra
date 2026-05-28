@@ -24,7 +24,7 @@ services:
         ipv4_address: 192.168.1.21
     environment:
       - TZ=Asia/Kolkata
-      - POSTGRES_USER=polaris
+      - POSTGRES_USER=${DOCKER_USR}
       - POSTGRES_PASSWORD=${DOCKER_PASS}
     ports:
       - 5432:5432
