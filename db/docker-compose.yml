@@ -23,6 +23,7 @@ services:
       bdCluster:
         ipv4_address: 192.168.1.21
     environment:
+      - TZ=Asia/Kolkata
       - POSTGRES_USER=polaris
       - POSTGRES_PASSWORD=${DOCKER_PASS}
     ports:
@@ -33,13 +34,17 @@ services:
 
   pgbouncer:
     image: edoburu/pgbouncer:latest
-    container_name: pgbouncer_pool
+    container_name: pgbouncer
+    hostname: pgbouncer.bdc.home
     mem_limit: 4g
+    restart: unless-stopped
     ports:
       - "6432:6432"
     networks:
       bdCluster:
         ipv4_address: 192.168.1.21
+    environment:
+      - TZ=Asia/Kolkata
     volumes:
       - ./postgresql/pgbouncer.ini:/etc/pgbouncer/pgbouncer.ini:ro
       - ./postgresql/userlist.txt:/etc/pgbouncer/userlist.txt:ro
