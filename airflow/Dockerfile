@@ -10,7 +10,7 @@ ARG GIT_CONFIG_ADDRESS
 ARG GIT_AIRFLOW_ADDRESS
 
 # Java installation
-RUN apk upgrade && apk add --upgrade apk-tools && apk upgrade --available && apk add curl rsync ripgrep git musl-dev lz4-dev gcc cifs-utils bash librdkafka-dev openssh-client openjdk11-jdk
+RUN apk upgrade && apk add --upgrade apk-tools && apk upgrade --available && apk add curl rsync ripgrep git musl-dev lz4-dev gcc cifs-utils bash librdkafka-dev openssh-client openjdk11-jdk libffi-dev python3-dev
 # openjdk11-jdk openssh-client bash
 
 WORKDIR ${DOCKER_DIR}
