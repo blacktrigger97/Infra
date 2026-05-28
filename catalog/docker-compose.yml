@@ -19,8 +19,7 @@ services:
       - quarkus.datasource.db-kind=postgresql
       - quarkus.datasource.username=polaris
       - quarkus.datasource.password=${DOCKER_PASS}
-      - quarkus.datasource.jdbc.url=jdbc:postgresql://pgbouncer.bdc.home:6432/bdc?currentSchema=polaris
-      - QUARKUS_DATASOURCE_JDBC_CONNECTION_INIT_SQL=SET search_path TO polaris, public;
+      - quarkus.datasource.jdbc.url=jdbc:postgresql://pgbouncer.bdc.home:6432/bdc
       - quarkus.datasource.jdbc.acquisition-timeout=30s
     command:
       [
@@ -50,8 +49,7 @@ services:
       - quarkus.datasource.db-kind=postgresql
       - quarkus.datasource.username=polaris
       - quarkus.datasource.password=${DOCKER_PASS}
-      - quarkus.datasource.jdbc.url=jdbc:postgresql://pgbouncer.bdc.home:6432/bdc?currentSchema=polaris
-      - QUARKUS_DATASOURCE_JDBC_CONNECTION_INIT_SQL=SET search_path TO polaris, public;
+      - quarkus.datasource.jdbc.url=jdbc:postgresql://pgbouncer.bdc.home:6432/bdc
       - AWS_ACCESS_KEY_ID=${DOCKER_USR}
       - AWS_SECRET_ACCESS_KEY=${DOCKER_PASS}
       - AWS_REGION=us-east-1
