@@ -37,6 +37,9 @@ services:
     mem_limit: 4g
     ports:
       - "6432:6432"
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.21
     volumes:
       - ./postgresql/pgbouncer.ini:/etc/pgbouncer/pgbouncer.ini:ro
       - ./postgresql/userlist.txt:/etc/pgbouncer/userlist.txt:ro
