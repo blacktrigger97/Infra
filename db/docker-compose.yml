@@ -11,7 +11,6 @@ networks:
           gateway: 192.168.1.1
 
 services:
-
   postgresql:
     platform: linux/amd64
     image: postgres:${DB_VER}
@@ -22,12 +21,18 @@ services:
     networks:
       bdCluster:
         ipv4_address: 192.168.1.21
+    deploy:
+      resources:
+        limits:
+          memory: 8G # Hard limit: Container will be killed if it exceeds this
+        reservations:
+          memory: 4G
     environment:
       - POSTGRES_USER=${DOCKER_USR}
       - POSTGRES_PASSWORD=${DOCKER_PASS}
     ports:
       - 5432:5432
-    volumes: 
+    volumes:
       - ./postgresql/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ${LOCAL_DIR}docker/${PG_DB_DIR}:/var/lib/postgresql/data
 
@@ -59,10 +64,3 @@ services:
       - QDB_HTTP_ENABLED=true
       - QDB_HTTP_BIND_TO=0.0.0.0:9000
       - QDB_HTTP_SECURITY_READONLY=false
-
-  
-
-  
-  
-
-  
