@@ -15,8 +15,6 @@ GRANT CONNECT ON DATABASE bdc TO hue \gexec
 
 GRANT CONNECT ON DATABASE bdc TO airflow \gexec
 
-GRANT CONNECT ON DATABASE bdc TO polaris \gexec
-
 GRANT CONNECT ON DATABASE bdc TO cfgloghndlr \gexec
 
 
