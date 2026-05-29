@@ -1,5 +1,4 @@
 "airflow" "abcd1234"
 "hue" "abcd1234"
 "cfgloghndlr" "abcd1234"
-"polaris" "abcd1234"
 "root" "abcd1234"

@@ -4,8 +4,6 @@ CREATE ROLE hue LOGIN PASSWORD 'abcd1234' \gexec
 
 CREATE ROLE airflow LOGIN PASSWORD 'abcd1234' \gexec
 
-CREATE ROLE polaris LOGIN PASSWORD 'abcd1234' \gexec
-
 CREATE ROLE cfgloghndlr LOGIN PASSWORD 'abcd1234' \gexec
 
 
@@ -37,16 +35,12 @@ CREATE SCHEMA IF NOT EXISTS runlogs \gexec
 
 CREATE SCHEMA IF NOT EXISTS hue \gexec
 
-CREATE SCHEMA IF NOT EXISTS polaris \gexec
-
 
 -- GRANT ALL PERMISSION ON SCHEMA
 
 GRANT ALL ON SCHEMA hue TO hue \gexec
 
 GRANT ALL ON SCHEMA airflow TO airflow \gexec
-
-GRANT ALL ON SCHEMA polaris TO polaris \gexec
 
 GRANT ALL ON SCHEMA controls TO cfgloghndlr \gexec
 
@@ -58,8 +52,6 @@ GRANT ALL ON SCHEMA runlogs TO cfgloghndlr \gexec
 ALTER USER hue SET search_path = hue \gexec
 
 ALTER USER airflow SET search_path = airflow \gexec
-
-ALTER USER polaris SET search_path = polaris \gexec
 
 
 -- REVOKE ALL PERMISSIONS FROM PUBLIC SCHEMA
