@@ -17,7 +17,7 @@ services:
     container_name: polaris-bootstrap
     environment:
       - quarkus.datasource.db-kind=postgresql
-      - quarkus.datasource.username=polaris
+      - quarkus.datasource.username=${DOCKER_USR}
       - quarkus.datasource.password=${DOCKER_PASS}
       - quarkus.datasource.jdbc.url=jdbc:postgresql://pgbouncer.bdc.home:6432/bdc
       - quarkus.datasource.jdbc.acquisition-timeout=30s
@@ -47,7 +47,7 @@ services:
       - polaris.bootstrap=true
       - polaris.persistence.type=relational-jdbc
       - quarkus.datasource.db-kind=postgresql
-      - quarkus.datasource.username=polaris
+      - quarkus.datasource.username=${DOCKER_USR}
       - quarkus.datasource.password=${DOCKER_PASS}
       - quarkus.datasource.jdbc.url=jdbc:postgresql://pgbouncer.bdc.home:6432/bdc
       - AWS_ACCESS_KEY_ID=${DOCKER_USR}
