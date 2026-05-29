@@ -12,9 +12,8 @@ networks:
           gateway: 192.168.1.1
 
 services:
-
   hue:
-    image: gethue/hue:latest
+    image: gethue/gethue/hue:20260527-140101
     hostname: hue.bdc.home
     container_name: hue
     restart: unless-stopped
@@ -30,7 +29,7 @@ services:
 
   jupyter:
     build:
-      context: jupyter 
+      context: jupyter
       dockerfile: ${HOST_DIR}/ext_serv/jupyter/Dockerfile
       args:
         - PY_VER=${PY_VER}
@@ -39,7 +38,7 @@ services:
     image: jupyter
     container_name: jupyter
     hostname: jupyter.bdc.home
-    entrypoint: ["jupyter","notebook"]
+    entrypoint: ["jupyter", "notebook"]
     networks:
       bdCluster:
         ipv4_address: 192.168.1.201
