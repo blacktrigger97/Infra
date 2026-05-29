@@ -13,7 +13,7 @@ networks:
 
 services:
   hue:
-    image: gethue/hue:latest
+    image: gethue/hue:20260522-140101
     hostname: hue.bdc.home
     container_name: hue
     restart: unless-stopped
