@@ -58,6 +58,8 @@ ALTER USER airflow SET search_path = airflow \gexec
 
 REVOKE ALL ON SCHEMA public FROM public \gexec
 
+REVOKE ALL ON SCHEMA public FROM hue \gexec
+
 
 -- CONNECTION LIMIT
 
