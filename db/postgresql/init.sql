@@ -60,6 +60,7 @@ REVOKE ALL ON SCHEMA public FROM public \gexec
 
 REVOKE ALL ON SCHEMA public FROM hue \gexec
 
+REVOKE ALL ON SCHEMA public FROM airflow \gexec
 
 -- CONNECTION LIMIT
 
