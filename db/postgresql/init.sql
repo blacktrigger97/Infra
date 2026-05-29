@@ -62,6 +62,8 @@ REVOKE ALL ON SCHEMA public FROM hue \gexec
 
 REVOKE ALL ON SCHEMA public FROM airflow \gexec
 
+REVOKE ALL ON SCHEMA public FROM cfgloghndlr \gexec
+
 -- CONNECTION LIMIT
 
 -- ALTER ROLE hue CONNECTION LIMIT 2 \gexec
