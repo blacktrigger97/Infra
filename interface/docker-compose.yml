@@ -23,7 +23,7 @@ services:
     ports:
       - 8888:8888
     volumes:
-      - ./hue/hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
+      - ./hue/hue.ini:/usr/share/hue/desktop/conf/hue.ini
       - ./hue/startup.sh:/usr/share/hue/startup.sh
       - ./hue/__init__.py:/usr/share/hue/build/env/lib/python3.11/site-packages/hyper/__init__.py
 
