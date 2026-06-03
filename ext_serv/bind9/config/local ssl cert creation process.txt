@@ -1,0 +1,37 @@
+# Generate private key for your Root CA
+openssl genrsa -des3 -out myLocalCA.key 2048
+
+# Generate the Root Certificate (valid for 10 years)
+openssl req -x509 -new -nodes -key myLocalCA.key -sha256 -days 3650 -out myLocalCA.pem
+
+
+# Create file by name domain.txt and add below
+
+authorityKeyIdentifier=keyid,issuer
+basicConstraints=CA:FALSE
+keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = bdc.home
+DNS.2 = *.bdc.home
+
+
+# Generate the domain private key
+openssl genrsa -out bdc.home.key 2048
+
+# Create the CSR
+openssl req -new -key bdc.home.key -out bdc.home.csr
+
+# Sign the certificate using your Root CA
+openssl x509 -req -in bdc.home.csr -CA myLocalCA.pem -CAkey myLocalCA.key \
+-CAcreateserial -out bdc.home.crt -days 825 -sha256 -extfile domain.ext
+
+
+# Secure the private key
+sudo chown bind:bind /etc/bind/bdc.home.key
+sudo chmod 600 /etc/bind/bdc.home.key
+
+# Set permissions for the certificate
+sudo chown bind:bind /etc/bind/bdc.home.crt
+sudo chmod 644 /etc/bind/bdc.home.crt
