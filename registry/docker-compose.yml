@@ -12,14 +12,13 @@ networks:
           gateway: 192.168.1.1
 
 services:
-
   registry:
     image: registry:2
     hostname: registry.bdc.home
-    container_name: docker_registry
+    container_name: registry
     networks:
       bdCluster:
-        ipv4_address: 192.168.1.92
+        ipv4_address: 192.168.1.23
     environment:
       TZ: Asia/Kolkata
       REGISTRY_VALIDATION_DISABLED: "true"
