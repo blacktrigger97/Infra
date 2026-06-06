@@ -1,0 +1,14 @@
+# Global configuration block
+{
+    # Optional: Prevents Caddy from attempting to contact public ACME servers for local domains
+    local_certs
+}
+
+(ssl_certs) {
+    tls /etc/caddy/certs/_wildcard.bdc.home.pem /etc/caddy/certs/_wildcard.bdc.home-key.pem
+}
+
+hue.bdc.home {
+    import ssl_certs
+    reverse_proxy hue:8888
+}

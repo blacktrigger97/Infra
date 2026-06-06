@@ -1,5 +1,4 @@
 services:
-
   dns1:
     container_name: dns1
     hostname: dns1.bdc.home
@@ -14,6 +13,24 @@ services:
     network_mode: host
     restart: unless-stopped
 
+  caddy:
+    image: caddy:alpine
+    container_name: caddy
+    hostname: caddy.bdc.home
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      # - "443:443/udp" # Optional: For HTTP/3 support'
+    network_mode: host
+    environment:
+      - TZ=Asia/Kolkata
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ./caddy/certs:/etc/caddy/certs:ro # Read-only mount for your TLS certs
+      - caddy_data:/data
+      - caddy_config:/config
+
   registry:
     image: registry:2
     hostname: registry.bdc.home
@@ -21,7 +38,7 @@ services:
     network_mode: host
     environment:
       TZ: Asia/Kolkata
-      REGISTRY_VALIDATION_DISABLED: 'true'
+      REGISTRY_VALIDATION_DISABLED: "true"
     # ports:
     #   - 5000:5000
     volumes:
@@ -64,15 +81,8 @@ services:
     #   - 8080:8080
     environment:
       TZ: "Asia/Kolkata"
-      KAFKA_CLUSTERS_0_NAME: 'BDC-KAFKA'
+      KAFKA_CLUSTERS_0_NAME: "BDC-KAFKA"
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka-1.bdc.home:29092,kafka-2.bdc.home:29092,kafka-3.bdc.home:29092
       KAFKA_CLUSTERS_0_SCHEMAREGISTRY: http://kafka-sr.bdc.home:8081
       KAFKA_CLUSTERS_0_KSQLDB_SERVER: http://ksqldb.bdc.home:8088
       DYNAMIC_CONFIG_ENABLED: true
-  
-  
-
-  
-  
-
-  
