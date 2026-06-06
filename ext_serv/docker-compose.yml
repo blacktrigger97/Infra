@@ -28,8 +28,8 @@ services:
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
       - ./caddy/certs:/etc/caddy/certs:ro # Read-only mount for your TLS certs
-      - caddy_data:/data
-      - caddy_config:/config
+      - ./caddy/caddy_data:/data
+      - ./caddy/caddy_config:/config
 
   registry:
     image: registry:2
