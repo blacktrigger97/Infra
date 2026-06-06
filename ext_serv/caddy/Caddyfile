@@ -18,13 +18,3 @@ hue.bdc.home {
     import ssl_certs
     reverse_proxy hue.bdc.home:8888
 }
-
-kafka-ui.bdc.home {
-    import ssl_certs
-    reverse_proxy kafka-ui.bdc.home:8080
-}
-
-nginx-lb.bdc.home {
-    import ssl_certs
-    reverse_proxy nginx-lb.bdc.home:9000
-}
