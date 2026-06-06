@@ -4,11 +4,22 @@
     local_certs
 }
 
+caddy.bdc.home {
+    bind 192.168.1.10
+    reverse_proxy caddy.bdc.home:80
+}
+
+
 (ssl_certs) {
     tls /etc/caddy/certs/_wildcard.bdc.home.pem /etc/caddy/certs/_wildcard.bdc.home-key.pem
 }
 
 hue.bdc.home {
     import ssl_certs
-    reverse_proxy hue:8888
+    reverse_proxy hue.bdc.home:8888
+}
+
+kafka-ui.bdc.home {
+    import ssl_certs
+    reverse_proxy kafka-ui.bdc.home:8080
 }
