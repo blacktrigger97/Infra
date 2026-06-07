@@ -22,7 +22,7 @@ services:
       - "2019:2019"
       - "80:80"
       - "443:443"
-      # - "443:443/udp" # Optional: For HTTP/3 support'
+      - "443:443/udp" # Optional: For HTTP/3 support'
     network_mode: host
     environment:
       - TZ=Asia/Kolkata
