@@ -30,7 +30,7 @@ services:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
       - ./caddy/certs:/etc/caddy/certs:ro # Read-only mount for your TLS certs
       - ./caddy/data:/data
-      - ./caddy/caddy_config:/config
+      - ./caddy/config:/config
 
   # registry:
   #   image: registry:2
