@@ -10,11 +10,10 @@
 # }
 
 bdc.home {
-    tls internal
     reverse_proxy caddy.bdc.home:80
 }
 
 hue.bdc.home {
-    import ssl_certs
+    tls internal
     reverse_proxy hue.bdc.home:8888
 }
