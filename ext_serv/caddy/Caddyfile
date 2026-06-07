@@ -4,17 +4,18 @@
     debug
     admin 192.168.1.10:2019
     local_certs
+    email root@worker0
 }
 
-(ssl_certs) {
-    tls /etc/caddy/certs/_wildcard.bdc.home.pem /etc/caddy/certs/_wildcard.bdc.home-key.pem
-}
+# (ssl_certs) {
+#     tls /etc/caddy/certs/_wildcard.bdc.home.pem /etc/caddy/certs/_wildcard.bdc.home-key.pem
+# }
 
-bdc.home {
+caddy.bdc.home {
     reverse_proxy caddy.bdc.home:80
 }
 
 hue.bdc.home {
-    import ssl_certs
+    tls internal
     reverse_proxy hue.bdc.home:8888
 }
