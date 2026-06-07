@@ -11,7 +11,7 @@ caddy.bdc.home {
 
 
 (ssl_certs) {
-    tls /etc/caddy/certs/_wildcard.bdc.home.pem /etc/caddy/certs/_wildcard.bdc.home-key.pem
+    tls /etc/caddy/certs/bdc.home.crt /etc/caddy/certs/bdc.home.key
 }
 
 hue.bdc.home {
