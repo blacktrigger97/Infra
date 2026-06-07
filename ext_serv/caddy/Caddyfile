@@ -11,7 +11,7 @@
 }
 
 bdc.home {
-    reverse_proxy 192.168.1.10:80
+    reverse_proxy caddy.bdc.home:80
 }
 
 hue.bdc.home {
