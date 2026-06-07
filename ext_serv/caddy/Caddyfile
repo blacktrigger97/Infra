@@ -1,8 +1,8 @@
 # Global configuration block
-{
-    # Optional: Prevents Caddy from attempting to contact public ACME servers for local domains
-    local_certs
-}
+# {
+#    # Optional: Prevents Caddy from attempting to contact public ACME servers for local domains
+#     local_certs
+# }
 
 caddy.bdc.home {
     bind 192.168.1.10
