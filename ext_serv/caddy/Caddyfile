@@ -5,15 +5,15 @@
     admin 192.168.1.10:2019
 }
 
-# (ssl_certs) {
-#    tls /etc/caddy/certs/bdc.home.crt /etc/caddy/certs/bdc.home.key
-# }
+(ssl_certs) {
+    tls /etc/caddy/certs/_wildcard.bdc.home.pem /etc/caddy/certs/_wildcard.bdc.home-key.pem
+}
 
-bdc.home {
+*.bdc.home {
     reverse_proxy caddy.bdc.home:80
 }
 
 hue.bdc.home {
-    tls internal
+    import ssl_certs
     reverse_proxy hue.bdc.home:8888
 }
