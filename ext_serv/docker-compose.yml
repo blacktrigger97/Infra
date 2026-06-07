@@ -19,6 +19,7 @@ services:
     hostname: caddy.bdc.home
     restart: unless-stopped
     ports:
+      - "2019:2019"
       - "80:80"
       - "443:443"
       # - "443:443/udp" # Optional: For HTTP/3 support'
@@ -28,7 +29,7 @@ services:
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
       - ./caddy/certs:/etc/caddy/certs:ro # Read-only mount for your TLS certs
-      - ./caddy/caddy_data:/data
+      - ./caddy/data:/data
       - ./caddy/caddy_config:/config
 
   # registry:

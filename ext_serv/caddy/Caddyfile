@@ -1,17 +1,17 @@
 # Global configuration block
-# {
-#    # Optional: Prevents Caddy from attempting to contact public ACME servers for local domains
-#     local_certs
-# }
-
-caddy.bdc.home {
-    bind 192.168.1.10
-    reverse_proxy caddy.bdc.home:80
+{
+   # Optional: Prevents Caddy from attempting to contact public ACME servers for local domains
+    debug
+    admin 192.168.1.10:2019
 }
 
+# (ssl_certs) {
+#    tls /etc/caddy/certs/bdc.home.crt /etc/caddy/certs/bdc.home.key
+# }
 
-(ssl_certs) {
-    tls /etc/caddy/certs/bdc.home.crt /etc/caddy/certs/bdc.home.key
+bdc.home {
+    tls internal
+    reverse_proxy caddy.bdc.home:80
 }
 
 hue.bdc.home {
