@@ -18,7 +18,7 @@ $ORIGIN 1.168.192.in-addr.arpa.
 
 10	IN	PTR	redis
 10	IN	PTR	kafka-ui
-10  IN  PTR caddy
+10  IN  PTR registry
 10	IN	PTR	minio-mc
 10  IN  PTR worker0
 11  IN  PTR worker1
@@ -27,10 +27,10 @@ $ORIGIN 1.168.192.in-addr.arpa.
 14  IN  PTR worker4
 21	IN	PTR	postgresql
 22  IN  PTR pgbouncer
-23  IN  PTR registry
+23  IN  PTR caddy
 30	IN	PTR	polaris
 31	IN	PTR	nessie
-10	IN	PTR	hue
+23	IN	PTR	hue
 33	IN	PTR	trino-co
 34	IN	PTR	airflow
 35	IN	PTR	kafka-sr
