@@ -3,19 +3,21 @@
    # Optional: Prevents Caddy from attempting to contact public ACME servers for local domains
     debug
     admin 192.168.1.10:2019
-    local_certs
     email root@worker0
+    local_certs
 }
 
-# (ssl_certs) {
-#     tls /etc/caddy/certs/_wildcard.bdc.home.pem /etc/caddy/certs/_wildcard.bdc.home-key.pem
-# }
-
-caddy.bdc.home {
-    reverse_proxy caddy.bdc.home:80
+(ssl_certs) {
+    tls /etc/caddy/certs/_wildcard.bdc.home.pem /etc/caddy/certs/_wildcard.bdc.home-key.pem
 }
 
 hue.bdc.home {
-    tls internal
-    reverse_proxy hue.bdc.home:8888
+    import ssl_certs
+    reverse_proxy hue.bdc.home:8888 {
+        # Hue requires websockets and header forwarding for optimal function
+        header_up Host {host}
+        header_up X-Real-IP {remote}
+        header_up X-Forwarded-For {remote}
+        header_up X-Forwarded-Proto {scheme}
+    }
 }

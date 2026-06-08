@@ -17,7 +17,7 @@ dns1          IN      A       192.168.1.10
 
 redis	    IN	A	192.168.1.10
 kafka-ui    IN	A	192.168.1.10
-caddy    IN  A   192.168.1.10
+caddy       IN  A   192.168.1.10
 minio-mc    IN	A	192.168.1.10
 worker0	    IN	A	192.168.1.10
 worker1	    IN	A	192.168.1.11
@@ -29,7 +29,7 @@ pgbouncer   IN	A	192.168.1.22
 registry    IN  A   192.168.1.23
 polaris	    IN	A	192.168.1.30
 nessie	    IN	A	192.168.1.31
-hue         IN	A	192.168.1.32
+hue         IN	A	192.168.1.10
 trino-co	IN	A	192.168.1.33
 airflow     IN  A   192.168.1.34
 kafka-sr	IN	A	192.168.1.35
