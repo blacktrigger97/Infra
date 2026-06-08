@@ -21,3 +21,18 @@ hue.bdc.home {
         header_up X-Forwarded-Proto {scheme}
     }
 }
+
+minio.bdc.home {
+    import ssl_certs
+    reverse_proxy nginx-lb.bdc.home:9001
+}
+
+polaris.bdc.home {
+    import ssl_certs
+    reverse_proxy polaris-ui.bdc.home:8080
+}
+
+kafka.bdc.home {
+    import ssl_certs
+    reverse_proxy kafka-ui.bdc.home:8080
+}
