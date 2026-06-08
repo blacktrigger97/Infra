@@ -24,9 +24,9 @@ services:
       - "443:443"
       - "443:443/udp" # Optional: For HTTP/3 support'
     network_mode: host
-    sysctls:
-      - net.core.rmem_max=2500000
-      - net.core.wmem_max=2500000
+    # sysctls:
+    #   - net.core.rmem_max=2500000
+    #   - net.core.wmem_max=2500000
     environment:
       - TZ=Asia/Kolkata
     volumes:
