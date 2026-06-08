@@ -29,7 +29,7 @@ minio.bdc.home {
 
 kafka.bdc.home {
     import ssl_certs
-    reverse_proxy kafka-ui.bdc.home:8080
+    reverse_proxy kafka-ui.bdc.home:80
 }
 
 polaris-ui.bdc.home {
