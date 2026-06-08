@@ -32,7 +32,7 @@ kafka.bdc.home {
     reverse_proxy kafka-ui.bdc.home:8080
 }
 
-polaris.bdc.home {
+polaris-ui.bdc.home {
     import ssl_certs
     reverse_proxy polaris-ui.bdc.home:8080
 }
