@@ -16,8 +16,8 @@ $ORIGIN 1.168.192.in-addr.arpa.
 
 ;
 
+10  IN  PTR kafka-ui
 10	IN	PTR	redis
-
 10  IN  PTR registry
 23	IN	PTR	minio-mc
 10  IN  PTR worker0
