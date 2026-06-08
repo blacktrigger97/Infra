@@ -2,7 +2,7 @@
 {
    # Optional: Prevents Caddy from attempting to contact public ACME servers for local domains
     debug
-    admin 192.168.1.10:2019
+    admin caddy.bdc.home:2019
     email root@worker0
     local_certs
 }
