@@ -28,7 +28,7 @@ pgbouncer   IN	A	192.168.1.22
 caddy       IN  A   192.168.1.23
 hue         IN	A	192.168.1.23
 minio       IN	A	192.168.1.23
-kafka-ui    IN	A	192.168.1.23
+kafka       IN	A	192.168.1.23
 polaris-ui  IN	A	192.168.1.23
 airflow     IN  A   192.168.1.23
 flower      IN  A   192.168.1.23

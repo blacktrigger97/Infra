@@ -30,7 +30,7 @@ $ORIGIN 1.168.192.in-addr.arpa.
 23  IN  PTR caddy
 23	IN	PTR	hue
 23	IN	PTR	minio
-23	IN	PTR	kafka-ui
+23	IN	PTR	kafka
 23	IN	PTR	polaris-ui
 23	IN	PTR	airflow
 23	IN	PTR	flower
