@@ -27,12 +27,22 @@ minio.bdc.home {
     reverse_proxy nginx-lb.bdc.home:9001
 }
 
+kafka.bdc.home {
+    import ssl_certs
+    reverse_proxy kafka-ui.bdc.home:8080
+}
+
 polaris.bdc.home {
     import ssl_certs
     reverse_proxy polaris-ui.bdc.home:8080
 }
 
-kafka.bdc.home {
+airflow.bdc.home {
     import ssl_certs
-    reverse_proxy kafka-ui.bdc.home:8080
+    reverse_proxy airflow.bdc.home:8080
+}
+
+flower.bdc.home {
+    import ssl_certs
+    reverse_proxy flower.bdc.home:5555
 }
