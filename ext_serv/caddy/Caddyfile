@@ -34,7 +34,7 @@ kafka.bdc.home {
 
 catalog.bdc.home {
     import ssl_certs
-    reverse_proxy polaris-ui.bdc.home:8080
+    reverse_proxy polaris-ui.bdc.home:80
 }
 
 scheduler.bdc.home {
