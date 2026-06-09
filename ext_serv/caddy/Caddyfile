@@ -11,7 +11,7 @@
     tls /etc/caddy/certs/_wildcard.bdc.home.pem /etc/caddy/certs/_wildcard.bdc.home-key.pem
 }
 
-hue.bdc.home {
+gethue.bdc.home {
     import ssl_certs
     reverse_proxy hue.bdc.home:8888 {
         # Hue requires websockets and header forwarding for optimal function
@@ -32,17 +32,17 @@ kafka.bdc.home {
     reverse_proxy kafka-ui.bdc.home:8080
 }
 
-polaris-ui.bdc.home {
+catalog.bdc.home {
     import ssl_certs
     reverse_proxy polaris-ui.bdc.home:8080
 }
 
-airflow.bdc.home {
+scheduler.bdc.home {
     import ssl_certs
     reverse_proxy airflow.bdc.home:8080
 }
 
 flower.bdc.home {
     import ssl_certs
-    reverse_proxy flower.bdc.home:5555
+    reverse_proxy airflow.bdc.home:5555
 }

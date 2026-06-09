@@ -31,7 +31,7 @@ $ORIGIN 1.168.192.in-addr.arpa.
 23	IN	PTR	hue
 23	IN	PTR	minio
 23	IN	PTR	kafka
-23	IN	PTR	polaris-ui
+23	IN	PTR	catalog
 23	IN	PTR	airflow
 23	IN	PTR	flower
 30	IN	PTR	polaris
@@ -39,6 +39,7 @@ $ORIGIN 1.168.192.in-addr.arpa.
 33	IN	PTR	trino-co
 35	IN	PTR	kafka-sr
 36	IN	PTR	ksqldb
+37	IN	PTR	polaris-ui
 41	IN	PTR	trino-wk1
 42	IN	PTR	trino-wk2
 43	IN	PTR	trino-wk3
