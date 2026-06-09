@@ -50,7 +50,7 @@ services:
   registry:
     image: registry:2
     hostname: registry.bdc.home
-    container_name: docker_registry
+    container_name: registry
     ports:
       - 5000:5000
     networks:
