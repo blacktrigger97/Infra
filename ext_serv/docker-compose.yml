@@ -44,8 +44,8 @@ services:
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
       - ./caddy/certs:/etc/caddy/certs:ro # Read-only mount for your TLS certs
-      - ./caddy/data:/data
-      - ./caddy/config:/config
+      - ${LOCAL_DIR}docker/caddy/data:/data
+      - ${LOCAL_DIR}docker/caddy/config:/config
 
   registry:
     image: registry:2
