@@ -51,12 +51,14 @@ services:
     image: registry:2
     hostname: registry.bdc.home
     container_name: docker_registry
-    network_mode: host
+    ports:
+      - 5000:5000
+    networks:
+      bdCluster:
+        ipv4_address: 192.168.1.24
     environment:
       TZ: Asia/Kolkata
       REGISTRY_VALIDATION_DISABLED: "true"
-    # ports:
-    #   - 5000:5000
     volumes:
       - ${LOCAL_DIR}docker/registry-data:/var/lib/registry:z
     restart: unless-stopped
